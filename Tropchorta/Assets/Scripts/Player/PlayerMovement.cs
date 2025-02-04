@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(1f, 10f)] float speed;
     [SerializeField, Range(1f, 5f)] float sprintMod;
     [SerializeField, Range(0.0f, 1f)] float lerpHalfTime = 0.1f;
-    [SerializeField] Transform modelTransform;
+    [SerializeField] Transform modelRootTransform;
 
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -39,9 +39,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
             if (lookDirection != Vector3.zero)
             {
-                // the model is rotated in such a way that forward is the right hand of the model
-                // so we need to make it look in a different direction
-                modelTransform.right = -lookDirection;
+                modelRootTransform.forward = lookDirection;
             }
         }
     }
