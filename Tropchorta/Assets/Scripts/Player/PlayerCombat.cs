@@ -4,11 +4,21 @@ using UnityEngine.InputSystem;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator staffAnimator;
+    [SerializeField] HealthBar healthBar;
+    HealthComponent health;
 
     void Start()
     {
         var playerInput = GetComponent<PlayerInput>();
         playerInput.actions["LeftMouse"].performed += OnAttack;
+        health = GetComponent<HealthComponent>();
+        health.onDamageTaken.AddListener(onDamageTaken);
+    }
+
+
+    public void onDamageTaken(float damage, float currentHealth)
+    {
+        healthBar.SetHealth(currentHealth / health.MaxHealth);
     }
 
     void OnAttack(InputAction.CallbackContext context)
@@ -27,7 +37,7 @@ public class PlayerCombat : MonoBehaviour
                 staffAnimator.SetTrigger("Attack");
             }
         }
-
+        health.Damage(10);
         // TODO : no more attack logic at this point. Will wait for enemies to be implemented
     }
 }

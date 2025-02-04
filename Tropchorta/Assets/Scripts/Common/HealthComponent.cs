@@ -9,9 +9,12 @@ public class HealthComponent : MonoBehaviour
 
     bool isDead = false;
 
-    public UnityEvent onDamageTaken;
+    // Event holds (damageTaken, currentHealth)
+    public UnityEvent<float, float> onDamageTaken;
     public UnityEvent onDeath;
-    public UnityEvent onHeal;
+
+    // Event holds (healValue, currentHealth)
+    public UnityEvent<float, float> onHeal;
 
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
@@ -32,7 +35,7 @@ public class HealthComponent : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
-        onDamageTaken.Invoke();
+        onDamageTaken.Invoke(damage, currentHealth);
         // only invoke onDeath the first time a unit dies
         if (currentHealth <= 0 && !isDead)
         {
@@ -51,7 +54,7 @@ public class HealthComponent : MonoBehaviour
         if (isDead) return;
         currentHealth += heal;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        onHeal.Invoke();
+        onHeal.Invoke(heal, currentHealth);
     }
 
     public void Revive(float newHealth)
@@ -64,7 +67,7 @@ public class HealthComponent : MonoBehaviour
         }
         currentHealth = newHealth;
         isDead = false;
-        onHeal.Invoke();
+        onHeal.Invoke(newHealth, currentHealth);
     }
 
     public void SetMaxHealth(float newMaxHealth)
