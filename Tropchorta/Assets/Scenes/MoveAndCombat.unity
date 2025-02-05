@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staffAnimator: {fileID: 1453777308}
   healthBar: {fileID: 238416375}
+  rotatingRootTransform: {fileID: 588931495}
 --- !u!114 &227393564
 MonoBehaviour:
   m_ObjectHideFlags: 0
