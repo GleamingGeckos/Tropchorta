@@ -77,4 +77,9 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = false;
         }
     }
+
+    public Vector3 GetRotatingDirection()
+    {
+        return modelRootTransform.forward;
+    }
 }

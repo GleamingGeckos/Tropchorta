@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MapZoomIn",
+                    "type": "Button",
+                    "id": "9ebda48e-6e47-447e-9d71-f488871eafdf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MapZoomOut",
+                    "type": "Button",
+                    "id": "b516792d-b3a3-4c5c-bd97-b30f41d6ce3d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,6 +166,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75909bdc-3632-4484-8e32-2af47b8b01fe",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapZoomIn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d7116d7-2fd7-4cec-83a8-1eaa5094b274",
+                    "path": "<Keyboard>/#(+)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapZoomIn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30b36d81-efc6-4ac8-97f3-e0125d0d46f8",
+                    "path": "<Keyboard>/#(-)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapZoomOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "920afed8-65ed-4e7c-83dc-a4029c1fc074",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapZoomOut",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
