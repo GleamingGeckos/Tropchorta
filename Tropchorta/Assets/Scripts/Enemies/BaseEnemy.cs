@@ -21,7 +21,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<HealthComponent>().Damage(enemyCombat.Attack());
+            collision.gameObject.GetComponent<HealthComponent>().Damage(enemyCombat.DealDamage());
         }
     }
 
