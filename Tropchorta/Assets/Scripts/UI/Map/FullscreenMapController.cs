@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class FullscreenMapController : MonoBehaviour
 {
-    public RectTransform mapRectTransform;
-    public RectTransform fullscreenMapRoot;
-    public Image darkOverlay;
-    public float zoomSpeed = 0.1f;
-    public float minZoom = 0.5f, maxZoom = 2f;
+    [SerializeField] private RectTransform mapRectTransform;
+    [SerializeField] private RectTransform fullscreenMapRoot;
+    [SerializeField] private Image darkOverlay;
+    [SerializeField] private float zoomSpeed = 0.1f;
+    [SerializeField] private float minZoom = 0.5f, maxZoom = 2f;
 
     private Vector2 mouseDelta;
     private Vector2 mousePosition;
@@ -17,13 +17,14 @@ public class FullscreenMapController : MonoBehaviour
     private float currentZoom = 1f;
     private float zoomInput;
     private bool isMapOpen = false;
-    private Vector2 mapStartPosition;
-    private Vector2 dragStartPosition;
     private Vector2 mapInitialSize;
+    private MapController mapController;
 
+    [SerializeField] RectTransform playerIcon;
 
     private void Start()
     {
+        mapController = GetComponentInChildren<MapController>();
         mapInitialSize = mapRectTransform.sizeDelta;
         fullscreenMapRoot.gameObject.SetActive(false);
         darkOverlay.DOFade(0f, 0f);
@@ -54,6 +55,14 @@ public class FullscreenMapController : MonoBehaviour
         {
             if (isDragging) PanMap();
             ZoomMap();
+
+            Vector2 playerNormalizedPosition = mapController.GetNormalizedPlayerPosition();
+            // move the player icon to the player position
+            playerIcon.anchoredPosition = new Vector2(
+                playerNormalizedPosition.x * mapRectTransform.rect.width - mapRectTransform.rect.width / 2,
+                playerNormalizedPosition.y * mapRectTransform.rect.height - mapRectTransform.rect.height / 2
+            );
+            playerIcon.up = mapController.GetPlayerRotation();
         }
     }
 
@@ -62,14 +71,6 @@ public class FullscreenMapController : MonoBehaviour
         if (!isMapOpen) return;
 
         isDragging = true;
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            mapRectTransform,
-            mousePosition,
-            null,
-            out dragStartPosition);
-
-        mapStartPosition = mapRectTransform.anchoredPosition;
     }
 
     private void StopDragging()
@@ -90,7 +91,7 @@ public class FullscreenMapController : MonoBehaviour
 
         currentZoom = Mathf.Clamp(mapRectTransform.localScale.x + zoomInput * zoomSpeed, minZoom, maxZoom);
         mapRectTransform.localScale = Vector3.one * currentZoom;
-
+        RescaleIcons();
         ClampPosition();
     }
 
@@ -136,5 +137,11 @@ public class FullscreenMapController : MonoBehaviour
         fullscreenMapRoot.DOAnchorMin(normalizedPosition, time);
 
         fullscreenMapRoot.anchoredPosition = Vector2.zero;
+    }
+
+    private void RescaleIcons()
+    {
+        // make icons the same size regardless of zoom
+        playerIcon.localScale = Vector3.one / currentZoom;
     }
 }

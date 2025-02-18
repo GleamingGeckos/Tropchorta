@@ -57,13 +57,25 @@ public class MapController : MonoBehaviour
 
     public void ZoomMapIn()
     {
-        Debug.Log("Zooming up");
         mapZoom = Mathf.Clamp(mapZoom + zoomPerLevel, zoomMin, zoomMax);
     }
 
     public void ZoomMapOut()
     {
-        Debug.Log("Zooming down");
         mapZoom = Mathf.Clamp(mapZoom - zoomPerLevel, zoomMin, zoomMax);
+    }
+
+    public Vector2 GetNormalizedPlayerPosition()
+    {
+        return playerNormalizedPosition;
+    }
+
+    public Vector3 GetPlayerRotation()
+    {
+        Vector3 rotationDirection = playerMovement.GetRotatingDirection();
+        rotationDirection.y = rotationDirection.z;
+        rotationDirection.z = 0.0f;
+
+        return rotationDirection;
     }
 }
