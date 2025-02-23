@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
@@ -11,6 +12,9 @@ public class EnemyCombat : MonoBehaviour
     Collider[] _colliders = new Collider[16];
     [SerializeField] LayerMask _excludedLayer;
 
+    bool _isCooldown = false;
+    [SerializeField] float _cooldownInterval = 3.0f;
+
     public int DealDamage()
     {
         int damage = Random.Range(_minDamage, _maxDamage + 1);
@@ -18,19 +22,9 @@ public class EnemyCombat : MonoBehaviour
         return damage;
     }
 
-    private void Update()
+    public void Attack()
     {
-        _attackTimer += Time.deltaTime;
-
-        if (_attackTimer >= _intervalsBetweenAttacks)
-        {
-            Attack();
-            _attackTimer = 0f; // Reset the timer
-        }
-    }
-
-    void Attack()
-    {
+        if (_isCooldown) return;
         // everything below this line should be later on handled by a Weapon of some sorts, this is for testing only
         Vector3 rotatingOffset = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + rotatingOffset, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
@@ -42,6 +36,15 @@ public class EnemyCombat : MonoBehaviour
                 healthComponent.Damage(DealDamage());
             }
         }
+        StartCoroutine(Cooldown());
         DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
     }
+
+    private IEnumerator Cooldown()
+    {
+        _isCooldown = true; // Set flag to prevent multiple coroutines
+        yield return new WaitForSeconds(_cooldownInterval);
+        _isCooldown = false; // Reset flag when player leaves range
+    }
+
 }

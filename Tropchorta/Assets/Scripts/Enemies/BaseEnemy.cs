@@ -1,5 +1,7 @@
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -25,6 +27,18 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if ((other.transform.position - transform.position).sqrMagnitude < 9.0f)
+            {
+                enemyCombat.Attack();
+            }
+        }
+    }
+
+  
     public void OnDeath()
     {
         Destroy(gameObject);
