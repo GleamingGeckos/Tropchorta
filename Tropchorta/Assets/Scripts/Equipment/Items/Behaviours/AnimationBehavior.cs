@@ -13,4 +13,9 @@ public class AnimationBehavior : WeaponBehavior
             Debug.Log("Triggered animation: " + animationTrigger);
         }
     }
+
+    public override void ClearData(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
 }

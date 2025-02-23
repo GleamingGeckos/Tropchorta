@@ -12,4 +12,12 @@ public class Weapon : Item
             behavior?.Use(user);
         }
     }
+
+    public void ClearData(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.ClearData(user);
+        }
+    }
 }

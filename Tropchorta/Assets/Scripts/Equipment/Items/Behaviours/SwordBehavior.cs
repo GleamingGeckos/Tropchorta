@@ -40,4 +40,9 @@ public class SwordBehavior : WeaponBehavior
             // Apply damage to enemy here
         }
     }
+
+    public override void ClearData(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
 }

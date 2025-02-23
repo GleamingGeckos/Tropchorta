@@ -12,4 +12,9 @@ public class BowBehavior : WeaponBehavior
         GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, Quaternion.identity);
         arrow.GetComponent<Rigidbody>().linearVelocity = user.forward * arrowSpeed;
     }
+
+    public override void ClearData(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
 }

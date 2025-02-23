@@ -35,6 +35,10 @@ public class ColorChangeBehavior : WeaponBehavior
         }
     }
 
+    public override void ClearData(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
     private IEnumerator ChangeColorTemporary(Renderer renderer)
     {
         // Change to the desired color
