@@ -3,13 +3,23 @@ using UnityEngine;
 
 public class EquipmentController : MonoBehaviour
 {
-    public int goldAmount = 0;
-    public Item lastInteractedItem;
-    public List<Item> interactedItems;
+    [SerializeField] int goldAmount = 0;
+    [SerializeField] Item lastInteractedItem;
+    [SerializeField] List<Item> interactedItems;
 
-    void Start()
+    [SerializeField] Item usedWeapon;
+    [SerializeField] Item inactiveWeapon;
+    [SerializeField] Item helmet;
+    [SerializeField] Item breastplate;
+    [SerializeField] Item pants;
+    [SerializeField] Item shoes;
+
+    void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))  // Left Mouse Click
+        {
+            UseWeapon();
+        }
     }
 
 
@@ -31,5 +41,31 @@ public class EquipmentController : MonoBehaviour
             ItemController controller = spawnedItem.GetComponent<ItemController>();
             controller.itemData = item;  // Assign the ScriptableObject data
         }
+    }
+    private void UseWeapon()
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            //Debug.Log($"Using weapon: {weapon.itemName}");
+            weapon.Use(transform);
+        }
+        else
+        {
+            //Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
+    public void SwitchWeapons()
+    {
+        Item tmpItem = usedWeapon;
+        usedWeapon = inactiveWeapon;
+        inactiveWeapon = tmpItem;
     }
 }

@@ -18,7 +18,7 @@ public class ItemController : MonoBehaviour
         if (itemData is Weapon weapon)
         {
             //Debug.Log($"Weapon Loaded: {weapon.itemName}");
-            weapon.Use(transform);
+            //weapon.Use(transform);
         }
         else
         {
