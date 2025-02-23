@@ -10,12 +10,17 @@ public class BaseEnemy : MonoBehaviour
     private Color flashColor = new Color(1f, 0f, 0f); // Red color
     private float transitionDuration = 1f;
     private Tween colorTween;
-    private EnemyCombat enemyCombat;
+
+
+    //Components
+    private EnemyCombat _enemyCombat;
+    private EnemyMovement _enemyMovement;
 
     void Start()
     {
         material = GetComponentInChildren<Renderer>().sharedMaterial;
-        enemyCombat = GetComponent<EnemyCombat>();
+        _enemyCombat = GetComponent<EnemyCombat>();
+        _enemyMovement = GetComponent<EnemyMovement>();
         originalColor = material.color; // Store the original color
     }
 
@@ -23,7 +28,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<HealthComponent>().Damage(enemyCombat.DealDamage());
+            collision.gameObject.GetComponent<HealthComponent>().Damage(_enemyCombat.DealDamage());
         }
     }
 
@@ -31,10 +36,12 @@ public class BaseEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if ((other.transform.position - transform.position).sqrMagnitude < 9.0f)
+            GameObject player = other.gameObject;
+            if ((player.transform.position - transform.position).sqrMagnitude < 9.0f)
             {
-                enemyCombat.Attack();
+                _enemyCombat.Attack();
             }
+            _enemyMovement.RotateTowards(player);
         }
     }
 
