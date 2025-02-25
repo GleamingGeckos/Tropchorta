@@ -15,6 +15,7 @@ public class FullscreenMapController : MonoBehaviour
     [SerializeField] private RectTransform playerIcon;
     [SerializeField] private GameObject mapIconPrefab;
     [SerializeField] private InputReader input;
+    [SerializeField] private PlayerStateSO playerState;
 
     [Header("Zoom")]
     [SerializeField, Tooltip("Speed of scroll zoom")] private float zoomSpeed = 0.1f;
@@ -60,28 +61,6 @@ public class FullscreenMapController : MonoBehaviour
         iconSizeSlider.maxValue = maxIconSize;
         iconSizeSlider.value = currentIconSize;
         iconSizeSlider.onValueChanged.AddListener(OnIconSizeSliderChanged);
-    }
-
-    private void OnEnable()
-    {
-        // var playerInput = FindAnyObjectByType<PlayerInput>();
-
-        // playerInput.actions["LeftMouse"].performed += ctx => StartDragging(ctx);
-        // playerInput.actions["LeftMouse"].canceled += ctx =>
-        // {
-        //     TryPlaceIcon();
-        //     StopDragging();
-        // };
-
-        // playerInput.actions["MouseDelta"].performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
-        // playerInput.actions["MouseDelta"].canceled += ctx => mouseDelta = Vector2.zero;
-
-        // playerInput.actions["Look"].performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
-
-        // playerInput.actions["ScrollWheel"].performed += ctx => zoomInput = ctx.ReadValue<float>();
-        // playerInput.actions["ScrollWheel"].canceled += ctx => zoomInput = 0f;
-
-        // playerInput.actions["ToggleMap"].performed += ctx => ToggleMap();
 
         input.OnLeftMouseClickEvent += StartDragging;
         input.OnLeftMouseReleaseEvent += () => { TryPlaceIcon(); StopDragging(); }; // needs to preserve order of these
@@ -161,6 +140,8 @@ public class FullscreenMapController : MonoBehaviour
 
         if (isMapOpen)
         {
+            playerState.state = PlayerState.DisableInput;
+
             fullscreenMapRoot.gameObject.SetActive(isMapOpen);
             darkOverlay.gameObject.SetActive(isMapOpen);
             darkOverlay.DOFade(0.75f, 0.5f);
@@ -168,6 +149,7 @@ public class FullscreenMapController : MonoBehaviour
         }
         else
         {
+            playerState.state = PlayerState.Normal;
             darkOverlay.DOFade(0, 0.5f).onComplete += () =>
             {
                 fullscreenMapRoot.gameObject.SetActive(isMapOpen);

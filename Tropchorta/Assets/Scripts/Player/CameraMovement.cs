@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField, Range(0.01f, 1f)] float lerpHalfTime = 0.1f;
     [SerializeField] InputReader input;
+    [SerializeField] PlayerStateSO playerState;
 
     [Header("Look Influence")]
     [SerializeField, Range(0.0f, 20f), Tooltip("Total look influence in calcualtions of camera offset")] float lookInfluence = 1f;
@@ -40,6 +41,8 @@ public class CameraMovement : MonoBehaviour
     // otherwise you might notice jittering of the player.
     void FixedUpdate()
     {
+        if (playerState.state == PlayerState.DisableInput) return;
+
         // We only want to move the camera on the XZ plane, assuming it will never need to move up/down
         forwardXZProjected = new Vector2(player.forward.x, player.forward.z).normalized * verticalLookInfluence;
         rightXZProjected = new Vector2(player.right.x, player.right.z).normalized * horizontalLookInfluence;

@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(0.0f, 1f)] float lerpHalfTime = 0.1f;
     [SerializeField] Transform modelRootTransform;
     [SerializeField] public InputReader input;
+    [SerializeField] public PlayerStateSO playerState;
 
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (playerState.state == PlayerState.DisableInput) return;
+
         lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
         Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
         cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);

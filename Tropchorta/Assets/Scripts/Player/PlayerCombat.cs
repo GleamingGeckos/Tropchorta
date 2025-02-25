@@ -5,6 +5,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] Animator staffAnimator;
     [SerializeField] HealthBar healthBar;
     [SerializeField] Transform rotatingRootTransform;
+    [SerializeField] PlayerStateSO playerState;
     HealthComponent health;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
@@ -12,7 +13,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        GetComponent<PlayerMovement>().input.OnLeftMouseClickEvent += OnAttack;
+        var pm = GetComponent<PlayerMovement>();
+        pm.input.OnLeftMouseClickEvent += OnAttack;
+        playerState = pm.playerState;
         health = GetComponent<HealthComponent>();
         health.onDamageTaken.AddListener(onDamageTaken);
     }
@@ -40,6 +43,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnAttack()
     {
+        if (playerState.state == PlayerState.DisableInput) return;
 
         // check if the clip is already playing, if it is simply reset it
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
