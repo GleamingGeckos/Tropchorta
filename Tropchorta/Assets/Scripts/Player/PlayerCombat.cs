@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -13,8 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        playerInput.actions["LeftMouse"].performed += OnAttack;
+        GetComponent<PlayerMovement>().input.OnLeftMouseClickEvent += OnAttack;
         health = GetComponent<HealthComponent>();
         health.onDamageTaken.AddListener(onDamageTaken);
     }
@@ -40,23 +38,21 @@ public class PlayerCombat : MonoBehaviour
         DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
     }
 
-    void OnAttack(InputAction.CallbackContext context)
+    void OnAttack()
     {
-        if (context.performed)
-        {
-            // check if the clip is already playing, if it is simply reset it
-            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                // reset the clip
-                staffAnimator.Play("Attack", -1, 0);
-            }
-            else
-            {
-                // play the clip, if it's not already playing
-                staffAnimator.SetTrigger("Attack");
-            }
 
-            Attack();
+        // check if the clip is already playing, if it is simply reset it
+        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            // reset the clip
+            staffAnimator.Play("Attack", -1, 0);
         }
+        else
+        {
+            // play the clip, if it's not already playing
+            staffAnimator.SetTrigger("Attack");
+        }
+
+        Attack();
     }
 }

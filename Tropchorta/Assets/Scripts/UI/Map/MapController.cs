@@ -11,6 +11,7 @@ public class MapController : MonoBehaviour
     [SerializeField] float zoomMax = 50.0f;
     [SerializeField, Tooltip("Unity-units size of the actual terrain the map presents.")] private Vector2 mapRealSize = new Vector2(100, 100);
     [SerializeField, Tooltip("Center of the actual terrain the map represents. Coordinates represent the XZ plane size.")] private Vector2 mapWorldCenter = new Vector2(0, 0);
+    [SerializeField] InputReader input;
     private PlayerMovement playerMovement;
     private Transform playerTransform;
     private RectTransform mapRectTransform;
@@ -24,9 +25,8 @@ public class MapController : MonoBehaviour
         playerTransform = playerMovement.transform;
         mapRectTransform = mapImage.GetComponent<RectTransform>();
 
-        var playerInput = FindAnyObjectByType<PlayerInput>();
-        playerInput.actions["MapZoomOut"].performed += _ => ZoomMapIn();
-        playerInput.actions["MapZoomIn"].performed += _ => ZoomMapOut();
+        input.OnMapZoomInEvent += ZoomMapIn;
+        input.OnMapZoomOutEvent += ZoomMapOut;
     }
 
     void LateUpdate()
@@ -52,7 +52,7 @@ public class MapController : MonoBehaviour
         Vector3 rotationDirection = playerMovement.GetRotatingDirection();
         rotationDirection.y = rotationDirection.z;
         rotationDirection.z = 0.0f;
-        playerIcon.up = rotationDirection; 
+        playerIcon.up = rotationDirection;
     }
 
     public void ZoomMapIn()

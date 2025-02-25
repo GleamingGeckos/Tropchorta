@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(1f, 5f)] float sprintMod;
     [SerializeField, Range(0.0f, 1f)] float lerpHalfTime = 0.1f;
     [SerializeField] Transform modelRootTransform;
+    [SerializeField] public InputReader input;
 
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -19,12 +20,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
-        var playerInput = GetComponent<PlayerInput>();
-        playerInput.actions["Move"].performed += OnMoveInput;
-        playerInput.actions["Move"].canceled += OnMoveInput;
-        playerInput.actions["Look"].performed += OnMousePosition;
-        playerInput.actions["Sprint"].performed += OnSprint;
-        playerInput.actions["Sprint"].canceled += OnSprint;
+        input.OnMoveInputEvent += OnMoveInput;
+        input.OnLookInputEvent += OnMousePosition;
+        input.OnSprintEvent += () => isSprinting = true;
+        input.OnSprintCancelledEvent += () => isSprinting = false;
     }
 
     void FixedUpdate()
@@ -44,38 +43,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void OnMoveInput(InputAction.CallbackContext context)
+    public void OnMoveInput(Vector2 move)
     {
-        if (context.performed)
-        {
-            movementInput = context.ReadValue<Vector2>();
-        }
-        if (context.canceled)
-        {
-            movementInput = Vector2.zero;
-        }
+        movementInput = move;
     }
 
-    public void OnMousePosition(InputAction.CallbackContext context)
+    public void OnMousePosition(Vector2 newMousePosition)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            mousePosition = context.ReadValue<Vector2>();
-            // Normlize the mouse position to (-1, 1)
-            mousePosition = new Vector2(((mousePosition.x / Screen.width) - 0.5f) * 2.0f, ((mousePosition.y / Screen.height) - 0.5f) * 2.0f);
-        }
-    }
-
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            isSprinting = true;
-        }
-        if (context.canceled)
-        {
-            isSprinting = false;
-        }
+        mousePosition = newMousePosition;
+        // Normalize the mouse position to (-1, 1)
+        mousePosition = new Vector2(((mousePosition.x / Screen.width) - 0.5f) * 2.0f, ((mousePosition.y / Screen.height) - 0.5f) * 2.0f);
     }
 
     public Vector3 GetRotatingDirection()

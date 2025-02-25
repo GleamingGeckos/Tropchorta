@@ -345,6 +345,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b516792d-b3a3-4c5c-bd97-b30f41d6ce3d
     m_ActionName: 'Player/MapZoomOut[/Keyboard/minus,/Keyboard/numpadMinus]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e114d70-8105-4609-969a-80ae032c07dc
+    m_ActionName: 'Player/ToggleMap[/Keyboard/m]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e849dd49-5231-4a8c-a902-9e9484780fef
+    m_ActionName: 'Player/MouseDelta[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afa5babd-de8f-456c-b6cd-6d18eb2b14c5
+    m_ActionName: 'Player/ScrollWheel[/Mouse/scroll/y]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 912f346c-436d-47d0-b601-1f2bfbed11a2
+    m_ActionName: 'Player/Escape[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -408,6 +424,7 @@ MonoBehaviour:
   sprintMod: 1.65
   lerpHalfTime: 0.045
   modelRootTransform: {fileID: 588931495}
+  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
 --- !u!54 &227393562
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -782,6 +799,7 @@ MonoBehaviour:
   player: {fileID: 227393560}
   offset: {x: 0, y: 5.09, z: -2.3}
   lerpHalfTime: 0.045
+  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   lookInfluence: 1
   verticalLookInfluence: 1.25
   horizontalLookInfluence: 1.09
@@ -2999,6 +3017,7 @@ MonoBehaviour:
   zoomMax: 50
   mapRealSize: {x: 100, y: 100}
   mapWorldCenter: {x: 0, y: 0}
+  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
 --- !u!114 &1765321618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3017,6 +3036,7 @@ MonoBehaviour:
   darkOverlay: {fileID: 1743229985}
   playerIcon: {fileID: 1186730735}
   mapIconPrefab: {fileID: 5870446606119108387, guid: afad6b7720a4a6e4cb1eaa76181812b8, type: 3}
+  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   zoomSpeed: 0.1
   minZoom: 1
   maxZoom: 2

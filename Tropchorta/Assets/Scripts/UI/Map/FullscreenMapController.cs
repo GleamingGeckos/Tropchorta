@@ -14,6 +14,7 @@ public class FullscreenMapController : MonoBehaviour
     [SerializeField] private Image darkOverlay;
     [SerializeField] private RectTransform playerIcon;
     [SerializeField] private GameObject mapIconPrefab;
+    [SerializeField] private InputReader input;
 
     [Header("Zoom")]
     [SerializeField, Tooltip("Speed of scroll zoom")] private float zoomSpeed = 0.1f;
@@ -37,10 +38,6 @@ public class FullscreenMapController : MonoBehaviour
     private List<MapIcon> playerPlacedIcons = new List<MapIcon>();
     private List<MapIconButton> mapIconButtons = new List<MapIconButton>();
     private Sprite selectedIcon;
-
-    // magic number to make panning actually pan 1:1 with mouse movement.
-    // no fucking clue why this number specifically. It should be 1/zoom but its not xd
-    private const float panMultiplier = 1.62f;
 
     private void Start()
     {
@@ -67,24 +64,31 @@ public class FullscreenMapController : MonoBehaviour
 
     private void OnEnable()
     {
-        var playerInput = FindAnyObjectByType<PlayerInput>();
+        // var playerInput = FindAnyObjectByType<PlayerInput>();
 
-        playerInput.actions["LeftMouse"].performed += ctx => StartDragging(ctx);
-        playerInput.actions["LeftMouse"].canceled += ctx =>
-        {
-            TryPlaceIcon();
-            StopDragging();
-        };
+        // playerInput.actions["LeftMouse"].performed += ctx => StartDragging(ctx);
+        // playerInput.actions["LeftMouse"].canceled += ctx =>
+        // {
+        //     TryPlaceIcon();
+        //     StopDragging();
+        // };
 
-        playerInput.actions["MouseDelta"].performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
-        playerInput.actions["MouseDelta"].canceled += ctx => mouseDelta = Vector2.zero;
+        // playerInput.actions["MouseDelta"].performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
+        // playerInput.actions["MouseDelta"].canceled += ctx => mouseDelta = Vector2.zero;
 
-        playerInput.actions["Look"].performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
+        // playerInput.actions["Look"].performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
 
-        playerInput.actions["ScrollWheel"].performed += ctx => zoomInput = ctx.ReadValue<float>();
-        playerInput.actions["ScrollWheel"].canceled += ctx => zoomInput = 0f;
+        // playerInput.actions["ScrollWheel"].performed += ctx => zoomInput = ctx.ReadValue<float>();
+        // playerInput.actions["ScrollWheel"].canceled += ctx => zoomInput = 0f;
 
-        playerInput.actions["ToggleMap"].performed += ctx => ToggleMap();
+        // playerInput.actions["ToggleMap"].performed += ctx => ToggleMap();
+
+        input.OnLeftMouseClickEvent += StartDragging;
+        input.OnLeftMouseReleaseEvent += () => { TryPlaceIcon(); StopDragging(); }; // needs to preserve order of these
+        input.OnMouseDeltaEvent += delta => mouseDelta = delta;
+        input.OnLookInputEvent += pos => mousePosition = pos;
+        input.OnScrollEvent += delta => zoomInput = delta;
+        input.OnToggleMapEvent += ToggleMap;
     }
 
     private void Update()
@@ -104,7 +108,7 @@ public class FullscreenMapController : MonoBehaviour
         }
     }
 
-    private void StartDragging(InputAction.CallbackContext ctx)
+    private void StartDragging()
     {
         if (!isMapOpen) return;
 
@@ -120,7 +124,7 @@ public class FullscreenMapController : MonoBehaviour
     private void PanMap()
     {
         if (!IsMouseInsideMap()) return;
-        mapRectTransform.anchoredPosition += mouseDelta * panMultiplier;
+        mapRectTransform.anchoredPosition += mouseDelta;
         if (mouseDelta != Vector2.zero) hasDragged = true;
 
         ClampPosition();

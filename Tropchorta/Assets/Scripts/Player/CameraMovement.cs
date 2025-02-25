@@ -7,6 +7,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] Vector3 offset;
     [SerializeField, Range(0.01f, 1f)] float lerpHalfTime = 0.1f;
+    [SerializeField] InputReader input;
 
     [Header("Look Influence")]
     [SerializeField, Range(0.0f, 20f), Tooltip("Total look influence in calcualtions of camera offset")] float lookInfluence = 1f;
@@ -31,7 +32,7 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<Camera>();
-        player.GetComponent<PlayerInput>().actions["Look"].performed += OnMousePosition;
+        input.OnLookInputEvent += OnMousePosition;
     }
 
     // this is FixedUpdate, the same as movement of the player.
@@ -49,13 +50,10 @@ public class CameraMovement : MonoBehaviour
         transform.position = transform.position.LerpFI(targetPosition, Time.deltaTime, lerpHalfTime);
     }
 
-    public void OnMousePosition(InputAction.CallbackContext context)
+    public void OnMousePosition(Vector2 newMousePosition)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            mousePosition = context.ReadValue<Vector2>();
-            // Normlize the mouse position to (-1, 1)
-            mousePosition = new Vector2(((mousePosition.x / Screen.width) - 0.5f) * 2.0f, ((mousePosition.y / Screen.height) - 0.5f) * 2.0f);
-        }
+        mousePosition = newMousePosition;
+        // Normlize the mouse position to (-1, 1)
+        mousePosition = new Vector2(((mousePosition.x / Screen.width) - 0.5f) * 2.0f, ((mousePosition.y / Screen.height) - 0.5f) * 2.0f);
     }
 }
