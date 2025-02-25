@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator staffAnimator;
     [SerializeField] HealthBar healthBar;
     [SerializeField] Transform rotatingRootTransform;
+    [SerializeField] PlayerStateSO playerState;
     HealthComponent health;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
@@ -13,8 +13,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        playerInput.actions["LeftMouse"].performed += OnAttack;
+        var pm = GetComponent<PlayerMovement>();
+        pm.input.OnLeftMouseClickEvent += OnAttack;
+        playerState = pm.playerState;
         health = GetComponent<HealthComponent>();
         health.onDamageTaken.AddListener(onDamageTaken);
     }
@@ -40,23 +41,22 @@ public class PlayerCombat : MonoBehaviour
         DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
     }
 
-    void OnAttack(InputAction.CallbackContext context)
+    void OnAttack()
     {
-        if (context.performed)
-        {
-            // check if the clip is already playing, if it is simply reset it
-            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                // reset the clip
-                staffAnimator.Play("Attack", -1, 0);
-            }
-            else
-            {
-                // play the clip, if it's not already playing
-                staffAnimator.SetTrigger("Attack");
-            }
+        if (playerState.state == PlayerState.DisableInput) return;
 
-            Attack();
+        // check if the clip is already playing, if it is simply reset it
+        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            // reset the clip
+            staffAnimator.Play("Attack", -1, 0);
         }
+        else
+        {
+            // play the clip, if it's not already playing
+            staffAnimator.SetTrigger("Attack");
+        }
+
+        Attack();
     }
 }
