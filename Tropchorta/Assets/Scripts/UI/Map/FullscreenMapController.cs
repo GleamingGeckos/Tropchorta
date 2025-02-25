@@ -11,6 +11,7 @@ public class FullscreenMapController : MonoBehaviour
     [SerializeField] private RectTransform mapRectTransform;
     [SerializeField] private RectTransform fullscreenMapRoot;
     [SerializeField] private RectTransform mask;
+    [SerializeField] private RectTransform minimapRoot;
     [SerializeField] private Image darkOverlay;
     [SerializeField] private RectTransform playerIcon;
     [SerializeField] private GameObject mapIconPrefab;
@@ -37,6 +38,7 @@ public class FullscreenMapController : MonoBehaviour
     private Vector2 mapInitialSize;
     private MapController mapController;
     private List<MapIcon> playerPlacedIcons = new List<MapIcon>();
+    private List<MapIcon> minimapIcons = new List<MapIcon>();
     private List<MapIconButton> mapIconButtons = new List<MapIconButton>();
     private Sprite selectedIcon;
 
@@ -209,10 +211,15 @@ public class FullscreenMapController : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(mapRectTransform, mousePosition, null, out iconPosOnRect);
 
         GameObject newIcon = Instantiate(mapIconPrefab, mapRectTransform);
+        GameObject newMinimapIcon = Instantiate(mapIconPrefab, minimapRoot);
         MapIcon mapIcon = newIcon.GetComponent<MapIcon>();
+        MapIcon minimapIcon = newMinimapIcon.GetComponent<MapIcon>();
 
         mapIcon.SetSprite(selectedIcon);
         mapIcon.SetSize(currentIconSize / currentZoom);
+
+        minimapIcon.SetSprite(selectedIcon);
+        minimapIcon.SetSize(8f);
 
         Vector2 iconNormalizedPosition = new Vector2(
             iconPosOnRect.x / mapRectTransform.rect.width + 0.5f,
@@ -220,8 +227,11 @@ public class FullscreenMapController : MonoBehaviour
         );
 
         mapIcon.SetPosition(iconNormalizedPosition);
+        minimapIcon.SetPosition(iconNormalizedPosition);
         playerPlacedIcons.Add(mapIcon);
+        minimapIcons.Add(minimapIcon);
         mapIcon.SetIndex(playerPlacedIcons.Count - 1);
+        minimapIcon.SetIndex(minimapIcons.Count - 1);
         mapIcon.onDestroyed.AddListener(IconDestroyed);
     }
 
@@ -235,9 +245,17 @@ public class FullscreenMapController : MonoBehaviour
     {
         playerPlacedIcons.RemoveAt(idx);
 
+        Destroy(minimapIcons[idx].gameObject);
+        minimapIcons.RemoveAt(idx);
+
         for (int i = 0; i < playerPlacedIcons.Count; i++)
         {
             playerPlacedIcons[i].SetIndex(i);
+        }
+
+        for (int i = 0; i < minimapIcons.Count; i++)
+        {
+            minimapIcons[i].SetIndex(i);
         }
     }
 

@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 2526423}
   - component: {fileID: 2526422}
   m_Layer: 5
-  m_Name: Map
+  m_Name: MinimapRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2961,6 +2961,7 @@ MonoBehaviour:
   mapRectTransform: {fileID: 654069933}
   fullscreenMapRoot: {fileID: 1612313730}
   mask: {fileID: 966484150}
+  minimapRoot: {fileID: 2526421}
   darkOverlay: {fileID: 1743229985}
   playerIcon: {fileID: 1186730735}
   mapIconPrefab: {fileID: 5870446606119108387, guid: afad6b7720a4a6e4cb1eaa76181812b8, type: 3}
