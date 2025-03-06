@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    public Item itemData;  // Reference to ScriptableObject
+    [SerializeField] Item itemData;  // Reference to ScriptableObject
 
     private void Start()
     {
@@ -24,5 +24,15 @@ public class ItemController : MonoBehaviour
         {
            // Debug.Log($"Item: {itemData.itemName} - {itemData.description}");
         }
+    }
+
+    public Item GetItem()
+    {
+        return itemData;
+    }
+
+    public void SetItem(Item item)
+    {
+        itemData = item;
     }
 }

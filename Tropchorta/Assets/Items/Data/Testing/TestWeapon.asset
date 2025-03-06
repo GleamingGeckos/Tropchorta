@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Test 2 New Item
   icon: {fileID: 21300000, guid: 8ed761c2ec87da442b08fbdaf626ec84, type: 3}
   description: Test 2 Item Description
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 8086611897145994040, guid: 3612d7e9f7220f44cb786ea498976752, type: 3}
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
   - {fileID: 11400000, guid: 012ae5038d794504fa367ef929595005, type: 2}

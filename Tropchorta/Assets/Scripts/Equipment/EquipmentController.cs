@@ -18,10 +18,27 @@ public class EquipmentController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))  // Left Mouse Click
         {
-            //UseWeapon();
+            //UseWeapon(transform);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UseWeapon(transform);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log("Picking up items!!!");
+            PickUpItem();
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("Switching weapons!!!");
+            SwitchWeapons();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            
         }
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,19 +46,54 @@ public class EquipmentController : MonoBehaviour
         if (other.CompareTag("Gold"))
         {
             //Debug.Log("equimpent controller got some gold");
-            goldAmount += other.gameObject.GetComponent<GoldController>().OnPlayerActivate();
+            AddGold(other.gameObject.GetComponent<GoldController>().OnPlayerActivate());
+        }
+        else if(other.CompareTag("Item"))
+        {
+            Item item = other.GetComponent<ItemController>().GetItem();
+            interactedItems.Add(item);
+            lastInteractedItem = item;
         }
     }
 
-    public void SpawnItem(Item item, Vector3 position)
+    private void OnTriggerExit(Collider other)
     {
-        if (item.itemPrefab != null)
+        if (other.CompareTag("Item"))
         {
-            GameObject spawnedItem = Instantiate(item.itemPrefab, position, Quaternion.identity);
-            ItemController controller = spawnedItem.GetComponent<ItemController>();
-            controller.itemData = item;  // Assign the ScriptableObject data
+            Item item = other.GetComponent<ItemController>().GetItem();
+            interactedItems.Remove(item);
+
+            if (lastInteractedItem == item)
+            {
+                lastInteractedItem = null;
+                if(interactedItems.Count > 0)
+                {
+                    lastInteractedItem = interactedItems[interactedItems.Count - 1];
+                }
+            }
         }
     }
+
+    public int GetGold()
+    {
+        return goldAmount;
+    }
+
+    public void AddGold(int amount)
+    {
+        goldAmount += amount;
+    }
+
+    public void RemoveGold(int amount)
+    {
+        goldAmount -= amount;
+    }
+
+    public void ClearGold()
+    {
+        goldAmount = 0;
+    }
+
     public void UseWeapon(Transform playerTransform)
     {
         if (usedWeapon == null)
@@ -67,5 +119,24 @@ public class EquipmentController : MonoBehaviour
         Item tmpItem = usedWeapon;
         usedWeapon = inactiveWeapon;
         inactiveWeapon = tmpItem;
+    }
+
+    public void PickUpItem()
+    {
+        if (lastInteractedItem is Weapon weapon)
+        {
+            Debug.Log($"Picking up weapon: {weapon.itemName}");
+
+        }
+    }
+
+    public void SpawnItem(Item item, Vector3 position)
+    {
+        if (item.itemPrefab != null)
+        {
+            GameObject spawnedItem = Instantiate(item.itemPrefab, position, Quaternion.identity);
+            ItemController controller = spawnedItem.GetComponent<ItemController>();
+            controller.SetItem(item); // Assign the ScriptableObject data
+        }
     }
 }
