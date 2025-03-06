@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1472c3aed6a0514e92909d48d17d8cb, type: 3}
   m_Name: BasicColorChangeBehaviour
   m_EditorClassIdentifier: 
-  weaponColor: {r: 1, g: 0, b: 0, a: 1}
+  weaponColor: {r: 0, g: 0, b: 1, a: 1}
+  duration: 1

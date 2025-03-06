@@ -586,6 +586,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldAmount: 0
+  lastInteractedItem: {fileID: 0}
+  interactedItems: []
+  usedWeapon: {fileID: 11400000, guid: fb579876cf2335e49a7ac5599b61e481, type: 2}
+  inactiveWeapon: {fileID: 0}
+  helmet: {fileID: 0}
+  breastplate: {fileID: 0}
+  pants: {fileID: 0}
+  shoes: {fileID: 0}
 --- !u!54 &657210817
 Rigidbody:
   m_ObjectHideFlags: 0

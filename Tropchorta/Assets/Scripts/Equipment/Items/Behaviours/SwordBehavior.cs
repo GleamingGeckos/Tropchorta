@@ -32,11 +32,12 @@ public class SwordBehavior : WeaponBehavior
     {
         // Debug.Log("Swinging sword!");
         // Example attack logic (sphere cast to detect enemies)
+        //Debug.Log("User position : " + user.position);
         RaycastHit[] hits = Physics.SphereCastAll(user.position, attackRange, user.forward, 0f);
         foreach (var hit in hits)
         {
-            //Debug.Log("Hit " + hit.transform.name);
-            DebugExtension.DebugWireSphere(hit.transform.position, Color.yellow, 1f, 1f);
+            //Debug.Log("Hit " + hit.transform.name + hit.transform.position);
+            DebugExtension.DebugWireSphere(hit.transform.position, Color.blue, 1f, 1f);
             // Apply damage to enemy here
         }
     }

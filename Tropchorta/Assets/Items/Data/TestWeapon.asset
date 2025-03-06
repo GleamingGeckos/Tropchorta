@@ -18,3 +18,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 0}
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
+  - {fileID: 11400000, guid: 012ae5038d794504fa367ef929595005, type: 2}

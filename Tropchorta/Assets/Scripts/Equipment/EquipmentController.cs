@@ -18,7 +18,7 @@ public class EquipmentController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))  // Left Mouse Click
         {
-            UseWeapon();
+            //UseWeapon();
         }
     }
 
@@ -42,7 +42,7 @@ public class EquipmentController : MonoBehaviour
             controller.itemData = item;  // Assign the ScriptableObject data
         }
     }
-    private void UseWeapon()
+    public void UseWeapon(Transform playerTransform)
     {
         if (usedWeapon == null)
         {
@@ -53,12 +53,12 @@ public class EquipmentController : MonoBehaviour
         // Check if the equipped item is a Weapon
         if (usedWeapon is Weapon weapon)
         {
-            //Debug.Log($"Using weapon: {weapon.itemName}");
-            weapon.Use(transform);
+            Debug.Log($"Using weapon: {weapon.itemName}");
+            weapon.Use(playerTransform);
         }
         else
         {
-            //Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
         }
     }
 

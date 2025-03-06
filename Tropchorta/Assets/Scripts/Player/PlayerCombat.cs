@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     [SerializeField] Transform rotatingRootTransform;
     [SerializeField] PlayerStateSO playerState;
+    [SerializeField] EquipmentController equipmentController;
     HealthComponent health;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
@@ -57,6 +58,7 @@ public class PlayerCombat : MonoBehaviour
             staffAnimator.SetTrigger("Attack");
         }
 
+        equipmentController.UseWeapon(transform);
         Attack();
     }
 }
