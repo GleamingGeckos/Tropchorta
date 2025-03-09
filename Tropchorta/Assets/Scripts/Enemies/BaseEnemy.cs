@@ -11,7 +11,6 @@ public class BaseEnemy : MonoBehaviour
     private float transitionDuration = 1f;
     private Tween colorTween;
 
-
     //Components
     private EnemyCombat _enemyCombat;
     private EnemyMovement _enemyMovement;
@@ -24,11 +23,32 @@ public class BaseEnemy : MonoBehaviour
         originalColor = material.color; // Store the original color
     }
 
+    void Update()
+    {
+         _enemyMovement.MoveToTarget();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<HealthComponent>().Damage(_enemyCombat.DealDamage());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _enemyMovement.StartChasing(other.gameObject.transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _enemyMovement.StopChasing();   
         }
     }
 
@@ -44,7 +64,6 @@ public class BaseEnemy : MonoBehaviour
             _enemyMovement.RotateTowards(player);
         }
     }
-
   
     public void OnDeath()
     {
