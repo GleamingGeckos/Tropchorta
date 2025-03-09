@@ -34,7 +34,7 @@ public class PlayerCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent))
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
             {
                 healthComponent.Damage(10);
             }
