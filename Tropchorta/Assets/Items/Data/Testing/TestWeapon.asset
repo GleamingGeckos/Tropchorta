@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4ea23a3ee7d1643bcd780a37baa101, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  itemName: Test 2 New Item
+  itemName: Test 1 Weapon
   icon: {fileID: 21300000, guid: 8ed761c2ec87da442b08fbdaf626ec84, type: 3}
-  description: Test 2 Item Description
+  description: Test 1 Weapon Description
   itemPrefab: {fileID: 8086611897145994040, guid: 3612d7e9f7220f44cb786ea498976752, type: 3}
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}

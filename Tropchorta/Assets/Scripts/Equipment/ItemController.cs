@@ -26,6 +26,12 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    public Item PickUpItem()
+    {
+        Destroy(gameObject);
+        return itemData;
+    }
+
     public Item GetItem()
     {
         return itemData;

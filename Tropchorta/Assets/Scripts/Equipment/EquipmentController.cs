@@ -4,8 +4,8 @@ using UnityEngine;
 public class EquipmentController : MonoBehaviour
 {
     [SerializeField] int goldAmount = 0;
-    [SerializeField] Item lastInteractedItem;
-    [SerializeField] List<Item> interactedItems;
+    [SerializeField] GameObject lastInteractedItem;
+    [SerializeField] List<GameObject> interactedItems;
 
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
@@ -26,7 +26,7 @@ public class EquipmentController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Debug.Log("Picking up items!!!");
+            //Debug.Log("Picking up items!!!");
             PickUpItem();
         }
         if (Input.GetKeyDown(KeyCode.U))
@@ -50,9 +50,9 @@ public class EquipmentController : MonoBehaviour
         }
         else if(other.CompareTag("Item"))
         {
-            Item item = other.GetComponent<ItemController>().GetItem();
-            interactedItems.Add(item);
-            lastInteractedItem = item;
+            //Item item = other.GetComponent<ItemController>().GetItem();
+            interactedItems.Add(other.gameObject);
+            lastInteractedItem = other.gameObject;
         }
     }
 
@@ -60,10 +60,10 @@ public class EquipmentController : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            Item item = other.GetComponent<ItemController>().GetItem();
-            interactedItems.Remove(item);
+            //Item item = other.GetComponent<ItemController>().GetItem();
+            interactedItems.Remove(other.gameObject);
 
-            if (lastInteractedItem == item)
+            if (lastInteractedItem == other.gameObject)
             {
                 lastInteractedItem = null;
                 if(interactedItems.Count > 0)
@@ -123,20 +123,141 @@ public class EquipmentController : MonoBehaviour
 
     public void PickUpItem()
     {
-        if (lastInteractedItem is Weapon weapon)
+        if (lastInteractedItem != null)
         {
-            Debug.Log($"Picking up weapon: {weapon.itemName}");
-
+            if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Weapon weapon)
+            {
+                DropWeapon();
+                Debug.Log($"Picking up weapon: {weapon.itemName}");
+                usedWeapon = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
+            }
+            else if(lastInteractedItem.GetComponent<ItemController>().GetItem() is Helmet helm)
+            {
+                DropHelmet();
+                Debug.Log($"Picking up helmet: {helm.itemName}");
+                helmet = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
+            }
+            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Breastplate breastp)
+            {
+                DropBreastplate();
+                Debug.Log($"Picking up helmet: {breastp.itemName}");
+                breastplate = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
+            }
+            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Pants pant)
+            {
+                DropPants();
+                Debug.Log($"Picking up helmet: {pant.itemName}");
+                pants = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
+            }
+            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Shoes shoe)
+            {
+                DropShoes();
+                Debug.Log($"Picking up helmet: {shoe.itemName}");
+                shoes = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
+            }
+            else
+            {
+                Debug.Log("Item type is not supported");
+            }
         }
     }
 
+    public void UseDefensiveItems(Transform playerTransform)
+    {
+        if (helmet != null)
+        {
+            if (helmet is Helmet helm)
+            {
+                helm.Use(playerTransform);
+                Debug.Log($"Using helmet: {helm.itemName}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No helmet equipped.");
+        }
+
+        if (breastplate != null)
+        {
+            if (breastplate is Breastplate breastp)
+            {
+                breastp.Use(playerTransform);
+                Debug.Log($"Using helmet: {breastp.itemName}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No breastplate equipped.");
+        }
+
+        if (pants != null)
+        {
+            if (pants is Pants pant)
+            {
+                pant.Use(playerTransform);
+                Debug.Log($"Using helmet: {pant.itemName}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No pants equipped.");
+        }
+
+        if (shoes != null)
+        {
+            if (shoes is Shoes shoe)
+            {
+                shoe.Use(playerTransform);
+                Debug.Log($"Using helmet: {shoe.itemName}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No shoes equipped.");
+        }
+    }
+    void DropWeapon()
+    {
+        SpawnItem(usedWeapon,transform.position);
+        usedWeapon = null;
+    }
+    void DropHelmet()
+    {
+        SpawnItem(helmet, transform.position);
+        helmet = null;
+    }
+
+    void DropBreastplate()
+    {
+        SpawnItem(breastplate, transform.position);
+        breastplate = null;
+    }
+
+    void DropPants()
+    {
+        SpawnItem(pants, transform.position);
+        pants = null;
+    }
+
+    void DropShoes()
+    {
+        SpawnItem(shoes, transform.position);
+        shoes = null;
+    }
     public void SpawnItem(Item item, Vector3 position)
     {
-        if (item.itemPrefab != null)
+        if(item != null)
         {
-            GameObject spawnedItem = Instantiate(item.itemPrefab, position, Quaternion.identity);
-            ItemController controller = spawnedItem.GetComponent<ItemController>();
-            controller.SetItem(item); // Assign the ScriptableObject data
+            if (item.itemPrefab != null)
+            {
+                GameObject spawnedItem = Instantiate(item.itemPrefab, position, Quaternion.identity);
+                ItemController controller = spawnedItem.GetComponent<ItemController>();
+                controller.SetItem(item); // Assign the ScriptableObject data
+            }
+        }
+        else
+        {
+            Debug.Log("Item to drop is null");
         }
     }
 }
