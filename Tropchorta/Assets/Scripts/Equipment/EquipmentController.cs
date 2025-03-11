@@ -22,7 +22,7 @@ public class EquipmentController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            UseWeapon(transform);
+            UseWeaponStart(transform);
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
@@ -94,7 +94,7 @@ public class EquipmentController : MonoBehaviour
         goldAmount = 0;
     }
 
-    public void UseWeapon(Transform playerTransform)
+    public void UseWeaponStart(Transform playerTransform)
     {
         if (usedWeapon == null)
         {
@@ -106,7 +106,68 @@ public class EquipmentController : MonoBehaviour
         if (usedWeapon is Weapon weapon)
         {
             Debug.Log($"Using weapon: {weapon.itemName}");
-            weapon.Use(playerTransform);
+            weapon.UseStart(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
+
+    public void UseWeaponEnd(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            Debug.Log($"Using weapon: {weapon.itemName}");
+            weapon.UseEnd(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
+    public void UseWeaponAltStart(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            Debug.Log($"Using weapon: {weapon.itemName}");
+            weapon.AltUseStart(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
+    public void UseWeaponAltEnd(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            Debug.Log($"Using weapon: {weapon.itemName}");
+            weapon.AltUseEnd(playerTransform);
         }
         else
         {
@@ -123,42 +184,48 @@ public class EquipmentController : MonoBehaviour
 
     public void PickUpItem()
     {
-        if (lastInteractedItem != null)
+        if (lastInteractedItem == null)
+            return;
+
+        var itemController = lastInteractedItem.GetComponent<ItemController>();
+        // if item is null, this is also null
+        var item = itemController?.GetItem();
+
+        switch (item)
         {
-            if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Weapon weapon)
-            {
+            case Weapon weapon:
                 DropWeapon();
                 Debug.Log($"Picking up weapon: {weapon.itemName}");
-                usedWeapon = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
-            }
-            else if(lastInteractedItem.GetComponent<ItemController>().GetItem() is Helmet helm)
-            {
+                usedWeapon = itemController.PickUpItem();
+                break;
+
+            case Helmet helm:
                 DropHelmet();
                 Debug.Log($"Picking up helmet: {helm.itemName}");
-                helmet = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
-            }
-            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Breastplate breastp)
-            {
+                helmet = itemController.PickUpItem();
+                break;
+
+            case Breastplate breastp:
                 DropBreastplate();
-                Debug.Log($"Picking up helmet: {breastp.itemName}");
-                breastplate = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
-            }
-            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Pants pant)
-            {
+                Debug.Log($"Picking up breastplate: {breastp.itemName}");
+                breastplate = itemController.PickUpItem();
+                break;
+
+            case Pants pant:
                 DropPants();
-                Debug.Log($"Picking up helmet: {pant.itemName}");
-                pants = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
-            }
-            else if (lastInteractedItem.GetComponent<ItemController>().GetItem() is Shoes shoe)
-            {
+                Debug.Log($"Picking up pants: {pant.itemName}");
+                pants = itemController.PickUpItem();
+                break;
+
+            case Shoes shoe:
                 DropShoes();
-                Debug.Log($"Picking up helmet: {shoe.itemName}");
-                shoes = lastInteractedItem.GetComponent<ItemController>().PickUpItem();
-            }
-            else
-            {
+                Debug.Log($"Picking up shoes: {shoe.itemName}");
+                shoes = itemController.PickUpItem();
+                break;
+
+            default:
                 Debug.Log("Item type is not supported");
-            }
+                break;
         }
     }
 

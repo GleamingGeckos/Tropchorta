@@ -15,7 +15,8 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         var pm = GetComponent<PlayerMovement>();
-        pm.input.OnLeftMouseClickEvent += OnAttack;
+        pm.input.OnLeftMouseClickEvent += OnAttackStart;
+        pm.input.OnLeftMouseReleaseEvent += OnAttackEnd;
         playerState = pm.playerState;
         health = GetComponent<HealthComponent>();
         health.onDamageTaken.AddListener(onDamageTaken);
@@ -42,7 +43,7 @@ public class PlayerCombat : MonoBehaviour
         DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
     }
 
-    void OnAttack()
+    void OnAttackStart()
     {
         if (playerState.state == PlayerState.DisableInput) return;
 
@@ -58,7 +59,13 @@ public class PlayerCombat : MonoBehaviour
             staffAnimator.SetTrigger("Attack");
         }
 
-        equipmentController.UseWeapon(transform);
+        equipmentController.UseWeaponStart(transform);
         Attack();
+    }
+
+    void OnAttackEnd()
+    {
+        Debug.Log("Attack end");
+        equipmentController.UseWeaponEnd(transform);
     }
 }

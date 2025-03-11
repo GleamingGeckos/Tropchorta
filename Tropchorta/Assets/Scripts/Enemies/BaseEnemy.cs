@@ -23,9 +23,9 @@ public class BaseEnemy : MonoBehaviour
         originalColor = material.color; // Store the original color
     }
 
-    void Update()
+    void FixedUpdate()
     {
-         _enemyMovement.MoveToTarget();
+        _enemyMovement.MoveToTarget();
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -5,11 +5,35 @@ public class Weapon : Item
 {
     public WeaponBehavior[] weaponBehaviors;
 
-    public void Use(Transform user)
+    public void UseStart(Transform user)
     {
         foreach (var behavior in weaponBehaviors)
         {
-            behavior?.Use(user);
+            behavior?.UseStart(user);
+        }
+    }
+
+    public void UseEnd(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.UseStop(user);
+        }
+    }
+
+    public void AltUseStart(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.AltUseStart(user);
+        }
+    }
+
+    public void AltUseEnd(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.AltUseStop(user);
         }
     }
 

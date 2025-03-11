@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 [CreateAssetMenu(fileName = "NewBehaviour", menuName = "Inventory/WeaponBehaviors/ColorChangeBehavior", order = 3)]
 public class ColorChangeBehavior : WeaponBehavior
@@ -10,6 +11,8 @@ public class ColorChangeBehavior : WeaponBehavior
     private Coroutine activeCoroutine;  // Tracks the currently running coroutine
     private Color originalColor;        // Stores the original color persistently
     private bool originalColorStored = false;  // Ensure we store the original color only once
+
+    private Tween tween;
 
     public override void Use(Transform user)
     {
@@ -23,15 +26,12 @@ public class ColorChangeBehavior : WeaponBehavior
                 originalColorStored = true;
             }
 
-            // If coroutine is running, stop it to reset the timer
-            MonoBehaviour userMono = user.GetComponent<MonoBehaviour>();
-            if (activeCoroutine != null)
+            if (!tween.IsActive())
             {
-                userMono.StopCoroutine(activeCoroutine);
+                tween.Kill();
             }
 
-            // Start the coroutine again with a fresh timer
-            activeCoroutine = userMono.StartCoroutine(ChangeColorTemporary(weaponRenderer));
+            ChangeColorTemporary(weaponRenderer);
         }
     }
 
@@ -39,18 +39,29 @@ public class ColorChangeBehavior : WeaponBehavior
     {
         throw new System.NotImplementedException();
     }
-    private IEnumerator ChangeColorTemporary(Renderer renderer)
+    private void ChangeColorTemporary(Renderer renderer)
     {
         // Change to the desired color
         renderer.material.color = weaponColor;
 
-        yield return new WaitForSeconds(duration);  // Wait for the specified duration
+        tween = renderer.material.DOColor(originalColor, duration).SetEase(Ease.Linear).OnComplete(() => {
+            // Revert to the original color
+            renderer.material.color = originalColor;
 
-        // Revert to the original color
-        renderer.material.color = originalColor;
+            activeCoroutine = null;           // Reset coroutine reference after completion
+            originalColorStored = false;      // Allow color storage for future uses
+            tween = null;   // ensure tween is null after completion
+        });
+    }
 
-        activeCoroutine = null;           // Reset coroutine reference after completion
-        originalColorStored = false;      // Allow color storage for future uses
+    public override void StopUse(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void AltUse(Transform user)
+    {
+        throw new System.NotImplementedException();
     }
 }
 

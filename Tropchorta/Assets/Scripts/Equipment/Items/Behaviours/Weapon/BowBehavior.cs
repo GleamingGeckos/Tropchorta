@@ -17,4 +17,14 @@ public class BowBehavior : WeaponBehavior
     {
         throw new System.NotImplementedException();
     }
+
+    public override void StopUse(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void AltUse(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
 }
