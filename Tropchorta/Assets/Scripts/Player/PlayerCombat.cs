@@ -65,7 +65,6 @@ public class PlayerCombat : MonoBehaviour
 
     void OnAttackEnd()
     {
-        Debug.Log("Attack end");
         equipmentController.UseWeaponEnd(transform);
     }
 }

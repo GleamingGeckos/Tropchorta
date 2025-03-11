@@ -14,7 +14,7 @@ public class ColorChangeBehavior : WeaponBehavior
 
     private Tween tween;
 
-    public override void Use(Transform user)
+    public override void UseStart(Transform user)
     {
         Renderer weaponRenderer = user.GetComponentInChildren<Renderer>();
         if (weaponRenderer != null)
@@ -35,16 +35,33 @@ public class ColorChangeBehavior : WeaponBehavior
         }
     }
 
+    public override void UseStop(Transform user)
+    {
+
+    }
+
+    public override void AltUseStart(Transform user)
+    {
+
+    }
+
+    public override void AltUseStop(Transform user)
+    {
+
+    }
+
     public override void ClearData(Transform user)
     {
         throw new System.NotImplementedException();
     }
+
     private void ChangeColorTemporary(Renderer renderer)
     {
         // Change to the desired color
         renderer.material.color = weaponColor;
 
-        tween = renderer.material.DOColor(originalColor, duration).SetEase(Ease.Linear).OnComplete(() => {
+        tween = renderer.material.DOColor(originalColor, duration).SetEase(Ease.Linear).OnComplete(() =>
+        {
             // Revert to the original color
             renderer.material.color = originalColor;
 
@@ -52,16 +69,6 @@ public class ColorChangeBehavior : WeaponBehavior
             originalColorStored = false;      // Allow color storage for future uses
             tween = null;   // ensure tween is null after completion
         });
-    }
-
-    public override void StopUse(Transform user)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void AltUse(Transform user)
-    {
-        throw new System.NotImplementedException();
     }
 }
 

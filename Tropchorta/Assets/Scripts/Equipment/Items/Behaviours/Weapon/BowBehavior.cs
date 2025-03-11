@@ -6,11 +6,26 @@ public class BowBehavior : WeaponBehavior
     public GameObject arrowPrefab;
     public float arrowSpeed = 20f;
 
-    public override void Use(Transform user)
+    public override void UseStart(Transform user)
     {
         Debug.Log("Shooting an arrow!");
         GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, Quaternion.identity);
         arrow.GetComponent<Rigidbody>().linearVelocity = user.forward * arrowSpeed;
+    }
+
+    public override void UseStop(Transform user)
+    {
+
+    }
+
+    public override void AltUseStart(Transform user)
+    {
+
+    }
+
+    public override void AltUseStop(Transform user)
+    {
+
     }
 
     public override void ClearData(Transform user)
@@ -18,13 +33,5 @@ public class BowBehavior : WeaponBehavior
         throw new System.NotImplementedException();
     }
 
-    public override void StopUse(Transform user)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void AltUse(Transform user)
-    {
-        throw new System.NotImplementedException();
-    }
 }

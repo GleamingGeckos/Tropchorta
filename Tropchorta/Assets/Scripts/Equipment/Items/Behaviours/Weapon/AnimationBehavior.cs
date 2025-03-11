@@ -4,7 +4,7 @@ public class AnimationBehavior : WeaponBehavior
 {
     public string animationTrigger = "Attack";
 
-    public override void Use(Transform user)
+    public override void UseStart(Transform user)
     {
         Animator animator = user.GetComponent<Animator>();
         if (animator != null)
@@ -14,17 +14,22 @@ public class AnimationBehavior : WeaponBehavior
         }
     }
 
+    public override void UseStop(Transform user)
+    {
+
+    }
+
+    public override void AltUseStart(Transform user)
+    {
+
+    }
+
+    public override void AltUseStop(Transform user)
+    {
+
+    }
+
     public override void ClearData(Transform user)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void StopUse(Transform user)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void AltUse(Transform user)
     {
         throw new System.NotImplementedException();
     }

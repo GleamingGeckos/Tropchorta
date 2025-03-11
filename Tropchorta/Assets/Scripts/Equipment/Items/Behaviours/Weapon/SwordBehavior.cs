@@ -28,7 +28,13 @@ public class SwordBehavior : WeaponBehavior
                 Debug.LogWarning("Attack Range cannot be negative.");
         }
     }
-    public override void Use(Transform user)
+
+    public override void ClearData(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void UseStart(Transform user)
     {
         // Debug.Log("Swinging sword!");
         // Example attack logic (sphere cast to detect enemies)
@@ -42,18 +48,18 @@ public class SwordBehavior : WeaponBehavior
         }
     }
 
-    public override void ClearData(Transform user)
+    public override void UseStop(Transform user)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void StopUse(Transform user)
+    public override void AltUseStart(Transform user)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void AltUse(Transform user)
+    public override void AltUseStop(Transform user)
     {
-        throw new System.NotImplementedException();
+        
     }
 }
