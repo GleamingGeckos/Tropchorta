@@ -7,8 +7,6 @@ public class ColorChangeBehavior : WeaponBehavior
 {
     public Color weaponColor = Color.red;
     public float duration = 2f;  // Duration in seconds before reverting
-
-    private Coroutine activeCoroutine;  // Tracks the currently running coroutine
     private Color originalColor;        // Stores the original color persistently
     private bool originalColorStored = false;  // Ensure we store the original color only once
 
@@ -65,7 +63,6 @@ public class ColorChangeBehavior : WeaponBehavior
             // Revert to the original color
             renderer.material.color = originalColor;
 
-            activeCoroutine = null;           // Reset coroutine reference after completion
             originalColorStored = false;      // Allow color storage for future uses
             tween = null;   // ensure tween is null after completion
         });

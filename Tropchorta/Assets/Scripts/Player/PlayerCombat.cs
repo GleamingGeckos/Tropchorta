@@ -27,26 +27,10 @@ public class PlayerCombat : MonoBehaviour
         healthBar.SetHealth(currentHealth / health.MaxHealth);
     }
 
-    void Attack()
-    {
-        // everything below this line should be later on handled by a Weapon of some sorts, this is for testing only
-        Vector3 rotatingOffset = rotatingRootTransform.forward * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(transform.position + rotatingOffset, 1f, colliders); // TODO : layermask for damageable objects or enemies?
-        for (int i = 0; i < hits; i++)
-        {
-            // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
-            {
-                healthComponent.Damage(10);
-            }
-        }
-        DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
-    }
-
     void OnAttackStart()
     {
         if (playerState.state == PlayerState.DisableInput) return;
-
+        // TODO : move this to a weapon behavior somehow
         // check if the clip is already playing, if it is simply reset it
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
@@ -60,11 +44,15 @@ public class PlayerCombat : MonoBehaviour
         }
 
         equipmentController.UseWeaponStart(transform);
-        Attack();
     }
 
     void OnAttackEnd()
     {
         equipmentController.UseWeaponEnd(transform);
+    }
+
+    public Vector3 GetRotatingRootForward()
+    {
+        return rotatingRootTransform.forward;
     }
 }

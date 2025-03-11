@@ -6,6 +6,9 @@ public class SwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackRange = 1.5f;
+    
+    private PlayerCombat playerCombat;
+    Collider[] colliders = new Collider[16];
     public int Damage
     {
         get => damage;
@@ -36,16 +39,18 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseStart(Transform user)
     {
-        // Debug.Log("Swinging sword!");
-        // Example attack logic (sphere cast to detect enemies)
-        //Debug.Log("User position : " + user.position);
-        RaycastHit[] hits = Physics.SphereCastAll(user.position, attackRange, user.forward, 0f);
-        foreach (var hit in hits)
+        // TODO : add some kind of Start/Awake method to collect ref the first frame its worn/used
+        Vector3 rotatingOffset = user.GetComponent<PlayerCombat>().GetRotatingRootForward() * 1.5f;
+        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 1f, colliders); // TODO : layermask for damageable objects or enemies?
+        for (int i = 0; i < hits; i++)
         {
-            //Debug.Log("Hit " + hit.transform.name + hit.transform.position);
-            DebugExtension.DebugWireSphere(hit.transform.position, Color.blue, 1f, 1f);
-            // Apply damage to enemy here
+            // Currently assuming the collider is on the same object as the HealthComponent
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
+            {
+                healthComponent.Damage(10);
+            }
         }
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 1f, 1f);
     }
 
     public override void UseStop(Transform user)
