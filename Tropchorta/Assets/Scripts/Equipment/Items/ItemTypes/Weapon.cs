@@ -5,6 +5,14 @@ public class Weapon : Item
 {
     public WeaponBehavior[] weaponBehaviors;
 
+    public void Initialize(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.Initialize(user);
+        }
+    }
+
     public void UseStart(Transform user)
     {
         foreach (var behavior in weaponBehaviors)

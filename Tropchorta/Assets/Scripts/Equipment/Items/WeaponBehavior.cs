@@ -1,7 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class WeaponBehavior : ScriptableObject
 {
+    public abstract void Initialize(Transform user);
     // the most basic weapon behavior this can be either a simple attack OR treated as beginning of a hold-to-use attack like a bow or something
     public abstract void UseStart(Transform user);
 

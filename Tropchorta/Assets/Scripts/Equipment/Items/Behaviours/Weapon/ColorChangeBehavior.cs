@@ -50,7 +50,6 @@ public class ColorChangeBehavior : WeaponBehavior
 
     public override void ClearData(Transform user)
     {
-        throw new System.NotImplementedException();
     }
 
     private void ChangeColorTemporary(Renderer renderer)
@@ -66,6 +65,10 @@ public class ColorChangeBehavior : WeaponBehavior
             originalColorStored = false;      // Allow color storage for future uses
             tween = null;   // ensure tween is null after completion
         });
+    }
+
+    public override void Initialize(Transform user)
+    {
     }
 }
 

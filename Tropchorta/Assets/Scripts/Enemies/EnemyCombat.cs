@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
@@ -14,6 +15,18 @@ public class EnemyCombat : MonoBehaviour
 
     bool _isCooldown = false;
     [SerializeField] float _cooldownInterval = 3.0f;
+
+    [Header("Temporary")]
+    [SerializeField] private RectTransform attackBar;
+    private float attackBarInitialX;
+    [SerializeField] private float attackBarFinalX = 0f;
+    Tween barTween;
+
+
+    private void Start()
+    {
+        attackBarInitialX = attackBar.anchoredPosition.x;
+    }
 
     public int DealDamage()
     {
@@ -33,7 +46,7 @@ public class EnemyCombat : MonoBehaviour
             // Currently assuming the collider is on the same object as the HealthComponent
             if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && !_colliders[i].isTrigger)
             {
-                healthComponent.Damage(DealDamage());
+                healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }
         StartCoroutine(Cooldown());
@@ -43,8 +56,21 @@ public class EnemyCombat : MonoBehaviour
     private IEnumerator Cooldown()
     {
         _isCooldown = true; // Set flag to prevent multiple coroutines
-        yield return new WaitForSeconds(_cooldownInterval);
+        yield return new WaitForSeconds(_cooldownInterval / 2f);
+        barTween = attackBar.DOAnchorPosX(attackBarFinalX, _cooldownInterval / 2f)
+        .SetEase(Ease.Linear)
+        .OnComplete( () => 
+            {
+                // reset bar
+                attackBar.anchoredPosition = new Vector2(attackBarInitialX, attackBar.anchoredPosition.y);
+            });
+        yield return new WaitForSeconds(_cooldownInterval / 2f);
         _isCooldown = false; // Reset flag when player leaves range
+    }
+
+    private void OnDestroy()
+    {
+        barTween.Kill();
     }
 
 }

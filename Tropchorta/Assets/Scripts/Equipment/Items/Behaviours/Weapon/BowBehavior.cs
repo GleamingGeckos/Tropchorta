@@ -30,8 +30,9 @@ public class BowBehavior : WeaponBehavior
 
     public override void ClearData(Transform user)
     {
-        throw new System.NotImplementedException();
     }
 
-
+    public override void Initialize(Transform user)
+    {
+    }
 }

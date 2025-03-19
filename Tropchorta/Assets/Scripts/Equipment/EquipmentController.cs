@@ -5,7 +5,7 @@ public class EquipmentController : MonoBehaviour
 {
     [SerializeField] int goldAmount = 0;
     [SerializeField] GameObject lastInteractedItem;
-    [SerializeField] List<GameObject> interactedItems;
+    [SerializeField] List<GameObject> interactedItems = new List<GameObject>();
 
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
@@ -14,12 +14,26 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Item pants;
     [SerializeField] Item shoes;
 
+    public void Initialize(Transform playerTransform)
+    {
+        if (usedWeapon != null)
+        {
+            if (usedWeapon is Weapon weapon)
+            {
+                weapon.Initialize(playerTransform);
+            }
+        }
+        if (inactiveWeapon != null)
+        {
+            if (inactiveWeapon is Weapon weapon)
+            {
+                weapon.Initialize(playerTransform);
+            }
+        }
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))  // Left Mouse Click
-        {
-            //UseWeapon(transform);
-        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             UseWeaponStart(transform);
@@ -36,7 +50,7 @@ public class EquipmentController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            
+
         }
     }
 
@@ -48,7 +62,7 @@ public class EquipmentController : MonoBehaviour
             //Debug.Log("equimpent controller got some gold");
             AddGold(other.gameObject.GetComponent<GoldController>().OnPlayerActivate());
         }
-        else if(other.CompareTag("Item"))
+        else if (other.CompareTag("Item"))
         {
             //Item item = other.GetComponent<ItemController>().GetItem();
             interactedItems.Add(other.gameObject);
@@ -66,7 +80,7 @@ public class EquipmentController : MonoBehaviour
             if (lastInteractedItem == other.gameObject)
             {
                 lastInteractedItem = null;
-                if(interactedItems.Count > 0)
+                if (interactedItems.Count > 0)
                 {
                     lastInteractedItem = interactedItems[interactedItems.Count - 1];
                 }
@@ -105,7 +119,6 @@ public class EquipmentController : MonoBehaviour
         // Check if the equipped item is a Weapon
         if (usedWeapon is Weapon weapon)
         {
-            Debug.Log($"Using weapon: {weapon.itemName}");
             weapon.UseStart(playerTransform);
         }
         else
@@ -126,7 +139,6 @@ public class EquipmentController : MonoBehaviour
         // Check if the equipped item is a Weapon
         if (usedWeapon is Weapon weapon)
         {
-            Debug.Log($"Using weapon: {weapon.itemName}");
             weapon.UseEnd(playerTransform);
         }
         else
@@ -146,7 +158,6 @@ public class EquipmentController : MonoBehaviour
         // Check if the equipped item is a Weapon
         if (usedWeapon is Weapon weapon)
         {
-            Debug.Log($"Using weapon: {weapon.itemName}");
             weapon.AltUseStart(playerTransform);
         }
         else
@@ -166,7 +177,6 @@ public class EquipmentController : MonoBehaviour
         // Check if the equipped item is a Weapon
         if (usedWeapon is Weapon weapon)
         {
-            Debug.Log($"Using weapon: {weapon.itemName}");
             weapon.AltUseEnd(playerTransform);
         }
         else
@@ -285,7 +295,7 @@ public class EquipmentController : MonoBehaviour
     }
     void DropWeapon()
     {
-        SpawnItem(usedWeapon,transform.position);
+        SpawnItem(usedWeapon, transform.position);
         usedWeapon = null;
     }
     void DropHelmet()
@@ -313,7 +323,7 @@ public class EquipmentController : MonoBehaviour
     }
     public void SpawnItem(Item item, Vector3 position)
     {
-        if(item != null)
+        if (item != null)
         {
             if (item.itemPrefab != null)
             {

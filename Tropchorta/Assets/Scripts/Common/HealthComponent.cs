@@ -4,10 +4,10 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] float maxHealth;
-    float currentHealth;
+    [SerializeField] protected float maxHealth;
+    protected float currentHealth;
 
-    bool isDead = false;
+    protected bool isDead = false;
 
     // Event holds (damageTaken, currentHealth)
     public UnityEvent<float, float> onDamageTaken;
@@ -15,6 +15,8 @@ public class HealthComponent : MonoBehaviour
 
     // Event holds (healValue, currentHealth)
     public UnityEvent<float, float> onHeal;
+
+    public UnityEvent<AttackData> onAttacked;
 
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
@@ -24,7 +26,8 @@ public class HealthComponent : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Damage(float damage)
+    // this is for unavoidable dmaage like bows, traps, etc.
+    public virtual void SimpleDamage(float damage)
     {
         if (damage < 0)
         {
@@ -36,6 +39,27 @@ public class HealthComponent : MonoBehaviour
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
         onDamageTaken.Invoke(damage, currentHealth);
+        // only invoke onDeath the first time a unit dies
+        if (currentHealth <= 0 && !isDead)
+        {
+            onDeath.Invoke();
+            isDead = true;
+        }
+    }
+
+    // this is for damage that can be avoided or reduced, like melee attacks that can be blocked by player
+    public virtual void BlockableDamage(AttackData ad)
+    {
+        if (ad.damage < 0)
+        {
+            Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");
+            return;
+        }
+        currentHealth -= ad.damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        // Do we want to invoke both events on death?
+        // Should onDamageTaken be invoked on death?
+        onDamageTaken.Invoke(ad.damage, currentHealth);
         // only invoke onDeath the first time a unit dies
         if (currentHealth <= 0 && !isDead)
         {

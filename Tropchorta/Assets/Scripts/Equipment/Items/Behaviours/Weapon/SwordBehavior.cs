@@ -6,8 +6,15 @@ public class SwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackRange = 1.5f;
-    
-    private PlayerCombat playerCombat;
+    [SerializeField, Range(0.0f, 1.0f)] private float blockPower = 0.2f;
+    private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
+
+    public override void Initialize(Transform user)
+    {
+        Debug.Log("Setting player in SwordBehavior");
+        playerCombat = user.GetComponent<PlayerCombat>();
+    }
+
     Collider[] colliders = new Collider[16];
     public int Damage
     {
@@ -39,15 +46,14 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseStart(Transform user)
     {
-        // TODO : add some kind of Start/Awake method to collect ref the first frame its worn/used
-        Vector3 rotatingOffset = user.GetComponent<PlayerCombat>().GetRotatingRootForward() * 1.5f;
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 1f, colliders); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
             {
-                healthComponent.Damage(10);
+                healthComponent.SimpleDamage(10);
             }
         }
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 1f, 1f);
@@ -55,16 +61,16 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseStop(Transform user)
     {
-        
+
     }
 
     public override void AltUseStart(Transform user)
     {
-        
+        playerCombat.StartBlocking(blockPower);
     }
 
     public override void AltUseStop(Transform user)
     {
-        
+        playerCombat.StopBlocking();
     }
 }

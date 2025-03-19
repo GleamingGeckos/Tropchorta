@@ -30,10 +30,10 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<HealthComponent>().Damage(_enemyCombat.DealDamage());
-        }
+        // if (collision.gameObject.tag == "Player")
+        // {
+        //     collision.gameObject.GetComponent<HealthComponent>().Damage(_enemyCombat.DealDamage());
+        // }
     }
 
     private void OnTriggerEnter(Collider other)
