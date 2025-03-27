@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         input.OnSprintCancelledEvent += () => isSprinting = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (playerState.state == PlayerState.DisableInput) return;
 

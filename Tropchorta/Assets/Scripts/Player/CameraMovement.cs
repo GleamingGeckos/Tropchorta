@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour
     // this is FixedUpdate, the same as movement of the player.
     // if you ever change this to Update, or the player's movement to Update, remember that both need to be the same
     // otherwise you might notice jittering of the player.
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (playerState.state == PlayerState.DisableInput) return;
 

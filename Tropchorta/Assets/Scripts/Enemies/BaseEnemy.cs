@@ -23,7 +23,7 @@ public class BaseEnemy : MonoBehaviour
         originalColor = material.color; // Store the original color
     }
 
-    void FixedUpdate()
+    void Update()
     {
         _enemyMovement.MoveToTarget();
     }
