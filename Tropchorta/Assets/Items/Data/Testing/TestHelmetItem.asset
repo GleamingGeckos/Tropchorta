@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b689ea53c08a3a04995fe7d7d3f9e31e, type: 3}
   m_Name: TestHelmetItem
   m_EditorClassIdentifier: 
-  itemName: New Item
-  icon: {fileID: 0}
-  description: Item Description
-  itemPrefab: {fileID: 0}
+  itemName: Testing helmet item
+  icon: {fileID: 21300000, guid: 33c4d4cb8c5d17646a7a5963da56812f, type: 3}
+  description: This is just a test helmet, nothing more to it
+  itemPrefab: {fileID: 1223754669357353652, guid: d8bce5dfc4459d847a5ed633f1f80e5a, type: 3}
   defensiveBehaviours:
   - {fileID: 11400000, guid: 50f268f8832597c46be5d5e66c775325, type: 2}

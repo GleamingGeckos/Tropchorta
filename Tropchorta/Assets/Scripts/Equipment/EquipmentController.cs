@@ -14,6 +14,11 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Item pants;
     [SerializeField] Item shoes;
 
+    [SerializeField] EquipmentUIController equipmentUIController;
+    private void Start()
+    {
+        DisplayItems();
+    }
     public void Initialize(Transform playerTransform)
     {
         if (usedWeapon != null)
@@ -67,6 +72,7 @@ public class EquipmentController : MonoBehaviour
             //Item item = other.GetComponent<ItemController>().GetItem();
             interactedItems.Add(other.gameObject);
             lastInteractedItem = other.gameObject;
+            equipmentUIController.ChangeLastInteractedItemDisplay(lastInteractedItem.GetComponent<ItemController>().GetItem());
         }
     }
 
@@ -80,9 +86,11 @@ public class EquipmentController : MonoBehaviour
             if (lastInteractedItem == other.gameObject)
             {
                 lastInteractedItem = null;
+                equipmentUIController.HideLastInteractedItemDisplay();
                 if (interactedItems.Count > 0)
                 {
                     lastInteractedItem = interactedItems[interactedItems.Count - 1];
+                    equipmentUIController.ChangeLastInteractedItemDisplay(lastInteractedItem.GetComponent<ItemController>().GetItem());
                 }
             }
         }
@@ -126,7 +134,6 @@ public class EquipmentController : MonoBehaviour
             Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
         }
     }
-
 
     public void UseWeaponEnd(Transform playerTransform)
     {
@@ -190,6 +197,8 @@ public class EquipmentController : MonoBehaviour
         Item tmpItem = usedWeapon;
         usedWeapon = inactiveWeapon;
         inactiveWeapon = tmpItem;
+        equipmentUIController.ChangeWeapon1Image(usedWeapon);
+        equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
     }
 
     public void PickUpItem()
@@ -206,31 +215,46 @@ public class EquipmentController : MonoBehaviour
             case Weapon weapon:
                 DropWeapon();
                 Debug.Log($"Picking up weapon: {weapon.itemName}");
+                interactedItems.Remove(lastInteractedItem);
                 usedWeapon = itemController.PickUpItem();
+                equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
             case Helmet helm:
                 DropHelmet();
                 Debug.Log($"Picking up helmet: {helm.itemName}");
+                interactedItems.Remove(lastInteractedItem);
                 helmet = itemController.PickUpItem();
+                equipmentUIController.ChangeHeadImage(helmet);
+                equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
             case Breastplate breastp:
                 DropBreastplate();
                 Debug.Log($"Picking up breastplate: {breastp.itemName}");
+                interactedItems.Remove(lastInteractedItem);
                 breastplate = itemController.PickUpItem();
+                equipmentUIController.ChangeTorsoImage(breastplate);
+                equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
             case Pants pant:
                 DropPants();
                 Debug.Log($"Picking up pants: {pant.itemName}");
+                interactedItems.Remove(lastInteractedItem);
                 pants = itemController.PickUpItem();
+                equipmentUIController.ChangePantsImage(pants);
+                equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
             case Shoes shoe:
                 DropShoes();
                 Debug.Log($"Picking up shoes: {shoe.itemName}");
+                interactedItems.Remove(lastInteractedItem);
                 shoes = itemController.PickUpItem();
+                equipmentUIController.ChangeShoesImage(shoes);
+                equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
             default:
@@ -336,5 +360,15 @@ public class EquipmentController : MonoBehaviour
         {
             Debug.Log("Item to drop is null");
         }
+    }
+
+    void DisplayItems()
+    {
+        equipmentUIController.ChangeHeadImage(helmet);
+        equipmentUIController.ChangeTorsoImage(breastplate);
+        equipmentUIController.ChangePantsImage(pants);
+        equipmentUIController.ChangeShoesImage(shoes);
+        equipmentUIController.ChangeWeapon1Image(usedWeapon);
+        equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
     }
 }

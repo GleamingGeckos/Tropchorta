@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Test2Weapon
   m_EditorClassIdentifier: 
   itemName: Test 2 Weapon
-  icon: {fileID: 21300000, guid: 8ed761c2ec87da442b08fbdaf626ec84, type: 3}
+  icon: {fileID: 21300000, guid: 4f97c725ce5e5d040aa5736897de8f3e, type: 3}
   description: Test 2 Weapon
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 8086611897145994040, guid: c76cb386cfc35574cbf2cdeb2a768584, type: 3}
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
-  - {fileID: 0}
