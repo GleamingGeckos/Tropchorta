@@ -42,9 +42,20 @@ public class BestiaryUIController : MonoBehaviour
         }
         beastPanels[activePanelId].SetActive(true);
     }
-    public void MainPanelDisplay()// moves on to the last beast display
+    public void MainPanelDisplay()// moves back to the all beasts display
     {
         beastPanels[activePanelId].SetActive(false);
+        buttonsPanel.SetActive(false);
+        mainPanel.SetActive(true);
+        activePanelId = -1;
+    }
+
+    public void ResetBestiary()
+    {
+        if(activePanelId>=0)
+        {
+            beastPanels[activePanelId].SetActive(false);
+        }
         buttonsPanel.SetActive(false);
         mainPanel.SetActive(true);
         activePanelId = -1;
