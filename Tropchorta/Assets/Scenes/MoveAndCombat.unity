@@ -970,6 +970,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434728700}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &480486261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2344816972238489837, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+  m_PrefabInstance: {fileID: 3322490514841734549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e677f4187831f84098468d3b6373b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &646999840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1405,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952784693}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1027670966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6377643294684528147, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+  m_PrefabInstance: {fileID: 3322490514841734549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1322942277 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4279971193698972227, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
@@ -2700,6 +2716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78aaa4dde83e52b4e81bbc79ca000873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cluesPanel: {fileID: 1027670966}
+  bestiaryUIController: {fileID: 480486261}
 --- !u!1001 &470203499886165095
 PrefabInstance:
   m_ObjectHideFlags: 0
