@@ -17,6 +17,7 @@ public class InputReader : ScriptableObject
     private InputAction mouseDeltaAction;
     private InputAction scrollAction;
     private InputAction escapeAction;
+    private InputAction interactAction;
 
     #region MouseEvents
     public UnityAction<Vector2> OnMoveInputEvent;
@@ -36,6 +37,7 @@ public class InputReader : ScriptableObject
     public UnityAction OnMapZoomOutEvent;
     public UnityAction OnToggleMapEvent;
     public UnityAction OnEscapeEvent;
+    public UnityAction OnInteractEvent;
     #endregion
 
     private void OnEnable()
@@ -51,6 +53,7 @@ public class InputReader : ScriptableObject
         mouseDeltaAction = inputAsset.FindAction("MouseDelta");
         scrollAction = inputAsset.FindAction("ScrollWheel");
         escapeAction = inputAsset.FindAction("Escape");
+        interactAction = inputAsset.FindAction("Interact");
 
         moveAction.Enable();
         lookAction.Enable();
@@ -63,6 +66,7 @@ public class InputReader : ScriptableObject
         mouseDeltaAction.Enable();
         scrollAction.Enable();
         escapeAction.Enable();
+        interactAction.Enable();
 
         moveAction.performed += ctx => OnMoveInputEvent?.Invoke(ctx.ReadValue<Vector2>());
         moveAction.canceled += ctx => OnMoveInputEvent?.Invoke(Vector2.zero);
@@ -90,6 +94,8 @@ public class InputReader : ScriptableObject
         scrollAction.canceled += ctx => OnScrollEvent?.Invoke(0);
 
         escapeAction.performed += ctx => OnEscapeEvent?.Invoke();
+
+        interactAction.performed += ctx => OnInteractEvent?.Invoke();
     }
 
     private void OnDisable()
@@ -105,6 +111,7 @@ public class InputReader : ScriptableObject
         mouseDeltaAction.Disable();
         scrollAction.Disable();
         escapeAction.Disable();
+        interactAction.Disable();
     }
 
 
