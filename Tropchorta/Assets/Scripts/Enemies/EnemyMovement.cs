@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
 
     bool _isMoving = false;
     bool _isChasing = false;
+    bool _attackInterrupted = false;
 
     public void RotateTowards(GameObject obj) 
     {
@@ -52,8 +53,19 @@ public class EnemyMovement : MonoBehaviour
         _isMoving = false;
     }
 
+    public void AttackStarted()
+    {
+        _attackInterrupted = true;
+    }
+    public void AttackFinished()
+    {
+        _attackInterrupted = false;
+    }
+
+    // TODO : this can be reworked to use a state machine or a ENUM state swtich for easier management
     public void MoveToTarget()
     {
+        if (_attackInterrupted) return;
         if (!_isChasing && transform.position == _targetPosition)
         {
             _isMoving = false;
@@ -74,7 +86,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         if (!_isMoving) return;
-        // Poruszamy obiekt w stronê celu
+        // Poruszamy obiekt w stronï¿½ celu
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
 
     }

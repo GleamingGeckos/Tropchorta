@@ -30,20 +30,30 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (playerState.state == PlayerState.DisableInput) return;
-
-        lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
-        Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
-        cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
-
-        // Rotate the player to face the mouse position
-        if (mousePosition != Vector2.zero)
+        if (playerState.state == PlayerState.Attacking)
         {
-            Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
-            if (lookDirection != Vector3.zero)
+            lerpedMove = lerpedMove.LerpFI(Vector2.zero, Time.fixedDeltaTime, lerpHalfTime);
+            // no mose movement
+        } 
+        else
+        {
+            // normal state
+            lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
+            Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
+            cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
+
+            // Rotate the player to face the mouse position
+            if (mousePosition != Vector2.zero)
             {
-                modelRootTransform.forward = lookDirection;
+                Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
+                if (lookDirection != Vector3.zero)
+                {
+                    modelRootTransform.forward = lookDirection;
+                }
             }
         }
+
+        
     }
 
     public void OnMoveInput(Vector2 move)

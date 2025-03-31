@@ -3,4 +3,5 @@ public enum PlayerState
 {
     Normal,
     DisableInput,
+    Attacking, 
 }

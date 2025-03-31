@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] PlayerStateSO playerState;
     [SerializeField] EquipmentController equipmentController;
     private PlayerHealthComponent health;
+    private PlayerMovement movement;
     private bool isBlocking = false;
     private float blockingStartTime = 0f;
     private float blockPower = 0.0f;
@@ -16,11 +17,17 @@ public class PlayerCombat : MonoBehaviour
     // array of colliders so that SphereCast doesn't allocate everytime it's called
     Collider[] colliders = new Collider[16];
 
-    float attackCooldown = 0.4f; // TODO : move this to weapon behavior
+    [Header("Temporary stuff")]
+    [SerializeField] Vector2Int animationAttackTime = new Vector2Int(0, 50); // TODO : move this to weapon behavior
+    [SerializeField] Vector2Int totalAnimationTime = new Vector2Int(1, 30); // TODO : move this to weapon behavior
+    private float attackTime = 0f;
+    private float animationTime = 0f;
+    [SerializeField] float attackCooldown = 0.4f; // TODO : move this to weapon behavior
     bool canAttack = true;
 
     void Start()
     {
+        movement = GetComponent<PlayerMovement>();
         var pm = GetComponent<PlayerMovement>();
         pm.input.OnLeftMouseClickEvent += OnAttackStart;
         pm.input.OnLeftMouseReleaseEvent += OnAttackEnd;
@@ -31,6 +38,9 @@ public class PlayerCombat : MonoBehaviour
         health.onDamageTaken.AddListener(onDamageTaken);
         health.onAttacked.AddListener(OnAttacked);
         equipmentController.Initialize(transform);
+
+        attackTime = animationAttackTime.x + (animationAttackTime.y / 60f);
+        animationTime = totalAnimationTime.x + (totalAnimationTime.y / 60f);
     }
 
     public void onDamageTaken(float damage, float currentHealth)
@@ -42,6 +52,15 @@ public class PlayerCombat : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput) return;
         if (!canAttack) return;
+
+        StartCoroutine(AttackSequence());        
+    }
+    IEnumerator AttackSequence()
+    {
+        playerState.state = PlayerState.Attacking;
+    
+        
+        
         // TODO : move this to a weapon behavior somehow
         // check if the clip is already playing, if it is simply reset it
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -54,8 +73,14 @@ public class PlayerCombat : MonoBehaviour
             // play the clip, if it's not already playing
             staffAnimator.SetTrigger("Attack");
         }
+        yield return new WaitForSeconds(attackTime);
 
-        equipmentController.UseWeaponStart(transform);
+        equipmentController.UseWeaponStart(transform); // hit logic
+
+        yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
+        
+        playerState.state = PlayerState.Normal;
+    
         StartCoroutine(AttackCooldown());
     }
 

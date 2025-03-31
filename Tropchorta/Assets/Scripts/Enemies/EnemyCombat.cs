@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
@@ -14,7 +15,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] LayerMask _excludedLayer;
 
     bool _isCooldown = false;
-    [SerializeField] float _cooldownInterval = 3.0f;
+    [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
     [Header("Temporary")]
     [SerializeField] private RectTransform attackBar;
@@ -22,10 +23,23 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private float attackBarFinalX = 0f;
     Tween barTween;
 
+    [SerializeField] Animator animator;
+
+    [SerializeField, Tooltip("This is a unit from Animation timeline Unit where you input [seconds:...something] and that someting is not ms because it can only reach up to 60. Meaning if an event happens at 1:30 this is treated as 1.5s because the 30 means half a second.")]
+    Vector2Int timeFromStartToAttackInUnityTimeline = new Vector2Int(0, 50);
+    [SerializeField, Tooltip("Just like variable above, this is in animation timeline units. Specifies when the enemy stops moving from the animation start in timeline units. SHOULD BE LESS THAN timeFromStartToAttackInUnityTimeline.")]
+    Vector2Int offsetFromAnimStartToMovementStop = new Vector2Int(0, 50);
+    float moveStopOffset = 0.45f;
+    private float timeToAttackInSeconds = 0f;
+    EnemyMovement enemyMovement;
 
     private void Start()
     {
+        enemyMovement = GetComponent<EnemyMovement>();
+        timeToAttackInSeconds = timeFromStartToAttackInUnityTimeline.x + (timeFromStartToAttackInUnityTimeline.y / 60f);
+        moveStopOffset = offsetFromAnimStartToMovementStop.x + (offsetFromAnimStartToMovementStop.y / 60f);
         attackBarInitialX = attackBar.anchoredPosition.x;
+        // convert ms to normalized time
     }
 
     public int DealDamage()
@@ -38,9 +52,34 @@ public class EnemyCombat : MonoBehaviour
     public void Attack()
     {
         if (_isCooldown) return;
-        // everything below this line should be later on handled by a Weapon of some sorts, this is for testing only
-        Vector3 rotatingOffset = transform.forward * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(transform.position + rotatingOffset, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
+        Debug.Log($"Attack damage");
+
+        StartCoroutine(AttackRoutine());
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        _isCooldown = true; // Set flag to prevent multiple coroutines
+        float time = _cooldownInterval - timeToAttackInSeconds;
+        yield return new WaitForSeconds(time);
+        // start the bar animation
+        barTween = attackBar.DOAnchorPosX(attackBarFinalX, timeToAttackInSeconds)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                // reset bar
+                attackBar.anchoredPosition = new Vector2(attackBarInitialX, attackBar.anchoredPosition.y);
+            });
+        animator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
+
+        enemyMovement.AttackStarted(); // stop moving
+        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+
+        // Core attack logic
+        Vector3 attackPoint = transform.forward * 1.5f;
+        int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
@@ -49,23 +88,12 @@ public class EnemyCombat : MonoBehaviour
                 healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }
-        StartCoroutine(Cooldown());
-        DebugExtension.DebugWireSphere(transform.position + rotatingOffset, Color.red, 1f, 1f);
-    }
+        DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);
 
-    private IEnumerator Cooldown()
-    {
-        _isCooldown = true; // Set flag to prevent multiple coroutines
-        yield return new WaitForSeconds(_cooldownInterval / 2f);
-        barTween = attackBar.DOAnchorPosX(attackBarFinalX, _cooldownInterval / 2f)
-        .SetEase(Ease.Linear)
-        .OnComplete( () => 
-            {
-                // reset bar
-                attackBar.anchoredPosition = new Vector2(attackBarInitialX, attackBar.anchoredPosition.y);
-            });
-        yield return new WaitForSeconds(_cooldownInterval / 2f);
-        _isCooldown = false; // Reset flag when player leaves range
+        yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+
+        enemyMovement.AttackFinished(); // start moving again
+        _isCooldown = false;
     }
 
     private void OnDestroy()
