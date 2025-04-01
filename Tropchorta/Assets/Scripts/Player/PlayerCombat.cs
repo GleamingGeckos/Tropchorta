@@ -58,8 +58,6 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator AttackSequence()
     {
         playerState.state = PlayerState.Attacking;
-    
-        
         
         // TODO : move this to a weapon behavior somehow
         // check if the clip is already playing, if it is simply reset it
@@ -144,18 +142,15 @@ public class PlayerCombat : MonoBehaviour
         {
             if (Time.time - blockingStartTime < ad.blockTime)
             {
-                Debug.Log("Sucessful block");
                 health.SimpleDamage(ad.damage - (ad.damage * blockPower));
             }
             else
             {
-                Debug.Log("Failed block");
                 health.SimpleDamage(ad.damage - (ad.damage * blockPower / 2f));
             }
         }
         else
         {
-            Debug.Log("Normal damage");
             health.SimpleDamage(ad.damage);
         }
     }

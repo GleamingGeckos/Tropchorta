@@ -52,8 +52,6 @@ public class EnemyCombat : MonoBehaviour
     public void Attack()
     {
         if (_isCooldown) return;
-        Debug.Log($"Attack damage");
-
         StartCoroutine(AttackRoutine());
     }
 
