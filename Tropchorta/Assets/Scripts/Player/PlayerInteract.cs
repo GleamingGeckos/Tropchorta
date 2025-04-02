@@ -32,8 +32,12 @@ public class PlayerInteract : MonoBehaviour
         {
             for (int i = 0; i < numColliders; i++)
             {
-                if (hitColliders[i].gameObject.GetComponent<NPCBehaviourScript>() != null)
-                    Debug.Log("[DEBUG] Found");
+                var npc = hitColliders[i].gameObject.GetComponent<NPCBehaviourScript>();
+                if (npc != null)
+                {
+                    npc.TalkBack();
+                    break;
+                }
             }
         }
     }
