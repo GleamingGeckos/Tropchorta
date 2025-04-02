@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +17,14 @@ public class NPCBehaviourScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _description;
 
+    [Header("Quest")]
+    [SerializeField] private bool _bQuestActive;
+    [SerializeField] private SpawnerForQuests _spawner;
+    [SerializeField] private GameObject _enemyToSpawn;
+    [SerializeField] private int _howManyToSpawn = 3;
+    [SerializeField] private List<GameObject> _enemies;
+    [SerializeField] private GameObject _reward;
+
     private void Awake()
     {
         _canvas.SetActive(false);
@@ -21,13 +32,17 @@ public class NPCBehaviourScript : MonoBehaviour
         _isTalking = false;
     }
 
-    void Start()
+    private void Update()
     {
-    }
-
-    void Update()
-    {
-        
+        if (_bQuestActive)
+        {
+            _enemies.RemoveAll(item => item == null);
+            if(_enemies.Count == 0)
+            {
+                _bQuestActive = false;
+                _spawner.SpawnObjects(_reward, 1);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,7 +67,9 @@ public class NPCBehaviourScript : MonoBehaviour
         if (!_isTalking)
         {
             _isTalking = true;
+            _bQuestActive = true;
             _screenCanvas.SetActive(true);
+            _enemies = _spawner.SpawnObjects(_enemyToSpawn, _howManyToSpawn);
         }
         else
         {
@@ -60,6 +77,4 @@ public class NPCBehaviourScript : MonoBehaviour
             _screenCanvas.SetActive(false);
         }
     }
-
-
 }
