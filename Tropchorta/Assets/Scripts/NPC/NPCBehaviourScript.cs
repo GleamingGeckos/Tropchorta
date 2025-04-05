@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class NPCBehaviourScript : MonoBehaviour
 {
 
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private float delay = 5f;
     private bool _isTalking;
 
     [Header("Panel")]
@@ -18,12 +20,15 @@ public class NPCBehaviourScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _description;
 
     [Header("Quest")]
-    [SerializeField] private bool _bQuestActive;
+    [SerializeField] private bool _isQuestActive;
     [SerializeField] private SpawnerForQuests _spawner;
     [SerializeField] private GameObject _enemyToSpawn;
     [SerializeField] private int _howManyToSpawn = 3;
     [SerializeField] private List<GameObject> _enemies;
     [SerializeField] private GameObject _reward;
+    [SerializeField] private String _QuestMassage;
+    [SerializeField] private String _FinishedMassage;
+
 
     private void Awake()
     {
@@ -34,13 +39,18 @@ public class NPCBehaviourScript : MonoBehaviour
 
     private void Update()
     {
-        if (_bQuestActive)
+        if (_isQuestActive)
         {
             _enemies.RemoveAll(item => item == null);
             if(_enemies.Count == 0)
             {
-                _bQuestActive = false;
-                _spawner.SpawnObjects(_reward, 1);
+                _isQuestActive = false;
+
+                if(_reward != null)
+                    _spawner.SpawnObjects(_reward, 1);
+                _screenCanvas.SetActive(true);
+                _description.text = _FinishedMassage;
+                StartCoroutine(DestroyAfterDelay());
             }
         }
     }
@@ -67,7 +77,8 @@ public class NPCBehaviourScript : MonoBehaviour
         if (!_isTalking)
         {
             _isTalking = true;
-            _bQuestActive = true;
+            _isQuestActive = true;
+            _description.text = _QuestMassage;
             _screenCanvas.SetActive(true);
             _enemies = _spawner.SpawnObjects(_enemyToSpawn, _howManyToSpawn);
         }
@@ -76,5 +87,11 @@ public class NPCBehaviourScript : MonoBehaviour
             _isTalking = false;
             _screenCanvas.SetActive(false);
         }
+    }
+
+    IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
