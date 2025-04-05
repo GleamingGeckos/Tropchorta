@@ -17,7 +17,8 @@ public class BaseEnemy : MonoBehaviour
 
     void Start()
     {
-        material = GetComponentInChildren<Renderer>().sharedMaterial;
+        material = new Material(GetComponentInChildren<Renderer>().sharedMaterial);
+        GetComponentInChildren<Renderer>().material = material;
         _enemyCombat = GetComponent<EnemyCombat>();
         _enemyMovement = GetComponent<EnemyMovement>();
         originalColor = material.color; // Store the original color
