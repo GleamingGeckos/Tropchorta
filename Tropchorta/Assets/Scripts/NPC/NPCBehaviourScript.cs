@@ -26,8 +26,8 @@ public class NPCBehaviourScript : MonoBehaviour
     [SerializeField] private int _howManyToSpawn = 3;
     [SerializeField] private List<GameObject> _enemies;
     [SerializeField] private GameObject _reward;
-    [SerializeField] private String _QuestMassage;
-    [SerializeField] private String _FinishedMassage;
+    [SerializeField] private string _QuestMassage;
+    [SerializeField] private string _FinishedMassage;
 
 
     private void Awake()

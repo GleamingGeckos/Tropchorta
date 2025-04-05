@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MoveAndCombat.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/BossFight.unity
+    guid: 5838c8b2b2b3db2469f6ef7f2c1ba578
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6c21e9cb3f1c764da602b29e82c9986, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f2e35d3dae6e23147be006f83b143267, type: 3}

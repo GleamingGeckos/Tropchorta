@@ -5,7 +5,11 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] GameObject cluesPanel;
     [SerializeField] BestiaryUIController bestiaryUIController;
 
- 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))

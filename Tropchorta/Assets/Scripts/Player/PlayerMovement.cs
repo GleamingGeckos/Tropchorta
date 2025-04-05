@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     bool isSprinting;
     Coroutine dashCoroutine = null;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

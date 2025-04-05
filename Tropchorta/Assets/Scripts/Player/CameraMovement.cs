@@ -30,6 +30,11 @@ public class CameraMovement : MonoBehaviour
     Vector3 targetPosition;
     #endregion
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void Start()
     {
         cam = GetComponent<Camera>();
