@@ -24,6 +24,7 @@ public class PlayerCombat : MonoBehaviour
     private float animationTime = 0f;
     [SerializeField] float attackCooldown = 0.4f; // TODO : move this to weapon behavior
     bool canAttack = true;
+    Coroutine attackCoroutine = null;
 
     void Start()
     {
@@ -53,10 +54,17 @@ public class PlayerCombat : MonoBehaviour
         if (playerState.state == PlayerState.DisableInput) return;
         if (!canAttack) return;
 
-        StartCoroutine(AttackSequence());        
+        // at this point it SHOULD be not null, but just in case
+        if (attackCoroutine == null)
+        {
+            attackCoroutine = StartCoroutine(AttackSequence());
+        }
     }
+
     IEnumerator AttackSequence()
     {
+        StartCoroutine(AttackCooldown());
+
         playerState.state = PlayerState.Attacking;
         
         // TODO : move this to a weapon behavior somehow
@@ -78,8 +86,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         
         playerState.state = PlayerState.Normal;
-    
-        StartCoroutine(AttackCooldown());
+        attackCoroutine = null; 
     }
 
     IEnumerator AttackCooldown()
@@ -87,6 +94,17 @@ public class PlayerCombat : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+    }
+
+    public void StopAttack()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+
+            staffAnimator.SetTrigger("AttackEarlyExit");
+        }
     }
 
     void OnAttackEnd()

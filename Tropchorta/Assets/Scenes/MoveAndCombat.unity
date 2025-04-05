@@ -2192,6 +2192,10 @@ PrefabInstance:
       propertyPath: equipmentUIController
       value: 
       objectReference: {fileID: 2012483781}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

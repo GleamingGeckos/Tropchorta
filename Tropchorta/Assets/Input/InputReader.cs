@@ -8,6 +8,7 @@ public class InputReader : ScriptableObject
     [SerializeField] private InputActionAsset inputAsset;
     private InputAction moveAction;
     private InputAction lookAction;
+    private InputAction spaceAction;
     private InputAction leftMouseAction;
     private InputAction rightMouseAction;
     private InputAction sprintAction;
@@ -38,12 +39,14 @@ public class InputReader : ScriptableObject
     public UnityAction OnToggleMapEvent;
     public UnityAction OnEscapeEvent;
     public UnityAction OnInteractEvent;
+    public UnityAction OnSpaceEvent;
     #endregion
 
     private void OnEnable()
     {
         moveAction = inputAsset.FindAction("Move");
         lookAction = inputAsset.FindAction("Look");
+        spaceAction = inputAsset.FindAction("Space");
         leftMouseAction = inputAsset.FindAction("LeftMouse");
         rightMouseAction = inputAsset.FindAction("RightMouse");
         sprintAction = inputAsset.FindAction("Sprint");
@@ -57,6 +60,7 @@ public class InputReader : ScriptableObject
 
         moveAction.Enable();
         lookAction.Enable();
+        spaceAction.Enable();
         leftMouseAction.Enable();
         rightMouseAction.Enable();
         sprintAction.Enable();
@@ -72,6 +76,8 @@ public class InputReader : ScriptableObject
         moveAction.canceled += ctx => OnMoveInputEvent?.Invoke(Vector2.zero);
 
         lookAction.performed += ctx => OnLookInputEvent?.Invoke(ctx.ReadValue<Vector2>());
+        
+        spaceAction.performed += ctx => OnSpaceEvent?.Invoke();
 
         leftMouseAction.performed += ctx => OnLeftMouseClickEvent?.Invoke();
         leftMouseAction.canceled += ctx => OnLeftMouseReleaseEvent?.Invoke();
