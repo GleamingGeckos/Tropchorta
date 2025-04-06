@@ -3,7 +3,12 @@ guid: c973d596f99658248802a136512bdadd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Owca
+    second: {fileID: 2100000, guid: 6095de097d43c684f8a77a4806bbe4c2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
