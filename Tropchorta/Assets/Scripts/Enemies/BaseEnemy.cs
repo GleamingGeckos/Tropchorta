@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BaseEnemy : MonoBehaviour
 {

@@ -10,9 +10,8 @@ public class NotesUIController : MonoBehaviour
 
     private void Start()
     {
-        AddNote("podobno farmer sra w lesie");
-        AddNote("farmer ma buraki");
-        AddNote("ale musi w krzaki");
+        AddNote("Bestia zostawia jaja w kopczykach");
+        AddNote("Bestia zostawia œlady pazurów");
     }
     public void AddNote(string noteText)
     {
