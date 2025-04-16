@@ -15,6 +15,8 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Item shoes;
 
     [SerializeField] EquipmentUIController equipmentUIController;
+
+    [SerializeField] List<ClueItem> clueItems;
     private void Start()
     {
         DisplayItems();
@@ -257,6 +259,13 @@ public class EquipmentController : MonoBehaviour
                 equipmentUIController.HideLastInteractedItemDisplay();
                 break;
 
+            case ClueItem clueItem:
+                Debug.Log($"Picking up shoes: {clueItem.itemName}");
+                interactedItems.Remove(lastInteractedItem);
+                clueItems.Add(itemController.PickUpItem() as ClueItem);
+                equipmentUIController.HideLastInteractedItemDisplay();
+                break;
+
             default:
                 Debug.Log("Item type is not supported");
                 break;
@@ -370,5 +379,17 @@ public class EquipmentController : MonoBehaviour
         equipmentUIController.ChangeShoesImage(shoes);
         equipmentUIController.ChangeWeapon1Image(usedWeapon);
         equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+    }
+
+    public bool HasClueItem(ClueItem clueItem)
+    {
+        if(clueItems.Contains(clueItem))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

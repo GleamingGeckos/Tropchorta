@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Gold
   - Item
+  - Equipment
   layers:
   - Default
   - TransparentFX

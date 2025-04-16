@@ -9,6 +9,15 @@ public class ClueController : MonoBehaviour
     [SerializeField] GameObject display;
     [SerializeField] GameObject before;
     [SerializeField] GameObject after;
+
+    [SerializeField] bool needsClueItem; // whether player needs a special clue item to activate the clue
+    [SerializeField] ClueItem clueItem;
+    [SerializeField] private EquipmentController equipmentController;
+
+    private void Start()
+    {
+        equipmentController = GameObject.FindWithTag("Equipment").GetComponent<EquipmentController>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -43,14 +52,31 @@ public class ClueController : MonoBehaviour
     
     void OnPlayerGetClue() // activated when player gets the clue to the notes
     {
-        if(!isActivated && isReady)
+        Debug.Log(needsClueItem);
+        Debug.Log(equipmentController.HasClueItem(clueItem));
+        if (needsClueItem && equipmentController.HasClueItem(clueItem))
         {
-            display.SetActive(false);
-            before.SetActive(false);
-            after.SetActive(true);
-            isActivated = true;
-            isReady = false;
-            notesUIController.AddNote(clueText);
+            if (!isActivated && isReady)
+            {
+                display.SetActive(false);
+                before.SetActive(false);
+                after.SetActive(true);
+                isActivated = true;
+                isReady = false;
+                notesUIController.AddNote(clueText);
+            }
+        }
+        else if(!needsClueItem)
+        {
+            if (!isActivated && isReady)
+            {
+                display.SetActive(false);
+                before.SetActive(false);
+                after.SetActive(true);
+                isActivated = true;
+                isReady = false;
+                notesUIController.AddNote(clueText);
+            }
         }
     }
 
