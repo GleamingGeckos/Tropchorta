@@ -8,6 +8,8 @@ public class HealthComponent : MonoBehaviour
     protected float currentHealth;
 
     protected bool isDead = false;
+    
+    public bool isInvulnerable = false;
 
     // Event holds (damageTaken, currentHealth)
     public UnityEvent<float, float> onDamageTaken;
@@ -29,6 +31,8 @@ public class HealthComponent : MonoBehaviour
     // this is for unavoidable dmaage like bows, traps, etc.
     public virtual void SimpleDamage(float damage)
     {
+        if (isInvulnerable)
+            return;
         if (damage < 0)
         {
             Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");
@@ -50,6 +54,8 @@ public class HealthComponent : MonoBehaviour
     // this is for damage that can be avoided or reduced, like melee attacks that can be blocked by player
     public virtual void BlockableDamage(AttackData ad)
     {
+        if (isInvulnerable)
+            return;
         if (ad.damage < 0)
         {
             Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");

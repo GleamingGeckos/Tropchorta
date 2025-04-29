@@ -8,11 +8,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(1f, 10f)] float speed;
     [SerializeField, Range(1f, 5f)] float sprintMod;
     [SerializeField, Range(0.0f, 1f)] float lerpHalfTime = 0.1f;
-    [SerializeField] float dashDistance = 5f;
-    [SerializeField] float dashDuration = 0.5f;
+    [SerializeField] float dashDistance = 15f;
+    [SerializeField] float dashDuration = 0.3f;
     [SerializeField] Transform modelRootTransform;
     [SerializeField] public InputReader input;
     [SerializeField] public PlayerStateSO playerState;
+
+    // For dash
+    [SerializeField]  PlayerHealthComponent playerHealthComponent;
+
+
     private PlayerCombat playerCombat;
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -101,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 targetPosition = startPosition + direction * currentDistance;
                 Vector3 move = targetPosition - transform.position;
 
-                cc.Move(move);
+                cc.Move(move); // TODO add 
 
                 elapsed += Time.deltaTime;
                 yield return null;
@@ -115,6 +120,9 @@ public class PlayerMovement : MonoBehaviour
 
         playerState.state = PlayerState.Normal;
         dashCoroutine = null;
+        playerHealthComponent.isInvulnerable = false;
+        cc.includeLayers = 0;
+
     }
 
     void OnDash()
@@ -122,7 +130,8 @@ public class PlayerMovement : MonoBehaviour
         if (dashCoroutine == null)
         {
             playerCombat.StopAttack();
-
+            playerHealthComponent.isInvulnerable = true;
+            cc.excludeLayers = LayerMask.GetMask("Enemy");
             dashCoroutine = StartCoroutine(Dash());
         }
     }
