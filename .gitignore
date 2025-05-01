@@ -88,6 +88,4 @@ Tropchorta/Assets/save.dat.meta
 # VSCode
 .vscode/
 Tropchorta/.vsconfig
-Tropchorta/Assets/Plugins/FMOD/platforms/mac/lib/fmodstudio.bundle/Contents/Info.plist
-Tropchorta/Assets/Plugins/FMOD/platforms/mac/lib/fmodstudioL.bundle/Contents/Info.plist
-Tropchorta/Assets/Plugins/FMOD/platforms/mac/lib/resonanceaudio.bundle/Contents/Info.plist
+Tropchorta/Assets/Plugins/FMOD/platforms/*
