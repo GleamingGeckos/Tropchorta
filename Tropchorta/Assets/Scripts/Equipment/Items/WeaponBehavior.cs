@@ -7,6 +7,8 @@ public abstract class WeaponBehavior : ScriptableObject
     // the most basic weapon behavior this can be either a simple attack OR treated as beginning of a hold-to-use attack like a bow or something
     public abstract void UseStart(Transform user);
 
+    public abstract void UseSpecialAttack(Transform user);
+
     // this is for when the player releases the button or stops using the weapon
     public abstract void UseStop(Transform user);
 

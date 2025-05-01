@@ -118,6 +118,24 @@ public class EquipmentController : MonoBehaviour
         goldAmount = 0;
     }
 
+    public void UseWeaponSpecialAttack(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        if (usedWeapon is Weapon weapon)
+        {
+            weapon.UseSpecialAttack(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
     public void UseWeaponStart(Transform playerTransform)
     {
         if (usedWeapon == null)

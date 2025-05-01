@@ -1,18 +1,16 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "SwordBehavior", menuName = "Inventory/WeaponBehaviors/Sword", order = 1)]
-public class SwordBehavior : WeaponBehavior
+[CreateAssetMenu(fileName = "SwordBehavior", menuName = "Inventory/WeaponBehaviors/Special", order = 1)]
+public class SpecialSwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField, Range(0.0f, 1.0f)] private float blockPower = 0.2f;
-    private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
 
     public override void Initialize(Transform user)
     {
         Debug.Log("Setting player in SwordBehavior");
-        playerCombat = user.GetComponent<PlayerCombat>();
     }
 
     Collider[] colliders = new Collider[16];
@@ -41,22 +39,10 @@ public class SwordBehavior : WeaponBehavior
 
     public override void ClearData(Transform user)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void UseStart(Transform user)
     {
-        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 1f, colliders); // TODO : layermask for damageable objects or enemies?
-        for (int i = 0; i < hits; i++)
-        {
-            // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
-            {
-                healthComponent.SimpleDamage(10);
-            }
-        }
-        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 1f, 1f);
     }
 
     public override void UseStop(Transform user)
@@ -66,16 +52,14 @@ public class SwordBehavior : WeaponBehavior
 
     public override void AltUseStart(Transform user)
     {
-        playerCombat.StartBlocking(blockPower);
     }
 
     public override void AltUseStop(Transform user)
     {
-        playerCombat.StopBlocking();
     }
 
     public override void UseSpecialAttack(Transform user)
     {
-
+        //AAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa TODO
     }
 }

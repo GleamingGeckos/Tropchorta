@@ -38,4 +38,9 @@ public class AnimationBehavior : WeaponBehavior
     {
         
     }
+
+    public override void UseSpecialAttack(Transform user)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -29,6 +29,14 @@ public class Weapon : Item
         }
     }
 
+    public void UseSpecialAttack(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.UseSpecialAttack(user);
+        }
+    }
+
     public void AltUseStart(Transform user)
     {
         foreach (var behavior in weaponBehaviors)

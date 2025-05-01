@@ -98,7 +98,7 @@ public class PlayerCombat : MonoBehaviour
             }
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponStart(transform); // hit logic
+            //equipmentController.UseWeaponStart(transform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
             Debug.Log("Special attack triggered!");
@@ -146,12 +146,10 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(animationTime - comboAttackTime);
         isWindowOpen = true;
-        Debug.Log("Combo window OPEN");
 
         yield return new WaitForSeconds(comboAttackTime);
 
         isWindowOpen = false;
-        Debug.Log("Combo window CLOSED");
     }
 
     IEnumerator AttackCooldown()

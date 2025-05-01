@@ -35,4 +35,8 @@ public class BowBehavior : WeaponBehavior
     public override void Initialize(Transform user)
     {
     }
+
+    public override void UseSpecialAttack(Transform user)
+    {
+    }
 }
