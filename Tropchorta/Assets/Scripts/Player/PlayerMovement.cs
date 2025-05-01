@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     // For dash
     [SerializeField]  PlayerHealthComponent playerHealthComponent;
 
-
     private PlayerCombat playerCombat;
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -133,6 +132,17 @@ public class PlayerMovement : MonoBehaviour
             playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");
             dashCoroutine = StartCoroutine(Dash());
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (dashCoroutine == null)
+        {
+            playerState.state = PlayerState.Normal;
+            dashCoroutine = null;
+            playerHealthComponent.isInvulnerable = false;
+            cc.includeLayers = 0;
         }
     }
 
