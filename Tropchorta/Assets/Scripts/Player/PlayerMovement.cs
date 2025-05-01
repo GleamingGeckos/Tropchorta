@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     // For dash
     [SerializeField]  PlayerHealthComponent playerHealthComponent;
+    [SerializeField]  TrailRenderer trail;
 
     private PlayerCombat playerCombat;
     private CharacterController cc;
@@ -120,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
         playerState.state = PlayerState.Normal;
         dashCoroutine = null;
         playerHealthComponent.isInvulnerable = false;
+        trail.enabled = false;
         cc.includeLayers = 0;
 
     }
@@ -129,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashCoroutine == null)
         {
             playerCombat.StopAttack();
+            trail.enabled = true;
             playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");
             dashCoroutine = StartCoroutine(Dash());
@@ -141,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerState.state = PlayerState.Normal;
             dashCoroutine = null;
+            trail.enabled = false;
             playerHealthComponent.isInvulnerable = false;
             cc.includeLayers = 0;
         }
