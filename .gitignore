@@ -89,3 +89,4 @@ Tropchorta/Assets/save.dat.meta
 .vscode/
 Tropchorta/.vsconfig
 Tropchorta/Assets/Plugins/FMOD/platforms/*
+/Tropchorta/Assets/Plugins/FMOD/platforms/mac/lib

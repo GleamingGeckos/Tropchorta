@@ -18,13 +18,21 @@ public class PlayerCombat : MonoBehaviour
     Collider[] colliders = new Collider[16];
 
     [Header("Temporary stuff")]
-    [SerializeField] Vector2Int animationAttackTime = new Vector2Int(0, 50); // TODO : move this to weapon behavior
-    [SerializeField] Vector2Int totalAnimationTime = new Vector2Int(1, 30); // TODO : move this to weapon behavior
+    [SerializeField] Vector2Int animationAttackTime = new Vector2Int(0, 30); // TODO : move this to weapon behavior
+    [SerializeField] Vector2Int totalAnimationTime = new Vector2Int(1, 20); // TODO : move this to weapon behavior
     private float attackTime = 0f;
     private float animationTime = 0f;
     [SerializeField] float attackCooldown = 0.4f; // TODO : move this to weapon behavior
     bool canAttack = true;
     Coroutine attackCoroutine = null;
+
+    [Header("Combo")]
+    private int specialAttackNr = 3;
+    [SerializeField] int comboCounter = 0;
+    [SerializeField] Vector2Int comboAttackWindow = new Vector2Int(1, 00);
+    private float comboAttackTime = 0f;
+    [SerializeField] bool doNextAttack;
+    [SerializeField] bool isWindowOpen;
 
     void Start()
     {
@@ -42,6 +50,7 @@ public class PlayerCombat : MonoBehaviour
 
         attackTime = animationAttackTime.x + (animationAttackTime.y / 60f);
         animationTime = totalAnimationTime.x + (totalAnimationTime.y / 60f);
+        comboAttackTime = comboAttackWindow.x + (comboAttackWindow.y / 60f);
     }
 
     public void onDamageTaken(float damage, float currentHealth)
@@ -58,35 +67,91 @@ public class PlayerCombat : MonoBehaviour
         if (attackCoroutine == null)
         {
             attackCoroutine = StartCoroutine(AttackSequence());
+            StartCoroutine(ComboWindow());
+        }
+        else if (isWindowOpen && !(comboCounter == specialAttackNr))// When window was open and not last attack in combo check for next attack
+        {
+            doNextAttack = true;
         }
     }
 
     IEnumerator AttackSequence()
     {
-        StartCoroutine(AttackCooldown());
+        comboCounter++;
+        Debug.Log($"Attack started | ComboCounter: {comboCounter}");
 
         playerState.state = PlayerState.Attacking;
-        
-        // TODO : move this to a weapon behavior somehow
-        // check if the clip is already playing, if it is simply reset it
-        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+
+        if (comboCounter == specialAttackNr)
         {
-            // reset the clip
-            staffAnimator.Play("Attack", -1, 0);
+            // TODO : move this to a weapon behavior somehow
+            // check if the clip is already playing, if it is simply reset it
+            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                // reset the clip
+                staffAnimator.Play("Attack", -1, 0);
+            }
+            else
+            {
+                // play the clip, if it's not already playing
+                staffAnimator.SetTrigger("Attack");
+            }
+            yield return new WaitForSeconds(attackTime);
+
+            equipmentController.UseWeaponStart(transform); // hit logic
+
+            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
+            Debug.Log("Special attack triggered!");
+            comboCounter = 0;
         }
         else
         {
-            // play the clip, if it's not already playing
-            staffAnimator.SetTrigger("Attack");
+            // TODO : move this to a weapon behavior somehow
+            // check if the clip is already playing, if it is simply reset it
+            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                // reset the clip
+                staffAnimator.Play("Attack", -1, 0);
+            }
+            else
+            {
+                // play the clip, if it's not already playing
+                staffAnimator.SetTrigger("Attack");
+            }
+            yield return new WaitForSeconds(attackTime);
+
+            equipmentController.UseWeaponStart(transform); // hit logic
+
+            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
-        yield return new WaitForSeconds(attackTime);
 
-        equipmentController.UseWeaponStart(transform); // hit logic
-
-        yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
-        
         playerState.state = PlayerState.Normal;
-        attackCoroutine = null; 
+        attackCoroutine = null;
+
+        if (doNextAttack)
+        {
+            Debug.Log("Chaining next attack");
+            doNextAttack = false;
+            attackCoroutine = StartCoroutine(AttackSequence());
+            StartCoroutine(ComboWindow());
+        }
+        else
+        {
+            comboCounter = 0;
+            Debug.Log("Combo ended");
+        }
+    }
+
+    IEnumerator ComboWindow()
+    {
+        yield return new WaitForSeconds(animationTime - comboAttackTime);
+        isWindowOpen = true;
+        Debug.Log("Combo window OPEN");
+
+        yield return new WaitForSeconds(comboAttackTime);
+
+        isWindowOpen = false;
+        Debug.Log("Combo window CLOSED");
     }
 
     IEnumerator AttackCooldown()
