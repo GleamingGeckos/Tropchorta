@@ -7,7 +7,7 @@ public class NotesUIController : MonoBehaviour
     [SerializeField] GameObject notePrefab;
     [SerializeField] List<GameObject> notes;
     [SerializeField] int maxNotesAmount;
-
+    [SerializeField] GameObject cluePopup;
     private void Start()
     {
         AddNote("Bestia zostawia jaja w kopczykach");
@@ -15,9 +15,12 @@ public class NotesUIController : MonoBehaviour
     }
     public void AddNote(string noteText)
     {
-        if(notes.Count+1 < maxNotesAmount)
+        cluePopup.SetActive(true);
+        // tu powinno byc jeszcze zalaczenie dzwieku z kodu ale idk jak ten fmod dziala
+        if (notes.Count+1 < maxNotesAmount)
         {
             GameObject newNote = Instantiate(notePrefab,transform);
+            newNote.transform.SetAsLastSibling();
             notes.Add(newNote);
             newNote.GetComponent<TMP_Text>().text = noteText;
         }
