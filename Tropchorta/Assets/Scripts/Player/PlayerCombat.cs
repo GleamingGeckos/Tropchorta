@@ -36,6 +36,7 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Step during attack")]
     [SerializeField] float distance = 1.0f;
+    float playerRadius = 1.0f;
     Coroutine stepCoroutine = null;
 
 
@@ -56,6 +57,8 @@ public class PlayerCombat : MonoBehaviour
         attackTime = animationAttackTime.x + (animationAttackTime.y / 60f);
         animationTime = totalAnimationTime.x + (totalAnimationTime.y / 60f);
         comboAttackTime = comboAttackWindow.x + (comboAttackWindow.y / 60f);
+
+        playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
     public void onDamageTaken(float damage, float currentHealth)
@@ -159,10 +162,20 @@ public class PlayerCombat : MonoBehaviour
         Vector3 start = target.position;
         Vector3 end = start + GetRotatingRootForward() * distance;
         float elapsed = 0f;
+        RaycastHit hit;
 
         while (elapsed < duration)
         {
-            target.position = Vector3.Lerp(start, end, elapsed / duration);
+            float t = elapsed / duration;
+            Vector3 nextPos = Vector3.Lerp(start, end, t);
+
+            if (Physics.Raycast(target.position, GetRotatingRootForward(), out hit, Vector3.Distance(target.position, nextPos + (GetRotatingRootForward() * playerRadius))))
+            {
+                target.position = hit.point + (GetRotatingRootForward() * -playerRadius);
+                yield break;
+            }
+
+            target.position = nextPos;
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -170,14 +183,6 @@ public class PlayerCombat : MonoBehaviour
         target.position = end;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(stepCoroutine != null)
-        {
-            StopCoroutine(stepCoroutine);
-            stepCoroutine = null;
-        }
-    }
     
     IEnumerator AttackCooldown()
     {
