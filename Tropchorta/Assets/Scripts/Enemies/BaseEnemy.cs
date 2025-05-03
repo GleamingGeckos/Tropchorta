@@ -23,11 +23,6 @@ public class BaseEnemy : MonoBehaviour
         originalColor = material.color; // Store the original color
     }
 
-    void Update()
-    {
-        _enemyMovement.MoveToTarget();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         // if (collision.gameObject.tag == "Player")
