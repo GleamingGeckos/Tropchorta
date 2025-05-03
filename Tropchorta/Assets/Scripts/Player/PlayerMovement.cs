@@ -118,11 +118,7 @@ public class PlayerMovement : MonoBehaviour
             cc.Move(remaining);
         }
 
-        playerState.state = PlayerState.Normal;
-        dashCoroutine = null;
-        playerHealthComponent.isInvulnerable = false;
-        trail.enabled = false;
-        cc.includeLayers = 0;
+        StopDash();
 
     }
 
@@ -139,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
+    {
+        StopDash();
+    }
+
+    private void StopDash()
     {
         if (dashCoroutine == null)
         {

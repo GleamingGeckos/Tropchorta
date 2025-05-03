@@ -1,12 +1,12 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "SwordBehavior", menuName = "Inventory/WeaponBehaviors/Special", order = 1)]
 public class SpecialSwordBehavior : WeaponBehavior
 {
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float attackRange = 1.5f;
-    [SerializeField, Range(0.0f, 1.0f)] private float blockPower = 0.2f;
+    [SerializeField] private int damage = 20;
+    [SerializeField] private float attackRadius = 1.5f;
 
     public override void Initialize(Transform user)
     {
@@ -23,17 +23,6 @@ public class SpecialSwordBehavior : WeaponBehavior
                 damage = value;
             else
                 Debug.LogWarning("Damage cannot be negative.");
-        }
-    }
-    public float AttackRange
-    {
-        get => attackRange;
-        set
-        {
-            if (value >= 0)
-                attackRange = value;
-            else
-                Debug.LogWarning("Attack Range cannot be negative.");
         }
     }
 
@@ -60,6 +49,17 @@ public class SpecialSwordBehavior : WeaponBehavior
 
     public override void UseSpecialAttack(Transform user)
     {
-        //AAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa TODO
+        float radius = attackRadius;
+        Collider[] hitColliders = Physics.OverlapSphere(user.position, radius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy") && hitCollider.GetComponent<HealthComponent>())
+            {
+                hitCollider.GetComponent<HealthComponent>().SimpleDamage(damage);
+            }
+        }
+        DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
+        
     }
+
 }

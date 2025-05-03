@@ -27,12 +27,17 @@ public class PlayerCombat : MonoBehaviour
     Coroutine attackCoroutine = null;
 
     [Header("Combo")]
-    private int specialAttackNr = 3;
     [SerializeField] int comboCounter = 0;
+    private int specialAttackNr = 3;
     [SerializeField] Vector2Int comboAttackWindow = new Vector2Int(1, 00);
     private float comboAttackTime = 0f;
     [SerializeField] bool doNextAttack;
     [SerializeField] bool isWindowOpen;
+
+    [Header("Step during attack")]
+    [SerializeField] float distance = 1.0f;
+    Coroutine stepCoroutine = null;
+
 
     void Start()
     {
@@ -69,7 +74,7 @@ public class PlayerCombat : MonoBehaviour
             attackCoroutine = StartCoroutine(AttackSequence());
             StartCoroutine(ComboWindow());
         }
-        else if (isWindowOpen && !(comboCounter == specialAttackNr))// When window was open and not last attack in combo check for next attack
+        else if (isWindowOpen)// When window was open and not last attack in combo check for next attack
         {
             doNextAttack = true;
         }
@@ -78,7 +83,6 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator AttackSequence()
     {
         comboCounter++;
-        Debug.Log($"Attack started | ComboCounter: {comboCounter}");
 
         playerState.state = PlayerState.Attacking;
 
@@ -98,14 +102,14 @@ public class PlayerCombat : MonoBehaviour
             }
             yield return new WaitForSeconds(attackTime);
 
-            //equipmentController.UseWeaponStart(transform); // hit logic
+            equipmentController.UseWeaponSpecialAttack(transform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
-            Debug.Log("Special attack triggered!");
             comboCounter = 0;
         }
         else
         {
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, animationTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -118,6 +122,7 @@ public class PlayerCombat : MonoBehaviour
                 // play the clip, if it's not already playing
                 staffAnimator.SetTrigger("Attack");
             }
+
             yield return new WaitForSeconds(attackTime);
 
             equipmentController.UseWeaponStart(transform); // hit logic
@@ -130,7 +135,6 @@ public class PlayerCombat : MonoBehaviour
 
         if (doNextAttack)
         {
-            Debug.Log("Chaining next attack");
             doNextAttack = false;
             attackCoroutine = StartCoroutine(AttackSequence());
             StartCoroutine(ComboWindow());
@@ -138,7 +142,6 @@ public class PlayerCombat : MonoBehaviour
         else
         {
             comboCounter = 0;
-            Debug.Log("Combo ended");
         }
     }
 
@@ -148,10 +151,34 @@ public class PlayerCombat : MonoBehaviour
         isWindowOpen = true;
 
         yield return new WaitForSeconds(comboAttackTime);
-
         isWindowOpen = false;
     }
 
+    IEnumerator MoveForwardSmooth(Transform target, float distance, float duration)
+    {
+        Vector3 start = target.position;
+        Vector3 end = start + GetRotatingRootForward() * distance;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            target.position = Vector3.Lerp(start, end, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        target.position = end;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(stepCoroutine != null)
+        {
+            StopCoroutine(stepCoroutine);
+            stepCoroutine = null;
+        }
+    }
+    
     IEnumerator AttackCooldown()
     {
         canAttack = false;

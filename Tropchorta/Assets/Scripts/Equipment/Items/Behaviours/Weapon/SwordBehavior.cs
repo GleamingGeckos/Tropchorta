@@ -11,7 +11,7 @@ public class SwordBehavior : WeaponBehavior
 
     public override void Initialize(Transform user)
     {
-        Debug.Log("Setting player in SwordBehavior");
+       // Debug.Log("Setting player in SwordBehavior");
         playerCombat = user.GetComponent<PlayerCombat>();
     }
 
