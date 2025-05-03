@@ -183,6 +183,12 @@ public class PlayerCombat : MonoBehaviour
         target.position = end;
     }
 
+    public void BreakCombo()
+    {
+        comboCounter = 0;
+        doNextAttack = false;
+        StopCoroutine(stepCoroutine);
+    }
     
     IEnumerator AttackCooldown()
     {

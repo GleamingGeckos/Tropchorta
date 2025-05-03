@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ffa260f62ce944b8341573d0bc3f2f, type: 3}
   m_Name: SpecialSwordBehavior
   m_EditorClassIdentifier: 
-  damage: 10
-  attackRange: 1.5
-  blockPower: 0.2
+  damage: 20
+  attackRadius: 1.5

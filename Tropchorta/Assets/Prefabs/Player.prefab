@@ -266,6 +266,11 @@ MonoBehaviour:
   animationAttackTime: {x: 0, y: 50}
   totalAnimationTime: {x: 1, y: 30}
   attackCooldown: 0.4
+  comboCounter: 0
+  comboAttackWindow: {x: 1, y: 0}
+  doNextAttack: 0
+  isWindowOpen: 0
+  distance: 1
 --- !u!114 &3305874657431232447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +287,19 @@ MonoBehaviour:
   isInvulnerable: 0
   onDamageTaken:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5326583177451854505}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: BreakCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
