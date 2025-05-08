@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 28773794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7924857, y: 1.7296349, z: 11.233627}
+  m_LocalPosition: {x: 4.7924857, y: 1.73, z: 11.233627}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2870,6 +2870,10 @@ PrefabInstance:
       propertyPath: animationAttackTime.y
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 5489086599203184047, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5802719137707570028, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_SlopeLimit
       value: 10
@@ -2885,6 +2889,26 @@ PrefabInstance:
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: dashDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: footstepsSound.Path
+      value: event:/Footsteps
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: footstepsSound.Guid.Data1
+      value: -983999153
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: footstepsSound.Guid.Data2
+      value: 1143768147
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: footstepsSound.Guid.Data3
+      value: -2106460258
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: footstepsSound.Guid.Data4
+      value: 1235314964
       objectReference: {fileID: 0}
     - target: {fileID: 9048358294829012902, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_Constraints

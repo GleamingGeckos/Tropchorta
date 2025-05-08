@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using FMODUnity;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -15,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public PlayerStateSO playerState;
 
     // For dash
-    [SerializeField]  PlayerHealthComponent playerHealthComponent;
-    [SerializeField]  TrailRenderer trail;
+    [SerializeField] PlayerHealthComponent playerHealthComponent;
+    [SerializeField] TrailRenderer trail;
 
     private PlayerCombat playerCombat;
     private CharacterController cc;
@@ -24,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 mousePosition;
     bool isSprinting;
     Coroutine dashCoroutine = null;
+
+    // Sounds
+    [SerializeField] EventReference footstepsSound;
+    [SerializeField] EventReference dashSound;
+    float footstepsTime = 0.5f;
+    Coroutine footstepsCoroutine = null;
 
     private void Awake()
     {
@@ -50,9 +57,11 @@ public class PlayerMovement : MonoBehaviour
                 NormalMovement();
                 break;
             case PlayerState.DisableInput:
+                StopFootstepsSound();
                 // Disable input, do nothing
                 break;
             case PlayerState.Attacking:
+                StopFootstepsSound();
                 AttackingState();
                 break;
             case PlayerState.Dashing:
@@ -73,6 +82,14 @@ public class PlayerMovement : MonoBehaviour
         lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
         Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
         cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
+        if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
+        {
+            PlayFootstepsSound();
+        }
+        else
+        {
+            StopFootstepsSound();
+        }
 
         // Rotate the player to face the mouse position
         if (mousePosition != Vector2.zero)
@@ -89,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         playerState.state = PlayerState.Dashing;
+        StopFootstepsSound();
         lerpedMove = Vector2.zero;
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
@@ -126,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dashCoroutine == null)
         {
+            RuntimeManager.PlayOneShot(dashSound, transform.position);
             playerCombat.StopAttack();
             trail.enabled = true;
             playerHealthComponent.isInvulnerable = true;
@@ -141,8 +160,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopDash()
     {
-        if (dashCoroutine == null)
+        if (dashCoroutine != null)
         {
+            StopCoroutine(dashCoroutine);
+            dashCoroutine = null;
             playerState.state = PlayerState.Normal;
             dashCoroutine = null;
             trail.enabled = false;
@@ -166,5 +187,31 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetRotatingDirection()
     {
         return modelRootTransform.forward;
+    }
+
+    private IEnumerator FootstepsSound()
+    {
+        while (true)
+        {
+            RuntimeManager.PlayOneShot(footstepsSound, transform.position);
+            yield return new WaitForSeconds(footstepsTime);
+        }
+    }
+
+    private void PlayFootstepsSound()
+    {
+        if (footstepsCoroutine == null)
+        {
+            footstepsCoroutine = StartCoroutine(FootstepsSound());
+        }
+    }
+
+    private void StopFootstepsSound()
+    {
+        if (footstepsCoroutine != null)
+        {
+            StopCoroutine(footstepsCoroutine);
+            footstepsCoroutine = null;
+        }
     }
 }

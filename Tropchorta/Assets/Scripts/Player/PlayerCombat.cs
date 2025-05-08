@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -38,6 +39,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float distance = 1.0f;
     float playerRadius = 1.0f;
     Coroutine stepCoroutine = null;
+
+    [SerializeField] EventReference tempAttackEvent; // TODO : move this to weapons
 
 
     void Start()
@@ -88,7 +91,7 @@ public class PlayerCombat : MonoBehaviour
         comboCounter++;
 
         playerState.state = PlayerState.Attacking;
-
+        RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
         {
             // TODO : move this to a weapon behavior somehow
@@ -104,7 +107,7 @@ public class PlayerCombat : MonoBehaviour
                 staffAnimator.SetTrigger("Attack");
             }
             yield return new WaitForSeconds(attackTime);
-
+            
             equipmentController.UseWeaponSpecialAttack(transform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
