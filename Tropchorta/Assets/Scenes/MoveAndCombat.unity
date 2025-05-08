@@ -258,6 +258,101 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &118832011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118832013}
+  - component: {fileID: 118832012}
+  - component: {fileID: 118832014}
+  m_Layer: 0
+  m_Name: Ambiance+Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &118832012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118832011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1078520364
+      Data2: 1098089485
+      Data3: -1059352675
+      Data4: 1081356228
+    Path: event:/Ambiance
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &118832013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118832011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.566816, y: 3.534919, z: -3.8680568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &118832014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118832011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -803380933
+      Data2: 1159116050
+      Data3: -1076719705
+      Data4: 1248064691
+    Path: event:/TempMusic
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &329211459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,12 +2958,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1916372293}
     - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: tempAttackEvent.Path
+      value: event:/StickAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: totalAnimationTime.y
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: animationAttackTime.y
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: tempAttackEvent.Guid.Data1
+      value: -949156090
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: tempAttackEvent.Guid.Data2
+      value: 1255346433
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: tempAttackEvent.Guid.Data3
+      value: -306064976
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: tempAttackEvent.Guid.Data4
+      value: 1379436096
       objectReference: {fileID: 0}
     - target: {fileID: 5489086599203184047, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_Enabled
@@ -2891,8 +3006,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashSound.Path
+      value: event:/Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: footstepsSound.Path
       value: event:/Footsteps
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashSound.Guid.Data1
+      value: -777167254
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashSound.Guid.Data2
+      value: 1137731583
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashSound.Guid.Data3
+      value: -721604731
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashSound.Guid.Data4
+      value: 372554964
       objectReference: {fileID: 0}
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: footstepsSound.Guid.Data1
@@ -3215,3 +3350,4 @@ SceneRoots:
   - {fileID: 944300388}
   - {fileID: 1345695944}
   - {fileID: 28773796}
+  - {fileID: 118832013}
