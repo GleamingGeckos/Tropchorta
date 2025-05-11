@@ -11,9 +11,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] EquipmentController equipmentController;
     private PlayerHealthComponent health;
     private PlayerMovement movement;
-    private bool isBlocking = false;
+    public bool isBlocking = false;
     private float blockingStartTime = 0f;
-    private float blockPower = 0.0f;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
     Collider[] colliders = new Collider[16];
@@ -190,7 +189,8 @@ public class PlayerCombat : MonoBehaviour
     {
         comboCounter = 0;
         doNextAttack = false;
-        StopCoroutine(stepCoroutine);
+        if(stepCoroutine != null)
+            StopCoroutine(stepCoroutine);
     }
     
     IEnumerator AttackCooldown()
@@ -231,12 +231,11 @@ public class PlayerCombat : MonoBehaviour
         return rotatingRootTransform.forward;
     }
 
-    public void StartBlocking(float blockPower)
+    public void StartBlocking()
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = true;
         blockingStartTime = Time.time;
-        this.blockPower = blockPower;
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
         {
             // reset the clip
@@ -260,18 +259,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnAttacked(AttackData ad)
     {
-        if (isBlocking)
-        {
-            if (Time.time - blockingStartTime < ad.blockTime)
-            {
-                health.SimpleDamage(ad.damage - (ad.damage * blockPower));
-            }
-            else
-            {
-                health.SimpleDamage(ad.damage - (ad.damage * blockPower / 2f));
-            }
-        }
-        else
+        if (!isBlocking)
         {
             health.SimpleDamage(ad.damage);
         }

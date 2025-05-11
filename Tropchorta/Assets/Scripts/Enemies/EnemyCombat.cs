@@ -1,9 +1,11 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyCombat : MonoBehaviour
 {
+    [Header("Attack")]
     [SerializeField] int _maxDamage;//inclusive
     [SerializeField] int _minDamage;//inclusive
 
@@ -12,15 +14,25 @@ public class EnemyCombat : MonoBehaviour
     float _attackTimer;
     Collider[] _colliders = new Collider[16];
     [SerializeField] LayerMask _excludedLayer;
+    private Coroutine attackCoroutine;
 
     bool _isCooldown = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
+    [Header("Attack signal")]
+    [SerializeField] private Canvas _canva;
+    [SerializeField] private RectTransform _attackCircleTransform;
+    [SerializeField] private Image _attackCircleImage;
+    [SerializeField] private float _minCircle;
+    [SerializeField] private float _maxCircle;
+    [SerializeField] private Color _minColorCircle;
+    [SerializeField] private Color _maxColorCircle;
+    Tween circleTween;
+
     [Header("Temporary")]
-    [SerializeField] private RectTransform attackBar;
     private float attackBarInitialX;
     [SerializeField] private float attackBarFinalX = 0f;
-    Tween barTween;
+
 
     [SerializeField] Animator animator;
 
@@ -37,7 +49,8 @@ public class EnemyCombat : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         timeToAttackInSeconds = timeFromStartToAttackInUnityTimeline.x + (timeFromStartToAttackInUnityTimeline.y / 60f);
         moveStopOffset = offsetFromAnimStartToMovementStop.x + (offsetFromAnimStartToMovementStop.y / 60f);
-        attackBarInitialX = attackBar.anchoredPosition.x;
+        _canva.enabled = false;
+
         // convert ms to normalized time
     }
 
@@ -51,29 +64,46 @@ public class EnemyCombat : MonoBehaviour
     public void Attack()
     {
         if (_isCooldown) return;
-        StartCoroutine(AttackRoutine());
+        attackCoroutine = StartCoroutine(AttackRoutine());
+    }
+
+    public void WasBlocked()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(AttackRoutine());
+            attackCoroutine = null;
+        }
     }
 
     private IEnumerator AttackRoutine()
     {
+        _canva.enabled = true;
         _isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
         yield return new WaitForSeconds(time);
-        // start the bar animation
-        barTween = attackBar.DOAnchorPosX(attackBarFinalX, timeToAttackInSeconds)
-            .SetEase(Ease.Linear)
-            .OnComplete(() =>
-            {
-                // reset bar
-                attackBar.anchoredPosition = new Vector2(attackBarInitialX, attackBar.anchoredPosition.y);
-            });
+
+        // start the circle animation
+        circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
+        .SetEase(Ease.Linear)
+        .OnUpdate(() =>
+        {
+            float t = (_attackCircleTransform.localScale.x - _minCircle) / (_maxCircle - _minCircle);
+            _attackCircleImage.color = Color.Lerp(_minColorCircle, _maxColorCircle, t);
+        })
+        .OnComplete(() =>
+        {
+            _canva.enabled = false;
+            _attackCircleTransform.localScale = new Vector3(_maxCircle, _maxCircle, 1f);
+            _attackCircleImage.color = _maxColorCircle;
+        });
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
         enemyMovement.AttackStarted(); // stop moving
-        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
 
+        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
@@ -95,7 +125,7 @@ public class EnemyCombat : MonoBehaviour
 
     private void OnDestroy()
     {
-        barTween.Kill();
+        circleTween.Kill();
     }
 
 }

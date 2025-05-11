@@ -6,7 +6,6 @@ public class SwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackRange = 1.5f;
-    [SerializeField, Range(0.0f, 1.0f)] private float blockPower = 0.2f;
     private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
 
     public override void Initialize(Transform user)
@@ -66,7 +65,7 @@ public class SwordBehavior : WeaponBehavior
 
     public override void AltUseStart(Transform user)
     {
-        playerCombat.StartBlocking(blockPower);
+        playerCombat.StartBlocking();
     }
 
     public override void AltUseStop(Transform user)
