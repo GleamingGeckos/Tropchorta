@@ -1,7 +1,9 @@
 using System.Collections;
 using DG.Tweening;
+using FMOD;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class EnemyCombat : MonoBehaviour
 {
@@ -16,7 +18,8 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] LayerMask _excludedLayer;
     private Coroutine attackCoroutine;
 
-    bool _isCooldown = false;
+    bool isCooldown = false;
+    public bool isAttacking = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
     [Header("Attack signal")]
@@ -27,10 +30,12 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private float _maxCircle;
     [SerializeField] private Color _minColorCircle;
     [SerializeField] private Color _maxColorCircle;
+    [SerializeField] private Vector2 _perfectBlockWindow;
+    private float _perfectBlockInSeconds;
+    public bool isPerfectBlockWindow;
     Tween circleTween;
 
     [Header("Temporary")]
-    private float attackBarInitialX;
     [SerializeField] private float attackBarFinalX = 0f;
 
 
@@ -51,6 +56,8 @@ public class EnemyCombat : MonoBehaviour
         moveStopOffset = offsetFromAnimStartToMovementStop.x + (offsetFromAnimStartToMovementStop.y / 60f);
         _canva.enabled = false;
 
+        _perfectBlockInSeconds = _perfectBlockWindow.x + (_perfectBlockWindow.y / 60f);
+        isPerfectBlockWindow = false;
         // convert ms to normalized time
     }
 
@@ -63,8 +70,9 @@ public class EnemyCombat : MonoBehaviour
 
     public void Attack()
     {
-        if (_isCooldown) return;
+        if (isCooldown) return;
         attackCoroutine = StartCoroutine(AttackRoutine());
+        StartCoroutine(PerfectBlockWindow());
     }
 
     public void WasBlocked()
@@ -76,10 +84,20 @@ public class EnemyCombat : MonoBehaviour
         }
     }
 
+    private IEnumerator PerfectBlockWindow()
+    {
+        yield return new WaitForSeconds(_cooldownInterval - _perfectBlockInSeconds);
+        Debug.Log("Start window");
+        isPerfectBlockWindow = true;
+        yield return new WaitForSeconds(_perfectBlockInSeconds);
+        Debug.Log("Stop window");
+        isPerfectBlockWindow = false;
+    }
+
     private IEnumerator AttackRoutine()
     {
         _canva.enabled = true;
-        _isCooldown = true; // Set flag to prevent multiple coroutines
+        isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
         yield return new WaitForSeconds(time);
 
@@ -103,6 +121,7 @@ public class EnemyCombat : MonoBehaviour
 
         enemyMovement.AttackStarted(); // stop moving
 
+
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
@@ -120,7 +139,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
         enemyMovement.AttackFinished(); // start moving again
-        _isCooldown = false;
+        isCooldown = false;
     }
 
     private void OnDestroy()

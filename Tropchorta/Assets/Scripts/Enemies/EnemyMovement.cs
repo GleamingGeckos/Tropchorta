@@ -1,18 +1,20 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
     Transform _target;
-    Vector3 _targetPosition;
     NavMeshAgent agent;
 
     [SerializeField] float _speed = 4f;
     [SerializeField] float _stoppingDistance = 0.9f;
+    [SerializeField] float _stunTime = 0.5f;
+    [SerializeField] Image _stunImage;
 
-    bool _isMoving = false;
     bool _isChasing = false;
     bool _attackInterrupted = false;
 
@@ -20,6 +22,7 @@ public class EnemyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = _stoppingDistance;
+        _stunImage.enabled = false;
     }
 
     public void RotateTowards(GameObject obj) 
@@ -46,6 +49,33 @@ public class EnemyMovement : MonoBehaviour
     {
         _isChasing = false;
         agent.isStopped = true;
+    }
+
+    public void Stun()
+    {
+        if (_isChasing)
+        {
+            Debug.Log("Stun");
+            StopChasing();
+            _stunImage.enabled = true;
+            StartCoroutine(StunWindow());
+        }
+    }
+
+    private IEnumerator StunWindow()
+    {
+        yield return new WaitForSeconds(_stunTime);
+        _stunImage.enabled = false;
+        Collider[] hits = Physics.OverlapSphere(transform.position, 6); //TODO Radius should be taken from collider
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                // Znaleziono gracza w sferze
+                StartChasing(hit.transform);
+                break;
+            }
+        }
     }
 
     public void AttackStarted()

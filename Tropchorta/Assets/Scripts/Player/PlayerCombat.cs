@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 
@@ -235,6 +236,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = true;
+        CheckForAttackingEnemies(isBlocking);
         blockingStartTime = Time.time;
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
         {
@@ -264,4 +266,30 @@ public class PlayerCombat : MonoBehaviour
             health.SimpleDamage(ad.damage);
         }
     }
+
+    private void CheckForAttackingEnemies(bool isBlocking)//TODO im tired, needs to be redone, but works for now
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, 3);
+        HashSet<GameObject> processed = new HashSet<GameObject>();
+
+        foreach (var hit in hits)
+        {
+            GameObject obj = hit.gameObject;
+            if (processed.Contains(obj)) continue;
+            processed.Add(obj);
+
+            if (obj.CompareTag("Enemy"))
+            {
+                var combat = obj.GetComponent<EnemyCombat>();
+                var movement = obj.GetComponent<EnemyMovement>();
+
+                if (combat != null && movement != null && combat.isPerfectBlockWindow)
+                {
+                    combat.WasBlocked();
+                    movement.Stun();
+                }
+            }
+        }
+    }
+
 }
