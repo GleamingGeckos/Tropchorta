@@ -28,6 +28,21 @@ public class Weapon : Item
             behavior?.UseStop(user);
         }
     }
+    public void UseStrongStart(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.UseStrongStart(user);
+        }
+    }
+
+    public void UseStrongEnd(Transform user)
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.UseStrongStop(user);
+        }
+    }
 
     public void UseSpecialAttack(Transform user)
     {

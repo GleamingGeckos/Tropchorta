@@ -18,6 +18,20 @@ public class AnimationBehavior : WeaponBehavior
     {
 
     }
+    public override void UseStrongStart(Transform user)
+    {
+        Animator animator = user.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetTrigger(animationTrigger);
+            Debug.Log("Triggered animation: " + animationTrigger);
+        }
+    }
+
+    public override void UseStrongStop(Transform user)
+    {
+
+    }
 
     public override void AltUseStart(Transform user)
     {

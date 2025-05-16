@@ -17,6 +17,17 @@ public class BowBehavior : WeaponBehavior
     {
 
     }
+    public override void UseStrongStart(Transform user)
+    {
+        Debug.Log("Shooting an arrow!");
+        GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, Quaternion.identity);
+        arrow.GetComponent<Rigidbody>().linearVelocity = user.forward * arrowSpeed;
+    }
+
+    public override void UseStrongStop(Transform user)
+    {
+
+    }
 
     public override void AltUseStart(Transform user)
     {

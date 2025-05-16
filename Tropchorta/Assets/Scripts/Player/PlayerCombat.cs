@@ -27,13 +27,20 @@ public class PlayerCombat : MonoBehaviour
     bool canAttack = true;
     Coroutine attackCoroutine = null;
 
+    [Header("Input")]
+    float attackPressTime;
+    [SerializeField] float whenConsiderHoldingAttack = 0.2f;
+    [SerializeField] bool isHoldingAttack;
+
     [Header("Combo")]
     [SerializeField] int comboCounter = 0;
     private int specialAttackNr = 3;
     [SerializeField] Vector2Int comboAttackWindow = new Vector2Int(1, 00);
     private float comboAttackTime = 0f;
     [SerializeField] bool doNextAttack;
+    [SerializeField] bool isNextStrongAttack;
     [SerializeField] bool isWindowOpen;
+
 
     [Header("Step during attack")]
     [SerializeField] float distance = 1.0f;
@@ -71,22 +78,32 @@ public class PlayerCombat : MonoBehaviour
 
     void OnAttackStart()
     {
+        attackPressTime = Time.time;
+        isHoldingAttack = false;
+    }
+
+    void OnAttackEnd()
+    {
+        float pressDuration = Time.time - attackPressTime;
+        isHoldingAttack = pressDuration > whenConsiderHoldingAttack; 
+
         if (playerState.state == PlayerState.DisableInput) return;
         if (!canAttack) return;
 
-        // at this point it SHOULD be not null, but just in case
         if (attackCoroutine == null)
         {
-            attackCoroutine = StartCoroutine(AttackSequence());
+            attackCoroutine = StartCoroutine(AttackSequence(isHoldingAttack));
             StartCoroutine(ComboWindow());
         }
-        else if (isWindowOpen)// When window was open and not last attack in combo check for next attack
+        else if (isWindowOpen)
         {
+            isNextStrongAttack = isHoldingAttack;
             doNextAttack = true;
         }
     }
 
-    IEnumerator AttackSequence()
+
+    IEnumerator AttackSequence(bool isHolding = false)
     {
         comboCounter++;
 
@@ -107,11 +124,35 @@ public class PlayerCombat : MonoBehaviour
                 staffAnimator.SetTrigger("Attack");
             }
             yield return new WaitForSeconds(attackTime);
-            
+
             equipmentController.UseWeaponSpecialAttack(transform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
             comboCounter = 0;
+            doNextAttack = false;
+            equipmentController.UseWeaponEnd(transform);
+        }
+        else if (isHolding)
+        {
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
+            // TODO : move this to a weapon behavior somehow
+            // check if the clip is already playing, if it is simply reset it
+            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                // reset the clip
+                staffAnimator.Play("Attack", -1, 0);
+            }
+            else
+            {
+                // play the clip, if it's not already playing
+                staffAnimator.SetTrigger("Attack");
+            }
+
+            yield return new WaitForSeconds(attackTime);
+
+            equipmentController.UseWeaponStrongStart(transform); // hit logic
+
+            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
         else
         {
@@ -142,12 +183,18 @@ public class PlayerCombat : MonoBehaviour
         if (doNextAttack)
         {
             doNextAttack = false;
-            attackCoroutine = StartCoroutine(AttackSequence());
+            attackCoroutine = StartCoroutine(AttackSequence(isNextStrongAttack));
             StartCoroutine(ComboWindow());
         }
         else
         {
             comboCounter = 0;
+            if(isHolding)
+            {
+                equipmentController.UseWeaponEnd(transform);
+            }
+            else
+                equipmentController.UseWeaponEnd(transform);
         }
     }
 
@@ -210,11 +257,6 @@ public class PlayerCombat : MonoBehaviour
 
             staffAnimator.SetTrigger("AttackEarlyExit");
         }
-    }
-
-    void OnAttackEnd()
-    {
-        equipmentController.UseWeaponEnd(transform);
     }
 
     void AltUseStart()

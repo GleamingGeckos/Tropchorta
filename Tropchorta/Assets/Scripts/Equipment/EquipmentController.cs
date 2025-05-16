@@ -21,6 +21,7 @@ public class EquipmentController : MonoBehaviour
     {
         DisplayItems();
     }
+
     public void Initialize(Transform playerTransform)
     {
         if (usedWeapon != null)
@@ -167,6 +168,43 @@ public class EquipmentController : MonoBehaviour
         if (usedWeapon is Weapon weapon)
         {
             weapon.UseEnd(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+    public void UseWeaponStrongStart(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            weapon.UseStrongStart(playerTransform);
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+
+    public void UseWeaponStrongEnd(Transform playerTransform)
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            weapon.UseStrongEnd(playerTransform);
         }
         else
         {

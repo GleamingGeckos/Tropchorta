@@ -38,6 +38,16 @@ public class ColorChangeBehavior : WeaponBehavior
 
     }
 
+    public override void UseStrongStart(Transform user)
+    {
+
+    }
+
+    public override void UseStrongStop(Transform user)
+    {
+
+    }
+    
     public override void AltUseStart(Transform user)
     {
 

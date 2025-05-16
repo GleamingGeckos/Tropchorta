@@ -11,6 +11,10 @@ public abstract class WeaponBehavior : ScriptableObject
 
     // this is for when the player releases the button or stops using the weapon
     public abstract void UseStop(Transform user);
+    public abstract void UseStrongStart(Transform user);
+
+    // this is for when the player releases the button or stops using the weapon
+    public abstract void UseStrongStop(Transform user);
 
     // alt use. For something like right-click block with a sword
     public abstract void AltUseStart(Transform user);

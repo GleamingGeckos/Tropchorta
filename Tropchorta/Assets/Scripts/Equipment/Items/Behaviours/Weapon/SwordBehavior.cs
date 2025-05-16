@@ -50,7 +50,7 @@ public class SwordBehavior : WeaponBehavior
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].isTrigger)
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
                 healthComponent.SimpleDamage(10);
             }
@@ -59,6 +59,26 @@ public class SwordBehavior : WeaponBehavior
     }
 
     public override void UseStop(Transform user)
+    {
+
+    }
+
+    public override void UseStrongStart(Transform user)
+    {
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
+        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
+        for (int i = 0; i < hits; i++)
+        {
+            // Currently assuming the collider is on the same object as the HealthComponent
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
+            {
+                healthComponent.SimpleDamage(20);
+            }
+        }
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, 2f, 1f);
+    }
+
+    public override void UseStrongStop(Transform user)
     {
 
     }
