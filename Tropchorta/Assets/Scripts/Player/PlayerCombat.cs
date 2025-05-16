@@ -115,7 +115,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, animationTime));
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
