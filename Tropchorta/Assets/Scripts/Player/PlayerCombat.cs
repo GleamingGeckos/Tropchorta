@@ -285,7 +285,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (combat != null && movement != null && combat.isPerfectBlockWindow)
                 {
-                    combat.WasBlocked();
+                    //combat.WasBlocked();
                     movement.Stun();
                 }
             }

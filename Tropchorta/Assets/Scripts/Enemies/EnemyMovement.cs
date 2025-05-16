@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float _stunTime = 0.5f;
     [SerializeField] Image _stunImage;
 
+    public bool isStuned = false;
     bool _isChasing = false;
     bool _attackInterrupted = false;
 
@@ -55,9 +56,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_isChasing)
         {
+            isStuned = true;
             Debug.Log("Stun");
-            StopChasing();
             _stunImage.enabled = true;
+            StopChasing();
             StartCoroutine(StunWindow());
         }
     }
@@ -66,6 +68,7 @@ public class EnemyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(_stunTime);
         _stunImage.enabled = false;
+        isStuned = false;
         Collider[] hits = Physics.OverlapSphere(transform.position, 6); //TODO Radius should be taken from collider
         foreach (var hit in hits)
         {

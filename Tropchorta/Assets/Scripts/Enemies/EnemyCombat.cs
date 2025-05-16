@@ -13,7 +13,7 @@ public class EnemyCombat : MonoBehaviour
 
     [SerializeField] float _howLongAttackDealsDamage; //TODO
     [SerializeField] float _intervalsBetweenAttacks;
-    float _attackTimer;
+
     Collider[] _colliders = new Collider[16];
     [SerializeField] LayerMask _excludedLayer;
     private Coroutine attackCoroutine;
@@ -23,7 +23,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
     [Header("Attack signal")]
-    [SerializeField] private Canvas _canva;
+    [SerializeField] private GameObject _circles;
     [SerializeField] private RectTransform _attackCircleTransform;
     [SerializeField] private Image _attackCircleImage;
     [SerializeField] private float _minCircle;
@@ -54,7 +54,7 @@ public class EnemyCombat : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         timeToAttackInSeconds = timeFromStartToAttackInUnityTimeline.x + (timeFromStartToAttackInUnityTimeline.y / 60f);
         moveStopOffset = offsetFromAnimStartToMovementStop.x + (offsetFromAnimStartToMovementStop.y / 60f);
-        _canva.enabled = false;
+        _circles.SetActive(false);
 
         _perfectBlockInSeconds = _perfectBlockWindow.x + (_perfectBlockWindow.y / 60f);
         isPerfectBlockWindow = false;
@@ -79,7 +79,7 @@ public class EnemyCombat : MonoBehaviour
     {
         if (attackCoroutine != null)
         {
-            StopCoroutine(AttackRoutine());
+            StopCoroutine(attackCoroutine);
             attackCoroutine = null;
         }
     }
@@ -96,7 +96,7 @@ public class EnemyCombat : MonoBehaviour
 
     private IEnumerator AttackRoutine()
     {
-        _canva.enabled = true;
+        _circles.SetActive(true);
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
         yield return new WaitForSeconds(time);
@@ -111,7 +111,7 @@ public class EnemyCombat : MonoBehaviour
         })
         .OnComplete(() =>
         {
-            _canva.enabled = false;
+            _circles.SetActive(false);
             _attackCircleTransform.localScale = new Vector3(_maxCircle, _maxCircle, 1f);
             _attackCircleImage.color = _maxColorCircle;
         });
