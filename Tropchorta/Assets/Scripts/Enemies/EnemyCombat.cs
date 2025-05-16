@@ -119,8 +119,8 @@ public class EnemyCombat : MonoBehaviour
 
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
-        enemyMovement.AttackStarted(); // stop moving
 
+        enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
@@ -129,8 +129,10 @@ public class EnemyCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && !_colliders[i].isTrigger)
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) && !_colliders[i].isTrigger)
             {
+                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
+                    enemyMovement.Stun();
                 healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }

@@ -16,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Image _stunImage;
 
     public bool isStuned = false;
+    public bool perfectParWasInitiated = false;
     bool _isChasing = false;
     bool _attackInterrupted = false;
 
@@ -37,6 +38,8 @@ public class EnemyMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, newRotation.eulerAngles.y, 0.0f);
     }
 
+
+
     // Method to dynamically change the target
     public void StartChasing(Transform newTarget)
     {
@@ -56,6 +59,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_isChasing)
         {
+            perfectParWasInitiated = false;
             isStuned = true;
             Debug.Log("Stun");
             _stunImage.enabled = true;
