@@ -131,8 +131,22 @@ public class EnemyCombat : MonoBehaviour
             // Currently assuming the collider is on the same object as the HealthComponent
             if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) && !_colliders[i].isTrigger)
             {
+                Transform playerTransform = _colliders[i].transform;
+                Transform modelRoot = playerTransform.Find("ModelRoot");
+
+                Vector3 playerForward = playerTransform.forward;
+                if (modelRoot != null) playerForward = modelRoot.forward; // lub continue w pêtli
+
+                Vector3 toEnemy = (transform.position - playerTransform.position).normalized;
+                float angle = Vector3.Angle(playerForward, toEnemy);
+                if(angle > 80f)
+                    playerCombatComponent.isBlocking = false;
+
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
+                {
                     enemyMovement.Stun();
+                }
+
                 healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }
