@@ -24,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = _stoppingDistance;
+        agent.speed = _speed;
         _stunImage.enabled = false;
     }
 

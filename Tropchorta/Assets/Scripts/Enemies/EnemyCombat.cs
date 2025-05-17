@@ -22,7 +22,7 @@ public class EnemyCombat : MonoBehaviour
     public bool isAttacking = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
-    [Header("Attack signal")]
+    [Header("Normal attack signal")]
     [SerializeField] private GameObject _circles;
     [SerializeField] private RectTransform _attackCircleTransform;
     [SerializeField] private Image _attackCircleImage;
@@ -31,13 +31,16 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private Color _minColorCircle;
     [SerializeField] private Color _maxColorCircle;
     [SerializeField] private Vector2 _perfectBlockWindow;
+    Tween circleTween;
     private float _perfectBlockInSeconds;
     public bool isPerfectBlockWindow;
-    Tween circleTween;
 
-    [Header("Temporary")]
-    [SerializeField] private float attackBarFinalX = 0f;
-
+    [Header("Strong attack signal")]
+    [SerializeField] private RectTransform _attackStrongTransform;
+    [SerializeField] private Image _attackStrongImage;
+    [SerializeField] private Vector3 _minStrong;
+    [SerializeField] private Vector3 _maxStrong;
+    Tween StrongTween;
 
     [SerializeField] Animator animator;
 
@@ -71,7 +74,14 @@ public class EnemyCombat : MonoBehaviour
     public void Attack()
     {
         if (isCooldown) return;
-        attackCoroutine = StartCoroutine(AttackRoutine());
+        attackCoroutine = StartCoroutine(NormalAttackRoutine());
+        StartCoroutine(PerfectBlockWindow());
+    }
+    
+    public void StrongAttack()
+    {
+        if (isCooldown) return;
+        attackCoroutine = StartCoroutine(StrongAttackRoutine());
         StartCoroutine(PerfectBlockWindow());
     }
 
@@ -94,12 +104,12 @@ public class EnemyCombat : MonoBehaviour
         isPerfectBlockWindow = false;
     }
 
-    private IEnumerator AttackRoutine()
+    private IEnumerator NormalAttackRoutine()
     {
         _circles.SetActive(true);
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
-        yield return new WaitForSeconds(time);
+        //yield return new WaitForSeconds(time);
 
         // start the circle animation
         circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
@@ -118,7 +128,6 @@ public class EnemyCombat : MonoBehaviour
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
-
 
         enemyMovement.AttackStarted(); // stop moving
 
@@ -150,6 +159,56 @@ public class EnemyCombat : MonoBehaviour
                 healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }
+        DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f,0.2f,0.0f), 1f, 1f);
+
+        yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+
+        enemyMovement.AttackFinished(); // start moving again
+        isCooldown = false;
+    }
+
+
+    private IEnumerator StrongAttackRoutine()
+    {
+        isCooldown = true; // Set flag to prevent multiple coroutines
+        float time = _cooldownInterval - timeToAttackInSeconds;
+        //yield return new WaitForSeconds(time);
+
+        // start the circle animation
+        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dó³
+        _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
+        _attackStrongImage.enabled = true;
+
+        StrongTween = DOTween.Sequence()
+            .Append(_attackStrongTransform.DOScaleY(_maxStrong.y, timeToAttackInSeconds / 5.2f)
+                .From(_minStrong.y)
+                .SetEase(Ease.InOutBack))
+            .SetLoops(5, LoopType.Yoyo)
+            .OnComplete(() =>
+            {
+                _attackStrongImage.enabled = false;
+                _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
+            });
+        _attackStrongImage.DOFade(1f, timeToAttackInSeconds).From(0.2f);
+
+        animator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
+
+        enemyMovement.AttackStarted(); // stop moving
+
+        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+        // Core attack logic
+        Vector3 attackPoint = transform.forward * 2.5f;
+        int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 3f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
+        for (int i = 0; i < hits; i++)
+        {
+            // Currently assuming the collider is on the same object as the HealthComponent
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && !_colliders[i].isTrigger)
+            {
+                healthComponent.SimpleDamage(DealDamage());
+            }
+        }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
@@ -157,6 +216,7 @@ public class EnemyCombat : MonoBehaviour
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;
     }
+
 
     private void OnDestroy()
     {

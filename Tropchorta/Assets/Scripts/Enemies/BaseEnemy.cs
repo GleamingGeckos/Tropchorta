@@ -52,9 +52,14 @@ public class BaseEnemy : MonoBehaviour
         if (other.gameObject.tag == "Player" && !_enemyMovement.isStuned)
         {
             GameObject player = other.gameObject;
-            if ((player.transform.position - transform.position).sqrMagnitude < 9.0f)
+            float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
+
+            if (distanceSqr < 4.0f)
             {
-                _enemyCombat.Attack();
+                if (Random.value < 0.7f)
+                    _enemyCombat.Attack(); // czasami bli¿szy
+                else
+                    _enemyCombat.StrongAttack(); // czasami dalszy
             }
             _enemyMovement.RotateTowards(player);
         }
