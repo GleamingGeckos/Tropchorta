@@ -18,8 +18,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] LayerMask _excludedLayer;
     private Coroutine attackCoroutine;
 
-    bool isCooldown = false;
-    public bool isAttacking = false;
+    [SerializeField] bool isCooldown = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
     [Header("Normal attack signal")]

@@ -54,7 +54,7 @@ public class BaseEnemy : MonoBehaviour
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
 
-            if (distanceSqr < 4.0f)
+            if (distanceSqr < 6.0f)
             {
                 if (Random.value < 0.7f)
                     _enemyCombat.Attack(); // czasami bli¿szy
