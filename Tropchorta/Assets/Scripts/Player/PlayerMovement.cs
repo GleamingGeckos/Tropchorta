@@ -49,6 +49,14 @@ public class PlayerMovement : MonoBehaviour
         input.OnSpaceEvent += OnDash;
     }
 
+    public void RotatePlayerTowards(Vector3 lookDirection)
+    {
+        if (lookDirection != Vector3.zero)
+        {
+            modelRootTransform.forward = new Vector3(lookDirection.x, 0.0f, lookDirection.z);
+        }
+    }
+
     void Update()
     {
         switch (playerState.state)

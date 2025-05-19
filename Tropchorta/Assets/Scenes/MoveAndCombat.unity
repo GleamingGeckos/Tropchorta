@@ -2756,6 +2756,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2733366508810233481, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: m_Acceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2733366508810233481, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251304635978395309, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: _speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251304635978395309, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: perfectParWasInitiated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4361709780842544851, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -2997,10 +3013,6 @@ PrefabInstance:
       propertyPath: tempAttackEvent.Guid.Data4
       value: 1379436096
       objectReference: {fileID: 0}
-    - target: {fileID: 5489086599203184047, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5802719137707570028, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_SlopeLimit
       value: 10
@@ -3013,6 +3025,10 @@ PrefabInstance:
       propertyPath: equipmentUIController
       value: 
       objectReference: {fileID: 2012483781}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dashDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: dashDuration
       value: 1

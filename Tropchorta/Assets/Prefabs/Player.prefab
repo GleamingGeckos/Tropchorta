@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 3305874657431232447}
   - component: {fileID: 7316165997840729316}
   - component: {fileID: 5489086599203184047}
+  - component: {fileID: 582302915993542184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -246,6 +247,20 @@ MonoBehaviour:
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   playerHealthComponent: {fileID: 3305874657431232447}
   trail: {fileID: 5489086599203184047}
+  footstepsSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  dashSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &5326583177451854505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,14 +278,25 @@ MonoBehaviour:
   rotatingRootTransform: {fileID: 8091216811212371203}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   equipmentController: {fileID: 6131339122415314527}
+  isBlocking: 0
   animationAttackTime: {x: 0, y: 50}
   totalAnimationTime: {x: 1, y: 30}
   attackCooldown: 0.4
+  whenConsiderHoldingAttack: 0.2
+  isHoldingAttack: 0
   comboCounter: 0
   comboAttackWindow: {x: 1, y: 0}
   doNextAttack: 0
+  isNextStrongAttack: 0
   isWindowOpen: 0
   distance: 1
+  tempAttackEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &3305874657431232447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +465,22 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!208 &582302915993542184
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763151380894057734}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.32, y: 0.92, z: 0.32}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.12, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4846538048631571966
 GameObject:
   m_ObjectHideFlags: 0

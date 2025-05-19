@@ -106,10 +106,10 @@ public class EnemyCombat : MonoBehaviour
 
     private IEnumerator NormalAttackRoutine()
     {
-        _circles.SetActive(true);
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
-        //yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);
+        _circles.SetActive(true);
 
         // start the circle animation
         circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
@@ -138,24 +138,16 @@ public class EnemyCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) && !_colliders[i].isTrigger)
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && 
+                _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) && 
+                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) && 
+                !_colliders[i].isTrigger)
             {
-                Transform playerTransform = _colliders[i].transform;
-                Transform modelRoot = playerTransform.Find("ModelRoot");
-
-                Vector3 playerForward = playerTransform.forward;
-                if (modelRoot != null) playerForward = modelRoot.forward; // lub continue w pêtli
-
-                Vector3 toEnemy = (transform.position - playerTransform.position).normalized;
-                float angle = Vector3.Angle(playerForward, toEnemy);
-                if(angle > 80f)
-                    playerCombatComponent.isBlocking = false;
-
+                playerMovementComponent.RotatePlayerTowards(transform.position);
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
                 {
                     enemyMovement.Stun();
                 }
-
                 healthComponent.BlockableDamage(new AttackData(DealDamage()));
             }
         }
@@ -172,7 +164,7 @@ public class EnemyCombat : MonoBehaviour
     {
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
-        //yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);
 
         // start the circle animation
         _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dó³

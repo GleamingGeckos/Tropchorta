@@ -1045,7 +1045,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isAttacking: 0
-  _cooldownInterval: 1.6
+  _cooldownInterval: 1.5
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
   _attackCircleImage: {fileID: 6573397796364980083}
@@ -1205,10 +1205,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
