@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EquipmentController : MonoBehaviour
 {
     [SerializeField] int goldAmount = 0;
     [SerializeField] GameObject lastInteractedItem;
     [SerializeField] List<GameObject> interactedItems = new List<GameObject>();
+    [SerializeField] public InputReader input;
 
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
@@ -14,12 +18,15 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Item pants;
     [SerializeField] Item shoes;
 
+    private bool canSwitch = true;
+
     [SerializeField] EquipmentUIController equipmentUIController;
 
     [SerializeField] List<ClueItem> clueItems;
     private void Start()
     {
         DisplayItems();
+        input.OnScrollEvent += SwitchWeapons;
     }
 
     public void Initialize(Transform playerTransform)
@@ -50,11 +57,6 @@ public class EquipmentController : MonoBehaviour
         {
             //Debug.Log("Picking up items!!!");
             PickUpItem();
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Debug.Log("Switching weapons!!!");
-            SwitchWeapons();
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -250,13 +252,21 @@ public class EquipmentController : MonoBehaviour
         }
     }
 
-    public void SwitchWeapons()
+    public void SwitchWeapons(float scroll)
     {
-        Item tmpItem = usedWeapon;
-        usedWeapon = inactiveWeapon;
-        inactiveWeapon = tmpItem;
-        equipmentUIController.ChangeWeapon1Image(usedWeapon);
-        equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+        if (canSwitch && scroll != 0f)
+        {
+            Item tmpItem = usedWeapon;
+            usedWeapon = inactiveWeapon;
+            inactiveWeapon = tmpItem;
+            equipmentUIController.ChangeWeapon1Image(usedWeapon);
+            equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+            canSwitch = false;
+        }
+        else if (scroll == 0f)
+        {
+            canSwitch = true;
+        }
     }
 
     public void PickUpItem()

@@ -39,8 +39,6 @@ public class EnemyMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, newRotation.eulerAngles.y, 0.0f);
     }
 
-
-
     // Method to dynamically change the target
     public void StartChasing(Transform newTarget)
     {
