@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c9c80f4db7f34e9239fd068961823, type: 3}
   m_Name: BasicBowBehaviour
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 0}
-  arrowSpeed: 20
+  arrowPrefab: {fileID: 2032088643122078551, guid: 518e3502757867a4ab47e705f265b831, type: 3}

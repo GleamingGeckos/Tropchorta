@@ -125,7 +125,7 @@ public class PlayerCombat : MonoBehaviour
             }
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponSpecialAttack(transform); // hit logic
+            equipmentController.UseWeaponSpecialAttack(rotatingRootTransform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
             comboCounter = 0;
@@ -150,7 +150,7 @@ public class PlayerCombat : MonoBehaviour
 
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponStrongStart(transform); // hit logic
+            equipmentController.UseWeaponStrongStart(rotatingRootTransform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
