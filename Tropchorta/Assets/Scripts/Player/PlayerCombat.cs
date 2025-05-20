@@ -172,7 +172,7 @@ public class PlayerCombat : MonoBehaviour
 
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponStart(transform); // hit logic
+            equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
