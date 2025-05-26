@@ -11,18 +11,20 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] List<GameObject> interactedItems = new List<GameObject>();
     [SerializeField] public InputReader input;
 
+    [Header("Possessed Items")]
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
     [SerializeField] Item helmet;
     [SerializeField] Item breastplate;
     [SerializeField] Item pants;
     [SerializeField] Item shoes;
+    [SerializeField] List<ClueItem> clueItems;
 
     private bool canSwitch = true;
 
+    [Header("UI Controller")]
     [SerializeField] EquipmentUIController equipmentUIController;
 
-    [SerializeField] List<ClueItem> clueItems;
     private void Start()
     {
         DisplayItems();
@@ -456,6 +458,57 @@ public class EquipmentController : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public Item SwitchItem(Item item) // used in shop to switch items from shop
+    {
+        Item tmpItem;
+        switch (item)
+        {
+            case Weapon weapon:
+                tmpItem = usedWeapon;
+                usedWeapon = item;
+                Debug.Log($"Switching weapon: {weapon.itemName}");
+                equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                return tmpItem;
+
+            case Helmet helm:
+                tmpItem = helmet;
+                helmet = item;
+                Debug.Log($"Switching helmet: {helm.itemName}");
+                equipmentUIController.ChangeHeadImage(helmet);
+                return tmpItem;
+
+            case Breastplate breastp:
+                tmpItem = breastplate;
+                breastplate = item;
+                Debug.Log($"Switching breastplate: {breastp.itemName}");
+                equipmentUIController.ChangeTorsoImage(breastplate);
+                return tmpItem;
+
+            case Pants pant:
+                tmpItem = pants;
+                pants = item;
+                Debug.Log($"Switching pants: {pant.itemName}");
+                equipmentUIController.ChangePantsImage(pants);
+                return tmpItem;
+
+            case Shoes shoe:
+                tmpItem = shoes;
+                shoes = item;
+                Debug.Log($"Switching shoes: {shoe.itemName}");
+                equipmentUIController.ChangeShoesImage(shoes);
+                return tmpItem;
+
+            case ClueItem clueItem:
+                Debug.Log($"Adding Clue Item: {clueItem.itemName}");
+                clueItems.Add(item as ClueItem);
+                return null;
+
+            default:
+                Debug.Log("Item type is not supported");
+                return null;
         }
     }
 }

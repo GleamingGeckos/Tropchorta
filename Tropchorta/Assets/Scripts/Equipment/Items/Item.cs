@@ -7,4 +7,5 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public string description = "Item Description";
     public GameObject itemPrefab;  // The actual prefab to instantiate when dropped
+    public int itemPrice = 100 ;
 }
