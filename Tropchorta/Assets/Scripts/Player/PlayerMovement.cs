@@ -119,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
         lerpedMove = Vector2.zero;
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
+        if (direction == Vector3.zero)
+            direction = modelRootTransform.forward;
         if (direction != Vector3.zero)
         {
             float elapsed = 0f;
@@ -144,21 +146,20 @@ public class PlayerMovement : MonoBehaviour
             Vector3 remaining = finalTarget - transform.position;
             cc.Move(remaining);
         }
-
         StopDash();
-
     }
 
     void OnDash()
     {
         if (dashCoroutine == null)
         {
+            Debug.Log("OnDash");
+            dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             playerCombat.StopAttack();
             trail.enabled = true;
             playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");
-            dashCoroutine = StartCoroutine(Dash());
         }
     }
 
