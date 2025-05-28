@@ -10,8 +10,8 @@ public class BestiaryUIController : MonoBehaviour
     [SerializeField] int activePanelId = -1;
     public void DisplayBeastPanel(int beastId)
     {
-        mainPanel.SetActive(false);
-        buttonsPanel.SetActive(true);
+        //mainPanel.SetActive(false);
+        //buttonsPanel.SetActive(true);
         beastPanels[beastId].SetActive(true);
         activePanelId = beastId;
     }
@@ -42,13 +42,13 @@ public class BestiaryUIController : MonoBehaviour
         }
         beastPanels[activePanelId].SetActive(true);
     }
-    public void MainPanelDisplay()// moves back to the all beasts display
+/*    public void MainPanelDisplay()// moves back to the all beasts display
     {
         beastPanels[activePanelId].SetActive(false);
         buttonsPanel.SetActive(false);
         mainPanel.SetActive(true);
         activePanelId = -1;
-    }
+    }*/
 
     public void ResetBestiary()
     {
@@ -56,8 +56,9 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
-        buttonsPanel.SetActive(false);
-        mainPanel.SetActive(true);
-        activePanelId = -1;
+        buttonsPanel.SetActive(true);
+        DisplayBeastPanel(0);
+        //mainPanel.SetActive(true);
+        activePanelId = 0;
     }
 }
