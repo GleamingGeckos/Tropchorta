@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/MoveAndCombat.unity
+    path: Assets/Scenes/Dev_Maps/MoveAndCombat.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/MAPA_unityterrain.unity
+    path: Assets/Scenes/Dev_Maps/MAPA_unityterrain.unity
     guid: b62a7f5b607ba6b469d986972f904dcd
   - enabled: 1
-    path: Assets/Scenes/BossFight.unity
+    path: Assets/Scenes/Dev_Maps/BossFight.unity
     guid: 5838c8b2b2b3db2469f6ef7f2c1ba578
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6c21e9cb3f1c764da602b29e82c9986, type: 2}
