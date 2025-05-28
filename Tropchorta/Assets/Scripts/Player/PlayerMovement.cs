@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lerpedMove;
     Vector2 mousePosition;
     bool isSprinting;
+    public bool useMouseRotation; 
     Coroutine dashCoroutine = null;
 
     // Sounds
@@ -87,28 +88,33 @@ public class PlayerMovement : MonoBehaviour
     void NormalMovement()
     {
         // normal state
-        lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
-        Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
-        cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
-        if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
+        if (!useMouseRotation)
         {
-            PlayFootstepsSound();
-            modelRootTransform.forward = move.normalized;
-        }
-        else
-        {
-            StopFootstepsSound();
+            lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
+            Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
+            cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
+            if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
+            {
+                PlayFootstepsSound();
+
+                modelRootTransform.forward = move.normalized;
+            }
+            else
+            {
+                StopFootstepsSound();
+            }
         }
 
+
         // Rotate the player to face the mouse position
-        //if (mousePosition != Vector2.zero)
-        //{
-        //    Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
-        //    if (lookDirection != Vector3.zero)
-        //    {
-        //        modelRootTransform.forward = lookDirection;
-        //    }
-        //}
+        if (useMouseRotation && mousePosition != Vector2.zero)
+        {
+            Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
+            if (lookDirection != Vector3.zero)
+            {
+                modelRootTransform.forward = lookDirection;
+            }
+        }
     }
 
 
