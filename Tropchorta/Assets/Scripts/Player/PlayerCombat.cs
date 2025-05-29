@@ -26,7 +26,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float attackCooldown = 0.4f; // TODO : move this to weapon behavior
     bool canAttack = true;
     Coroutine attackCoroutine = null;
-    Coroutine holdCorutine = null;
 
     [Header("Input")]
     float attackPressTime;
@@ -81,19 +80,15 @@ public class PlayerCombat : MonoBehaviour
     {
         attackPressTime = Time.time;
         isHoldingAttack = false;
-        holdCorutine = StartCoroutine(EnableRotationAttack());
     }
 
     void OnAttackEnd()
     {
         float pressDuration = Time.time - attackPressTime;
         isHoldingAttack = pressDuration > whenConsiderHoldingAttack; 
-        movement.useMouseRotation = false;
-        StopCoroutine(holdCorutine);
-        holdCorutine = null;
+
         if (playerState.state == PlayerState.DisableInput) return;
         if (!canAttack) return;
-        playerState.state = PlayerState.Attacking;
 
         if (attackCoroutine == null)
         {
@@ -107,16 +102,12 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    IEnumerator EnableRotationAttack()
-    {
-        yield return new WaitForSeconds(whenConsiderHoldingAttack);
-        movement.useMouseRotation = true;
-    }
 
     IEnumerator AttackSequence(bool isHolding = false)
     {
         comboCounter++;
 
+        playerState.state = PlayerState.Attacking;
         RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
         {
@@ -143,7 +134,6 @@ public class PlayerCombat : MonoBehaviour
         }
         else if (isHolding)
         {
-
             stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
