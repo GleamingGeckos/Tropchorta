@@ -21,7 +21,7 @@ public class NPCBehaviourScript : MonoBehaviour
 
     [Header("Quest")]
     [SerializeField] private bool _isQuestActive;
-    [SerializeField] private SpawnerForQuests _spawner;
+    [SerializeField] private SpawnerForObj _spawner;
     [SerializeField] private GameObject _enemyToSpawn;
     [SerializeField] private int _howManyToSpawn = 3;
     [SerializeField] private List<GameObject> _enemies;

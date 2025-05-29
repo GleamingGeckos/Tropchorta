@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerForQuests : MonoBehaviour
+public class SpawnerForObj : MonoBehaviour
 {
     [SerializeField] private SphereCollider spawnArea;
 

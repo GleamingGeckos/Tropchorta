@@ -11,7 +11,7 @@ public class MoneyDrop : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        value = Random.Range(1, 3);
+        value = Random.Range(1, 4);
     }
 
     private void OnTriggerEnter(Collider other)
