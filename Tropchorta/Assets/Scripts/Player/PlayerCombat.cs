@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -74,6 +75,19 @@ public class PlayerCombat : MonoBehaviour
     public void onDamageTaken(float damage, float currentHealth)
     {
         healthBar.SetHealth(currentHealth / health.MaxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        playerState.state = PlayerState.DisableInput;
+        StopAllCoroutines(); // Zatrzymaj wszystkie dzia³ania (np. ataki)
+        equipmentController.UseWeaponEnd(transform); // Upewnij siê, ¿e broñ siê deaktywuje
+        SceneManager.LoadScene("MainMenu");
     }
 
     void OnAttackStart()
