@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Dev_Maps/MAPA_unityterrain.unity
     guid: b62a7f5b607ba6b469d986972f904dcd
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 41bc858114b6a1b4197749efffb41402
+  - enabled: 1
+    path: Assets/Scenes/MainMap.unity
+    guid: 82e014efc64f45541af380817609a050
+  - enabled: 1
     path: Assets/Scenes/BossFightArenas/BossFightMountain.unity
     guid: 5838c8b2b2b3db2469f6ef7f2c1ba578
   - enabled: 1
@@ -20,12 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossFightArenas/BossFightSwamps.unity
     guid: 3a66b6417fa0d8a40832e382f37cbad7
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 41bc858114b6a1b4197749efffb41402
-  - enabled: 1
-    path: Assets/Scenes/MainMap.unity
-    guid: 82e014efc64f45541af380817609a050
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6c21e9cb3f1c764da602b29e82c9986, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f2e35d3dae6e23147be006f83b143267, type: 3}
