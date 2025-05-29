@@ -9,6 +9,7 @@ public class BaseEnemy : MonoBehaviour
     private Color flashColor = new Color(1f, 0f, 0f); // Red color
     private float transitionDuration = 1f;
     private Tween colorTween;
+    [SerializeField] GameObject moneyPrefab;
 
     //Components
     private EnemyCombat _enemyCombat;
@@ -67,6 +68,7 @@ public class BaseEnemy : MonoBehaviour
   
     public void OnDeath()
     {
+        Instantiate(moneyPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

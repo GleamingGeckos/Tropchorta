@@ -975,6 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536d3b8f1ef045742961eb86e5fb8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyPrefab: {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
 --- !u!114 &5642331688653515415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,7 +1045,7 @@ MonoBehaviour:
   _excludedLayer:
     serializedVersion: 2
     m_Bits: 128
-  isAttacking: 0
+  isCooldown: 0
   _cooldownInterval: 1.5
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
