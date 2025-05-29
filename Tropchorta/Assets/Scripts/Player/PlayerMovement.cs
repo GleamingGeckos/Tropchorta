@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         lerpedMove = lerpedMove.LerpFI(Vector2.zero, Time.fixedDeltaTime, lerpHalfTime);
     }
 
-    void NormalMovement()
+    public void NormalMovement()
     {
         // normal state
         lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);

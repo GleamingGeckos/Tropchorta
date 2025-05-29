@@ -106,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator AttackSequence(bool isHolding = false)
     {
         comboCounter++;
-
+        movement.NormalMovement();
         playerState.state = PlayerState.Attacking;
         RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
