@@ -10,7 +10,6 @@ public class NotesUIController : MonoBehaviour
     [SerializeField] GameObject cluePopup;
     private void Start()
     {
-        AddNote("My notes: ");
     }
     public void AddNote(string noteText)
     {
