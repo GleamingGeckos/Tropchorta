@@ -9,7 +9,7 @@ public class ShopItemPanelController : MonoBehaviour
 {
     [SerializeField] private Item displayedItem;
     [SerializeField] private Image itemImage;
-    [SerializeField] private TextMeshProUGUI nameText;
+    //[SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI priceText;
 
@@ -18,7 +18,7 @@ public class ShopItemPanelController : MonoBehaviour
     {
         displayedItem = item;
         itemImage.sprite = item.icon;
-        nameText.text = item.itemName;
+        //nameText.text = item.itemName;
         descriptionText.text = item.description;
         priceText.text = item.itemPrice.ToString();
     }

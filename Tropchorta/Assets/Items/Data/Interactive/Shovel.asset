@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c555252f95d7c304a8c3ec15b7034a3b, type: 3}
-  m_Name: TestClueItem
+  m_Name: Shovel
   m_EditorClassIdentifier: 
   itemName: Shovel
-  icon: {fileID: 21300000, guid: f4dd9b6dcfba44f4882eae12e6b0356b, type: 3}
-  description: 'This item cen help '
+  icon: {fileID: 21300000, guid: 2d719369e92582247a7b42b0ac3c1533, type: 3}
+  description: Maybe I'll dig up something interesting?
   itemPrefab: {fileID: 0}
-  itemPrice: 100
+  itemPrice: 10
