@@ -16,7 +16,7 @@ public class ClueController : MonoBehaviour
 
     private void Start()
     {
-        equipmentController = GameObject.FindWithTag("Equipment").GetComponent<EquipmentController>();
+        //equipmentController = GameObject.FindWithTag("Equipment").GetComponent<EquipmentController>();
     }
     void Update()
     {

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerUIController : MonoBehaviour
 {
-    [SerializeField] GameObject cluesPanel;
+    [SerializeField] GameObject bestiaryPanel;
+    [SerializeField] GameObject notesPanel;
     [SerializeField] BestiaryUIController bestiaryUIController;
 
     private void Awake()
@@ -12,16 +13,27 @@ public class PlayerUIController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            if(cluesPanel.activeSelf)
+            if(bestiaryPanel.activeSelf)
             {
-                cluesPanel.SetActive(false);
+                bestiaryPanel.SetActive(false);
             }
             else
             {
-                cluesPanel.SetActive(true);
+                bestiaryPanel.SetActive(true);
                 bestiaryUIController.ResetBestiary();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            if (notesPanel.activeSelf)
+            {
+                notesPanel.SetActive(false);
+            }
+            else
+            {
+                notesPanel.SetActive(true);
             }
         }
     }

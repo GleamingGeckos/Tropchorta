@@ -10,8 +10,7 @@ public class NotesUIController : MonoBehaviour
     [SerializeField] GameObject cluePopup;
     private void Start()
     {
-        AddNote("Bestia zostawia jaja w kopczykach");
-        AddNote("Bestia zostawia œlady pazurów");
+        AddNote("My notes: ");
     }
     public void AddNote(string noteText)
     {

@@ -349,9 +349,28 @@ MonoBehaviour:
   speed: 5
   sprintMod: 1.65
   lerpHalfTime: 0.045
+  dashDistance: 15
+  dashDuration: 0.3
   modelRootTransform: {fileID: 588931495}
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
+  playerHealthComponent: {fileID: 0}
+  trail: {fileID: 0}
+  useMouseRotation: 0
+  footstepsSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  dashSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!54 &227393562
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -396,6 +415,25 @@ MonoBehaviour:
   rotatingRootTransform: {fileID: 588931495}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   equipmentController: {fileID: 297650955}
+  isBlocking: 0
+  animationAttackTime: {x: 0, y: 30}
+  totalAnimationTime: {x: 1, y: 20}
+  attackCooldown: 0.4
+  whenConsiderHoldingAttack: 0.2
+  isHoldingAttack: 0
+  comboCounter: 0
+  comboAttackWindow: {x: 1, y: 0}
+  doNextAttack: 0
+  isNextStrongAttack: 0
+  isWindowOpen: 0
+  distance: 1
+  tempAttackEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &227393564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  isInvulnerable: 0
   onDamageTaken:
     m_PersistentCalls:
       m_Calls: []
@@ -416,6 +455,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttacked:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &227393565
@@ -526,12 +568,15 @@ MonoBehaviour:
   goldAmount: 0
   lastInteractedItem: {fileID: 0}
   interactedItems: []
+  input: {fileID: 0}
   usedWeapon: {fileID: 11400000, guid: fb579876cf2335e49a7ac5599b61e481, type: 2}
   inactiveWeapon: {fileID: 11400000, guid: 172a2586b4f49804db13c084a70c4e2f, type: 2}
   helmet: {fileID: 0}
   breastplate: {fileID: 0}
   pants: {fileID: 0}
   shoes: {fileID: 0}
+  clueItems: []
+  equipmentUIController: {fileID: 0}
 --- !u!54 &297650956
 Rigidbody:
   m_ObjectHideFlags: 0

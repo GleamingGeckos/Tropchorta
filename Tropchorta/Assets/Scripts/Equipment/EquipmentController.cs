@@ -55,7 +55,7 @@ public class EquipmentController : MonoBehaviour
         {
             UseWeaponStart(transform);
         }
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log("Picking up items!!!");
             PickUpItem();
