@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6018149227580362120, guid: c1f84be3b027fb24d95e19193bf3031b, type: 3}
+      propertyPath: _levelName
+      value: BossFightSwamps
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1869,6 +1873,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6018149227580362120, guid: c1f84be3b027fb24d95e19193bf3031b, type: 3}
+      propertyPath: _levelName
+      value: BossFightField
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2404,6 +2412,10 @@ PrefabInstance:
     - target: {fileID: 3784078528288271387, guid: c1f84be3b027fb24d95e19193bf3031b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018149227580362120, guid: c1f84be3b027fb24d95e19193bf3031b, type: 3}
+      propertyPath: _levelName
+      value: BossFightMountain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
