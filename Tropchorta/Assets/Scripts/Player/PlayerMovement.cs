@@ -115,36 +115,26 @@ public class PlayerMovement : MonoBehaviour
     {
         playerState.state = PlayerState.Dashing;
         StopFootstepsSound();
-        lerpedMove = Vector2.zero;
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
         if (direction == Vector3.zero)
             direction = modelRootTransform.forward;
-        if (direction != Vector3.zero)
+
+        float dashSpeed = dashDistance / dashDuration;
+        float elapsed = 0f;
+
+        while (elapsed < dashDuration)
         {
-            float elapsed = 0f;
-            Vector3 startPosition = transform.position;
+            float t = elapsed / dashDuration;
+            float easedT = 1f - Mathf.Pow(1f - t, 2f); // Quadratic ease-out
+            float currentSpeed = Mathf.Lerp(dashSpeed, 7, easedT);
 
-            while (elapsed < dashDuration)
-            {
-                float t = elapsed / dashDuration;
-                float easedT = 1f - Mathf.Pow(1f - t, 2f); // Quadratic ease-out
-                float currentDistance = easedT * dashDistance;
+            cc.Move(direction * currentSpeed * Time.deltaTime);
 
-                Vector3 targetPosition = startPosition + direction * currentDistance;
-                Vector3 move = targetPosition - transform.position;
-
-                cc.Move(move); // TODO add 
-
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            // Final correction to ensure exact position
-            Vector3 finalTarget = startPosition + direction * dashDistance;
-            Vector3 remaining = finalTarget - transform.position;
-            cc.Move(remaining);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
         StopDash();
     }
 
@@ -152,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dashCoroutine == null)
         {
-            Debug.Log("OnDash");
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             playerCombat.StopAttack();
@@ -171,13 +160,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dashCoroutine != null)
         {
-            StopCoroutine(dashCoroutine);
-            dashCoroutine = null;
             playerState.state = PlayerState.Normal;
-            dashCoroutine = null;
             trail.enabled = false;
             playerHealthComponent.isInvulnerable = false;
             cc.includeLayers = 0;
+            StopCoroutine(dashCoroutine);
+            dashCoroutine = null;
         }
     }
 

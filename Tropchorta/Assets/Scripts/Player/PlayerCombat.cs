@@ -188,7 +188,7 @@ public class PlayerCombat : MonoBehaviour
 
             equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
 
-            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
+            //yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
 
         playerState.state = PlayerState.Normal;

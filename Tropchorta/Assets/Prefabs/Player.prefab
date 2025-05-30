@@ -242,7 +242,7 @@ MonoBehaviour:
   sprintMod: 1.65
   lerpHalfTime: 0.045
   dashDistance: 5
-  dashDuration: 1
+  dashDuration: 0.7
   modelRootTransform: {fileID: 8091216811212371203}
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
@@ -280,7 +280,7 @@ MonoBehaviour:
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   equipmentController: {fileID: 6131339122415314527}
   isBlocking: 0
-  animationAttackTime: {x: 0, y: 40}
+  animationAttackTime: {x: 0, y: 30}
   totalAnimationTime: {x: 1, y: 10}
   attackCooldown: 0.4
   whenConsiderHoldingAttack: 0.2
