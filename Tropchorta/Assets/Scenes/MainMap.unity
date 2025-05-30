@@ -2634,7 +2634,7 @@ Camera:
   far clip plane: 1000
   field of view: 90
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9576,6 +9576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4993690822106579816, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5326583177451854505, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: healthBar
       value: 
@@ -9600,6 +9604,14 @@ PrefabInstance:
       propertyPath: equipmentUIController
       value: 
       objectReference: {fileID: 51841110}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: dummyWeaponSlot
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795328379351802557, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15286,7 +15298,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
-  - {fileID: 1278055117}
   - {fileID: 1138007191}
   - {fileID: 1831677575}
   - {fileID: 878268000}
@@ -15298,3 +15309,4 @@ SceneRoots:
   - {fileID: 810081585}
   - {fileID: 1256858966}
   - {fileID: 1580016466}
+  - {fileID: 1278055117}

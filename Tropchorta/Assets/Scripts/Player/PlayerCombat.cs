@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator staffAnimator;
+    [SerializeField] public GameObject weaponSlot;
     [SerializeField] HealthBar healthBar;
     [SerializeField] Transform rotatingRootTransform;
     [SerializeField] PlayerStateSO playerState;
@@ -49,6 +50,8 @@ public class PlayerCombat : MonoBehaviour
     Coroutine stepCoroutine = null;
 
     [SerializeField] EventReference tempAttackEvent; // TODO : move this to weapons
+    
+    
 
 
     void Start()
@@ -85,8 +88,8 @@ public class PlayerCombat : MonoBehaviour
     private void Die()
     {
         playerState.state = PlayerState.DisableInput;
-        StopAllCoroutines(); // Zatrzymaj wszystkie dzia³ania (np. ataki)
-        equipmentController.UseWeaponEnd(transform); // Upewnij siê, ¿e broñ siê deaktywuje
+        StopAllCoroutines(); // Zatrzymaj wszystkie dziaï¿½ania (np. ataki)
+        equipmentController.UseWeaponEnd(transform); // Upewnij siï¿½, ï¿½e broï¿½ siï¿½ deaktywuje
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -131,11 +134,18 @@ public class PlayerCombat : MonoBehaviour
             {
                 // reset the clip
                 staffAnimator.Play("Attack", -1, 0);
+                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
+                
             }
             else
             {
                 // play the clip, if it's not already playing
                 staffAnimator.SetTrigger("Attack");
+               
+                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
+             
             }
             yield return new WaitForSeconds(attackTime);
 
@@ -155,11 +165,15 @@ public class PlayerCombat : MonoBehaviour
             {
                 // reset the clip
                 staffAnimator.Play("Attack", -1, 0);
+                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
             }
             else
             {
                 // play the clip, if it's not already playing
                 staffAnimator.SetTrigger("Attack");
+                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
             }
 
             yield return new WaitForSeconds(attackTime);
@@ -177,11 +191,15 @@ public class PlayerCombat : MonoBehaviour
             {
                 // reset the clip
                 staffAnimator.Play("Attack", -1, 0);
+                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
             }
             else
             {
                 // play the clip, if it's not already playing
                 staffAnimator.SetTrigger("Attack");
+                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
+                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
             }
 
             yield return new WaitForSeconds(attackTime);

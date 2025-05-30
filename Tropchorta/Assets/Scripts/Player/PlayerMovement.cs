@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using FMODUnity;
@@ -32,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
     float footstepsTime = 0.5f;
     Coroutine footstepsCoroutine = null;
 
+    
+    //Animator
+    public Animator PlayerAnimator;
+    [NonSerialized] public Animator WeaponAnimator;
+    [SerializeField] GameObject hobbyHorseMesh;
+
+    
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -47,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         input.OnSprintEvent += () => isSprinting = true;
         input.OnSprintCancelledEvent += () => isSprinting = false;
         input.OnSpaceEvent += OnDash;
+        WeaponAnimator = playerCombat.weaponSlot.GetComponentInChildren<Animator>();
     }
 
     public void RotatePlayerTowards(Vector3 lookDirection)
@@ -59,10 +68,31 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        bool isMoving=movementInput != Vector2.zero;
+
+        
+        if (isSprinting&&isMoving)
+        {
+            hobbyHorseMesh.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            hobbyHorseMesh.transform.localScale = new Vector3(0, 0, 0);
+
+        }
+        
         switch (playerState.state)
         {
             case PlayerState.Normal:
                 NormalMovement();
+                PlayerAnimator.SetBool("isSprinting", isSprinting);
+                PlayerAnimator.SetBool("isMoving",isMoving);
+                
+                WeaponAnimator.SetBool("isSprinting", isSprinting);
+                WeaponAnimator.SetBool("isMoving",isMoving);
+                
+                
+                
                 break;
             case PlayerState.DisableInput:
                 StopFootstepsSound();
@@ -77,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
+    
+    
 
     // while attacking, lerp the movement to zero
     void AttackingState()
@@ -90,6 +122,8 @@ public class PlayerMovement : MonoBehaviour
         lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
         Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
         cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
+        
+        
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
         {
             PlayFootstepsSound();
