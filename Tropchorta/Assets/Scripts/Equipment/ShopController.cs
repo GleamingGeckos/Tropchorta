@@ -16,9 +16,13 @@ public class ShopController : MonoBehaviour
     [Header("Items")]
     [SerializeField] private List<Item> items;
 
+    private bool isInitialized = false;
+
+
     private void Start()
     {
         InicializeItemsDisplay();
+        isInitialized = true;
     }
 
     void InicializeItemsDisplay()

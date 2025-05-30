@@ -436,8 +436,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3784078528288271387}
   - component: {fileID: 4290335399292846551}
-  - component: {fileID: 3130687336901058570}
   - component: {fileID: 6018149227580362120}
+  - component: {fileID: 4152954857640401191}
   - component: {fileID: 7778557505848728693}
   m_Layer: 0
   m_Name: GoToBoss
@@ -471,7 +471,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3336791533772251892}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &3130687336901058570
+--- !u!114 &6018149227580362120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336791533772251892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec5e79bb82ae1d419c87214edf8411e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelName: BossFight
+  _screenCanvas: {fileID: 8867091046338694728}
+  _name: {fileID: 4533465363583224588}
+  _yesButton: {fileID: 7739253284672102106}
+  _noButton: {fileID: 5774482667506108827}
+--- !u!65 &4152954857640401191
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,25 +507,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 1, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6018149227580362120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3336791533772251892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec5e79bb82ae1d419c87214edf8411e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelName: BossFight
-  _screenCanvas: {fileID: 8867091046338694728}
-  _name: {fileID: 4533465363583224588}
-  _yesButton: {fileID: 7739253284672102106}
-  _noButton: {fileID: 5774482667506108827}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.0000047683716, y: 0, z: 0}
 --- !u!23 &7778557505848728693
 MeshRenderer:
   m_ObjectHideFlags: 0
