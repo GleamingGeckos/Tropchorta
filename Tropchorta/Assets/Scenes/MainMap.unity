@@ -1660,10 +1660,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2003075804}
     m_Modifications:
-    - target: {fileID: 339348526293256274, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 27
-      objectReference: {fileID: 0}
     - target: {fileID: 1227153667369763586, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1724,65 +1720,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1937265735078439543, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016222290993482263, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_UseSpriteMesh
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3953496076000323209, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
       propertyPath: m_Name
       value: ShopNPC
       objectReference: {fileID: 0}
-    - target: {fileID: 6266102297339289963, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6786486983335376965, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6786486983335376965, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 183
-      objectReference: {fileID: 0}
-    - target: {fileID: 6786486983335376965, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -103
-      objectReference: {fileID: 0}
     - target: {fileID: 6797362909380920896, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8690451104119880070, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8899666904466915220, guid: d0309c538e7302243bf7b64e33327e9d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
