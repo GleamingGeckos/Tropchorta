@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 mousePosition;
     bool isSprinting;
     Coroutine dashCoroutine = null;
+    public bool useMouseRotation;
 
     // Sounds
     [SerializeField] EventReference footstepsSound;
@@ -63,6 +64,17 @@ public class PlayerMovement : MonoBehaviour
         if (lookDirection != Vector3.zero)
         {
             modelRootTransform.forward = new Vector3(lookDirection.x, 0.0f, lookDirection.z);
+        }
+    }
+    public void RotatePlayerTowardsMouse()
+    {
+        if (mousePosition != Vector2.zero)
+        {
+            Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
+            if (lookDirection != Vector3.zero)
+            {
+                modelRootTransform.forward = lookDirection;
+            }
         }
     }
 
@@ -121,12 +133,14 @@ public class PlayerMovement : MonoBehaviour
         // normal state
         lerpedMove = lerpedMove.LerpFI(movementInput, Time.fixedDeltaTime, lerpHalfTime);
         Vector3 move = new Vector3(lerpedMove.x, 0, lerpedMove.y);
+
         cc.Move(move * speed * (isSprinting ? sprintMod : 1) * Time.deltaTime);
-        
+        //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
         {
             PlayFootstepsSound();
+            modelRootTransform.forward = move;
         }
         else
         {
@@ -139,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
             if (lookDirection != Vector3.zero)
             {
-                modelRootTransform.forward = lookDirection;
+                //modelRootTransform.forward = lookDirection;
             }
         }
     }

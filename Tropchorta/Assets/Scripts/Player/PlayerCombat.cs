@@ -123,11 +123,13 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator AttackSequence(bool isHolding = false)
     {
         comboCounter++;
-        movement.NormalMovement();
+        //movement.NormalMovement();
         playerState.state = PlayerState.Attacking;
+        movement.RotatePlayerTowardsMouse();
         RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
         {
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))

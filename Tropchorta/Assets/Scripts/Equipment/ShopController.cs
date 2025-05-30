@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-    [SerializeField] private EquipmentController equipmentController;
+    [SerializeField] public EquipmentController equipmentController;
 
     [Header("Items Display")]
     [SerializeField] private ShopUIController shopUIController;

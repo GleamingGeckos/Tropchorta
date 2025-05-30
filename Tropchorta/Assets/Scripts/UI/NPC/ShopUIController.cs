@@ -19,6 +19,7 @@ public class ShopUIController : MonoBehaviour
     public void ShowShopPanel()
     {
         shopPanel.SetActive(true);
+        //shopController.equipmentController.GetComponentInParent<PlayerMovement>().playerState.state = PlayerState.;
         foreach (GameObject panel in itemPanels)
         {
             panel.SetActive(false);

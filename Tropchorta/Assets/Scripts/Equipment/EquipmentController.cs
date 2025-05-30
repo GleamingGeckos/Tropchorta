@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,6 +11,7 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] GameObject lastInteractedItem;
     [SerializeField] List<GameObject> interactedItems = new List<GameObject>();
     [SerializeField] public InputReader input;
+    [SerializeField] private TextMeshProUGUI goldText;
 
     [Header("Possessed Items")]
     [SerializeField] Item usedWeapon;
@@ -28,7 +30,14 @@ public class EquipmentController : MonoBehaviour
     private void Start()
     {
         DisplayItems();
+        ClearGold();
         input.OnScrollEvent += SwitchWeapons;
+        UpdateGoldDisplay(goldAmount);
+    }
+
+    public void UpdateGoldDisplay(int goldAmount)
+    {
+        goldText.text = $"Gold: {goldAmount}";
     }
 
     public void Initialize(Transform playerTransform)
@@ -111,11 +120,13 @@ public class EquipmentController : MonoBehaviour
     public void AddGold(int amount)
     {
         goldAmount += amount;
+        UpdateGoldDisplay(goldAmount);
     }
 
     public void RemoveGold(int amount)
     {
         goldAmount -= amount;
+        UpdateGoldDisplay(goldAmount);
     }
 
     public void ClearGold()

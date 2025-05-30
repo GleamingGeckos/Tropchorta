@@ -9,6 +9,7 @@ public class BaseEnemy : MonoBehaviour
     private Color flashColor = new Color(1f, 0f, 0f); // Red color
     private float transitionDuration = 1f;
     private Tween colorTween;
+    private Tween shakeTween;
     [SerializeField] GameObject moneyPrefab;
 
     //Components
@@ -76,13 +77,28 @@ public class BaseEnemy : MonoBehaviour
     {
         if (material != null)
         {
+            Color change = flashColor;
             material.color = flashColor;
             if (colorTween.IsActive())
             {
                 // Kill the tween before starting a new one
                 colorTween.Kill();
             }
-            colorTween = material.DOColor(originalColor, transitionDuration);
+            colorTween = DOTween.To(() => change, c =>
+            {
+                change = c;
+                material.SetColor("_BaseColor", c);
+            }, originalColor, transitionDuration);
+            //material.DOColor(originalColor, transitionDuration);
         }
+
+        // Shake pozycji
+        if (shakeTween.IsActive())
+        {
+            shakeTween.Kill(true);
+        }
+
+        // Shake obiektu (np. transform this)
+        shakeTween = transform.DOShakePosition(0.3f, 0.2f, 10, 90, false, true);
     }
 }

@@ -46,16 +46,17 @@ public class SwordBehavior : WeaponBehavior
     public override void UseStart(Transform user)
     {
         Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 1f, colliders); // TODO : layermask for damageable objects or enemies?
+        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
+                Debug.Log("Hit");
                 healthComponent.SimpleDamage(10);
             }
         }
-        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 1f, 1f);
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 2f, 1f);
     }
 
     public override void UseStop(Transform user)
