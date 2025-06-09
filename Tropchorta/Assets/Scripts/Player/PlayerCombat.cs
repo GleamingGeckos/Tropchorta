@@ -64,8 +64,9 @@ public class PlayerCombat : MonoBehaviour
         pm.input.OnRightMouseReleaseEvent += AltUseEnd;
         playerState = pm.playerState;
         health = GetComponent<PlayerHealthComponent>();
-        health.onDamageTaken.AddListener(onDamageTaken);
+        health.onDamageTaken.AddListener(OnDamageTaken);
         health.onAttacked.AddListener(OnAttacked);
+        health.onDeath.AddListener(Die);
         equipmentController.Initialize(transform);
 
         attackTime = animationAttackTime.x + (animationAttackTime.y / 60f);
@@ -75,17 +76,12 @@ public class PlayerCombat : MonoBehaviour
         playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
-    public void onDamageTaken(float damage, float currentHealth)
+    public void OnDamageTaken(float damage, float currentHealth)
     {
         healthBar.SetHealth(currentHealth / health.MaxHealth);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
     }
 
-    private void Die()
+    public void Die()
     {
         playerState.state = PlayerState.DisableInput;
         StopAllCoroutines(); // Zatrzymaj wszystkie dzia�ania (np. ataki)
@@ -118,7 +114,12 @@ public class PlayerCombat : MonoBehaviour
             doNextAttack = true;
         }
     }
-
+     
+    public void Attack()
+    {
+        equipmentController.UseWeaponStart(rotatingRootTransform);
+        Debug.Log("Attack");
+    }
 
     IEnumerator AttackSequence(bool isHolding = false)
     {
@@ -151,7 +152,7 @@ public class PlayerCombat : MonoBehaviour
             }
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponSpecialAttack(rotatingRootTransform); // hit logic
+            //equipmentController.UseWeaponSpecialAttack(rotatingRootTransform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
             comboCounter = 0;
@@ -180,7 +181,7 @@ public class PlayerCombat : MonoBehaviour
 
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponStrongStart(rotatingRootTransform); // hit logic
+            //equipmentController.UseWeaponStrongStart(rotatingRootTransform); // hit logic
 
             yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
@@ -206,7 +207,7 @@ public class PlayerCombat : MonoBehaviour
 
             yield return new WaitForSeconds(attackTime);
 
-            equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
+            //equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
 
             //yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
         }
@@ -273,13 +274,6 @@ public class PlayerCombat : MonoBehaviour
         doNextAttack = false;
         if(stepCoroutine != null)
             StopCoroutine(stepCoroutine);
-    }
-    
-    IEnumerator AttackCooldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
     }
 
     public void StopAttack()
