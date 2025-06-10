@@ -119,20 +119,18 @@ public class PlayerCombat : MonoBehaviour
         comboCounter++;
         playerState.state = PlayerState.Attacking;
         movement.RotatePlayerTowardsMouse();
-        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
+        //if (movement.PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        //{
             // reset the clip
-            staffAnimator.Play("Attack", -1, 0);
-            movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
-            movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
-        }
-        else
-        {
+            //movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
+           // movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
+        //}
+        //else
+        //{
             // play the clip, if it's not already playing
-            staffAnimator.SetTrigger("Attack");
             movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
             movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
-        }
+        //}
     }
 
     public void EndAttack(bool isHolding = false)

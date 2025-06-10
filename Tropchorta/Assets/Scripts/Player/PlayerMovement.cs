@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        bool isMoving=movementInput != Vector2.zero;
+        bool isMoving = movementInput != Vector2.zero;
 
         
         if (isSprinting && isMoving)
@@ -98,10 +98,10 @@ public class PlayerMovement : MonoBehaviour
             case PlayerState.Normal:
                 NormalMovement();
                 PlayerAnimator.SetBool("isSprinting", isSprinting);
-                PlayerAnimator.SetBool("isMoving",isMoving);
+                PlayerAnimator.SetBool("isMoving", isMoving);
                 
                 WeaponAnimator.SetBool("isSprinting", isSprinting);
-                WeaponAnimator.SetBool("isMoving",isMoving);
+                WeaponAnimator.SetBool("isMoving", isMoving);
                 
                 break;
             case PlayerState.DisableInput:
@@ -136,23 +136,13 @@ public class PlayerMovement : MonoBehaviour
         //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
-        {
+        { 
             PlayFootstepsSound();
             modelRootTransform.forward = move;
         }
         else
         {
             StopFootstepsSound();
-        }
-
-        // Rotate the player to face the mouse position
-        if (mousePosition != Vector2.zero)
-        {
-            Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
-            if (lookDirection != Vector3.zero)
-            {
-                //modelRootTransform.forward = lookDirection;
-            }
         }
     }
 
