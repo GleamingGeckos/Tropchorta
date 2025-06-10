@@ -265,6 +265,7 @@ MonoBehaviour:
       Data4: 0
     Path: 
   PlayerAnimator: {fileID: 5203054765447739367}
+  WeaponAnimator: {fileID: 2562137763477939930}
   hobbyHorseMesh: {fileID: 4298961634838135768}
 --- !u!114 &5326583177451854505
 MonoBehaviour:
@@ -296,13 +297,6 @@ MonoBehaviour:
   isNextStrongAttack: 0
   isWindowOpen: 0
   distance: 1
-  tempAttackEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
 --- !u!114 &3305874657431232447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCombat: {fileID: 5326583177451854505}
+  isHolding: 0
 --- !u!4 &2243206680628936429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b580b08e85918c4b86d12d9399987d5, type: 3}

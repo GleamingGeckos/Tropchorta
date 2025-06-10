@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     
     //Animator
     public Animator PlayerAnimator;
-    [NonSerialized] public Animator WeaponAnimator;
+    public Animator WeaponAnimator;
     [SerializeField] GameObject hobbyHorseMesh;
 
     
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         input.OnSprintEvent += () => isSprinting = true;
         input.OnSprintCancelledEvent += () => isSprinting = false;
         input.OnSpaceEvent += OnDash;
-        WeaponAnimator = playerCombat.weaponSlot.GetComponentInChildren<Animator>();
+        //WeaponAnimator = playerCombat.weaponSlot.GetComponentInChildren<Animator>();
     }
 
     public void RotatePlayerTowards(Vector3 lookDirection)
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving=movementInput != Vector2.zero;
 
         
-        if (isSprinting&&isMoving)
+        if (isSprinting && isMoving)
         {
             hobbyHorseMesh.transform.localScale = new Vector3(1, 1, 1);
         }

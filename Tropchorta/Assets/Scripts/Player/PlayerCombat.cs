@@ -23,9 +23,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Temporary stuff")]
     [SerializeField] Vector2Int animationAttackTime = new Vector2Int(0, 30); // TODO : move this to weapon behavior
     [SerializeField] Vector2Int totalAnimationTime = new Vector2Int(1, 20); // TODO : move this to weapon behavior
-    private float attackTime = 0f;
-    private float animationTime = 0f;
-    [SerializeField] float attackCooldown = 0.4f; // TODO : move this to weapon behavior
+    private float animationTime = 0f;// TODO : move this to weapon behavior
     bool canAttack = true;
     Coroutine attackCoroutine = null;
 
@@ -41,12 +39,13 @@ public class PlayerCombat : MonoBehaviour
     private float comboAttackTime = 0f;
     [SerializeField] bool doNextAttack;
     [SerializeField] bool isNextStrongAttack;
-    [SerializeField] bool isWindowOpen;
+    public bool isWindowOpen;
 
 
     [Header("Step during attack")]
     [SerializeField] float distance = 1.0f;
     float playerRadius = 1.0f;
+    [SerializeField] float stepTime = 0.4f;
     Coroutine stepCoroutine = null;
 
     void Start()
@@ -64,7 +63,7 @@ public class PlayerCombat : MonoBehaviour
         health.onDeath.AddListener(Die);
         equipmentController.Initialize(transform);
 
-        attackTime = animationAttackTime.x + (animationAttackTime.y / 60f);
+        stepTime = 0.2f;
         animationTime = totalAnimationTime.x + (totalAnimationTime.y / 60f);
         comboAttackTime = comboAttackWindow.x + (comboAttackWindow.y / 60f);
 
@@ -100,18 +99,18 @@ public class PlayerCombat : MonoBehaviour
         if (!canAttack) return;
 
         StartAttackAnim();
-        //StartCoroutine(ComboWindow());
         
-        //if (isWindowOpen)
-        //{
-        //    isNextStrongAttack = isHoldingAttack;
-        //    doNextAttack = true;
-        //}
+        if (isWindowOpen)
+        {
+            isNextStrongAttack = isHoldingAttack;
+            doNextAttack = true;
+        }
     }
      
     public void Attack()
     {
         equipmentController.UseWeaponStart(rotatingRootTransform);
+        stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
         Debug.Log("Attack");
     }  
 
@@ -144,7 +143,6 @@ public class PlayerCombat : MonoBehaviour
         {
             doNextAttack = false;
             StartAttackAnim(isNextStrongAttack);
-            StartCoroutine(ComboWindow());
         }
         else
         {
@@ -169,7 +167,7 @@ public class PlayerCombat : MonoBehaviour
         //RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
         {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -189,18 +187,18 @@ public class PlayerCombat : MonoBehaviour
                 movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
              
             }
-            yield return new WaitForSeconds(attackTime);
+            yield return new WaitForSeconds(stepTime);
 
             //equipmentController.UseWeaponSpecialAttack(rotatingRootTransform); // hit logic
 
-            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
+            yield return new WaitForSeconds(animationTime - stepTime); // TODO : This should be in a weapon data
             comboCounter = 0;
             doNextAttack = false;
             equipmentController.UseWeaponEnd(transform);
         }
         else if (isHolding)
         {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -218,15 +216,15 @@ public class PlayerCombat : MonoBehaviour
                 movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
             }
 
-            yield return new WaitForSeconds(attackTime);
+            yield return new WaitForSeconds(stepTime);
 
             //equipmentController.UseWeaponStrongStart(rotatingRootTransform); // hit logic
 
-            yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
+            yield return new WaitForSeconds(animationTime - stepTime); // TODO : This should be in a weapon data
         }
         else
         {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
             // TODO : move this to a weapon behavior somehow
             // check if the clip is already playing, if it is simply reset it
             if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -244,7 +242,7 @@ public class PlayerCombat : MonoBehaviour
                 movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
             }
 
-            yield return new WaitForSeconds(attackTime);
+            yield return new WaitForSeconds(stepTime);
 
             //equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
 
@@ -257,8 +255,7 @@ public class PlayerCombat : MonoBehaviour
         if (doNextAttack)
         {
             doNextAttack = false;
-            attackCoroutine = StartCoroutine(AttackSequence(isNextStrongAttack));
-            StartCoroutine(ComboWindow());
+            //attackCoroutine = StartCoroutine(AttackSequence(isNextStrongAttack));
         }
         else
         {
@@ -270,15 +267,6 @@ public class PlayerCombat : MonoBehaviour
             else
                 equipmentController.UseWeaponEnd(transform);
         }
-    }
-
-    IEnumerator ComboWindow()
-    {
-        yield return new WaitForSeconds(animationTime - comboAttackTime);
-        isWindowOpen = true;
-
-        yield return new WaitForSeconds(comboAttackTime);
-        isWindowOpen = false;
     }
 
     IEnumerator MoveForwardSmooth(Transform target, float distance, float duration)
