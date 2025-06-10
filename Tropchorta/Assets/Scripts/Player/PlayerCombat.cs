@@ -49,17 +49,12 @@ public class PlayerCombat : MonoBehaviour
     float playerRadius = 1.0f;
     Coroutine stepCoroutine = null;
 
-    [SerializeField] EventReference tempAttackEvent; // TODO : move this to weapons
-    
-    
-
-
     void Start()
     {
         movement = GetComponent<PlayerMovement>();
         var pm = GetComponent<PlayerMovement>();
-        pm.input.OnLeftMouseClickEvent += OnAttackStart;
-        pm.input.OnLeftMouseReleaseEvent += OnAttackEnd;
+        pm.input.OnLeftMouseClickEvent += OnClickStart;
+        pm.input.OnLeftMouseReleaseEvent += OnClickEnd;
         pm.input.OnRightMouseClickEvent += AltUseStart;
         pm.input.OnRightMouseReleaseEvent += AltUseEnd;
         playerState = pm.playerState;
@@ -89,36 +84,80 @@ public class PlayerCombat : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    void OnAttackStart()
+    void OnClickStart()
     {
         attackPressTime = Time.time;
         isHoldingAttack = false;
     }
 
-    void OnAttackEnd()
+    public void OnClickEnd()
     {
         float pressDuration = Time.time - attackPressTime;
         isHoldingAttack = pressDuration > whenConsiderHoldingAttack; 
 
         if (playerState.state == PlayerState.DisableInput) return;
+        if (playerState.state == PlayerState.Attacking) return;
         if (!canAttack) return;
 
-        if (attackCoroutine == null)
-        {
-            attackCoroutine = StartCoroutine(AttackSequence(isHoldingAttack));
-            StartCoroutine(ComboWindow());
-        }
-        else if (isWindowOpen)
-        {
-            isNextStrongAttack = isHoldingAttack;
-            doNextAttack = true;
-        }
+        StartAttackAnim();
+        //StartCoroutine(ComboWindow());
+        
+        //if (isWindowOpen)
+        //{
+        //    isNextStrongAttack = isHoldingAttack;
+        //    doNextAttack = true;
+        //}
     }
      
     public void Attack()
     {
         equipmentController.UseWeaponStart(rotatingRootTransform);
         Debug.Log("Attack");
+    }  
+
+    private void StartAttackAnim(bool isHolding = false)
+    {
+        comboCounter++;
+        playerState.state = PlayerState.Attacking;
+        movement.RotatePlayerTowardsMouse();
+        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            // reset the clip
+            staffAnimator.Play("Attack", -1, 0);
+            movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
+            movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
+        }
+        else
+        {
+            // play the clip, if it's not already playing
+            staffAnimator.SetTrigger("Attack");
+            movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
+            movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
+        }
+    }
+
+    public void EndAttack(bool isHolding = false)
+    {
+        Debug.Log("End Attack");
+        playerState.state = PlayerState.Normal;
+        if (doNextAttack)
+        {
+            doNextAttack = false;
+            StartAttackAnim(isNextStrongAttack);
+            StartCoroutine(ComboWindow());
+        }
+        else
+        {
+            comboCounter = 0;
+            if (isHolding)
+            {
+                equipmentController.UseWeaponEnd(transform);
+            }
+            else
+            {
+                equipmentController.UseWeaponEnd(transform);
+            }
+        }
     }
 
     IEnumerator AttackSequence(bool isHolding = false)
@@ -127,7 +166,7 @@ public class PlayerCombat : MonoBehaviour
         //movement.NormalMovement();
         playerState.state = PlayerState.Attacking;
         movement.RotatePlayerTowardsMouse();
-        RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
+        //RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
         if (comboCounter == specialAttackNr)
         {
             stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, attackTime));

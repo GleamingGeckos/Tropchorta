@@ -103,8 +103,6 @@ public class PlayerMovement : MonoBehaviour
                 WeaponAnimator.SetBool("isSprinting", isSprinting);
                 WeaponAnimator.SetBool("isMoving",isMoving);
                 
-                
-                
                 break;
             case PlayerState.DisableInput:
                 StopFootstepsSound();
