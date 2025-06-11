@@ -96,6 +96,16 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseSpecialAttack(Transform user)
     {
+        float radius = attackRange * 2.0f;
+        Collider[] hitColliders = Physics.OverlapSphere(user.position, radius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy") && hitCollider.GetComponent<HealthComponent>())
+            {
+                hitCollider.GetComponent<HealthComponent>().SimpleDamage(damage);
+            }
+        }
+        DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
 
     }
 }
