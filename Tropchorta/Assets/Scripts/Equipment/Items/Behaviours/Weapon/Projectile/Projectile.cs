@@ -43,11 +43,25 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag(targetTag) && !other.isTrigger)
         {
-            if (other.TryGetComponent(out HealthComponent healthComponent))
+            if (other.TryGetComponent(out HealthComponent healthComponent) &&
+                other.TryGetComponent(out PlayerCombat playerCombatComponent) &&
+                other.TryGetComponent(out PlayerMovement playerMovementComponent) &&
+                transform.parent.TryGetComponent(out EnemyMovement enemyMovement) &&
+                !other.isTrigger)
+            {
+                playerMovementComponent.RotatePlayerTowards(transform.position);
+                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
+                {
+                    enemyMovement.Stun();
+                }
+                healthComponent.BlockableDamage(new AttackData(damage));
+
+
+            }else if (healthComponent)
             {
                 healthComponent.SimpleDamage(damage);
-                Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
     }
 }

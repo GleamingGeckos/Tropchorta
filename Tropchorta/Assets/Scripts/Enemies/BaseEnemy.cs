@@ -1,6 +1,8 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     private Tween colorTween;
     private Tween shakeTween;
     [SerializeField] GameObject moneyPrefab;
+    [SerializeField] bool distance;
 
     //Components
     private EnemyCombat _enemyCombat;
@@ -56,12 +59,16 @@ public class BaseEnemy : MonoBehaviour
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
 
-            if (distanceSqr < 6.0f)
+            if (!distance && distanceSqr < 6.0f)
             {
                 if (Random.value < 0.7f)
                     _enemyCombat.Attack(); // czasami bli¿szy
                 else
                     _enemyCombat.StrongAttack(); // czasami dalszy
+            }
+            else if (distance)
+            {
+                _enemyCombat.DistanceAttack();
             }
             _enemyMovement.RotateTowards(player);
         }

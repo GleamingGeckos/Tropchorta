@@ -51,6 +51,9 @@ public class EnemyCombat : MonoBehaviour
     private float timeToAttackInSeconds = 0f;
     EnemyMovement enemyMovement;
 
+
+    public GameObject arrowPrefab;
+
     private void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
@@ -81,6 +84,13 @@ public class EnemyCombat : MonoBehaviour
     {
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(StrongAttackRoutine());
+        StartCoroutine(PerfectBlockWindow());
+    }
+
+    public void DistanceAttack()
+    {
+        if (isCooldown) return;
+        attackCoroutine = StartCoroutine(DistanceAttackRoutine());
         StartCoroutine(PerfectBlockWindow());
     }
 
@@ -158,6 +168,61 @@ public class EnemyCombat : MonoBehaviour
         isCooldown = false;
     }
 
+
+    private IEnumerator DistanceAttackRoutine()
+    {
+        isCooldown = true; // Set flag to prevent multiple coroutines
+        float time = _cooldownInterval - timeToAttackInSeconds;
+        yield return new WaitForSeconds(time);
+        _circles.SetActive(true);
+
+        // start the circle animation
+        circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
+        .SetEase(Ease.Linear)
+        .OnUpdate(() =>
+        {
+            float t = (_attackCircleTransform.localScale.x - _minCircle) / (_maxCircle - _minCircle);
+            _attackCircleImage.color = Color.Lerp(_minColorCircle, _maxColorCircle, t);
+        })
+        .OnComplete(() =>
+        {
+            _circles.SetActive(false);
+            _attackCircleTransform.localScale = new Vector3(_maxCircle, _maxCircle, 1f);
+            _attackCircleImage.color = _maxColorCircle;
+        });
+        animator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
+
+        enemyMovement.AttackStarted(); // stop moving
+
+        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+        // Core attack logic
+        Vector3 attackPoint = transform.forward * 1.5f;
+        int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
+        GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
+        for (int i = 0; i < hits; i++)
+        {
+            // Currently assuming the collider is on the same object as the HealthComponent
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
+                _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) &&
+                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) &&
+                !_colliders[i].isTrigger)
+            {
+                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
+                {
+                    enemyMovement.Stun();
+                }
+                
+            }
+        }
+        //DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
+
+        yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+
+        enemyMovement.AttackFinished(); // start moving again
+        isCooldown = false;
+    }
 
     private IEnumerator StrongAttackRoutine()
     {
