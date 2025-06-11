@@ -109,161 +109,45 @@ public class PlayerCombat : MonoBehaviour
      
     public void Attack()
     {
-        equipmentController.UseWeaponStart(rotatingRootTransform);
+        if (isHoldingAttack) {
+            equipmentController.UseWeaponStrongStart(rotatingRootTransform);
+        }
+        else if (comboCounter == specialAttackNr) {
+            equipmentController.UseWeaponSpecialAttack(rotatingRootTransform);
+        } else
+        {
+            equipmentController.UseWeaponStart(rotatingRootTransform);
+        }
         stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
         Debug.Log("Attack");
     }  
 
-    private void StartAttackAnim(bool isHolding = false)
+    private void StartAttackAnim()
     {
         comboCounter++;
         playerState.state = PlayerState.Attacking;
         movement.RotatePlayerTowardsMouse();
-        //if (movement.PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
-        //{
-            // reset the clip
-            //movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
-           // movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
-        //}
-        //else
-        //{
-            // play the clip, if it's not already playing
-            movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
-            movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
-        //}
+        movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
+        movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
     }
 
-    public void EndAttack(bool isHolding = false)
+    public void EndAttack()
     {
         Debug.Log("End Attack");
         playerState.state = PlayerState.Normal;
-        if (doNextAttack)
+        if (isHoldingAttack)
         {
-            doNextAttack = false;
-            StartAttackAnim(isNextStrongAttack);
+            equipmentController.UseWeaponStrongEnd(rotatingRootTransform);
+            isHoldingAttack = false;
+        }
+        else if (comboCounter == specialAttackNr)
+        {
+            equipmentController.UseWeaponEnd(rotatingRootTransform);
+            comboCounter = 0;
         }
         else
         {
-            comboCounter = 0;
-            if (isHolding)
-            {
-                equipmentController.UseWeaponEnd(transform);
-            }
-            else
-            {
-                equipmentController.UseWeaponEnd(transform);
-            }
-        }
-    }
-
-    IEnumerator AttackSequence(bool isHolding = false)
-    {
-        comboCounter++;
-        //movement.NormalMovement();
-        playerState.state = PlayerState.Attacking;
-        movement.RotatePlayerTowardsMouse();
-        //RuntimeManager.PlayOneShot(tempAttackEvent, transform.position); // TODO : move this to weapon behavior
-        if (comboCounter == specialAttackNr)
-        {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
-            // TODO : move this to a weapon behavior somehow
-            // check if the clip is already playing, if it is simply reset it
-            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                // reset the clip
-                staffAnimator.Play("Attack", -1, 0);
-                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
-                
-            }
-            else
-            {
-                // play the clip, if it's not already playing
-                staffAnimator.SetTrigger("Attack");
-               
-                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
-             
-            }
-            yield return new WaitForSeconds(stepTime);
-
-            //equipmentController.UseWeaponSpecialAttack(rotatingRootTransform); // hit logic
-
-            yield return new WaitForSeconds(animationTime - stepTime); // TODO : This should be in a weapon data
-            comboCounter = 0;
-            doNextAttack = false;
-            equipmentController.UseWeaponEnd(transform);
-        }
-        else if (isHolding)
-        {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
-            // TODO : move this to a weapon behavior somehow
-            // check if the clip is already playing, if it is simply reset it
-            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                // reset the clip
-                staffAnimator.Play("Attack", -1, 0);
-                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
-            }
-            else
-            {
-                // play the clip, if it's not already playing
-                staffAnimator.SetTrigger("Attack");
-                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
-            }
-
-            yield return new WaitForSeconds(stepTime);
-
-            //equipmentController.UseWeaponStrongStart(rotatingRootTransform); // hit logic
-
-            yield return new WaitForSeconds(animationTime - stepTime); // TODO : This should be in a weapon data
-        }
-        else
-        {
-            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
-            // TODO : move this to a weapon behavior somehow
-            // check if the clip is already playing, if it is simply reset it
-            if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                // reset the clip
-                staffAnimator.Play("Attack", -1, 0);
-                movement.PlayerAnimator.ResetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.ResetTrigger("attackTriggerPlayer");
-            }
-            else
-            {
-                // play the clip, if it's not already playing
-                staffAnimator.SetTrigger("Attack");
-                movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
-                movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
-            }
-
-            yield return new WaitForSeconds(stepTime);
-
-            //equipmentController.UseWeaponStart(rotatingRootTransform); // hit logic
-
-            //yield return new WaitForSeconds(animationTime - attackTime); // TODO : This should be in a weapon data
-        }
-
-        playerState.state = PlayerState.Normal;
-        attackCoroutine = null;
-
-        if (doNextAttack)
-        {
-            doNextAttack = false;
-            //attackCoroutine = StartCoroutine(AttackSequence(isNextStrongAttack));
-        }
-        else
-        {
-            comboCounter = 0;
-            if(isHolding)
-            {
-                equipmentController.UseWeaponEnd(transform);
-            }
-            else
-                equipmentController.UseWeaponEnd(transform);
+            equipmentController.UseWeaponEnd(rotatingRootTransform);
         }
     }
 
