@@ -4579,6 +4579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -190.2
@@ -4790,6 +4794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5978,6 +5986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -176.5
@@ -6139,6 +6151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -109.7
@@ -6745,6 +6761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -167.3
@@ -11932,6 +11952,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12467,6 +12491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -65.9
