@@ -103,12 +103,18 @@ public class PlayerCombat : MonoBehaviour
         if (isWindowOpen)
         {
             isNextStrongAttack = isHoldingAttack;
-            doNextAttack = true;
+        }
+        else
+        {
+            comboCounter = 0;
         }
     }
      
     public void Attack()
     {
+        //Cheeeeeesing the anim lag
+        movement.PlayerAnimator.SetBool("isMoving", true);
+        movement.WeaponAnimator.SetBool("isMoving", true);
         if (isHoldingAttack) {
             equipmentController.UseWeaponStrongStart(rotatingRootTransform);
         }
@@ -176,6 +182,7 @@ public class PlayerCombat : MonoBehaviour
 
         target.position = end;
     }
+
 
     public void BreakCombo()
     {

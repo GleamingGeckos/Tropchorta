@@ -16,7 +16,7 @@ public class PlayerAnimation : MonoBehaviour
         playerCombat.EndAttack();
         playerCombat.isWindowOpen = false;
     }
-    void StartPerfectParWindow()
+    void StartComboWindow()
     {
         playerCombat.isWindowOpen = true;
     }
