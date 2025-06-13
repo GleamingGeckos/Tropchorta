@@ -14,10 +14,10 @@ public class PlayerAnimation : MonoBehaviour
     void EndAttack()
     {
         playerCombat.EndAttack();
-        playerCombat.isWindowOpen = false;
-    }
-    void StartComboWindow()
-    {
-        playerCombat.isWindowOpen = true;
+        if (playerCombat.doNextAttack)
+        {
+            playerCombat.doNextAttack = false;
+            playerCombat.StartAttackAnim();
+        }
     }
 }

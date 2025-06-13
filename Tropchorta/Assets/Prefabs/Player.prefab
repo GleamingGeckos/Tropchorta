@@ -286,12 +286,10 @@ MonoBehaviour:
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   equipmentController: {fileID: 6131339122415314527}
   isBlocking: 0
-  animationAttackTime: {x: 0, y: 30}
-  totalAnimationTime: {x: 1, y: 10}
   whenConsiderHoldingAttack: 0.2
   isHoldingAttack: 0
   comboCounter: 0
-  comboAttackWindow: {x: 1, y: 0}
+  comboAttackWindow: {x: 0, y: 40}
   doNextAttack: 0
   isNextStrongAttack: 0
   isWindowOpen: 0

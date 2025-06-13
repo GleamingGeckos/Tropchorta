@@ -29,10 +29,11 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Combo")]
     [SerializeField] int comboCounter = 0;
+    private Coroutine comboCorutine;
     private int specialAttackNr = 3;
     [SerializeField] Vector2Int comboAttackWindow = new Vector2Int(1, 00);
     private float comboAttackTime = 0f;
-    [SerializeField] bool doNextAttack;
+    [SerializeField] public bool doNextAttack;
     [SerializeField] bool isNextStrongAttack;
     public bool isWindowOpen;
 
@@ -89,21 +90,26 @@ public class PlayerCombat : MonoBehaviour
         isHoldingAttack = pressDuration > whenConsiderHoldingAttack; 
 
         if (playerState.state == PlayerState.DisableInput) return;
-        if (playerState.state == PlayerState.Attacking) return;
         if (!canAttack) return;
 
-        StartAttackAnim();
-        
-        if (isWindowOpen)
-        {
-            isNextStrongAttack = isHoldingAttack;
-        }
-        else
+        if (!isWindowOpen)
         {
             comboCounter = 0;
         }
+        if (playerState.state == PlayerState.Attacking)
+            doNextAttack = true;
+        else
+            StartAttackAnim();
+
     }
-     
+
+    IEnumerator ComboWindow()
+    {
+        isWindowOpen = true;
+        yield return new WaitForSeconds(comboAttackTime);
+        isWindowOpen = false;
+    }
+
     public void Attack()
     {
         //Cheeeeeesing the anim lag
@@ -123,9 +129,15 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("Attack");
     }  
 
-    private void StartAttackAnim()
+    public void StartAttackAnim()
     {
+        if (comboCorutine != null)
+        {
+            StopCoroutine(comboCorutine);
+        }
+        comboCorutine = StartCoroutine(ComboWindow());
         comboCounter++;
+        Debug.Log("comboCounter " + comboCounter);
         playerState.state = PlayerState.Attacking;
         movement.RotatePlayerTowardsMouse();
         movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
