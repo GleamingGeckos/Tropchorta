@@ -7,6 +7,12 @@ public class SpawnerForObj : MonoBehaviour
 
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
+    private Transform parent;
+
+    private void Awake()
+    {
+        parent = GameObject.Find("Enemies").transform;
+    }
     //Todo fix spawning hight
     public List<GameObject> SpawnObjects(GameObject objToSpawn, int spawnCount)
     {
@@ -16,7 +22,11 @@ public class SpawnerForObj : MonoBehaviour
         {
             Vector3 randomPosition = GetRandomPointInSphere(spawnArea);
             randomPosition.y = spawnArea.transform.position.y; // Ustawienie wysokoœci na wysokoœæ spawnera
-            GameObject spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity);
+            GameObject spawnedObj;
+            if (parent)
+                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity, parent);
+            else
+                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity);
             spawnedObjects.Add(spawnedObj);
         }
 

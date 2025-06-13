@@ -15,6 +15,7 @@ public class LevelSpawner : MonoBehaviour
     private bool isWaiting = false;
     private float timer = 0f;
 
+
     private void Start()
     {
         currentEnemyList = spawner.SpawnObjects(enemyType, Random.Range(minNumber, maxNumber + 1));
