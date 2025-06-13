@@ -6,6 +6,7 @@ public class BowBehavior : WeaponBehavior
     public GameObject arrowPrefab; 
     private PlayerCombat playerCombat;
 
+
     public override void Initialize(Transform user)
     {
         // Debug.Log("Setting player in SwordBehavior");
@@ -68,5 +69,10 @@ public class BowBehavior : WeaponBehavior
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
             GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
         }
+    }
+
+    public override bool IsDistance()
+    {
+        return true;
     }
 }

@@ -102,7 +102,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   goldText: {fileID: 0}
   usedWeapon: {fileID: 11400000, guid: fb579876cf2335e49a7ac5599b61e481, type: 2}
-  inactiveWeapon: {fileID: 11400000, guid: 172a2586b4f49804db13c084a70c4e2f, type: 2}
+  inactiveWeapon: {fileID: 11400000, guid: b069c979242a6ea45b4aa39a522e4f83, type: 2}
   helmet: {fileID: 11400000, guid: 5e67322e941a08a468335eed92a769aa, type: 2}
   breastplate: {fileID: 0}
   pants: {fileID: 0}
@@ -288,7 +288,6 @@ MonoBehaviour:
   isBlocking: 0
   animationAttackTime: {x: 0, y: 30}
   totalAnimationTime: {x: 1, y: 10}
-  attackCooldown: 0.4
   whenConsiderHoldingAttack: 0.2
   isHoldingAttack: 0
   comboCounter: 0
@@ -297,6 +296,7 @@ MonoBehaviour:
   isNextStrongAttack: 0
   isWindowOpen: 0
   distance: 1
+  stepTime: 0.4
 --- !u!114 &3305874657431232447
 MonoBehaviour:
   m_ObjectHideFlags: 0

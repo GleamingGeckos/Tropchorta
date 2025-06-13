@@ -85,5 +85,10 @@ public class ColorChangeBehavior : WeaponBehavior
     {
 
     }
+
+    public override bool IsDistance()
+    {
+        return true;
+    }
 }
 

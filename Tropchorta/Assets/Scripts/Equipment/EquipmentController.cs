@@ -189,6 +189,27 @@ public class EquipmentController : MonoBehaviour
             Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
         }
     }
+
+    public bool IsDistance()
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return false;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            return weapon.IsDistance();
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+        return false;
+    }
+
     public void UseWeaponStrongStart(Transform playerTransform)
     {
         if (usedWeapon == null)

@@ -124,7 +124,8 @@ public class PlayerCombat : MonoBehaviour
         {
             equipmentController.UseWeaponStart(rotatingRootTransform);
         }
-        stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
+        if(!equipmentController.IsDistance())
+            stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
         Debug.Log("Attack");
     }  
 
@@ -155,6 +156,11 @@ public class PlayerCombat : MonoBehaviour
         {
             equipmentController.UseWeaponEnd(rotatingRootTransform);
         }
+    }
+
+    public bool IsDistance()
+    {
+        return equipmentController.IsDistance();
     }
 
     IEnumerator MoveForwardSmooth(Transform target, float distance, float duration)

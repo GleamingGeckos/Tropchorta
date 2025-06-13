@@ -75,4 +75,19 @@ public class Weapon : Item
             behavior?.ClearData(user);
         }
     }
+
+    public bool IsDistance()
+    {
+        bool isDistance = false;
+        foreach (var behavior in weaponBehaviors)
+        {
+            if (behavior != null && !isDistance)
+            {
+                isDistance = behavior.IsDistance();
+                if(isDistance)
+                    return true;
+            }
+        }
+        return isDistance;
+    }
 }

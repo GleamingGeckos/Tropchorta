@@ -108,4 +108,9 @@ public class SwordBehavior : WeaponBehavior
         DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
 
     }
+
+    public override bool IsDistance()
+    {
+        return false;
+    }
 }

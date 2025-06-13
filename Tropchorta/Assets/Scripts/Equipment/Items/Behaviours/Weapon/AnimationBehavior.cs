@@ -57,4 +57,9 @@ public class AnimationBehavior : WeaponBehavior
     {
         throw new System.NotImplementedException();
     }
+
+    public override bool IsDistance()
+    {
+        return true;
+    }
 }
