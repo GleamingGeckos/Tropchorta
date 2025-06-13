@@ -1048,15 +1048,16 @@ MonoBehaviour:
     m_Bits: 128
   isCooldown: 0
   _cooldownInterval: 1.5
+  _arrowForPar: {fileID: 2032088643122078551, guid: 518e3502757867a4ab47e705f265b831, type: 3}
+  _perfectBlockWindow: {x: 0, y: 30}
+  isPerfectBlockWindow: 0
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
   _attackCircleImage: {fileID: 6573397796364980083}
   _minCircle: 0.45
   _maxCircle: 1.5
-  _minColorCircle: {r: 0.7264151, g: 0, b: 0, a: 1}
-  _maxColorCircle: {r: 0.8980392, g: 0.8235294, b: 0.41960785, a: 1}
-  _perfectBlockWindow: {x: 0, y: 30}
-  isPerfectBlockWindow: 0
+  _minColorCircle: {r: 0.60038906, g: 0, b: 0.7254902, a: 1}
+  _maxColorCircle: {r: 0.41960785, g: 0.7722576, b: 0.8980392, a: 1}
   _attackStrongTransform: {fileID: 1209876797446858458}
   _attackStrongImage: {fileID: 4361709780842544851}
   _minStrong: {x: 1, y: 0.2, z: 1}

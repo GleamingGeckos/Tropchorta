@@ -15,17 +15,12 @@ public class PlayerCombat : MonoBehaviour
     private PlayerHealthComponent health;
     private PlayerMovement movement;
     public bool isBlocking = false;
-    private float blockingStartTime = 0f;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
     Collider[] colliders = new Collider[16];
 
     [Header("Temporary stuff")]
-    [SerializeField] Vector2Int animationAttackTime = new Vector2Int(0, 30); // TODO : move this to weapon behavior
-    [SerializeField] Vector2Int totalAnimationTime = new Vector2Int(1, 20); // TODO : move this to weapon behavior
-    private float animationTime = 0f;// TODO : move this to weapon behavior
     bool canAttack = true;
-    Coroutine attackCoroutine = null;
 
     [Header("Input")]
     float attackPressTime;
@@ -64,7 +59,6 @@ public class PlayerCombat : MonoBehaviour
         equipmentController.Initialize(transform);
 
         stepTime = 0.2f;
-        animationTime = totalAnimationTime.x + (totalAnimationTime.y / 60f);
         comboAttackTime = comboAttackWindow.x + (comboAttackWindow.y / 60f);
 
         playerRadius = GetComponent<CapsuleCollider>().radius;
@@ -120,8 +114,8 @@ public class PlayerCombat : MonoBehaviour
         }
         else if (comboCounter == specialAttackNr) {
             equipmentController.UseWeaponSpecialAttack(rotatingRootTransform);
-        } else
-        {
+        } 
+        else {
             equipmentController.UseWeaponStart(rotatingRootTransform);
         }
         if(!equipmentController.IsDistance())
@@ -198,17 +192,6 @@ public class PlayerCombat : MonoBehaviour
             StopCoroutine(stepCoroutine);
     }
 
-    public void StopAttack()
-    {
-        if (attackCoroutine != null)
-        {
-            StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
-
-            staffAnimator.SetTrigger("AttackEarlyExit");
-        }
-    }
-
     void AltUseStart()
     {
         equipmentController.UseWeaponAltStart(transform);
@@ -229,7 +212,6 @@ public class PlayerCombat : MonoBehaviour
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = true;
         CheckForAttackingEnemies(isBlocking);
-        blockingStartTime = Time.time;
         if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
         {
             // reset the clip
@@ -246,7 +228,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = false;
-        blockingStartTime = 0f;
 
         staffAnimator.SetBool("Blocking", false);
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using FMOD;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -21,6 +22,12 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] bool isCooldown = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
 
+    [Header("Par")]
+    [SerializeField] private Vector2 _perfectBlockWindow;
+    Tween circleTween;
+    private float _perfectBlockInSeconds;
+    public bool isPerfectBlockWindow;
+
     [Header("Normal attack signal")]
     [SerializeField] private GameObject _circles;
     [SerializeField] private RectTransform _attackCircleTransform;
@@ -29,10 +36,6 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private float _maxCircle;
     [SerializeField] private Color _minColorCircle;
     [SerializeField] private Color _maxColorCircle;
-    [SerializeField] private Vector2 _perfectBlockWindow;
-    Tween circleTween;
-    private float _perfectBlockInSeconds;
-    public bool isPerfectBlockWindow;
 
     [Header("Strong attack signal")]
     [SerializeField] private RectTransform _attackStrongTransform;
@@ -201,28 +204,14 @@ public class EnemyCombat : MonoBehaviour
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
-        for (int i = 0; i < hits; i++)
-        {
-            // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
-                _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) &&
-                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) &&
-                !_colliders[i].isTrigger)
-            {
-                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
-                {
-                    enemyMovement.Stun();
-                }
-                
-            }
-        }
-        //DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;
     }
+
+
 
     private IEnumerator StrongAttackRoutine()
     {

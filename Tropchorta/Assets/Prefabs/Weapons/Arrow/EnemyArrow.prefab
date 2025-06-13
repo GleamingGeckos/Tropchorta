@@ -264,3 +264,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _arrowForPar: {fileID: 2032088643122078551, guid: 518e3502757867a4ab47e705f265b831, type: 3}

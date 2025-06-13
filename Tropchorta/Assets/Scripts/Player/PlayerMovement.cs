@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
         {
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
-            playerCombat.StopAttack();
+            //playerCombat.StopAttack();
             trail.enabled = true;
             playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");

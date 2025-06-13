@@ -19,6 +19,10 @@ public class Projectile : MonoBehaviour
     public AnimationCurve motionCurveY;
     public AnimationCurve motionCurveZ;
 
+
+    [Header("For Enemy only")]
+    [SerializeField] private GameObject _arrowForPar;
+
     void Start()
     {
         currentSpeed = speed;
@@ -50,13 +54,11 @@ public class Projectile : MonoBehaviour
                 !other.isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
-                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
+                if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
-                    enemyMovement.Stun();
+                    Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
                 }
                 healthComponent.BlockableDamage(new AttackData(damage));
-
-
             }else if (healthComponent)
             {
                 healthComponent.SimpleDamage(damage);
