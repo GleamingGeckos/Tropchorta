@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GoToBossFight : MonoBehaviour
 {
-    [SerializeField] private string _levelName;
+    public string _levelName;
     private PlayerMovement _playerMovement;
     private bool _isIn;
 
