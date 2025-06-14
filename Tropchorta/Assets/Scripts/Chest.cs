@@ -5,17 +5,25 @@ public class Chest : MonoBehaviour
 {
     [Header("Chest behaviour")]
     public GameObject itemToSpawn;
-    [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private float fadeDelay = 1.0f;
+    [SerializeField] private float _fadeDuration = 1f;
+    [SerializeField] private float _fadeDelay = 1.0f;
 
     [Header("Object anim")]
-    [SerializeField] private float jumpHeight = 2f;
-    [SerializeField] private float jumpDuration = 0.3f;
-    [SerializeField] private float sideOffset = 1f;
+    [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _jumpDuration = 0.3f;
+    [SerializeField] private float _sideOffset = 1f;
+
+    [SerializeField] private GameObject _canvas;
 
     private bool _used = false;
 
     private bool _playerInArea = false;
+
+    private void Start()
+    {
+        if (_canvas != null)
+            _canvas.SetActive(false);
+    }
 
     void Update()
     {
@@ -30,10 +38,13 @@ public class Chest : MonoBehaviour
         if (_used) return;
         _used = true;
 
+        if (_canvas != null)
+            _canvas.SetActive(false);
+
         Renderer rend = GetComponent<Renderer>();
         //rend.material.SetInt("_TransparentEnabled", 1); TODO Check on that when eny error
-        DOTween.To(() => rend.material.GetFloat("_Tweak_transparency"), x => rend.material.SetFloat("_Tweak_transparency", x), -1f, fadeDuration)
-            .SetDelay(fadeDelay)
+        DOTween.To(() => rend.material.GetFloat("_Tweak_transparency"), x => rend.material.SetFloat("_Tweak_transparency", x), -1f, _fadeDuration)
+            .SetDelay(_fadeDelay)
             .OnStart(() =>
             {
                 SpawnWithJump();
@@ -56,8 +67,8 @@ public class Chest : MonoBehaviour
         Vector3 spawnPos = transform.position;
         GameObject obj = Instantiate(itemToSpawn, spawnPos, Quaternion.identity);
 
-        Vector3 targetPos = spawnPos + transform.right * sideOffset;
-        obj.transform.DOJump(targetPos, jumpHeight, 1, jumpDuration);
+        Vector3 targetPos = spawnPos + transform.right * _sideOffset;
+        obj.transform.DOJump(targetPos, _jumpHeight, 1, _jumpDuration);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,6 +76,8 @@ public class Chest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playerInArea = true;
+            if (_canvas != null)
+                _canvas.SetActive(true);
         }
     }
 
@@ -73,6 +86,8 @@ public class Chest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playerInArea = false;
+            if (_canvas != null)
+                _canvas.SetActive(false);
         }
     }
 }
