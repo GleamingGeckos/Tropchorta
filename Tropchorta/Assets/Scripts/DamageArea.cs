@@ -5,6 +5,7 @@ public class DamageArea : MonoBehaviour
     [SerializeField] float damageValue;
     [SerializeField] float cooldown;
     [SerializeField] string whoToDamage;
+    [SerializeField] CharmType charmType;
 
     private float lastHitTime = 0f;
 
@@ -17,7 +18,7 @@ public class DamageArea : MonoBehaviour
                 var health = other.GetComponent<HealthComponent>();
                 if (health)
                 {
-                    health.SimpleDamage(damageValue);
+                    health.SimpleDamage(new AttackData(damageValue, charmType));
                     lastHitTime = Time.time;
                 }
             }

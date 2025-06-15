@@ -3,6 +3,12 @@ using UnityEngine;
 public class DefensiveItem : Item
 {
     public DefensiveBehaviour[] defensiveBehaviours;
+    public Charm charm;
+
+    public Charm GetDefensiveCharm()
+    {
+        return charm;
+    }
 
     public void Use(Transform user)
     {

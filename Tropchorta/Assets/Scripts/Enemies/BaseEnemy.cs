@@ -38,7 +38,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !_enemyMovement.isStuned)
+        if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
             _enemyMovement.StartChasing(other.gameObject.transform);
         }
@@ -54,7 +54,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !_enemyMovement.isStuned)
+        if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;

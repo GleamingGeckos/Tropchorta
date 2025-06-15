@@ -137,7 +137,6 @@ public class PlayerCombat : MonoBehaviour
         }
         comboCorutine = StartCoroutine(ComboWindow());
         comboCounter++;
-        Debug.Log("comboCounter " + comboCounter);
         playerState.state = PlayerState.Attacking;
         movement.RotatePlayerTowardsMouse();
         movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
@@ -248,7 +247,10 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!isBlocking)
         {
-            health.SimpleDamage(ad.damage);
+            AttackData attackData = ad;
+            if(equipmentController.GetDefensiveCharm() != null)
+                attackData = equipmentController.GetDefensiveCharm().CharmEffectOnArmor(attackData);
+            health.SimpleDamage(attackData);
         }
     }
 

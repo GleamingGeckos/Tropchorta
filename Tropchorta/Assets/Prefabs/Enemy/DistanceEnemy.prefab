@@ -1039,6 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charmType: 2
   _maxDamage: 2
   _minDamage: 5
   _howLongAttackDealsDamage: 0
@@ -1048,7 +1049,6 @@ MonoBehaviour:
     m_Bits: 128
   isCooldown: 0
   _cooldownInterval: 1.5
-  _arrowForPar: {fileID: 2032088643122078551, guid: 518e3502757867a4ab47e705f265b831, type: 3}
   _perfectBlockWindow: {x: 0, y: 30}
   isPerfectBlockWindow: 0
   _circles: {fileID: 7474923103453751766}

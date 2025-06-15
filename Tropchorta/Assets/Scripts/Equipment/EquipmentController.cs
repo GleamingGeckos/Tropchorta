@@ -372,27 +372,36 @@ public class EquipmentController : MonoBehaviour
         }
     }
 
+    public Charm GetDefensiveCharm()
+    {
+        if (breastplate is Breastplate breastp)
+        {
+            return breastp.GetDefensiveCharm();
+        }
+        return null;    
+    }
+
     public void UseDefensiveItems(Transform playerTransform)
     {
-        if (helmet != null)
-        {
-            if (helmet is Helmet helm)
-            {
-                helm.Use(playerTransform);
-                Debug.Log($"Using helmet: {helm.itemName}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No helmet equipped.");
-        }
+        //if (helmet != null)
+        //{
+        //    if (helmet is Helmet helm)
+        //    {
+        //        helm.Use(playerTransform);
+        //        Debug.Log($"Using helmet: {helm.itemName}");
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("No helmet equipped.");
+        //}
 
         if (breastplate != null)
         {
             if (breastplate is Breastplate breastp)
             {
                 breastp.Use(playerTransform);
-                Debug.Log($"Using helmet: {breastp.itemName}");
+                //Debug.Log($"Using helmet: {breastp.itemName}");
             }
         }
         else
@@ -400,31 +409,31 @@ public class EquipmentController : MonoBehaviour
             Debug.LogWarning("No breastplate equipped.");
         }
 
-        if (pants != null)
-        {
-            if (pants is Pants pant)
-            {
-                pant.Use(playerTransform);
-                Debug.Log($"Using helmet: {pant.itemName}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No pants equipped.");
-        }
-
-        if (shoes != null)
-        {
-            if (shoes is Shoes shoe)
-            {
-                shoe.Use(playerTransform);
-                Debug.Log($"Using helmet: {shoe.itemName}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No shoes equipped.");
-        }
+        //if (pants != null)
+        //{
+        //    if (pants is Pants pant)
+        //    {
+        //        pant.Use(playerTransform);
+        //        Debug.Log($"Using helmet: {pant.itemName}");
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("No pants equipped.");
+        //}
+        //
+        //if (shoes != null)
+        //{
+        //    if (shoes is Shoes shoe)
+        //    {
+        //        shoe.Use(playerTransform);
+        //        Debug.Log($"Using helmet: {shoe.itemName}");
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("No shoes equipped.");
+        //}
     }
     void DropWeapon()
     {

@@ -4,7 +4,7 @@ public class AnimationBehavior : WeaponBehavior
 {
     public string animationTrigger = "Attack";
 
-    public override void UseStart(Transform user)
+    public override void UseStart(Transform user, Charm charm)
     {
         Animator animator = user.GetComponent<Animator>();
         if (animator != null)
@@ -18,7 +18,7 @@ public class AnimationBehavior : WeaponBehavior
     {
 
     }
-    public override void UseStrongStart(Transform user)
+    public override void UseStrongStart(Transform user, Charm charm)
     {
         Animator animator = user.GetComponent<Animator>();
         if (animator != null)
@@ -33,7 +33,7 @@ public class AnimationBehavior : WeaponBehavior
 
     }
 
-    public override void AltUseStart(Transform user)
+    public override void AltUseStart(Transform user, Charm charm)
     {
 
     }
@@ -53,7 +53,7 @@ public class AnimationBehavior : WeaponBehavior
         
     }
 
-    public override void UseSpecialAttack(Transform user)
+    public override void UseSpecialAttack(Transform user, Charm charm)
     {
         throw new System.NotImplementedException();
     }

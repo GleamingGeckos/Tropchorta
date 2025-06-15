@@ -8,6 +8,7 @@ using Debug = UnityEngine.Debug;
 public class EnemyCombat : MonoBehaviour
 {
     [Header("Attack")]
+    [SerializeField] CharmType _charmType;
     [SerializeField] int _maxDamage;//inclusive
     [SerializeField] int _minDamage;//inclusive
 
@@ -108,10 +109,8 @@ public class EnemyCombat : MonoBehaviour
     private IEnumerator PerfectBlockWindow()
     {
         yield return new WaitForSeconds(_cooldownInterval - _perfectBlockInSeconds);
-        Debug.Log("Start window");
         isPerfectBlockWindow = true;
         yield return new WaitForSeconds(_perfectBlockInSeconds);
-        Debug.Log("Stop window");
         isPerfectBlockWindow = false;
     }
 
@@ -159,7 +158,7 @@ public class EnemyCombat : MonoBehaviour
                 {
                     enemyMovement.Stun();
                 }
-                healthComponent.BlockableDamage(new AttackData(DealDamage()));
+                healthComponent.BlockableDamage(new AttackData(DealDamage(), _charmType));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f,0.2f,0.0f), 1f, 1f);
@@ -203,6 +202,7 @@ public class EnemyCombat : MonoBehaviour
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
+        arrow.GetComponent<Projectile>().charmType = _charmType;
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
@@ -250,7 +250,7 @@ public class EnemyCombat : MonoBehaviour
             // Currently assuming the collider is on the same object as the HealthComponent
             if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && !_colliders[i].isTrigger)
             {
-                healthComponent.SimpleDamage(DealDamage());
+                healthComponent.SimpleDamage(new AttackData(DealDamage(), _charmType));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);

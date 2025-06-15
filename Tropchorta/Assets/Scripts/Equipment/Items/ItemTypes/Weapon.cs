@@ -18,7 +18,7 @@ public class Weapon : Item
     {
         foreach (var behavior in weaponBehaviors)
         {
-            behavior?.UseStart(user);
+            behavior?.UseStart(user, charm);
         }
     }
 
@@ -33,7 +33,7 @@ public class Weapon : Item
     {
         foreach (var behavior in weaponBehaviors)
         {
-            behavior?.UseStrongStart(user);
+            behavior?.UseStrongStart(user, charm);
         }
     }
 
@@ -49,7 +49,7 @@ public class Weapon : Item
     {
         foreach (var behavior in weaponBehaviors)
         {
-            behavior?.UseSpecialAttack(user);
+            behavior?.UseSpecialAttack(user, charm);
         }
     }
 
@@ -57,7 +57,7 @@ public class Weapon : Item
     {
         foreach (var behavior in weaponBehaviors)
         {
-            behavior?.AltUseStart(user);
+            behavior?.AltUseStart(user, charm);
         }
     }
 

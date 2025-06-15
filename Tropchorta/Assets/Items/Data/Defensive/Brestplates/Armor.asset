@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a803c704c4316ec40b31b518cdc60a7d, type: 3}
-  m_Name: TestBreastplate
+  m_Name: Armor
   m_EditorClassIdentifier: 
-  itemName: TEST BREASTPLATE
-  icon: {fileID: 21300000, guid: 60d6529f962812e47bf4360d64bec90f, type: 3}
-  description: Item Description for breastplate
+  itemName: New Item
+  icon: {fileID: 0}
+  description: Item Description
   itemPrefab: {fileID: 0}
   itemPrice: 100
   defensiveBehaviours: []
-  charm: {fileID: 11400000, guid: 9f526b1bd43dd1a45b55bdfb380ef7c4, type: 2}

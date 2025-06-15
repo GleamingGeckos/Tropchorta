@@ -29,20 +29,20 @@ public class HealthComponent : MonoBehaviour
     }
 
     // this is for unavoidable dmaage like bows, traps, etc.
-    public virtual void SimpleDamage(float damage)
+    public virtual void SimpleDamage(AttackData ad)
     {
         if (isInvulnerable)
             return;
-        if (damage < 0)
+        if (ad.damage < 0)
         {
             Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");
             return;
         }
-        currentHealth -= damage;
+        currentHealth -= ad.damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
-        onDamageTaken.Invoke(damage, currentHealth);
+        onDamageTaken.Invoke(ad.damage, currentHealth);
         // only invoke onDeath the first time a unit dies
         if (currentHealth <= 0 && !isDead)
         {

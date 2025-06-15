@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Charm : Item
 {
-    private CharmType charmType;
+    [SerializeField] private CharmType charmType;
 
     public CharmType GetCharmType()
     {
@@ -15,16 +15,21 @@ public class Charm : Item
     public AttackData CharmEffectOnWeapon(AttackData attackData)
     {
         AttackData newAttack = new AttackData(attackData);
-        if (charmType == attackData.charmType)
+     
+        if (charmType == attackData.charmType && charmType != CharmType.None)
             newAttack.damage *= 2.0f;
+
         return newAttack;
     }
 
     public AttackData CharmEffectOnArmor(AttackData attackData)
     {
         AttackData newAttack = new AttackData(attackData);
-        if (charmType == attackData.charmType)
+       // Debug.Log(charmType + " " + newAttack.charmType);
+        //Debug.Log("Old" + newAttack.damage);
+        if (charmType == attackData.charmType && charmType != CharmType.None)
             newAttack.damage *= 0.5f;
+        //Debug.Log("New" + newAttack.damage);
         return newAttack;
     }
 }

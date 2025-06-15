@@ -19,3 +19,4 @@ MonoBehaviour:
   itemPrice: 3
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
+  charm: {fileID: 11400000, guid: 9f526b1bd43dd1a45b55bdfb380ef7c4, type: 2}

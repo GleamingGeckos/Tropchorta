@@ -1,5 +1,4 @@
 using UnityEngine;
-
 [CreateAssetMenu(fileName = "BowBehavior", menuName = "Inventory/WeaponBehaviors/Bow", order = 2)]
 public class BowBehavior : WeaponBehavior
 {
@@ -13,7 +12,7 @@ public class BowBehavior : WeaponBehavior
         playerCombat = user.GetComponent<PlayerCombat>();
     }
 
-    public override void UseStart(Transform user)
+    public override void UseStart(Transform user, Charm charm)
     {
         GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, user.rotation);
     }
@@ -22,7 +21,7 @@ public class BowBehavior : WeaponBehavior
     {
 
     }
-    public override void UseStrongStart(Transform user)
+    public override void UseStrongStart(Transform user, Charm charm)
     {
         float spreadAngle = 5f; // k¹t miêdzy strza³ami
         int arrowCount = 3;
@@ -42,7 +41,7 @@ public class BowBehavior : WeaponBehavior
 
     }
 
-    public override void AltUseStart(Transform user)
+    public override void AltUseStart(Transform user, Charm charm)
     {
         playerCombat.StartBlocking();
     }
@@ -56,7 +55,7 @@ public class BowBehavior : WeaponBehavior
     {
     }
 
-    public override void UseSpecialAttack(Transform user)
+    public override void UseSpecialAttack(Transform user, Charm charm)
     {
         float spreadAngle = 15f; // k¹t miêdzy strza³ami
         int arrowCount = 5;

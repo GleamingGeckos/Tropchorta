@@ -976,21 +976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyPrefab: {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
-  attackVariants:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  distance: 0
 --- !u!114 &5642331688653515415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,6 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charmType: 1
   _maxDamage: 2
   _minDamage: 5
   _howLongAttackDealsDamage: 0
@@ -1062,6 +1049,8 @@ MonoBehaviour:
     m_Bits: 128
   isCooldown: 0
   _cooldownInterval: 1.5
+  _perfectBlockWindow: {x: 0, y: 30}
+  isPerfectBlockWindow: 0
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
   _attackCircleImage: {fileID: 6573397796364980083}
@@ -1069,8 +1058,6 @@ MonoBehaviour:
   _maxCircle: 1.5
   _minColorCircle: {r: 0.7264151, g: 0, b: 0, a: 1}
   _maxColorCircle: {r: 0.8980392, g: 0.8235294, b: 0.41960785, a: 1}
-  _perfectBlockWindow: {x: 0, y: 30}
-  isPerfectBlockWindow: 0
   _attackStrongTransform: {fileID: 1209876797446858458}
   _attackStrongImage: {fileID: 4361709780842544851}
   _minStrong: {x: 1, y: 0.2, z: 1}

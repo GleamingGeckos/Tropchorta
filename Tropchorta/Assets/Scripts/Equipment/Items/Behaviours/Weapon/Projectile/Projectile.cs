@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     float currentSpeed;
     [SerializeField] private float motionScale = 1f;
     [SerializeField] private float motionSpeed = 1f;
+    public CharmType charmType = CharmType.None;
 
     private float motionTime;
 
@@ -58,10 +59,10 @@ public class Projectile : MonoBehaviour
                 {
                     Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
                 }
-                healthComponent.BlockableDamage(new AttackData(damage));
+                healthComponent.BlockableDamage(new AttackData(damage, charmType));
             }else if (healthComponent)
             {
-                healthComponent.SimpleDamage(damage);
+                healthComponent.SimpleDamage(new AttackData(damage, charmType));
             }
             Destroy(gameObject);
         }

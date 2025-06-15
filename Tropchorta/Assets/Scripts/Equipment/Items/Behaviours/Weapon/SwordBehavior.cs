@@ -43,7 +43,7 @@ public class SwordBehavior : WeaponBehavior
         throw new System.NotImplementedException();
     }
 
-    public override void UseStart(Transform user)
+    public override void UseStart(Transform user, Charm charm)
     {
         Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
@@ -53,7 +53,8 @@ public class SwordBehavior : WeaponBehavior
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
                 Debug.Log("Hit");
-                healthComponent.SimpleDamage(10);
+                AttackData attack = new AttackData(damage);
+                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 2f, 1f);
@@ -64,7 +65,7 @@ public class SwordBehavior : WeaponBehavior
 
     }
 
-    public override void UseStrongStart(Transform user)
+    public override void UseStrongStart(Transform user, Charm charm)
     {
         Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
@@ -73,7 +74,8 @@ public class SwordBehavior : WeaponBehavior
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
-                healthComponent.SimpleDamage(20);
+                AttackData attack = new AttackData(20);
+                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, 2f, 1f);
@@ -84,7 +86,7 @@ public class SwordBehavior : WeaponBehavior
 
     }
 
-    public override void AltUseStart(Transform user)
+    public override void AltUseStart(Transform user, Charm charm)
     {
         playerCombat.StartBlocking();
     }
@@ -94,15 +96,16 @@ public class SwordBehavior : WeaponBehavior
         playerCombat.StopBlocking();
     }
 
-    public override void UseSpecialAttack(Transform user)
+    public override void UseSpecialAttack(Transform user, Charm charm)
     {
         float radius = attackRange * 2.0f;
         Collider[] hitColliders = Physics.OverlapSphere(user.position, radius);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy") && hitCollider.GetComponent<HealthComponent>())
+            if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out HealthComponent healthComponent))
             {
-                hitCollider.GetComponent<HealthComponent>().SimpleDamage(damage);
+                AttackData attack = new AttackData(damage);
+                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }
         DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
