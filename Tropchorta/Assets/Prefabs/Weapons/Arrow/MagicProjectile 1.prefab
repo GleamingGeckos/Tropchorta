@@ -21,6 +21,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 75092182704779387, guid: 518e3502757867a4ab47e705f265b831, type: 3}
+      propertyPath: charmType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75092182704779387, guid: 518e3502757867a4ab47e705f265b831, type: 3}
       propertyPath: motionScale
       value: 9
       objectReference: {fileID: 0}

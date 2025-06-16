@@ -57,9 +57,10 @@ public class Projectile : MonoBehaviour
                 playerMovementComponent.RotatePlayerTowards(transform.position);
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
-                    Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
-                }
-                healthComponent.BlockableDamage(new AttackData(damage, charmType));
+                    var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
+                    revange.GetComponent<Projectile>().charmType = charmType;
+                }else if (!playerCombatComponent.isBlocking)
+                    healthComponent.BlockableDamage(new AttackData(damage, charmType));
             }else if (healthComponent)
             {
                 healthComponent.SimpleDamage(new AttackData(damage, charmType));

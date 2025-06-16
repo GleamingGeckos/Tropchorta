@@ -4,7 +4,6 @@ public enum CharmType
 {
     None,
     Fire,
-    Ice,
-    Lightning,
-    Earth
+    Poison,
+    Lightning
 }
