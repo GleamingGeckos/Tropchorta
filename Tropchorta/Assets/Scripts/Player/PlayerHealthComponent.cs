@@ -1,15 +1,37 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerHealthComponent : HealthComponent
 {
-    public override void BlockableDamage(AttackData ad)
+    [Header("UI References")]
+    [SerializeField] HealthBar healthBar;
+
+    void Start()
     {
-        if (ad.damage < 0)
+        var uiObjects = FindObjectsByType<PlayerUIController>(FindObjectsSortMode.None);
+        if (uiObjects.Length > 0)
         {
-            Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");
-            return;
+            healthBar = uiObjects[0].healthBar;
         }
-        onAttacked.Invoke(ad);
+
+        onHeal.AddListener(UpdateHealth);
+        onDamageTaken.AddListener(UpdateHealth);
     }
+
+
+    public void UpdateHealth(float value, float currentValue)
+    {
+        UpdateHealthBar();
+    }
+
+    public void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth / MaxHealth);
+        }
+        
+    }
+
 }

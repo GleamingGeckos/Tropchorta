@@ -8,7 +8,6 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator staffAnimator;
     [SerializeField] public GameObject weaponSlot;
-    [SerializeField] HealthBar healthBar;
     [SerializeField] Transform rotatingRootTransform;
     [SerializeField] PlayerStateSO playerState;
     [SerializeField] EquipmentController equipmentController;
@@ -53,8 +52,8 @@ public class PlayerCombat : MonoBehaviour
         pm.input.OnRightMouseClickEvent += AltUseStart;
         pm.input.OnRightMouseReleaseEvent += AltUseEnd;
         playerState = pm.playerState;
+   
         health = GetComponent<PlayerHealthComponent>();
-        health.onDamageTaken.AddListener(OnDamageTaken);
         health.onAttacked.AddListener(OnAttacked);
         health.onDeath.AddListener(Die);
         equipmentController.Initialize(transform);
@@ -65,10 +64,6 @@ public class PlayerCombat : MonoBehaviour
         playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
-    public void OnDamageTaken(float damage, float currentHealth)
-    {
-        healthBar.SetHealth(currentHealth / health.MaxHealth);
-    }
 
     public void Die()
     {
@@ -126,7 +121,6 @@ public class PlayerCombat : MonoBehaviour
         }
         if(!equipmentController.IsDistance())
             stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
-        Debug.Log("Attack");
     }  
 
     public void StartAttackAnim()
@@ -145,7 +139,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void EndAttack()
     {
-        Debug.Log("End Attack");
         playerState.state = PlayerState.Normal;
         if (isHoldingAttack)
         {

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] protected float maxHealth;
-    protected float currentHealth;
+    [SerializeField] protected float currentHealth;
 
     protected bool isDead = false;
     
@@ -23,7 +23,7 @@ public class HealthComponent : MonoBehaviour
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
 
-    private void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -39,6 +39,7 @@ public class HealthComponent : MonoBehaviour
             return;
         }
         currentHealth -= ad.damage;
+        Debug.Log("Damage " + ad.damage);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
@@ -62,6 +63,7 @@ public class HealthComponent : MonoBehaviour
             return;
         }
         currentHealth -= ad.damage;
+        Debug.Log("Damage " + ad.damage);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
@@ -83,6 +85,7 @@ public class HealthComponent : MonoBehaviour
         }
         if (isDead) return;
         currentHealth += heal;
+        Debug.Log("Heal " + heal);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         onHeal.Invoke(heal, currentHealth);
     }

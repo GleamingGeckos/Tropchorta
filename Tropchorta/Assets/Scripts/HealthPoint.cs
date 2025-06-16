@@ -1,18 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
-public class MoneyDrop : MonoBehaviour
+public class HealthPoint : MonoBehaviour
 {
-    [SerializeField] private int _value;
-    public float delay = 0.2f;
+    [SerializeField] float _healValue = 10.0f;
+    public float delay = 0.1f;
     private Transform _player;
     private bool _isTaken = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        _value = Random.Range(1, 4);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,11 +16,9 @@ public class MoneyDrop : MonoBehaviour
         {
             _isTaken = true;
             _player = other.transform;
-            EquipmentController equipment = _player.GetComponentInChildren<EquipmentController>();
-            if (equipment != null)
+            if (other.TryGetComponent(out HealthComponent healthComponent))
             {
-                //Debug.Log("Add value " + value);
-                equipment.AddGold(_value);
+                healthComponent.Heal(_healValue);
             }
             StartCoroutine(MoveToPlayerAfterDelay());
         }

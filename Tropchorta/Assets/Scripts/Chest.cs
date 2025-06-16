@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
@@ -7,6 +8,7 @@ public class Chest : MonoBehaviour
     public GameObject itemToSpawn;
     [SerializeField] private float _fadeDuration = 1f;
     [SerializeField] private float _fadeDelay = 1.0f;
+    [SerializeField] float _objHight = 0.4f;
 
     [Header("Object anim")]
     [SerializeField] private float _jumpHeight = 2f;
@@ -67,7 +69,7 @@ public class Chest : MonoBehaviour
         Vector3 spawnPos = transform.position;
         GameObject obj = Instantiate(itemToSpawn, spawnPos, Quaternion.identity);
 
-        Vector3 targetPos = spawnPos + transform.right * _sideOffset;
+        Vector3 targetPos = spawnPos + transform.right * _sideOffset + Vector3.up * _objHight;
         obj.transform.DOJump(targetPos, _jumpHeight, 1, _jumpDuration);
     }
 

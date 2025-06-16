@@ -1045,6 +1045,8 @@ MonoBehaviour:
   notesPanel: {fileID: 5846643995972035212}
   mapPanel: {fileID: 4670684319656315147}
   bestiaryUIController: {fileID: 3040751453091210319}
+  playerMovement: {fileID: 0}
+  healthBar: {fileID: 2860486952234148870}
 --- !u!1 &7429019181626737711
 GameObject:
   m_ObjectHideFlags: 0

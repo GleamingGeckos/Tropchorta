@@ -7,7 +7,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] GameObject mapPanel;
     [SerializeField] BestiaryUIController bestiaryUIController;
     [SerializeField] PlayerMovement playerMovement;
-
+    public HealthBar healthBar;
 
     private void Awake()
     {

@@ -282,7 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staffAnimator: {fileID: 3625865515689920287}
   weaponSlot: {fileID: 6003927915612068230}
-  healthBar: {fileID: 0}
   rotatingRootTransform: {fileID: 8091216811212371203}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}
   equipmentController: {fileID: 6131339122415314527}
@@ -334,6 +333,7 @@ MonoBehaviour:
   onAttacked:
     m_PersistentCalls:
       m_Calls: []
+  healthBar: {fileID: 0}
 --- !u!114 &7316165997840729316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +930,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7a291ebd269ee794b932ac42047dff35, type: 3}
       propertyPath: m_Name
       value: staff1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7a291ebd269ee794b932ac42047dff35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
