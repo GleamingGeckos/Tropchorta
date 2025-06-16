@@ -8,4 +8,10 @@ public class Item : ScriptableObject
     public string description = "Item Description";
     public GameObject itemPrefab;  // The actual prefab to instantiate when dropped
     public int itemPrice = 100 ;
+    public bool justDrop = false;
+
+
+
+
+
 }

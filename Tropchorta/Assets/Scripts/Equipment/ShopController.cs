@@ -37,7 +37,13 @@ public class ShopController : MonoBehaviour
     {
         if(items[itemId].itemPrice <= equipmentController.GetGold())
         {
+
             equipmentController.RemoveGold(items[itemId].itemPrice);
+            if (items[itemId].justDrop)
+            {
+                Instantiate(items[itemId].itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+                return true;
+            }
             Item tmpItem = equipmentController.SwitchItem(items[itemId]);
             if(tmpItem != null)
             {
@@ -48,6 +54,7 @@ public class ShopController : MonoBehaviour
             {
                 items.Remove(items[itemId]);
             }
+
             return true;//if you can buy item
         }
         else
