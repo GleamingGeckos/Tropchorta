@@ -2594,7 +2594,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: -35
-  far clip plane: 1000
+  far clip plane: 200
   field of view: 90
   orthographic: 1
   orthographic size: 5
@@ -3375,10 +3375,10 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.8
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 3
 --- !u!1001 &411458998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7546,6 +7546,10 @@ PrefabInstance:
       propertyPath: equipmentController
       value: 
       objectReference: {fileID: 1278055118}
+    - target: {fileID: 4265466880086658688, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 34.200195
+      objectReference: {fileID: 0}
     - target: {fileID: 5001157999910165883, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7625,6 +7629,10 @@ PrefabInstance:
     - target: {fileID: 5001157999910165883, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318379419491289207, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00024414062
       objectReference: {fileID: 0}
     - target: {fileID: 7076339757439524321, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_Name
