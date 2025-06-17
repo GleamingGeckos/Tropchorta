@@ -63,9 +63,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lookDirection != Vector3.zero)
         {
-            modelRootTransform.forward = new Vector3(lookDirection.x, 0.0f, lookDirection.z);
+            Vector3 direction = lookDirection - modelRootTransform.position;
+            modelRootTransform.forward = new Vector3(direction.x, 0f, direction.z);
         }
     }
+
     public void RotatePlayerTowardsMouse()
     {
         if (mousePosition != Vector2.zero)

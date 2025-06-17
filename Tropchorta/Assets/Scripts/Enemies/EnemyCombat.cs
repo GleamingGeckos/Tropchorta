@@ -248,8 +248,11 @@ public class EnemyCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && !_colliders[i].isTrigger)
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
+                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
+                && !_colliders[i].isTrigger)
             {
+                playerMovementComponent.RotatePlayerTowards(transform.position);
                 healthComponent.SimpleDamage(new AttackData(DealDamage(), _charmType));
             }
         }

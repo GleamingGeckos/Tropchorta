@@ -54,7 +54,8 @@ public class Projectile : MonoBehaviour
                 transform.parent.TryGetComponent(out EnemyMovement enemyMovement) &&
                 !other.isTrigger)
             {
-                playerMovementComponent.RotatePlayerTowards(transform.position);
+                playerMovementComponent.RotatePlayerTowards(transform.parent.position);
+                Debug.Log("Enemy pos " + transform.parent.position);
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
                     var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
