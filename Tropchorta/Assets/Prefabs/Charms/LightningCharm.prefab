@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2219935430350156662}
   - component: {fileID: 7502994802413911833}
   m_Layer: 0
-  m_Name: IceCharm
+  m_Name: LightningCharm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,4 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4a6895a2d2db8439554057dd236acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 8b76924c3a3175943b8e3990bb91eb4f, type: 2}
+  itemData: {fileID: 11400000, guid: f26112dd13b440d42bb15cf893e1deef, type: 2}

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16e4750a64720f648b5c725ef761c925, type: 3}
-  m_Name: Ice
+  m_Name: Poison
   m_EditorClassIdentifier: 
-  itemName: Ice Charm
+  itemName: Poison Charm
   icon: {fileID: 21300000, guid: e77d66e35ed78b54aacf057cb40a0efc, type: 3}
-  description: 'Fire! Fire! Fire! '
+  description: 'Poison! Poison! Poison! '
   itemPrefab: {fileID: 5505681420328838874, guid: 9221b1df86fdf9a40b2f5a5354cd2328, type: 3}
   itemPrice: 100
+  justDrop: 0
   charmType: 2
