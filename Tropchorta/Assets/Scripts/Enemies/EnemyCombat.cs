@@ -157,7 +157,9 @@ public class EnemyCombat : MonoBehaviour
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
                 {
                     enemyMovement.Stun();
-                }else if(!playerCombatComponent.isBlocking)
+                    enemyMovement.perfectParWasInitiated = false;
+                }
+                else if(!playerCombatComponent.isBlocking)
                     healthComponent.SimpleDamage(new AttackData(DealDamage(), _charmType));
             }
         }

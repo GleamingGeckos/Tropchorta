@@ -19,4 +19,4 @@ MonoBehaviour:
   itemPrice: 100
   justDrop: 0
   defensiveBehaviours: []
-  charm: {fileID: 11400000, guid: 9f526b1bd43dd1a45b55bdfb380ef7c4, type: 2}
+  charm: {fileID: 11400000, guid: f26112dd13b440d42bb15cf893e1deef, type: 2}

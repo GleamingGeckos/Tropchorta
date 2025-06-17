@@ -60,7 +60,10 @@ public class Projectile : MonoBehaviour
                 {
                     var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
                     revange.GetComponent<Projectile>().charmType = charmType;
-                }else if (!playerCombatComponent.isBlocking)
+                    enemyMovement.perfectParWasInitiated = false;
+
+                }
+                else if (!playerCombatComponent.isBlocking)
                     healthComponent.SimpleDamage(new AttackData(damage, charmType));
             }else if (healthComponent)
             {

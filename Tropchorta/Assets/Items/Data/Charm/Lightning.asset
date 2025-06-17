@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: Lightning Charm
   icon: {fileID: 21300000, guid: e77d66e35ed78b54aacf057cb40a0efc, type: 3}
   description: 'Lightning! Thunder! Lightning! '
-  itemPrefab: {fileID: 5505681420328838874, guid: 9221b1df86fdf9a40b2f5a5354cd2328, type: 3}
+  itemPrefab: {fileID: 5505681420328838874, guid: ac843efa48176f3449505937174429d6, type: 3}
   itemPrice: 100
   justDrop: 0
   charmType: 3
+  armorReductionProcent: 0.5
+  weaponAmplificationMultiplier: 0
