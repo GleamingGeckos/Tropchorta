@@ -52,30 +52,6 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    // this is for damage that can be avoided or reduced, like melee attacks that can be blocked by player
-    public virtual void BlockableDamage(AttackData ad)
-    {
-        if (isInvulnerable)
-            return;
-        if (ad.damage < 0)
-        {
-            Debug.LogError("Damage cannot be negative, if you meant to heal use Heal method");
-            return;
-        }
-        currentHealth -= ad.damage;
-        //Debug.Log("Damage " + ad.damage);
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        // Do we want to invoke both events on death?
-        // Should onDamageTaken be invoked on death?
-        onDamageTaken.Invoke(ad.damage, currentHealth);
-        // only invoke onDeath the first time a unit dies
-        if (currentHealth <= 0 && !isDead)
-        {
-            onDeath.Invoke();
-            isDead = true;
-        }
-    }
-
     public void Heal(float heal)
     {
         if (heal < 0)

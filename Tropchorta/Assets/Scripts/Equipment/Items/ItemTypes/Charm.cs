@@ -26,10 +26,11 @@ public class Charm : Item
     {
         AttackData newAttack = new AttackData(attackData);
        // Debug.Log(charmType + " " + newAttack.charmType);
-        //Debug.Log("Old" + newAttack.damage);
+        Debug.Log("Old" + newAttack.damage);
         if (charmType == attackData.charmType && charmType != CharmType.None)
             newAttack.damage *= 0.5f;
-        //Debug.Log("New" + newAttack.damage);
+        Debug.Log("New" + newAttack.damage);
+        Debug.Log("-----------------------------------");
         return newAttack;
     }
 }

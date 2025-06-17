@@ -19,6 +19,14 @@ public class PlayerHealthComponent : HealthComponent
         onDamageTaken.AddListener(UpdateHealth);
     }
 
+    public override void SimpleDamage(AttackData ad)
+    {
+        onAttacked.Invoke(ad);
+    }
+    public void BaseSimpleDamage(AttackData ad)
+    {
+        base.SimpleDamage(ad);
+    }
 
     public void UpdateHealth(float value, float currentValue)
     {

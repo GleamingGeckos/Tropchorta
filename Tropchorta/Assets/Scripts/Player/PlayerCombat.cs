@@ -236,14 +236,16 @@ public class PlayerCombat : MonoBehaviour
         staffAnimator.SetBool("Blocking", false);
     }
 
-    private void OnAttacked(AttackData ad)
+    public void OnAttacked(AttackData ad)
     {
         if (!isBlocking)
         {
             AttackData attackData = ad;
             if(equipmentController.GetDefensiveCharm() != null)
+            {
                 attackData = equipmentController.GetDefensiveCharm().CharmEffectOnArmor(attackData);
-            health.SimpleDamage(attackData);
+            }
+            health.BaseSimpleDamage(attackData);
         }
     }
 

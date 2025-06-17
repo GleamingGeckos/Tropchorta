@@ -374,9 +374,12 @@ public class EquipmentController : MonoBehaviour
 
     public Charm GetDefensiveCharm()
     {
-        if (breastplate is Breastplate breastp)
+        if (breastplate != null)
         {
-            return breastp.GetDefensiveCharm();
+            if (breastplate is Breastplate breastp)
+            {
+                return breastp.GetDefensiveCharm();
+            }
         }
         return null;    
     }

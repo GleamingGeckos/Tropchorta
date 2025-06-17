@@ -52,8 +52,8 @@ public class ClueController : MonoBehaviour
     
     void OnPlayerGetClue() // activated when player gets the clue to the notes
     {
-        Debug.Log(needsClueItem);
-        Debug.Log(equipmentController.HasClueItem(clueItem));
+        //Debug.Log(needsClueItem);
+        //Debug.Log(equipmentController.HasClueItem(clueItem));
         if (needsClueItem && equipmentController.HasClueItem(clueItem))
         {
             if (!isActivated && isReady)

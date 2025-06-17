@@ -990,6 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
+  currentHealth: 0
   isInvulnerable: 0
   onDamageTaken:
     m_PersistentCalls:
@@ -1039,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charmType: 2
+  _charmType: 3
   _maxDamage: 2
   _minDamage: 5
   _howLongAttackDealsDamage: 0
