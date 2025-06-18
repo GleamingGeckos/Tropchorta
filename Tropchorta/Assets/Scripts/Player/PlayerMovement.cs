@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     
     //Animator
     public Animator PlayerAnimator;
-    public Animator WeaponAnimator;
     [SerializeField] GameObject hobbyHorseMesh;
 
     
@@ -64,7 +63,16 @@ public class PlayerMovement : MonoBehaviour
         if (lookDirection != Vector3.zero)
         {
             Vector3 direction = lookDirection - modelRootTransform.position;
-            modelRootTransform.forward = new Vector3(direction.x, 0f, direction.z);
+            //modelRootTransform.forward = new Vector3(direction.x, 0f, direction.z);
+            //Vector3 targetPos = new Vector3(direction.x, 0f, direction.z);
+            
+            Vector3 flatDirection = new Vector3(direction.x, 0f, direction.z).normalized;
+            Vector3 targetPosition = modelRootTransform.position + flatDirection;
+
+            modelRootTransform
+                .DOLookAt(targetPosition, 0.1f)
+                .SetEase(Ease.OutSine);
+
         }
     }
 
@@ -75,7 +83,10 @@ public class PlayerMovement : MonoBehaviour
             Vector3 lookDirection = new Vector3(mousePosition.x, 0, mousePosition.y);
             if (lookDirection != Vector3.zero)
             {
-                modelRootTransform.forward = lookDirection;
+                //modelRootTransform.forward = lookDirection;
+                modelRootTransform.DOLookAt(modelRootTransform.position + lookDirection, 0.1f);
+                
+
             }
         }
     }
@@ -95,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
         
+        
         switch (playerState.state)
         {
             case PlayerState.Normal:
@@ -102,8 +114,8 @@ public class PlayerMovement : MonoBehaviour
                 PlayerAnimator.SetBool("isSprinting", isSprinting);
                 PlayerAnimator.SetBool("isMoving", isMoving);
                 
-                WeaponAnimator.SetBool("isSprinting", isSprinting);
-                WeaponAnimator.SetBool("isMoving", isMoving);
+                // WeaponAnimator.SetBool("isSprinting", isSprinting);
+                // WeaponAnimator.SetBool("isMoving", isMoving);
                 
                 break;
             case PlayerState.DisableInput:
@@ -178,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDash()
     {
-        if (dashCoroutine == null)
+        if (dashCoroutine == null&&playerState.state != PlayerState.Attacking) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
         {
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);

@@ -64,6 +64,7 @@ public class EnemyMovement : MonoBehaviour
             _stunImage.enabled = true;
             StopChasing();
             StartCoroutine(StunWindow());
+            
         }
     }
 

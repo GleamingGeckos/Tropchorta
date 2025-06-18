@@ -58,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
         health.onDeath.AddListener(Die);
         equipmentController.Initialize(transform);
 
-        stepTime = 0.2f;
+        stepTime = 0.1f;
         comboAttackTime = comboAttackWindow.x + (comboAttackWindow.y / 60f);
 
         playerRadius = GetComponent<CapsuleCollider>().radius;
@@ -108,8 +108,8 @@ public class PlayerCombat : MonoBehaviour
     public void Attack()
     {
         //Cheeeeeesing the anim lag
-        movement.PlayerAnimator.SetBool("isMoving", true);
-        movement.WeaponAnimator.SetBool("isMoving", true);
+         // movement.PlayerAnimator.SetBool("isMoving", false);
+         // movement.WeaponAnimator.SetBool("isMoving", false);
         if (isHoldingAttack) {
             equipmentController.UseWeaponStrongStart(rotatingRootTransform);
         }
@@ -132,14 +132,19 @@ public class PlayerCombat : MonoBehaviour
         comboCorutine = StartCoroutine(ComboWindow());
         comboCounter++;
         playerState.state = PlayerState.Attacking;
+        //movement.WeaponAnimator.SetBool("canExitAttack", false);
+        movement.PlayerAnimator.SetBool("canExitAttack", false);
         movement.RotatePlayerTowardsMouse();
         movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
-        movement.WeaponAnimator.SetTrigger("attackTriggerPlayer");
+       // movement.WeaponAnimator.SetTrigger("atakTrigger");
     }
 
     public void EndAttack()
     {
+
         playerState.state = PlayerState.Normal;
+        //movement.WeaponAnimator.SetBool("canExitAttack", true);
+        movement.PlayerAnimator.SetBool("canExitAttack", true);
         if (isHoldingAttack)
         {
             equipmentController.UseWeaponStrongEnd(rotatingRootTransform);
@@ -215,25 +220,32 @@ public class PlayerCombat : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = true;
+        //movement.WeaponAnimator.SetBool("isBlocking", true);
+        movement.PlayerAnimator.SetBool("isBlocking", true);
+        
+        //movement.WeaponAnimator.SetTrigger("blockTrigger");
+        movement.PlayerAnimator.SetTrigger("blockTrigger");
+
         CheckForAttackingEnemies(isBlocking);
-        if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
-        {
-            // reset the clip
-            staffAnimator.Play("Block", -1, 0);
-        }
-        else
-        {
-            // play the clip, if it's not already playing
-            staffAnimator.SetBool("Blocking", true);
-        }
+        // if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
+        // {
+        //     // reset the clip
+        //     staffAnimator.Play("Block", -1, 0);
+        // }
+        // else
+        // {
+        //     // play the clip, if it's not already playing
+        //     staffAnimator.SetBool("Blocking", true);
+        // }
     }
 
     public void StopBlocking()
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = false;
-
-        staffAnimator.SetBool("Blocking", false);
+        //movement.WeaponAnimator.SetBool("isBlocking", false);
+        movement.PlayerAnimator.SetBool("isBlocking", false);
+        //staffAnimator.SetBool("Blocking", false);
     }
 
     public void OnAttacked(AttackData ad)
@@ -247,6 +259,8 @@ public class PlayerCombat : MonoBehaviour
             }
             health.BaseSimpleDamage(attackData);
         }
+
+        
     }
 
     private void CheckForAttackingEnemies(bool isBlocking)//TODO im tired, needs to be redone, but works for now
@@ -262,12 +276,16 @@ public class PlayerCombat : MonoBehaviour
 
             if (obj.CompareTag("Enemy"))
             {
-                var combat = obj.GetComponent<EnemyCombat>();
-                var movement = obj.GetComponent<EnemyMovement>();
+                var enemyCombat = obj.GetComponent<EnemyCombat>();
+                var enemyMovement = obj.GetComponent<EnemyMovement>();
 
-                if (combat != null && movement != null && combat.isPerfectBlockWindow)
+                if (enemyCombat != null && enemyMovement != null && enemyCombat.isPerfectBlockWindow)
                 {
-                    movement.perfectParWasInitiated = true;
+                    enemyMovement.perfectParWasInitiated = true;
+                    movement.PlayerAnimator.SetTrigger("parryTrigger");
+                    //movement.WeaponAnimator.SetTrigger("parryTrigger");
+                    
+                    
                 }
             }
         }
