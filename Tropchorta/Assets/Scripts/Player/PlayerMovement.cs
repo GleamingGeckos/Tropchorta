@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform modelRootTransform;
     [SerializeField] public InputReader input;
     [SerializeField] public PlayerStateSO playerState;
+    [NonSerialized]  public bool isMoving;
 
     // For dash
     [SerializeField] PlayerHealthComponent playerHealthComponent;
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void RotatePlayerTowards(Vector3 lookDirection)
     {
-        if (lookDirection != Vector3.zero)
+        if (lookDirection != Vector3.zero&&!isMoving)
         {
             Vector3 direction = lookDirection - modelRootTransform.position;
             //modelRootTransform.forward = new Vector3(direction.x, 0f, direction.z);
@@ -93,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        bool isMoving = movementInput != Vector2.zero;
+        isMoving = movementInput != Vector2.zero;
 
         
         if (isSprinting && isMoving)
