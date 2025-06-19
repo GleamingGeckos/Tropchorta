@@ -120,5 +120,13 @@ public class InputReader : ScriptableObject
         interactAction.Disable();
     }
 
+    public void EnableInput()
+    {
+        inputAsset.Enable();
+    }
 
+    public void DisableInput()
+    {
+        inputAsset.Disable();
+    }
 }

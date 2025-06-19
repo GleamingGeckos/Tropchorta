@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.IsPaused) return;
         isMoving = movementInput != Vector2.zero;
 
         

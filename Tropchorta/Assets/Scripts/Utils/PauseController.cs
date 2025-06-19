@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public static class PauseController
+{
+    public static InputReader InputReaderRef;
+    public static bool IsPaused { get; private set; }
+
+    public static void SetPause(bool pause)
+    {
+        IsPaused = pause;
+        if (IsPaused)
+        {
+            Time.timeScale = 0f;    
+            InputReaderRef.DisableInput();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            InputReaderRef.EnableInput();
+        }
+
+
+    }
+}

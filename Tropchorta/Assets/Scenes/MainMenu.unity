@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 205447696}
   - component: {fileID: 205447700}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!224 &205447699
 RectTransform:
@@ -236,7 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5ce39d922d7d84c8de7916983ee7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   initSceneName: MainMap
+  startWithVisible: 1
 --- !u!1 &281398927
 GameObject:
   m_ObjectHideFlags: 0

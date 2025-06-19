@@ -1,10 +1,15 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private string initSceneName;
+    public InputReader input;
+    [SerializeField] private string initSceneName;
+    [SerializeField] private bool startWithVisible;
+    private Canvas canvas;
+
+    public bool IsOpend { get; private set; }
 
     void Awake()
     {
@@ -14,8 +19,34 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        //input.OnEscapeEvent += TogglePauseGame;
+        canvas = GetComponent<Canvas>();    
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        canvas.enabled = startWithVisible;
+        IsOpend = startWithVisible;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseGame();
+        }
+    }
+
+    public void ShowMenu()
+    {
+        canvas.enabled = true;
+        IsOpend = true;
+        PauseController.SetPause(true);
+    }
+
+    public void HideMenu()
+    {
+        canvas.enabled = false;
+        IsOpend = false;
+        PauseController.SetPause(false);
     }
 
     public void NewGame()
@@ -25,6 +56,18 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
+    }
+
+    void TogglePauseGame()
+    {
+        if (!IsOpend)
+            ShowMenu();
+        else
+            HideMenu();
     }
 }

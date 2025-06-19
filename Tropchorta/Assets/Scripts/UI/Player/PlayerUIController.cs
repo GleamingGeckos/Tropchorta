@@ -16,6 +16,7 @@ public class PlayerUIController : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.IsPaused) return;
         if (Input.GetKeyDown(KeyCode.B))
         {
             if(bestiaryPanel.activeSelf)

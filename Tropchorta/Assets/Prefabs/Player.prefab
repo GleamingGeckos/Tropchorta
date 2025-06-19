@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 7316165997840729316}
   - component: {fileID: 5489086599203184047}
   - component: {fileID: 582302915993542184}
-  - component: {fileID: 1302801467979998815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -480,19 +479,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -0.12, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1302801467979998815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2763151380894057734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829d797a18d5b494b86187a6ac41a4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
 --- !u!1 &4846538048631571966
 GameObject:
   m_ObjectHideFlags: 0

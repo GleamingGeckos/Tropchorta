@@ -12,6 +12,7 @@ public class PlayerInteract : MonoBehaviour
     void Start()
     {
         input.OnInteractEvent += TalkWith;
+        PauseController.InputReaderRef = input;
     }
 
     // Update is called once per frame
