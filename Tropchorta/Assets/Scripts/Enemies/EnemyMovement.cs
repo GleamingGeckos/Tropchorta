@@ -99,4 +99,6 @@ public class EnemyMovement : MonoBehaviour
         if (!_isChasing || _target == null || _attackInterrupted) return;
             agent.SetDestination(_target.position);
     }
+
+
 }

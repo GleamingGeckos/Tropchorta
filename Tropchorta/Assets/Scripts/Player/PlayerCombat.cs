@@ -88,9 +88,8 @@ public class PlayerCombat : MonoBehaviour
         if (!canAttack) return;
 
         if (!isWindowOpen)
-        {
             comboCounter = 0;
-        }
+        
         if (playerState.state == PlayerState.Attacking)
             doNextAttack = true;
         else

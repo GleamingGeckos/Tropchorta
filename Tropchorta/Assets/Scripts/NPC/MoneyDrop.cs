@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class MoneyDrop : MonoBehaviour
 {
-    [SerializeField] private int _value;
+    [SerializeField] private int _value = 1;
+    [SerializeField] private int _minValue = 1;
+    [SerializeField] private int _maxValue = 1;
     public float delay = 0.2f;
     private Transform _player;
     private bool _isTaken = false;
@@ -11,7 +13,7 @@ public class MoneyDrop : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _value = Random.Range(1, 4);
+        _value = Random.Range(_minValue, _maxValue);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -20,6 +20,8 @@ public class HealthComponent : MonoBehaviour
 
     public UnityEvent<AttackData> onAttacked;
 
+    public UnityEvent<AttackData> afterAttack;
+
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
 
@@ -39,7 +41,6 @@ public class HealthComponent : MonoBehaviour
             return;
         }
         currentHealth -= ad.damage;
-        //Debug.Log("Damage " + ad.damage);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         // Do we want to invoke both events on death?
         // Should onDamageTaken be invoked on death?
@@ -49,7 +50,9 @@ public class HealthComponent : MonoBehaviour
         {
             onDeath.Invoke();
             isDead = true;
+            return;
         }
+        afterAttack.Invoke(ad);
     }
 
     public void Heal(float heal)

@@ -242,10 +242,11 @@ MonoBehaviour:
   slowdownRate: 1
   minSpeed: 45
   lifetime: 2
-  damage: 10
+  damage: 5
   targetTag: Enemy
   motionScale: 1
   motionSpeed: 1
+  charmType: 0
   motionCurveX:
     serializedVersion: 2
     m_Curve: []
@@ -264,3 +265,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _arrowForPar: {fileID: 0}

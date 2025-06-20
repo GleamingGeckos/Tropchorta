@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +19,13 @@ public class BaseEnemy : MonoBehaviour
     //Components
     private EnemyCombat _enemyCombat;
     private EnemyMovement _enemyMovement;
+    private HealthComponent _healthComponent;
+
+    [Header("Push on attack")]
+    [SerializeField] private float pushDistance = 1.0f;
+    [SerializeField] private float pushDuration = 0.1f;
+    [SerializeField] private float pushRadius = 1.0f;
+    [SerializeField] private LayerMask pushCollisionMask = default;
 
     void Start()
     {
@@ -25,7 +33,9 @@ public class BaseEnemy : MonoBehaviour
         GetComponentInChildren<Renderer>().material = material;
         _enemyCombat = GetComponent<EnemyCombat>();
         _enemyMovement = GetComponent<EnemyMovement>();
+        _healthComponent = GetComponent<HealthComponent>();
         originalColor = material.color; // Store the original color
+        _healthComponent.afterAttack.AddListener(AfterAttack);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -106,6 +116,16 @@ public class BaseEnemy : MonoBehaviour
         }
 
         // Shake obiektu (np. transform this)
-        shakeTween = transform.DOShakePosition(0.3f, 0.2f, 10, 90, false, true);
+        //shakeTween = transform.DOShakePosition(0.3f, 0.2f, 10, 90, false, true);
+    }
+
+    public void AfterAttack(AttackData ad)
+    {
+        Vector3 direction = transform.position - ad.attacker.transform.position;
+        direction.y = 0f;
+        direction = direction.normalized; 
+        _enemyCombat.PushBack(direction, pushDistance, pushDuration, pushRadius, pushCollisionMask);
+
+
     }
 }

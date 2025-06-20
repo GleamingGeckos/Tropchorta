@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag(targetTag) && !other.isTrigger)
         {
-            if (other.TryGetComponent(out HealthComponent healthComponent) &&
+            if (other.TryGetComponent(out PlayerHealthComponent playerHealthComponent) &&
                 other.TryGetComponent(out PlayerCombat playerCombatComponent) &&
                 other.TryGetComponent(out PlayerMovement playerMovementComponent) &&
                 transform.parent.TryGetComponent(out EnemyMovement enemyMovement) &&
@@ -58,16 +58,20 @@ public class Projectile : MonoBehaviour
                 
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
-                    var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0));
+                    var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0), other.transform);
                     revange.GetComponent<Projectile>().charmType = charmType;
                     enemyMovement.perfectParWasInitiated = false;
-
                 }
                 else if (!playerCombatComponent.isBlocking)
-                    healthComponent.SimpleDamage(new AttackData(damage, charmType));
-            }else if (healthComponent)
+                {
+                    playerHealthComponent.SimpleDamage(new AttackData(transform.parent.gameObject, damage, charmType));
+                }
+            }else if (other.TryGetComponent(out HealthComponent healthComponent) && other.CompareTag("Enemy") && other.TryGetComponent(out EnemyMovement enemyMovement2))
             {
-                healthComponent.SimpleDamage(new AttackData(damage, charmType));
+                if(transform.parent != null && transform.parent.parent != null)
+                    healthComponent.SimpleDamage(new AttackData(transform.parent.parent.gameObject, damage, charmType));
+                else
+                    healthComponent.SimpleDamage(new AttackData(gameObject, damage, charmType));
             }
             Destroy(gameObject);
         }

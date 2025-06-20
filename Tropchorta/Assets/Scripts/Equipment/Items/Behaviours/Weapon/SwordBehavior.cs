@@ -52,8 +52,7 @@ public class SwordBehavior : WeaponBehavior
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
-                Debug.Log("Hit");
-                AttackData attack = new AttackData(damage);
+                AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
                 healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }
@@ -74,7 +73,7 @@ public class SwordBehavior : WeaponBehavior
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
-                AttackData attack = new AttackData(20);
+                AttackData attack = new AttackData(user.gameObject, damage*2, charm.GetCharmType());
                 healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }
@@ -104,7 +103,7 @@ public class SwordBehavior : WeaponBehavior
         {
             if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out HealthComponent healthComponent))
             {
-                AttackData attack = new AttackData(damage);
+                AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
                 healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
             }
         }

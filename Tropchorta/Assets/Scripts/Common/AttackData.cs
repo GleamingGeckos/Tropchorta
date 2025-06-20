@@ -4,15 +4,18 @@ public struct AttackData
 {
     public float damage;
     public CharmType charmType;
+    public GameObject attacker;
 
-    public AttackData(float damage, CharmType charmType = CharmType.None)
+    public AttackData(GameObject attacker, float damage, CharmType charmType = CharmType.None)
     {
+        this.attacker = attacker;
         this.damage = damage;
         this.charmType = charmType;
     }
 
     public AttackData(AttackData attackData)
     {
+        this.attacker = attackData.attacker;
         this.damage = attackData.damage;
         this.charmType = attackData.charmType;
     }

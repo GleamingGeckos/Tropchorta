@@ -14,7 +14,7 @@ public class BowBehavior : WeaponBehavior
 
     public override void UseStart(Transform user, Charm charm)
     {
-        GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, user.rotation);
+        GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, user.rotation, user);
     }
 
     public override void UseStop(Transform user)
@@ -32,7 +32,7 @@ public class BowBehavior : WeaponBehavior
             float angleOffset = (i - middle) * spreadAngle;
             Quaternion rotation = user.rotation * Quaternion.Euler(0, angleOffset, 0);
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
-            GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
+            GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation, user);
         }
     }
 
@@ -66,7 +66,7 @@ public class BowBehavior : WeaponBehavior
             float angleOffset = (i - middle) * spreadAngle;
             Quaternion rotation = user.rotation * Quaternion.Euler(0, angleOffset, 0);
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
-            GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
+            GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation, user);
         }
     }
 

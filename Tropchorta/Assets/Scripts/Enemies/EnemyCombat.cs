@@ -1,9 +1,8 @@
-using System.Collections;
 using DG.Tweening;
-using FMOD;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 public class EnemyCombat : MonoBehaviour
 {
@@ -82,7 +81,7 @@ public class EnemyCombat : MonoBehaviour
         attackCoroutine = StartCoroutine(NormalAttackRoutine());
         StartCoroutine(PerfectBlockWindow());
     }
-    
+
     public void StrongAttack()
     {
         if (isCooldown) return;
@@ -148,9 +147,9 @@ public class EnemyCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) && 
-                _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) && 
-                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) && 
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
+                _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) &&
+                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) &&
                 !_colliders[i].isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
@@ -159,18 +158,17 @@ public class EnemyCombat : MonoBehaviour
                     enemyMovement.Stun();
                     enemyMovement.perfectParWasInitiated = false;
                 }
-                else if(!playerCombatComponent.isBlocking)
-                    healthComponent.SimpleDamage(new AttackData(DealDamage(), _charmType));
+                else if (!playerCombatComponent.isBlocking)
+                    healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _charmType));
             }
         }
-        DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f,0.2f,0.0f), 1f, 1f);
+        DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;
     }
-
 
     private IEnumerator DistanceAttackRoutine()
     {
@@ -211,8 +209,6 @@ public class EnemyCombat : MonoBehaviour
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;
     }
-
-
 
     private IEnumerator StrongAttackRoutine()
     {
@@ -255,7 +251,7 @@ public class EnemyCombat : MonoBehaviour
                 && !_colliders[i].isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
-                healthComponent.SimpleDamage(new AttackData(DealDamage(), _charmType));
+                healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _charmType));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);
@@ -266,10 +262,56 @@ public class EnemyCombat : MonoBehaviour
         isCooldown = false;
     }
 
-
     private void OnDestroy()
     {
         circleTween.Kill();
+        StrongTween.Kill();
+       
+    }
+
+    public void PushBack(Vector3 direction, float distance, float duration, float radius, LayerMask collisionMask)
+    {
+        StartCoroutine(PushBackSmooth(direction, distance, duration, radius, collisionMask));
+    }
+
+    public IEnumerator PushBackSmooth(Vector3 direction, float distance, float duration, float radius, LayerMask collisionMask)
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent == null) yield break;
+
+        agent.isStopped = true;
+        agent.updatePosition = false;
+
+        Transform target = agent.transform;
+        Vector3 start = target.position;
+        Vector3 dir = direction.normalized;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            Vector3 nextPos = Vector3.Lerp(start, start + dir * distance, t);
+
+            if (Physics.SphereCast(start, radius, dir, out RaycastHit hit, Vector3.Distance(start, nextPos), collisionMask))
+            {
+                target.position = hit.point - dir * radius;
+                break;
+            }
+
+            target.position = nextPos;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ustaw koñcow¹ pozycjê tylko jeœli nie by³o kolizji
+        if (!Physics.SphereCast(start, radius, dir, out _, distance, collisionMask))
+        {
+            target.position = start + dir * distance;
+        }
+
+        agent.Warp(target.position);
+        agent.updatePosition = true;
+        agent.isStopped = false;
     }
 
 }

@@ -18,7 +18,7 @@ public class DamageArea : MonoBehaviour
                 var health = other.GetComponent<HealthComponent>();
                 if (health)
                 {
-                    health.SimpleDamage(new AttackData(damageValue, charmType));
+                    health.SimpleDamage(new AttackData(gameObject, damageValue, charmType));
                     lastHitTime = Time.time;
                 }
             }

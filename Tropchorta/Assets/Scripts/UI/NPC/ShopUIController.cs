@@ -19,7 +19,7 @@ public class ShopUIController : MonoBehaviour
     public void ShowShopPanel()
     {
         shopPanel.SetActive(true);
-        PauseController.SetPause(true);
+        //PauseController.SetPause(true);
         //shopController.equipmentController.GetComponentInParent<PlayerMovement>().playerState.state = PlayerState.;
         foreach (GameObject panel in itemPanels)
         {
@@ -33,7 +33,7 @@ public class ShopUIController : MonoBehaviour
     }
     public void HideShopPanel()
     {
-        PauseController.SetPause(false);
+        //PauseController.SetPause(false);
         shopPanel.SetActive(false);
     }
     public void NextItemDisplay()// moves on to the next beast display
