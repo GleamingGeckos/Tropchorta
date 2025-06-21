@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController cc;
     private Vector2 lerpedMove;
     Vector2 mousePosition;
-    bool isSprinting;
+    [NonSerialized] public bool isSprinting;
     Coroutine dashCoroutine = null;
     public bool useMouseRotation;
 
@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSprinting && isMoving)
         {
             hobbyHorseMesh.transform.localScale = new Vector3(1, 1, 1);
+            playerCombat.StopBlocking();
         }
         else
         {
@@ -166,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         playerState.state = PlayerState.Dashing;
+        
         StopFootstepsSound();
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
@@ -175,6 +177,9 @@ public class PlayerMovement : MonoBehaviour
         float dashSpeed = dashDistance / dashDuration;
         float elapsed = 0f;
 
+        modelRootTransform.DOLookAt(modelRootTransform.position + direction, 0.1f);
+
+        
         while (elapsed < dashDuration)
         {
             float t = elapsed / dashDuration;
@@ -194,6 +199,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dashCoroutine == null&&playerState.state != PlayerState.Attacking) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
         {
+            isSprinting = false;
+            PlayerAnimator.SetBool("isSprinting", isSprinting);
+            
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             //playerCombat.StopAttack();

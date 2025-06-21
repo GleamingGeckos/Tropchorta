@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
@@ -25,6 +26,7 @@ public class PlayerCombat : MonoBehaviour
     float attackPressTime;
     [SerializeField] float whenConsiderHoldingAttack = 0.2f;
     [SerializeField] bool isHoldingAttack;
+    [NonSerialized] private bool mouseBeingHeld;
 
     [Header("Combo")]
     [SerializeField] int comboCounter = 0;
@@ -64,6 +66,15 @@ public class PlayerCombat : MonoBehaviour
         playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
+    // private void Update()
+    // {
+    //     if (mouseBeingHeld&&equipmentController.IsDistance())
+    //     {
+    //         movement.RotatePlayerTowardsMouse();
+    //         //no tu trzeba jeszcze ze gracza zatrzymuje w miejscu podczas trzymania i zeby strzalki nie skrecaly jak
+    //         gracz sie obraca 
+    //     }
+    // }
 
     public void Die()
     {
@@ -76,6 +87,7 @@ public class PlayerCombat : MonoBehaviour
     void OnClickStart()
     {
         attackPressTime = Time.time;
+        mouseBeingHeld = true;
         isHoldingAttack = false;
     }
 
@@ -83,6 +95,7 @@ public class PlayerCombat : MonoBehaviour
     {
         float pressDuration = Time.time - attackPressTime;
         isHoldingAttack = pressDuration > whenConsiderHoldingAttack; 
+        mouseBeingHeld = false;
 
         if (playerState.state == PlayerState.DisableInput) return;
         if (!canAttack) return;
@@ -103,6 +116,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(comboAttackTime);
         isWindowOpen = false;
     }
+    
 
     public void Attack()
     {
@@ -131,9 +145,12 @@ public class PlayerCombat : MonoBehaviour
         comboCorutine = StartCoroutine(ComboWindow());
         comboCounter++;
         playerState.state = PlayerState.Attacking;
-        //movement.WeaponAnimator.SetBool("canExitAttack", false);
+        movement.isSprinting = false;
         movement.PlayerAnimator.SetBool("canExitAttack", false);
-        movement.RotatePlayerTowardsMouse();
+        if (equipmentController.IsDistance())
+        {
+            movement.RotatePlayerTowardsMouse();
+        }
         movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
        // movement.WeaponAnimator.SetTrigger("atakTrigger");
     }
@@ -217,7 +234,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartBlocking()
     {
-        if (playerState.state == PlayerState.DisableInput) return;
+        if (playerState.state == PlayerState.DisableInput||movement.isSprinting) return;
         isBlocking = true;
         //movement.WeaponAnimator.SetBool("isBlocking", true);
         movement.PlayerAnimator.SetBool("isBlocking", true);
