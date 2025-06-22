@@ -19,3 +19,6 @@ MonoBehaviour:
   itemPrice: 100
   justDrop: 0
   charmType: 2
+  armorReductionProcent: 0.5
+  weaponAmplificationMultiplier: 2
+  weaponSwardCharm: {fileID: 2397760560179252254, guid: 9d9b3288a2a1c8d4eb74c91a8c0aa733, type: 3}

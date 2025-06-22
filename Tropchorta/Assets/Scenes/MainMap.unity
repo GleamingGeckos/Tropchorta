@@ -9298,6 +9298,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8627019436336382381, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: m_TagString
+      value: Effect
+      objectReference: {fileID: 0}
     - target: {fileID: 9048358294829012902, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_Constraints
       value: 12
@@ -9307,6 +9311,7 @@ PrefabInstance:
     - {fileID: 8096527129367242504, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
     - {fileID: 7991280585935095316, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
     - {fileID: 3206698616620232873, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+    - {fileID: 3122145497025409451, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}

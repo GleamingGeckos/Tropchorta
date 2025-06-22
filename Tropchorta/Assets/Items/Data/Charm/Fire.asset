@@ -17,4 +17,8 @@ MonoBehaviour:
   description: 'Fire! Fire! Fire! '
   itemPrefab: {fileID: 5505681420328838874, guid: fbc277cddda13bf4c81dc6d44cbd8350, type: 3}
   itemPrice: 100
+  justDrop: 0
   charmType: 1
+  armorReductionProcent: 0.5
+  weaponAmplificationMultiplier: 2
+  weaponSwardCharm: {fileID: 2397760560179252254, guid: 09081e486295be8409db0ce3ba9054f4, type: 3}

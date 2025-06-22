@@ -20,4 +20,5 @@ MonoBehaviour:
   justDrop: 0
   charmType: 3
   armorReductionProcent: 0.5
-  weaponAmplificationMultiplier: 0
+  weaponAmplificationMultiplier: 1
+  weaponSwardCharm: {fileID: 2397760560179252254, guid: d58cc1d316480ec4499b5812ad016ec7, type: 3}

@@ -62,7 +62,7 @@ public class EquipmentController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            UseWeaponStart(transform);
+            //UseWeaponStart(transform);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -290,6 +290,14 @@ public class EquipmentController : MonoBehaviour
     {
         if (canSwitch && scroll != 0f)
         {
+            if (usedWeapon is Weapon weapon)
+            {
+                weapon.ClearData(transform.parent);
+            }
+            if (inactiveWeapon is Weapon weapon1)
+            {
+                weapon1.Initialize(transform.parent);
+            }
             Item tmpItem = usedWeapon;
             usedWeapon = inactiveWeapon;
             inactiveWeapon = tmpItem;

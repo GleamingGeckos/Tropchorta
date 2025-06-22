@@ -8,6 +8,8 @@ public class Weapon : Item
 
     public void Initialize(Transform user)
     {
+        if(charm != null)
+            charm.EnableCharmEffect(user);
         foreach (var behavior in weaponBehaviors)
         {
             behavior?.Initialize(user);
@@ -71,6 +73,10 @@ public class Weapon : Item
 
     public void ClearData(Transform user)
     {
+        if (charm != null)
+        {
+            charm.DisableCharmEffect();
+        }
         foreach (var behavior in weaponBehaviors)
         {
             behavior?.ClearData(user);

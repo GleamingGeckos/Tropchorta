@@ -10,6 +10,7 @@ public class BowBehavior : WeaponBehavior
     {
         // Debug.Log("Setting player in SwordBehavior");
         playerCombat = user.GetComponent<PlayerCombat>();
+
     }
 
     public override void UseStart(Transform user, Charm charm)

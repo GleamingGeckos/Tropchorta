@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class EnemyCombat : MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] CharmType _charmType;
+    [SerializeField] CharmType _attackCharm;
+    public CharmType AttackCharm => _attackCharm; 
+    [SerializeField] private CharmType _weakToCharm;
+
+    public CharmType WeakToCharm => _weakToCharm;
     [SerializeField] int _maxDamage;//inclusive
     [SerializeField] int _minDamage;//inclusive
 
@@ -159,7 +163,7 @@ public class EnemyCombat : MonoBehaviour
                     enemyMovement.perfectParWasInitiated = false;
                 }
                 else if (!playerCombatComponent.isBlocking)
-                    healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _charmType));
+                    healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
@@ -202,7 +206,7 @@ public class EnemyCombat : MonoBehaviour
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
-        arrow.GetComponent<Projectile>().charmType = _charmType;
+        arrow.GetComponent<Projectile>().charmType = _attackCharm;
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
@@ -251,7 +255,7 @@ public class EnemyCombat : MonoBehaviour
                 && !_colliders[i].isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
-                healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _charmType));
+                healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);
@@ -266,7 +270,6 @@ public class EnemyCombat : MonoBehaviour
     {
         circleTween.Kill();
         StrongTween.Kill();
-       
     }
 
     public void PushBack(Vector3 direction, float distance, float duration, float radius, LayerMask collisionMask)

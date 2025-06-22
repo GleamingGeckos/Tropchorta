@@ -977,6 +977,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyPrefab: {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 0
+  pushDistance: 1
+  pushDuration: 0.1
+  pushRadius: 1
+  pushCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5642331688653515415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
+  currentHealth: 0
   isInvulnerable: 0
   onDamageTaken:
     m_PersistentCalls:
@@ -1027,6 +1034,9 @@ MonoBehaviour:
   onAttacked:
     m_PersistentCalls:
       m_Calls: []
+  afterAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &610599233900547432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,7 +1049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charmType: 1
+  _attackCharm: 0
+  _weakToCharm: 1
   _maxDamage: 2
   _minDamage: 5
   _howLongAttackDealsDamage: 0

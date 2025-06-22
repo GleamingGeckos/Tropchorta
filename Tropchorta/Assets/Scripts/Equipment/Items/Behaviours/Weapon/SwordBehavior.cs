@@ -40,7 +40,7 @@ public class SwordBehavior : WeaponBehavior
 
     public override void ClearData(Transform user)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void UseStart(Transform user, Charm charm)
@@ -50,10 +50,10 @@ public class SwordBehavior : WeaponBehavior
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && colliders[i].TryGetComponent(out EnemyCombat enemyCombat) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
                 AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
-                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
+                healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 2f, 1f);
@@ -71,10 +71,10 @@ public class SwordBehavior : WeaponBehavior
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
+            if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && colliders[i].TryGetComponent(out EnemyCombat enemyCombat) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
                 AttackData attack = new AttackData(user.gameObject, damage*2, charm.GetCharmType());
-                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
+                healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, 2f, 1f);
@@ -101,10 +101,10 @@ public class SwordBehavior : WeaponBehavior
         Collider[] hitColliders = Physics.OverlapSphere(user.position, radius);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out HealthComponent healthComponent))
+            if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out EnemyCombat enemyCombat) && hitCollider.TryGetComponent(out HealthComponent healthComponent))
             {
                 AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
-                healthComponent.SimpleDamage(charm.CharmEffectOnWeapon(attack));
+                healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
         DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);

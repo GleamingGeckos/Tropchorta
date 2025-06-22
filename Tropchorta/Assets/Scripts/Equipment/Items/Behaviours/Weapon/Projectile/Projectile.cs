@@ -66,12 +66,18 @@ public class Projectile : MonoBehaviour
                 {
                     playerHealthComponent.SimpleDamage(new AttackData(transform.parent.gameObject, damage, charmType));
                 }
-            }else if (other.TryGetComponent(out HealthComponent healthComponent) && other.CompareTag("Enemy") && other.TryGetComponent(out EnemyMovement enemyMovement2))
+            }else if (other.TryGetComponent(out HealthComponent healthComponent) && 
+                other.TryGetComponent(out EnemyCombat enemyCombat) && 
+                other.CompareTag("Enemy") && 
+                other.TryGetComponent(out EnemyMovement enemyMovement2) &&
+                transform.parent.TryGetComponent(out PlayerCombat playerCombatComponent2))
             {
-                if(transform.parent != null && transform.parent.parent != null)
-                    healthComponent.SimpleDamage(new AttackData(transform.parent.parent.gameObject, damage, charmType));
+                AttackData attackData;
+                if (transform.parent != null && transform.parent.parent != null)
+                    attackData = new AttackData(transform.parent.parent.gameObject, damage, charmType);
                 else
-                    healthComponent.SimpleDamage(new AttackData(gameObject, damage, charmType));
+                    attackData = new AttackData(gameObject, damage, charmType);
+                    healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
             Destroy(gameObject);
         }
