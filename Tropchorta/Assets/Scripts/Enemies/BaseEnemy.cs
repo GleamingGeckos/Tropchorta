@@ -13,13 +13,14 @@ public class BaseEnemy : MonoBehaviour
     private float transitionDuration = 1f;
     private Tween colorTween;
     private Tween shakeTween;
-    [SerializeField] GameObject moneyPrefab;
+
+    [SerializeField] GameObject[] spawnPrefabs;
     [SerializeField] bool distance;
 
     //Components
-    private EnemyCombat _enemyCombat;
-    private EnemyMovement _enemyMovement;
-    private HealthComponent _healthComponent;
+    protected EnemyCombat _enemyCombat;
+    protected EnemyMovement _enemyMovement;
+    protected HealthComponent _healthComponent;
 
     [Header("Push on attack")]
     [SerializeField] private float pushDistance = 1.0f;
@@ -27,7 +28,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private float pushRadius = 1.0f;
     [SerializeField] private LayerMask pushCollisionMask = default;
 
-    void Start()
+    protected void Start()
     {
         material = new Material(GetComponentInChildren<Renderer>().sharedMaterial);
         GetComponentInChildren<Renderer>().material = material;
@@ -38,15 +39,7 @@ public class BaseEnemy : MonoBehaviour
         _healthComponent.afterAttack.AddListener(AfterAttack);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // if (collision.gameObject.tag == "Player")
-        // {
-        //     collision.gameObject.GetComponent<HealthComponent>().Damage(_enemyCombat.DealDamage());
-        // }
-    }
-
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
@@ -54,15 +47,15 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && _enemyMovement != null)
         {
             _enemyMovement.StopChasing();   
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    virtual protected void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
@@ -86,7 +79,8 @@ public class BaseEnemy : MonoBehaviour
   
     public void OnDeath()
     {
-        Instantiate(moneyPrefab, transform.position, Quaternion.identity);
+        int index = Random.Range(0, spawnPrefabs.Length);
+        Instantiate(spawnPrefabs[index], transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -125,7 +119,5 @@ public class BaseEnemy : MonoBehaviour
         direction.y = 0f;
         direction = direction.normalized; 
         _enemyCombat.PushBack(direction, pushDistance, pushDuration, pushRadius, pushCollisionMask);
-
-
     }
 }

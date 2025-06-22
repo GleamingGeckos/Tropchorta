@@ -927,9 +927,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415594837180344419}
-  - component: {fileID: 8844228666972589291}
+  - component: {fileID: 4220987893441494779}
   - component: {fileID: 5642331688653515415}
-  - component: {fileID: 610599233900547432}
+  - component: {fileID: 955363162023138436}
   - component: {fileID: 4251304635978395309}
   - component: {fileID: 1510277763940413129}
   - component: {fileID: 9179937011673691299}
@@ -963,7 +963,7 @@ Transform:
   - {fileID: 1798592761695277002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8844228666972589291
+--- !u!114 &4220987893441494779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -972,11 +972,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492043854543673595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536d3b8f1ef045742961eb86e5fb8b01, type: 3}
+  m_Script: {fileID: 11500000, guid: c45504987b002fe4fbc66278b955a50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPrefab: {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
+  spawnPrefabs:
+  - {fileID: 4872426401037227270, guid: 9c9f370de4373e440a4a264135a2a36d, type: 3}
+  - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 0
+  pushDistance: 1
+  pushDuration: 0.1
+  pushRadius: 1
+  pushCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5642331688653515415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,15 +997,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deca46134c6cec042ba7e461e5b8095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
+  maxHealth: 100
   currentHealth: 0
   isInvulnerable: 0
   onDamageTaken:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8844228666972589291}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BaseEnemie, Assembly-CSharp
-        m_MethodName: OnTakeDamage
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1010,9 +1018,9 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8844228666972589291}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BaseEnemie, Assembly-CSharp
-        m_MethodName: OnDeath
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1028,7 +1036,10 @@ MonoBehaviour:
   onAttacked:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &610599233900547432
+  afterAttack:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &955363162023138436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1037,13 +1048,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492043854543673595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 7484c6b740f4f874e8e2f7bd86cf1552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charmType: 2
+  _attackCharm: 1
+  _weakToCharm: 2
   _maxDamage: 15
-  _minDamage: 12
-  _howLongAttackDealsDamage: 0
+  _minDamage: 15
   _intervalsBetweenAttacks: 3
   _excludedLayer:
     serializedVersion: 2
@@ -1057,7 +1068,7 @@ MonoBehaviour:
   _attackCircleImage: {fileID: 6573397796364980083}
   _minCircle: 0.45
   _maxCircle: 1.5
-  _minColorCircle: {r: 0.7264151, g: 0, b: 0, a: 1}
+  _minColorCircle: {r: 0.7254902, g: 0, b: 0, a: 1}
   _maxColorCircle: {r: 0.8980392, g: 0.8235294, b: 0.41960785, a: 1}
   _attackStrongTransform: {fileID: 1209876797446858458}
   _attackStrongImage: {fileID: 4361709780842544851}
@@ -1065,8 +1076,8 @@ MonoBehaviour:
   _maxStrong: {x: 1, y: 2, z: 1}
   animator: {fileID: 355014065761268957}
   timeFromStartToAttackInUnityTimeline: {x: 0, y: 50}
-  offsetFromAnimStartToMovementStop: {x: 0, y: 40}
-  arrowPrefab: {fileID: 0}
+  offsetFromAnimStartToMovementStop: {x: 0, y: 50}
+  arrowPrefab: {fileID: 2032088643122078551, guid: 3c982a6fee1ee394a8a247564962f7ce, type: 3}
 --- !u!114 &4251304635978395309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,9 +1091,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _stoppingDistance: 2
+  _stoppingDistance: 7
   _stunTime: 2
   _stunImage: {fileID: 8028947173684331387}
+  canBeStuned: 0
   isStuned: 0
   perfectParWasInitiated: 0
 --- !u!136 &1510277763940413129
@@ -1154,7 +1166,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &8407367355163870167
 SphereCollider:
@@ -1175,7 +1187,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &355014065761268957
 Animator:

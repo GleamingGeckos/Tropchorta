@@ -7,56 +7,54 @@ using UnityEngine.UI;
 public class EnemyCombat : MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] CharmType _attackCharm;
+    [SerializeField] protected CharmType _attackCharm;
     public CharmType AttackCharm => _attackCharm; 
-    [SerializeField] private CharmType _weakToCharm;
+    [SerializeField] protected CharmType _weakToCharm;
 
     public CharmType WeakToCharm => _weakToCharm;
-    [SerializeField] int _maxDamage;//inclusive
-    [SerializeField] int _minDamage;//inclusive
+    [SerializeField] protected int _maxDamage;//inclusive
+    [SerializeField] protected int _minDamage;//inclusive
 
-    [SerializeField] float _howLongAttackDealsDamage; //TODO
-    [SerializeField] float _intervalsBetweenAttacks;
+    [SerializeField] protected float _intervalsBetweenAttacks;
 
-    Collider[] _colliders = new Collider[16];
-    [SerializeField] LayerMask _excludedLayer;
-    private Coroutine attackCoroutine;
+    protected Collider[] _colliders = new Collider[16];
+    [SerializeField] protected LayerMask _excludedLayer;
+    protected Coroutine attackCoroutine;
 
-    [SerializeField] bool isCooldown = false;
-    [SerializeField, Tooltip("this should be longer than the attack animation itself")] float _cooldownInterval = 3.0f;
+    [SerializeField] protected bool isCooldown = false;
+    [SerializeField, Tooltip("this should be longer than the attack animation itself")] protected float _cooldownInterval = 3.0f;
 
     [Header("Par")]
     [SerializeField] private Vector2 _perfectBlockWindow;
-    Tween circleTween;
-    private float _perfectBlockInSeconds;
+    protected Tween circleTween;
+    protected float _perfectBlockInSeconds;
     public bool isPerfectBlockWindow;
 
     [Header("Normal attack signal")]
-    [SerializeField] private GameObject _circles;
-    [SerializeField] private RectTransform _attackCircleTransform;
-    [SerializeField] private Image _attackCircleImage;
-    [SerializeField] private float _minCircle;
-    [SerializeField] private float _maxCircle;
-    [SerializeField] private Color _minColorCircle;
-    [SerializeField] private Color _maxColorCircle;
+    [SerializeField] protected GameObject _circles;
+    [SerializeField] protected RectTransform _attackCircleTransform;
+    [SerializeField] protected Image _attackCircleImage;
+    [SerializeField] protected float _minCircle;
+    [SerializeField] protected float _maxCircle;
+    [SerializeField] protected Color _minColorCircle;
+    [SerializeField] protected Color _maxColorCircle;
 
     [Header("Strong attack signal")]
-    [SerializeField] private RectTransform _attackStrongTransform;
-    [SerializeField] private Image _attackStrongImage;
-    [SerializeField] private Vector3 _minStrong;
-    [SerializeField] private Vector3 _maxStrong;
+    [SerializeField] protected RectTransform _attackStrongTransform;
+    [SerializeField] protected Image _attackStrongImage;
+    [SerializeField] protected Vector3 _minStrong;
+    [SerializeField] protected Vector3 _maxStrong;
     Tween StrongTween;
 
-    [SerializeField] Animator animator;
+    [SerializeField] protected Animator animator;
 
     [SerializeField, Tooltip("This is a unit from Animation timeline Unit where you input [seconds:...something] and that someting is not ms because it can only reach up to 60. Meaning if an event happens at 1:30 this is treated as 1.5s because the 30 means half a second.")]
     Vector2Int timeFromStartToAttackInUnityTimeline = new Vector2Int(0, 50);
     [SerializeField, Tooltip("Just like variable above, this is in animation timeline units. Specifies when the enemy stops moving from the animation start in timeline units. SHOULD BE LESS THAN timeFromStartToAttackInUnityTimeline.")]
     Vector2Int offsetFromAnimStartToMovementStop = new Vector2Int(0, 50);
-    float moveStopOffset = 0.45f;
-    private float timeToAttackInSeconds = 0f;
-    EnemyMovement enemyMovement;
-
+    protected float moveStopOffset = 0.45f;
+    protected float timeToAttackInSeconds = 0f;
+    protected EnemyMovement enemyMovement;
 
     public GameObject arrowPrefab;
 
@@ -93,7 +91,7 @@ public class EnemyCombat : MonoBehaviour
         StartCoroutine(PerfectBlockWindow());
     }
 
-    public void DistanceAttack(Transform target)
+    public virtual void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
@@ -109,7 +107,7 @@ public class EnemyCombat : MonoBehaviour
         }
     }
 
-    private IEnumerator PerfectBlockWindow()
+    protected IEnumerator PerfectBlockWindow()
     {
         yield return new WaitForSeconds(_cooldownInterval - _perfectBlockInSeconds);
         isPerfectBlockWindow = true;
@@ -174,7 +172,7 @@ public class EnemyCombat : MonoBehaviour
         isCooldown = false;
     }
 
-    private IEnumerator DistanceAttackRoutine(Transform target)
+    protected virtual IEnumerator DistanceAttackRoutine(Transform target)
     {
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
@@ -206,7 +204,7 @@ public class EnemyCombat : MonoBehaviour
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
-        arrow.GetComponent<Projectile>().Initialize(target, _attackCharm);
+        arrow.GetComponent<Projectile>().Initialize(target, _attackCharm, DealDamage());
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 

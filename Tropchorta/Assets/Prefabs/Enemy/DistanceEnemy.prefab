@@ -975,8 +975,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536d3b8f1ef045742961eb86e5fb8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPrefab: {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
+  spawnPrefabs:
+  - {fileID: 4872426401037227270, guid: 9c9f370de4373e440a4a264135a2a36d, type: 3}
+  - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 1
+  pushDistance: 1
+  pushDuration: 0.1
+  pushRadius: 1
+  pushCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5642331688653515415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,6 +1036,9 @@ MonoBehaviour:
   onAttacked:
     m_PersistentCalls:
       m_Calls: []
+  afterAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &610599233900547432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,7 +1051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853b91b0200dd2e44a9ead62ad2fd0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charmType: 3
+  _attackCharm: 0
+  _weakToCharm: 0
   _maxDamage: 2
   _minDamage: 5
   _howLongAttackDealsDamage: 0
@@ -1154,7 +1166,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 8
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &8407367355163870167
 SphereCollider:
@@ -1175,7 +1187,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &355014065761268957
 Animator:

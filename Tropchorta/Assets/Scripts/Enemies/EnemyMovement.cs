@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float _stunTime = 0.5f;
     [SerializeField] Image _stunImage;
 
+    public bool canBeStuned = true;
     public bool isStuned = false;
     public bool perfectParWasInitiated = false;
     bool _isChasing = false;
@@ -56,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Stun()
     {
-        if (_isChasing)
+        if (_isChasing && canBeStuned)
         {
             perfectParWasInitiated = false;
             isStuned = true;

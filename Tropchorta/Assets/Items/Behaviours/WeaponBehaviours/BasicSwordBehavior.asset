@@ -15,4 +15,4 @@ MonoBehaviour:
   damage: 10
   attackRadius: 1
   specialAttackRadius: 1.5
-  attackDistanceFromPlayer: 2.5
+  attackDistanceFromPlayer: 2
