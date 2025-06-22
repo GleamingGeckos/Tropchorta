@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,16 +16,21 @@ public class EquipmentController : MonoBehaviour
     [Header("Possessed Items")]
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
-    [SerializeField] Item helmet;
+    [SerializeField] Item weaponCharm;
+    // add charm for weapon
+    [SerializeField] Item helmet;//
     [SerializeField] Item breastplate;
-    [SerializeField] Item pants;
-    [SerializeField] Item shoes;
+    [SerializeField] Item pants;//
+    [SerializeField] Item shoes;//
     [SerializeField] List<ClueItem> clueItems;
+    [SerializeField] List<Item> additionalItems; // items held in the inventory(different from the ones that user is currently using)
+
 
     private bool canSwitch = true;
 
-    [Header("UI Controller")]
+    [Header("UI Controllers")]
     [SerializeField] EquipmentUIController equipmentUIController;
+    [SerializeField] EquipmentBackpackUIController equipmentBackpackUIController;
 
     private void Start()
     {
@@ -303,6 +308,8 @@ public class EquipmentController : MonoBehaviour
             inactiveWeapon = tmpItem;
             equipmentUIController.ChangeWeapon1Image(usedWeapon);
             equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+            equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+            equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
             canSwitch = false;
         }
         else if (scroll == 0f)
@@ -320,51 +327,108 @@ public class EquipmentController : MonoBehaviour
         // if item is null, this is also null
         var item = itemController?.GetItem();
 
+        int additionalSpace = IsAdditionalItemSpaceAvailable();
+
         switch (item)
         {
             case Weapon weapon:
-                DropWeapon();
                 Debug.Log($"Picking up weapon: {weapon.itemName}");
-                interactedItems.Remove(lastInteractedItem);
-                usedWeapon = itemController.PickUpItem();
-                equipmentUIController.ChangeWeapon1Image(usedWeapon);
-                equipmentUIController.HideLastInteractedItemDisplay();
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay(); 
+                }
+                else
+                {
+                    DropWeapon();
+                    interactedItems.Remove(lastInteractedItem);
+                    usedWeapon = itemController.PickUpItem();
+                    equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                    equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
                 break;
 
             case Helmet helm:
-                DropHelmet();
-                Debug.Log($"Picking up helmet: {helm.itemName}");
-                interactedItems.Remove(lastInteractedItem);
-                helmet = itemController.PickUpItem();
-                equipmentUIController.ChangeHeadImage(helmet);
-                equipmentUIController.HideLastInteractedItemDisplay();
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                else
+                {
+                    DropHelmet();
+                    Debug.Log($"Picking up helmet: {helm.itemName}");
+                    interactedItems.Remove(lastInteractedItem);
+                    helmet = itemController.PickUpItem();
+                    equipmentUIController.ChangeHeadImage(helmet);
+                    equipmentBackpackUIController.ChangeHeadImage(helmet);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
                 break;
 
             case Breastplate breastp:
-                DropBreastplate();
                 Debug.Log($"Picking up breastplate: {breastp.itemName}");
-                interactedItems.Remove(lastInteractedItem);
-                breastplate = itemController.PickUpItem();
-                equipmentUIController.ChangeTorsoImage(breastplate);
-                equipmentUIController.HideLastInteractedItemDisplay();
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                else
+                {
+                    DropBreastplate();
+                    interactedItems.Remove(lastInteractedItem);
+                    breastplate = itemController.PickUpItem();
+                    equipmentUIController.ChangeTorsoImage(breastplate);
+                    equipmentBackpackUIController.ChangeTorsoImage(breastplate);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
                 break;
 
             case Pants pant:
-                DropPants();
-                Debug.Log($"Picking up pants: {pant.itemName}");
-                interactedItems.Remove(lastInteractedItem);
-                pants = itemController.PickUpItem();
-                equipmentUIController.ChangePantsImage(pants);
-                equipmentUIController.HideLastInteractedItemDisplay();
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                else
+                {
+                    DropPants();
+                    Debug.Log($"Picking up pants: {pant.itemName}");
+                    interactedItems.Remove(lastInteractedItem);
+                    pants = itemController.PickUpItem();
+                    equipmentUIController.ChangePantsImage(pants);
+                    equipmentBackpackUIController.ChangePantsImage(pants);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
                 break;
 
             case Shoes shoe:
-                DropShoes();
-                Debug.Log($"Picking up shoes: {shoe.itemName}");
-                interactedItems.Remove(lastInteractedItem);
-                shoes = itemController.PickUpItem();
-                equipmentUIController.ChangeShoesImage(shoes);
-                equipmentUIController.HideLastInteractedItemDisplay();
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                else
+                {
+                    DropShoes();
+                    Debug.Log($"Picking up shoes: {shoe.itemName}");
+                    interactedItems.Remove(lastInteractedItem);
+                    shoes = itemController.PickUpItem();
+                    equipmentUIController.ChangeShoesImage(shoes);
+                    equipmentBackpackUIController.ChangeShoesImage(shoes);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
                 break;
 
             case ClueItem clueItem:
@@ -378,6 +442,7 @@ public class EquipmentController : MonoBehaviour
                 Debug.Log("Item type is not supported");
                 break;
         }
+        DisplayItems();
     }
 
     public Charm GetDefensiveCharm()
@@ -499,6 +564,13 @@ public class EquipmentController : MonoBehaviour
         equipmentUIController.ChangeShoesImage(shoes);
         equipmentUIController.ChangeWeapon1Image(usedWeapon);
         equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+        equipmentBackpackUIController.ChangeHeadImage(helmet);
+        equipmentBackpackUIController.ChangeTorsoImage(breastplate);
+        equipmentBackpackUIController.ChangePantsImage(pants);
+        equipmentBackpackUIController.ChangeShoesImage(shoes);
+        equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+        equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
+        equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
     }
 
     public bool HasClueItem(ClueItem clueItem)
@@ -523,6 +595,7 @@ public class EquipmentController : MonoBehaviour
                 usedWeapon = item;
                 Debug.Log($"Switching weapon: {weapon.itemName}");
                 equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
                 return tmpItem;
 
             case Helmet helm:
@@ -530,6 +603,7 @@ public class EquipmentController : MonoBehaviour
                 helmet = item;
                 Debug.Log($"Switching helmet: {helm.itemName}");
                 equipmentUIController.ChangeHeadImage(helmet);
+                equipmentBackpackUIController.ChangeHeadImage(helmet);
                 return tmpItem;
 
             case Breastplate breastp:
@@ -537,6 +611,7 @@ public class EquipmentController : MonoBehaviour
                 breastplate = item;
                 Debug.Log($"Switching breastplate: {breastp.itemName}");
                 equipmentUIController.ChangeTorsoImage(breastplate);
+                equipmentBackpackUIController.ChangeTorsoImage(breastplate);
                 return tmpItem;
 
             case Pants pant:
@@ -544,6 +619,7 @@ public class EquipmentController : MonoBehaviour
                 pants = item;
                 Debug.Log($"Switching pants: {pant.itemName}");
                 equipmentUIController.ChangePantsImage(pants);
+                equipmentBackpackUIController.ChangePantsImage(pants);
                 return tmpItem;
 
             case Shoes shoe:
@@ -551,6 +627,7 @@ public class EquipmentController : MonoBehaviour
                 shoes = item;
                 Debug.Log($"Switching shoes: {shoe.itemName}");
                 equipmentUIController.ChangeShoesImage(shoes);
+                equipmentBackpackUIController.ChangeShoesImage(shoes);
                 return tmpItem;
 
             case ClueItem clueItem:
@@ -563,4 +640,124 @@ public class EquipmentController : MonoBehaviour
                 return null;
         }
     }
+
+    public void SwitchAdditionalItem(int firstIndex,int secondIndex) 
+    /*
+     * first index is of the dragged item in the display
+     * switches addition item either with one used by player or one within backpack itself
+     * backpack items indexes start from 100 and go on from there
+     * 0 - weapon 1, 1 - weapon 2, 2 - helmet, 3 - breastplate, 4 - pants, 5 - shoes
+     */
+    {
+        bool isFirstEquipped = firstIndex < 100;
+        bool isSecondEquipped = secondIndex < 100;
+
+        Item GetEquippedItem(int index)
+        {
+            return index switch
+            {
+                0 => usedWeapon,
+                1 => inactiveWeapon,
+                2 => helmet,
+                3 => breastplate,
+                4 => pants,
+                5 => shoes,
+                _ => null
+            };
+        }
+
+        void SetEquippedItem(int index, Item item)
+        {
+            switch (index)
+            {
+                case 0: usedWeapon = item; break;
+                case 1: inactiveWeapon = item; break;
+                case 2: helmet = item; break;
+                case 3: breastplate = item; break;
+                case 4: pants = item; break;
+                case 5: shoes = item; break;
+            }
+        }
+
+        bool IsItemValidForSlot(int index, Item item)
+        {
+            if (item == null) return true; // Allow setting null (empty) into any slot
+            return index switch
+            {
+                0 or 1 => item is Weapon,
+                2 => item is Helmet,
+                3 => item is Breastplate,
+                4 => item is Pants,
+                5 => item is Shoes,
+                _ => false
+            };
+        }
+
+        if (isFirstEquipped && isSecondEquipped)
+        {
+            // Equipped ↔ Equipped
+            Item item1 = GetEquippedItem(firstIndex);
+            Item item2 = GetEquippedItem(secondIndex);
+
+            if (IsItemValidForSlot(firstIndex, item2) && IsItemValidForSlot(secondIndex, item1))
+            {
+                SetEquippedItem(firstIndex, item2);
+                SetEquippedItem(secondIndex, item1);
+            }
+            else
+            {
+                Debug.LogWarning("Item type mismatch in equipped ↔ equipped switch.");
+            }
+        }
+        else if (!isFirstEquipped && !isSecondEquipped)
+        {
+            // Backpack ↔ Backpack
+            Item tmp = additionalItems[firstIndex - 100];
+            additionalItems[firstIndex - 100] = additionalItems[secondIndex - 100];
+            additionalItems[secondIndex - 100] = tmp;
+        }
+        else
+        {
+            // Equipped ↔ Backpack
+            int equippedIndex = isFirstEquipped ? firstIndex : secondIndex;
+            int backpackIndex = isFirstEquipped ? secondIndex - 100 : firstIndex - 100;
+
+            Item equippedItem = GetEquippedItem(equippedIndex);
+            Item backpackItem = (backpackIndex < additionalItems.Count) ? additionalItems[backpackIndex] : null;
+
+            if (IsItemValidForSlot(equippedIndex, backpackItem))
+            {
+                // Make sure the backpack has room for the item we're placing back
+                if (backpackIndex >= additionalItems.Count)
+                {
+                    // Extend the list to accommodate index
+                    while (additionalItems.Count <= backpackIndex)
+                    {
+                        additionalItems.Add(null);
+                    }
+                }
+
+                SetEquippedItem(equippedIndex, backpackItem);
+                additionalItems[backpackIndex] = equippedItem;
+            }
+            else
+            {
+                Debug.LogWarning($"Cannot place item '{backpackItem?.itemName}' into equipped slot {equippedIndex}: incompatible type.");
+            }
+        }
+        DisplayItems();
+    }
+
+    int IsAdditionalItemSpaceAvailable()
+    {
+        for (int i = 0; i < additionalItems.Count; i++)
+        {
+            if (additionalItems[i] == null)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
