@@ -280,7 +280,7 @@ public class EnemyCombat : MonoBehaviour
     public IEnumerator PushBackSmooth(Vector3 direction, float distance, float duration, float radius, LayerMask collisionMask)
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent == null) yield break;
+        if (agent == null || !agent.isOnNavMesh) yield break;
 
         agent.isStopped = true;
         agent.updatePosition = false;
@@ -288,6 +288,7 @@ public class EnemyCombat : MonoBehaviour
         Transform target = agent.transform;
         Vector3 start = target.position;
         Vector3 dir = direction.normalized;
+        Vector3 pos = target.position;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -297,11 +298,11 @@ public class EnemyCombat : MonoBehaviour
 
             if (Physics.SphereCast(start, radius, dir, out RaycastHit hit, Vector3.Distance(start, nextPos), collisionMask))
             {
-                target.position = hit.point - dir * radius;
+                pos = hit.point - dir * radius;
                 break;
             }
 
-            target.position = nextPos;
+            pos = nextPos;
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -309,10 +310,10 @@ public class EnemyCombat : MonoBehaviour
         // Ustaw koñcow¹ pozycjê tylko jeœli nie by³o kolizji
         if (!Physics.SphereCast(start, radius, dir, out _, distance, collisionMask))
         {
-            target.position = start + dir * distance;
+            pos = start + dir * distance;
         }
 
-        agent.Warp(target.position);
+        agent.Warp(pos);
         agent.updatePosition = true;
         agent.isStopped = false;
     }
