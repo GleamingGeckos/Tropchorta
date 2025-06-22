@@ -17,7 +17,6 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Item usedWeapon;
     [SerializeField] Item inactiveWeapon;
     [SerializeField] Item weaponCharm;
-    // add charm for weapon
     [SerializeField] Item helmet;//
     [SerializeField] Item breastplate;
     [SerializeField] Item pants;//
@@ -431,6 +430,25 @@ public class EquipmentController : MonoBehaviour
                 }
                 break;
 
+            case Charm charm:
+                if (additionalSpace >= 0)
+                {
+                    additionalItems[additionalSpace] = item;
+                    itemController.PickUpItem();
+                    interactedItems.Remove(lastInteractedItem);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                else
+                {
+                    DropCharm();
+                    interactedItems.Remove(lastInteractedItem);
+                    shoes = itemController.PickUpItem();
+                    equipmentUIController.ChangeCharmImage(charm);
+                    equipmentBackpackUIController.ChangeCharmImage(charm);
+                    equipmentUIController.HideLastInteractedItemDisplay();
+                }
+                break;
+
             case ClueItem clueItem:
                 Debug.Log($"Picking up shoes: {clueItem.itemName}");
                 interactedItems.Remove(lastInteractedItem);
@@ -511,11 +529,13 @@ public class EquipmentController : MonoBehaviour
         //    Debug.LogWarning("No shoes equipped.");
         //}
     }
+
     void DropWeapon()
     {
         SpawnItem(usedWeapon, transform.position);
         usedWeapon = null;
     }
+
     void DropHelmet()
     {
         SpawnItem(helmet, transform.position);
@@ -539,6 +559,13 @@ public class EquipmentController : MonoBehaviour
         SpawnItem(shoes, transform.position);
         shoes = null;
     }
+
+    void DropCharm()
+    {
+        SpawnItem(weaponCharm, transform.position);
+        weaponCharm = null;
+    }
+
     public void SpawnItem(Item item, Vector3 position)
     {
         if (item != null)
@@ -558,19 +585,21 @@ public class EquipmentController : MonoBehaviour
 
     void DisplayItems()
     {
-        equipmentUIController.ChangeHeadImage(helmet);
+        //equipmentUIController.ChangeHeadImage(helmet);
+        //equipmentUIController.ChangePantsImage(pants);
+        //equipmentUIController.ChangeShoesImage(shoes);
         equipmentUIController.ChangeTorsoImage(breastplate);
-        equipmentUIController.ChangePantsImage(pants);
-        equipmentUIController.ChangeShoesImage(shoes);
         equipmentUIController.ChangeWeapon1Image(usedWeapon);
         equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
-        equipmentBackpackUIController.ChangeHeadImage(helmet);
+        equipmentUIController.ChangeCharmImage(weaponCharm);
+        //equipmentBackpackUIController.ChangeHeadImage(helmet);
+        //equipmentBackpackUIController.ChangePantsImage(pants);
+        //equipmentBackpackUIController.ChangeShoesImage(shoes);
         equipmentBackpackUIController.ChangeTorsoImage(breastplate);
-        equipmentBackpackUIController.ChangePantsImage(pants);
-        equipmentBackpackUIController.ChangeShoesImage(shoes);
         equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
         equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
         equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
+        equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
     }
 
     public bool HasClueItem(ClueItem clueItem)
@@ -628,6 +657,13 @@ public class EquipmentController : MonoBehaviour
                 Debug.Log($"Switching shoes: {shoe.itemName}");
                 equipmentUIController.ChangeShoesImage(shoes);
                 equipmentBackpackUIController.ChangeShoesImage(shoes);
+                return tmpItem;
+
+            case Charm charm:
+                tmpItem = charm;
+                weaponCharm = item;
+                equipmentUIController.ChangeShoesImage(weaponCharm);
+                equipmentBackpackUIController.ChangeShoesImage(weaponCharm);
                 return tmpItem;
 
             case ClueItem clueItem:

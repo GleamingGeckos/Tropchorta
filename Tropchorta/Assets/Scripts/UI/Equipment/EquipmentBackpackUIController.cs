@@ -13,6 +13,7 @@ public class EquipmentBackpackUIController : MonoBehaviour
     [SerializeField] Image shoesImage;
     [SerializeField] Image weapon1Image;
     [SerializeField] Image weapon2Image;
+    [SerializeField] Image charmImage;
     [SerializeField] List<Image> backpackImages;
 
     [SerializeField] GameObject itemHighlightPanel;
@@ -103,6 +104,18 @@ public class EquipmentBackpackUIController : MonoBehaviour
         }
     }
 
+    public void ChangeCharmImage(Item item)
+    {
+        if (charmImage != null && item != null && item.icon != null)
+        {
+            charmImage.sprite = item.icon;
+        }
+        else if (item == null)
+        {
+            charmImage.sprite = null;
+        }
+    }
+
     public void ChangeBackpackImages(List<Item> items)
     {
         for (int i = 0; i < items.Count; i++)
@@ -117,7 +130,6 @@ public class EquipmentBackpackUIController : MonoBehaviour
             }
         }
     }
-    
 
     public void HighlightItem(Item item)
     {

@@ -3,18 +3,18 @@ using UnityEngine.UI;
 using TMPro;
 public class EquipmentUIController : MonoBehaviour
 {
-    public EquipmentController equipmentController;
-    public Image headImage;
-    public Image torsoImage;
-    public Image pantsImage;
-    public Image shoesImage;
-    public Image weapon1Image;
-    public Image weapon2Image;
-
-    public GameObject lastinteractedItemPanel;
-    public Image interactedItemImage;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
+    [SerializeField] EquipmentController equipmentController;
+    [SerializeField] Image headImage;
+    [SerializeField] Image torsoImage;
+    [SerializeField] Image pantsImage;
+    [SerializeField] Image shoesImage;
+    [SerializeField] Image charmImage;
+    [SerializeField] Image weapon1Image;
+    [SerializeField] Image weapon2Image;
+    [SerializeField] GameObject lastinteractedItemPanel;
+    [SerializeField] Image interactedItemImage;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI descriptionText;
 
     public void ChangeHeadImage(Item item)
     {
@@ -61,6 +61,14 @@ public class EquipmentUIController : MonoBehaviour
         if (weapon2Image != null && item != null && item.icon != null)
         {
             weapon2Image.sprite = item.icon;
+        }
+    }
+
+    public void ChangeCharmImage(Item item)
+    {
+        if (charmImage != null && item != null && item.icon != null)
+        {
+            charmImage.sprite = item.icon;
         }
     }
 
