@@ -5,7 +5,9 @@ using UnityEngine;
 public class SwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 10;
-    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackRadius = 1.0f;
+    [SerializeField] private float specialAttackRadius = 1.5f;
+    [SerializeField] private float attackDistanceFromPlayer = 2.5f;
     private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
 
     public override void Initialize(Transform user)
@@ -28,11 +30,11 @@ public class SwordBehavior : WeaponBehavior
     }
     public float AttackRange
     {
-        get => attackRange;
+        get => specialAttackRadius;
         set
         {
             if (value >= 0)
-                attackRange = value;
+                specialAttackRadius = value;
             else
                 Debug.LogWarning("Attack Range cannot be negative.");
         }
@@ -45,8 +47,8 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseStart(Transform user, Charm charm)
     {
-        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * attackRadius * attackDistanceFromPlayer;
+        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, attackRadius, colliders); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
@@ -56,7 +58,7 @@ public class SwordBehavior : WeaponBehavior
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
-        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, 2f, 1f);
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, attackRadius, 1f);
     }
 
     public override void UseStop(Transform user)
@@ -66,8 +68,8 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseStrongStart(Transform user, Charm charm)
     {
-        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, 2f, colliders); // TODO : layermask for damageable objects or enemies?
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * attackRadius * attackDistanceFromPlayer;
+        int hits = Physics.OverlapSphereNonAlloc(user.position + rotatingOffset, attackRadius, colliders); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
@@ -77,7 +79,7 @@ public class SwordBehavior : WeaponBehavior
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
-        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, 2f, 1f);
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, attackRadius, 1f);
     }
 
     public override void UseStrongStop(Transform user)
@@ -97,17 +99,18 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseSpecialAttack(Transform user, Charm charm)
     {
-        float radius = attackRange * 2.0f;
-        Collider[] hitColliders = Physics.OverlapSphere(user.position, radius);
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * specialAttackRadius * attackDistanceFromPlayer;
+        float radius = specialAttackRadius;
+        Collider[] hitColliders = Physics.OverlapSphere(user.position + rotatingOffset, radius);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out EnemyCombat enemyCombat) && hitCollider.TryGetComponent(out HealthComponent healthComponent))
+            if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out EnemyCombat enemyCombat) && hitCollider.TryGetComponent(out HealthComponent healthComponent) && !hitCollider.isTrigger)
             {
-                AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
+                AttackData attack = new AttackData(user.gameObject, damage*3, charm.GetCharmType());
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
-        DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
+        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.blue, radius, 1f);
 
     }
 

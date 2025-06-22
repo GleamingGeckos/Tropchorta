@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b4ea23a3ee7d1643bcd780a37baa101, type: 3}
-  m_Name: TestWeapon
+  m_Name: BaseSword
   m_EditorClassIdentifier: 
   itemName: Stick
   icon: {fileID: 21300000, guid: 96481751c3628b54d8462cca6526d4f7, type: 3}

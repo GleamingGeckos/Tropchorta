@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BasicSwordBehavior
   m_EditorClassIdentifier: 
   damage: 10
-  attackRange: 1.5
-  blockPower: 0.845
+  attackRadius: 1
+  specialAttackRadius: 1.5
+  attackDistanceFromPlayer: 2.5

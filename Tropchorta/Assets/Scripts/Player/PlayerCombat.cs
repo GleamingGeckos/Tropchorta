@@ -120,9 +120,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void Attack()
     {
-        //Cheeeeeesing the anim lag
-         // movement.PlayerAnimator.SetBool("isMoving", false);
-         // movement.WeaponAnimator.SetBool("isMoving", false);
         if (isHoldingAttack) {
             equipmentController.UseWeaponStrongStart(rotatingRootTransform);
         }
@@ -147,10 +144,7 @@ public class PlayerCombat : MonoBehaviour
         playerState.state = PlayerState.Attacking;
         movement.isSprinting = false;
         movement.PlayerAnimator.SetBool("canExitAttack", false);
-        if (equipmentController.IsDistance())
-        {
-            movement.RotatePlayerTowardsMouse();
-        }
+        movement.RotatePlayerTowardsMouse();
         movement.PlayerAnimator.SetTrigger("attackTriggerPlayer");
        // movement.WeaponAnimator.SetTrigger("atakTrigger");
     }
