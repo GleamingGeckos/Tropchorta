@@ -78,7 +78,7 @@ public class BaseEnemy : MonoBehaviour
             }
             else if (distance)
             {
-                _enemyCombat.DistanceAttack();
+                _enemyCombat.DistanceAttack(other.transform);
             }
             _enemyMovement.RotateTowards(player);
         }

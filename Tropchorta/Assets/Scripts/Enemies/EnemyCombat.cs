@@ -93,10 +93,10 @@ public class EnemyCombat : MonoBehaviour
         StartCoroutine(PerfectBlockWindow());
     }
 
-    public void DistanceAttack()
+    public void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
-        attackCoroutine = StartCoroutine(DistanceAttackRoutine());
+        attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
         StartCoroutine(PerfectBlockWindow());
     }
 
@@ -174,7 +174,7 @@ public class EnemyCombat : MonoBehaviour
         isCooldown = false;
     }
 
-    private IEnumerator DistanceAttackRoutine()
+    private IEnumerator DistanceAttackRoutine(Transform target)
     {
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
@@ -206,7 +206,7 @@ public class EnemyCombat : MonoBehaviour
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
-        arrow.GetComponent<Projectile>().charmType = _attackCharm;
+        arrow.GetComponent<Projectile>().Initialize(target, _attackCharm);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 

@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float lifetime = 2f;
     public int damage = 10;
     public string targetTag = "Enemy";
+    private Transform _target;
 
     float currentSpeed;
     [SerializeField] private float motionScale = 1f;
@@ -24,6 +25,12 @@ public class Projectile : MonoBehaviour
     [Header("For Enemy only")]
     [SerializeField] private GameObject _arrowForPar;
 
+    public void Initialize(Transform target, CharmType charmType)
+    {
+        _target = target;
+        this.charmType = charmType;
+    }
+
     void Start()
     {
         currentSpeed = speed;
@@ -32,6 +39,11 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (_target != null)
+        {
+            Vector3 direction = (_target.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
         motionTime += Time.deltaTime * motionSpeed;
 
         float offsetX = motionCurveX.Evaluate((motionTime)%1) * motionScale;
@@ -69,15 +81,15 @@ public class Projectile : MonoBehaviour
             }else if (other.TryGetComponent(out HealthComponent healthComponent) && 
                 other.TryGetComponent(out EnemyCombat enemyCombat) && 
                 other.CompareTag("Enemy") && 
-                other.TryGetComponent(out EnemyMovement enemyMovement2) &&
-                transform.parent.TryGetComponent(out PlayerCombat playerCombatComponent2))
+                other.TryGetComponent(out EnemyMovement enemyMovement2) )
             {
                 AttackData attackData;
                 if (transform.parent != null && transform.parent.parent != null)
                     attackData = new AttackData(transform.parent.parent.gameObject, damage, charmType);
                 else
                     attackData = new AttackData(gameObject, damage, charmType);
-                    healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
+                Debug.Log($"Attacking {other.name} with damage {damage} and charm {charmType}");
+                healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
             Destroy(gameObject);
         }
