@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 41bc858114b6a1b4197749efffb41402
   - enabled: 1
-    path: Assets/Scenes/MainMap.unity
+    path: Assets/Scenes/PreviousMap.unity
     guid: 82e014efc64f45541af380817609a050
   - enabled: 1
     path: Assets/Scenes/BossFightArenas/BossFightMountain.unity
