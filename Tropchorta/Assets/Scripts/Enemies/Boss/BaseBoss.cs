@@ -7,15 +7,26 @@ public class BaseBoss : BaseEnemy
     {
         if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
+            BossCombat bossCombat = (BossCombat)_enemyCombat;
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
 
-            int value = Random.Range(1, 2);
-            if(value == 1 && distanceSqr > 6.0f) // Plucie
+            int value = Random.Range(1, 4);
+            if (value == 1 && distanceSqr > 6.0f) // Plucie
             {
-                _enemyCombat.DistanceAttack(other.transform);
+                Debug.Log("Plucie attack");
+                bossCombat.DistanceAttack(other.transform);
             }
-            _enemyMovement.RotateTowards(player);
+            else if (value == 2)
+            {
+                Debug.Log("Punch attack");
+                bossCombat.PunchAttack(other.transform);
+            }
+            else
+            {
+                Debug.Log("Jump attack");
+                bossCombat.JumpAttack(other.transform);
+            }
         }
     }
 }

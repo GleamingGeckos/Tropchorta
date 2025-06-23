@@ -17,6 +17,7 @@ MonoBehaviour:
   description: This is my previous sword!
   itemPrefab: {fileID: 8086611897145994040, guid: 3612d7e9f7220f44cb786ea498976752, type: 3}
   itemPrice: 3
+  justDrop: 0
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
-  charm: {fileID: 11400000, guid: 9f526b1bd43dd1a45b55bdfb380ef7c4, type: 2}
+  charm: {fileID: 11400000, guid: f26112dd13b440d42bb15cf893e1deef, type: 2}
