@@ -110,7 +110,7 @@ public class EquipmentBackpackUIController : MonoBehaviour
         {
             charmImage.sprite = item.icon;
         }
-        else if (item == null)
+        else if (item == null && charmImage != null)
         {
             charmImage.sprite = null;
         }

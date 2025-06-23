@@ -89,7 +89,6 @@ public class Projectile : MonoBehaviour
                     attackData = new AttackData(transform.parent.parent.gameObject, _damage, charmType);
                 else
                     attackData = new AttackData(gameObject, _damage, charmType);
-                Debug.Log($"Attacking {other.name} with damage {_damage} and charm {charmType}");
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
             Destroy(gameObject);
