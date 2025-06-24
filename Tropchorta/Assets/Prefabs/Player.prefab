@@ -174,7 +174,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -474,7 +474,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
   m_ApplyActiveColorSpace: 1
 --- !u!208 &582302915993542184
 NavMeshObstacle:
@@ -921,6 +921,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4043556335226596680, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c108d399a5ec014ea1432903aa69ccf, type: 2}
+    - target: {fileID: -4043556335226596680, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79870ad1cc4ed564183f44c45299056e, type: 2}
+    - target: {fileID: -4043556335226596680, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ee642c259a8ecdd4e8d1a52949a05be8, type: 2}
+    - target: {fileID: -4043556335226596680, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 90ac68f35aa55614f93830ea7ae7dda1, type: 2}
+    - target: {fileID: -4043556335226596680, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 62f58fa7b5381d14b974bc95c5c11d10, type: 2}
     - target: {fileID: 919132149155446097, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
       propertyPath: m_Name
       value: adalbert_anims
@@ -928,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480435691957223400, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5920242270834686040, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
       propertyPath: m_IsActive

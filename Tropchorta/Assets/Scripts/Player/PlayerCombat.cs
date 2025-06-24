@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerHealthComponent health;
     private PlayerMovement movement;
     public bool isBlocking = false;
+    [NonSerialized] public bool queuedAttack = false;
 
     // array of colliders so that SphereCast doesn't allocate everytime it's called
     Collider[] colliders = new Collider[16];
@@ -135,6 +136,12 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartAttackAnim()
     {
+        if (playerState.state == PlayerState.Dashing)
+        {
+            queuedAttack = true;
+            return;
+        }
+      
         if (comboCorutine != null)
         {
             StopCoroutine(comboCorutine);

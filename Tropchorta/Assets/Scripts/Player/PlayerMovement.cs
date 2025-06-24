@@ -196,6 +196,8 @@ public class PlayerMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+        
+        
 
         StopDash();
     }
@@ -227,10 +229,16 @@ public class PlayerMovement : MonoBehaviour
         {
             playerState.state = PlayerState.Normal;
             trail.enabled = false;
+            
             playerHealthComponent.isInvulnerable = false;
             cc.includeLayers = 0;
             StopCoroutine(dashCoroutine);
             dashCoroutine = null;
+            if (playerCombat.queuedAttack)
+            { 
+                playerCombat.queuedAttack = false;
+                playerCombat.StartAttackAnim();
+            }
         }
     }
 
