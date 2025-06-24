@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
-  m_Name: Dialogue4.1
+  m_Name: Dialogue7.15
   m_EditorClassIdentifier: 
-  fullText: "A sword is not just for striking. A true hunter knows when to strike\u2026
-    and when to endure."
+  fullText: "You may collect items in a backpack, but beware - you won\u2019t be
+    able to use it all during the boss fight. Before entering the lair, you must
+    choose carefully which items to bring along. Choose wisely, for once inside,
+    your fate depends on your preparation."

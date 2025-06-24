@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
-  m_Name: Dialogue4.2
+  m_Name: Dialogue4.8
   m_EditorClassIdentifier: 
   fullText: "With any weapon, you can block an attack - be it a blade or a flying
     stick\u2026 I mean, uh, projectile. But watch closely\u2026 When an enemy prepares

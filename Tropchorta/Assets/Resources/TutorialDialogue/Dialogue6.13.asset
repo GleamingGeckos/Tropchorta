@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
-  m_Name: Dialogue7.2
+  m_Name: Dialogue6.13
   m_EditorClassIdentifier: 
-  fullText: "You may collect items in a backpack, but beware - you won\u2019t be
-    able to use it all during the boss fight. Before entering the lair, you must
-    choose carefully which items to bring along. Choose wisely, for once inside,
-    your fate depends on your preparation."
+  fullText: "Hold... Look beneath your feet. A beast\u2019s track. Collect it - every
+    clue brings you closer to the truth. In your bestiary, you will find a complete
+    list of all the clues that can be discovered.\r\n"

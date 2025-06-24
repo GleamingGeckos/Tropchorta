@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
-  m_Name: Dialogue5.3
+  m_Name: Dialogue5.12
   m_EditorClassIdentifier: 
-  fullText: This is the Bestiary - a tome containing the knowledge of monsters that
-    roam these lands. Each has distinct traits that will help you identify the creature
-    you're dealing with. But beware - some of them share similar signs. One clue
-    is not enough to pass judgment.
+  fullText: 'Wander. Seek out traces. Study the world. And when you find something
+    that may belong to the beast - approach it. Examine it. Your findings will be
+    recorded in your notebook, and the truth of the creature will begin to emerge
+    from the mist. '

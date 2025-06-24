@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
-  m_Name: Dialogue5.2
+  m_Name: Dialogue4.7
   m_EditorClassIdentifier: 
-  fullText: This is the Bestiary - a tome containing the knowledge of monsters that
-    roam these lands. Each has distinct traits that will help you identify the creature
-    you're dealing with.
+  fullText: "A sword is not just for striking. A true hunter knows when to strike\u2026
+    and when to endure."
