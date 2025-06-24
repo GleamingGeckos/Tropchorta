@@ -40,4 +40,9 @@ public class DragDropItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         return slotId;
     }
+
+    public void SetCanvas(Canvas toSetCanvas)
+    {
+        canvas = toSetCanvas;
+    }
 }

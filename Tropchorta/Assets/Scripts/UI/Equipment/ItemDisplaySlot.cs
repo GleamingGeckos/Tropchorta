@@ -9,6 +9,7 @@ public class ItemDisplaySlot : MonoBehaviour, IDropHandler
     private void Awake()
     {
         slotId = dragDropItem.GetSlotId();;
+        dragDropItem.SetCanvas(equipmentBackpackUIController.getCanvas());
     }
     public void OnDrop(PointerEventData eventData)
     {

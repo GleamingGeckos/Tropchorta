@@ -8,9 +8,7 @@ public class NotesUIController : MonoBehaviour
     [SerializeField] List<GameObject> notes;
     [SerializeField] int maxNotesAmount;
     [SerializeField] GameObject cluePopup;
-    private void Start()
-    {
-    }
+
     public void AddNote(string noteText)
     {
         cluePopup.SetActive(true);

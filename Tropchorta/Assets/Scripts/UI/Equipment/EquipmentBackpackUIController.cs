@@ -16,11 +16,22 @@ public class EquipmentBackpackUIController : MonoBehaviour
     [SerializeField] Image charmImage;
     [SerializeField] List<Image> backpackImages;
 
+    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject dropItemZone;
+
     [SerializeField] GameObject itemHighlightPanel;
     public Image highlightedItemImage;
     public TextMeshProUGUI highlightedItemNameText;
     public TextMeshProUGUI highlightedItemDescriptionText;
 
+    public Canvas getCanvas()
+    {
+        if(canvas != null)
+        {
+            return canvas;
+        }
+        return null;
+    }
     public void RefreshAllImages(Item weapon1, Item weapon2, Item head, Item torso, Item pants, Item shoes, List<Item> addditional)
     {
         ChangeWeapon1Image(weapon1);
@@ -158,5 +169,14 @@ public class EquipmentBackpackUIController : MonoBehaviour
     public void SwitchItems(int firstSlotId, int secondSlotId)
     {
         equipmentController.SwitchAdditionalItem(firstSlotId,secondSlotId);
+    }
+
+    public void TurnOnDropZone()
+    {
+        dropItemZone.SetActive(true);
+    }
+    public void TurnOffDropZone()
+    {
+        dropItemZone.SetActive(false);
     }
 }

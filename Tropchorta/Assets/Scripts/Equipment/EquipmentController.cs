@@ -677,57 +677,60 @@ public class EquipmentController : MonoBehaviour
         }
     }
 
+    Item GetEquippedItem(int index)
+    {
+        return index switch
+        {
+            0 => usedWeapon,
+            1 => inactiveWeapon,
+            2 => helmet,
+            3 => breastplate,
+            4 => pants,
+            5 => shoes,
+            6 => weaponCharm,
+            _ => null
+        };
+    }
+
+    void SetEquippedItem(int index, Item item)
+    {
+        switch (index)
+        {
+            case 0: usedWeapon = item; break;
+            case 1: inactiveWeapon = item; break;
+            case 2: helmet = item; break;
+            case 3: breastplate = item; break;
+            case 4: pants = item; break;
+            case 5: shoes = item; break;
+            case 6: weaponCharm = item; break;
+        }
+    }
+
+    bool IsItemValidForSlot(int index, Item item)
+    {
+        if (item == null) return true; // Allow setting null (empty) into any slot
+        return index switch
+        {
+            0 or 1 => item is Weapon,
+            2 => item is Helmet,
+            3 => item is Breastplate,
+            4 => item is Pants,
+            5 => item is Shoes,
+            6 => item is Charm,
+            _ => false
+        };
+    }
+
     public void SwitchAdditionalItem(int firstIndex,int secondIndex) 
     /*
      * first index is of the dragged item in the display
      * switches addition item either with one used by player or one within backpack itself
      * backpack items indexes start from 100 and go on from there
-     * 0 - weapon 1, 1 - weapon 2, 2 - helmet, 3 - breastplate, 4 - pants, 5 - shoes
+     * 0 - weapon 1, 1 - weapon 2, 2 - helmet, 3 - breastplate, 4 - pants, 5 - shoes, 6 - charm
      */
     {
         bool isFirstEquipped = firstIndex < 100;
         bool isSecondEquipped = secondIndex < 100;
-
-        Item GetEquippedItem(int index)
-        {
-            return index switch
-            {
-                0 => usedWeapon,
-                1 => inactiveWeapon,
-                2 => helmet,
-                3 => breastplate,
-                4 => pants,
-                5 => shoes,
-                _ => null
-            };
-        }
-
-        void SetEquippedItem(int index, Item item)
-        {
-            switch (index)
-            {
-                case 0: usedWeapon = item; break;
-                case 1: inactiveWeapon = item; break;
-                case 2: helmet = item; break;
-                case 3: breastplate = item; break;
-                case 4: pants = item; break;
-                case 5: shoes = item; break;
-            }
-        }
-
-        bool IsItemValidForSlot(int index, Item item)
-        {
-            if (item == null) return true; // Allow setting null (empty) into any slot
-            return index switch
-            {
-                0 or 1 => item is Weapon,
-                2 => item is Helmet,
-                3 => item is Breastplate,
-                4 => item is Pants,
-                5 => item is Shoes,
-                _ => false
-            };
-        }
 
         if (isFirstEquipped && isSecondEquipped)
         {
@@ -794,6 +797,38 @@ public class EquipmentController : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    public void DropItem(int slotId)
+    {
+        if(slotId < 100)
+        {
+            Item itemToDrop = GetEquippedItem(slotId);
+            if (itemToDrop != null)
+            {
+                SpawnItem(itemToDrop, transform.position);
+                SetEquippedItem(slotId, null);
+            }
+            else
+            {
+                Debug.LogWarning("No item equipped in this slot.");
+            }
+        }
+        else
+        {
+            int additionalSlotId = slotId - 100;  // Adjust the slotId for additional items
+            if (additionalItems[additionalSlotId] != null)
+            {
+                Item itemToDrop = additionalItems[additionalSlotId];
+                SpawnItem(itemToDrop, transform.position);
+                additionalItems[additionalSlotId] = null;
+            }
+            else
+            {
+                Debug.LogWarning("This slot in the backpack is empty: " + additionalSlotId);
+            }
+        }
+        DisplayItems();
     }
 
 }

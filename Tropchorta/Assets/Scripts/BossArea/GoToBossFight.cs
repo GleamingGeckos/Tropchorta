@@ -15,11 +15,43 @@ public class GoToBossFight : MonoBehaviour
     [SerializeField] private Button _yesButton;
     [SerializeField] private Button _noButton;
 
+    [SerializeField] PlayerUIController playerUIController;
     private void Start()
     {
         _screenCanvas.SetActive(false);
         _yesButton.onClick.AddListener(OnYesClicked);
         _noButton.onClick.AddListener(OnNoClicked);
+        playerUIController = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUIController>();
+    }
+
+    void ShowPlayersBackpackPanel()
+    {
+        if(playerUIController != null)
+        {
+            playerUIController.CloseAllPanels();
+            playerUIController.TurnOffBackpackDroppingCapability();
+            playerUIController.ShowBackpackPanel();
+        }
+    }
+
+    void HidePlayersBackpackPanel()
+    {
+        if (playerUIController != null)
+        {
+            playerUIController.HideBackpackPanel();
+            playerUIController.TurnOnBackpackDroppingCapability();
+            playerUIController.CloseAllPanels();
+        }
+    }
+
+    void HideAndBlockPlayersBackpackPanel()
+    {
+        if (playerUIController != null)
+        {
+            playerUIController.HideBackpackPanel();
+            playerUIController.TurnOnBackpackDroppingCapability();
+            playerUIController.TurnOffPlayerUI();
+        }
     }
 
     private void OnYesClicked()
@@ -34,6 +66,7 @@ public class GoToBossFight : MonoBehaviour
             _playerMovement.gameObject.transform.position = position;
             _playerMovement.gameObject.GetComponent<CharacterController>().enabled = true;
         }
+        HideAndBlockPlayersBackpackPanel();
         SceneManager.LoadScene(_levelName);
     }
 
@@ -44,6 +77,7 @@ public class GoToBossFight : MonoBehaviour
         {
             _playerMovement.playerState.state = PlayerState.Normal;
         }
+        HidePlayersBackpackPanel();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,6 +91,7 @@ public class GoToBossFight : MonoBehaviour
                 _isIn = true;
             }
             _screenCanvas.SetActive(true);
+            ShowPlayersBackpackPanel();
         }
     }
 
@@ -64,6 +99,8 @@ public class GoToBossFight : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
             _isIn = false;
+
+        HidePlayersBackpackPanel();
     }
 
 

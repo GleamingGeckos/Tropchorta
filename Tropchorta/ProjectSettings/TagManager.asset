@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Equipment
   - Effect
+  - PlayerUI
   layers:
   - Default
   - TransparentFX
