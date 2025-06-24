@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0b7a5e934689248aa6f3bffdb764f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldAmount: 0
+  goldAmount: 100
   lastInteractedItem: {fileID: 0}
   interactedItems: []
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
@@ -104,12 +104,18 @@ MonoBehaviour:
   usedWeapon: {fileID: 11400000, guid: fb579876cf2335e49a7ac5599b61e481, type: 2}
   inactiveWeapon: {fileID: 11400000, guid: b069c979242a6ea45b4aa39a522e4f83, type: 2}
   weaponCharm: {fileID: 0}
-  helmet: {fileID: 11400000, guid: 5e67322e941a08a468335eed92a769aa, type: 2}
+  helmet: {fileID: 0}
   breastplate: {fileID: 0}
   pants: {fileID: 0}
   shoes: {fileID: 0}
   clueItems: []
-  additionalItems: []
+  additionalItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: fb579876cf2335e49a7ac5599b61e481, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   equipmentUIController: {fileID: 0}
   equipmentBackpackUIController: {fileID: 0}
 --- !u!1 &2763151380894057734
@@ -715,6 +721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: miecz_anims
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8e9e1f8d77aff114aacc5ba6c901b133, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -914,6 +924,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
       propertyPath: m_Name
       value: adalbert_anims
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920242270834686040, guid: 0fe1c65ba2116af489388c91d9bbea70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

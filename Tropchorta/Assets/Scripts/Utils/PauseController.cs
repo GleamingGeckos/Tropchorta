@@ -18,7 +18,18 @@ public static class PauseController
             Time.timeScale = 1f;
             InputReaderRef.EnableInput();
         }
+    }
 
-
+    public static void DisableInput(bool disable)
+    {
+        IsPaused = disable;
+        if (IsPaused)
+        {
+            InputReaderRef.DisableInput();
+        }
+        else
+        {
+            InputReaderRef.EnableInput();
+        }
     }
 }

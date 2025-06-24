@@ -15,6 +15,11 @@ public class CameraMovement : MonoBehaviour
     [SerializeField, Range(0.0f, 4f), Tooltip("Strength of the vertical look influence")] float verticalLookInfluence = 1f;
     [SerializeField, Range(0.0f, 4f), Tooltip("Strength of the horizontal look influence")] float horizontalLookInfluence = 1f;
 
+    [Header("Camera Movement Bounds")]
+    [SerializeField] float minX = -1000;
+    [SerializeField] float maxX = 1000;
+    [SerializeField] float minZ = -1000;
+    [SerializeField] float maxZ = 1000;
     #endregion
 
     #region privates
@@ -48,14 +53,21 @@ public class CameraMovement : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput) return;
 
-        // We only want to move the camera on the XZ plane, assuming it will never need to move up/down
         forwardXZProjected = new Vector2(player.forward.x, player.forward.z).normalized * verticalLookInfluence;
         rightXZProjected = new Vector2(player.right.x, player.right.z).normalized * horizontalLookInfluence;
 
         mouseOffset = (forwardXZProjected * mousePosition.y + rightXZProjected * mousePosition.x) * lookInfluence;
 
         targetPosition = player.position + offset + new Vector3(mouseOffset.x, 0, mouseOffset.y);
-        transform.position = transform.position.LerpFI(targetPosition, Time.deltaTime, lerpHalfTime);
+
+        // Lerp pozycja
+        Vector3 newPosition = transform.position.LerpFI(targetPosition, Time.deltaTime, lerpHalfTime);
+
+        // Ogranicz X i Z
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
+
+        transform.position = newPosition;
     }
 
     public void OnMousePosition(Vector2 newMousePosition)
