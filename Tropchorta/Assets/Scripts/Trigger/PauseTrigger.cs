@@ -1,22 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject uiPanel;
+    [Header("Dialogi do wyœwietlenia")]
+    [SerializeField] private List<DialogueData> dialogueSequence;
+    [SerializeField] private DialoguePlayer dialoguePlayer;
 
-    public Animator PlayerAnimator;
+    private bool hasBeenTriggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (hasBeenTriggered) return;
+
         if (other.CompareTag("Player"))
         {
-            TutorialController.disableInput = true;
-            PlayerAnimator.SetBool("isSprinting", false);
-            PlayerAnimator.SetBool("isMoving", false);
-            if (uiPanel != null)
-            {
-                uiPanel.SetActive(true);     // Pokazuje UI
-            }
+            hasBeenTriggered = true;
+            dialoguePlayer.StartDialogue(dialogueSequence);
         }
     }
 }

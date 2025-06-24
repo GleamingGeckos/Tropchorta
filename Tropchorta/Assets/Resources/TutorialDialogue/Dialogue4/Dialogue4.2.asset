@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
+  m_Name: Dialogue4.2
+  m_EditorClassIdentifier: 
+  fullText: "With any weapon, you can block an attack - be it a blade or a flying
+    stick\u2026 I mean, uh, projectile. But watch closely\u2026 When an enemy prepares
+    to strike, a ring will appear around them. It shrinks... until, finally - the
+    blow is delivered. Block at the last moment - and you will stop the force, stunning
+    the beast."
