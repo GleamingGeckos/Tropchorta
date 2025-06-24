@@ -8,6 +8,7 @@ public class BossCombat : EnemyCombat
     public override void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
+        Debug.Log("Plucie attack");
         attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
         StartCoroutine(PerfectBlockWindow());
     }
@@ -15,12 +16,14 @@ public class BossCombat : EnemyCombat
     public void PunchAttack(Transform target)
     {
         if (isCooldown) return;
+        Debug.Log("Punch attack");
         attackCoroutine = StartCoroutine(PunchAttackRoutine(target));
     }
     
     public void JumpAttack(Transform target)
     {
         if (isCooldown) return;
+        Debug.Log("Jump attack");
         attackCoroutine = StartCoroutine(JumpAttackRoutine(target));
     }
 
@@ -52,6 +55,9 @@ public class BossCombat : EnemyCombat
         enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+        enemyMovement.StartChasing(target);
+        enemyMovement.agent.updateRotation = true;
+
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
@@ -94,7 +100,8 @@ public class BossCombat : EnemyCombat
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
-        int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
+        float attackRadius = 2.0f;
+        int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, attackRadius, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
@@ -113,7 +120,7 @@ public class BossCombat : EnemyCombat
                     healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
             }
         }
-        DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
+        DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.cyan, attackRadius, 7.0f);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 

@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMovement : MonoBehaviour
 {
     Transform _target;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     [SerializeField] float _speed = 4f;
     [SerializeField] float _stoppingDistance = 0.9f;
@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     public bool canBeStuned = true;
     public bool isStuned = false;
     public bool perfectParWasInitiated = false;
-    bool _isChasing = false;
+    public bool isChasing = false;
     bool _attackInterrupted = false;
 
     private void Awake()
@@ -44,20 +44,20 @@ public class EnemyMovement : MonoBehaviour
     public void StartChasing(Transform newTarget)
     {
         _target = newTarget;
-        _isChasing = true;
+        isChasing = true;
         agent.isStopped = false;
     }
 
     // Optionally, you can stop chasing
     public void StopChasing()
     {
-        _isChasing = false;
+        isChasing = false;
         agent.isStopped = true;
     }
 
     public void Stun()
     {
-        if (_isChasing && canBeStuned)
+        if (isChasing && canBeStuned)
         {
             perfectParWasInitiated = false;
             isStuned = true;
@@ -97,7 +97,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (!_isChasing || _target == null || _attackInterrupted) return;
+        if (!isChasing || _target == null || _attackInterrupted) return;
             agent.SetDestination(_target.position);
     }
 

@@ -16,6 +16,7 @@ public class BaseEnemy : MonoBehaviour
 
     [SerializeField] GameObject[] spawnPrefabs;
     [SerializeField] bool distance;
+    [SerializeField] bool strong;
 
     //Components
     protected EnemyCombat _enemyCombat;
@@ -66,7 +67,7 @@ public class BaseEnemy : MonoBehaviour
             {
                 if (Random.value < 0.7f)
                     _enemyCombat.Attack(); // czasami bli¿szy
-                else
+                else if(strong)
                     _enemyCombat.StrongAttack(); // czasami dalszy
             }
             else if (distance)

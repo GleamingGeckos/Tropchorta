@@ -81,8 +81,7 @@ public class Projectile : MonoBehaviour
                 }
             }else if (other.TryGetComponent(out HealthComponent healthComponent) && 
                 other.TryGetComponent(out EnemyCombat enemyCombat) && 
-                other.CompareTag("Enemy") && 
-                other.TryGetComponent(out EnemyMovement enemyMovement2) )
+                other.CompareTag("Enemy"))
             {
                 AttackData attackData;
                 if (transform.parent != null && transform.parent.parent != null)
