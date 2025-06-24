@@ -66,15 +66,15 @@ public class PlayerCombat : MonoBehaviour
         playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
-    // private void Update()
-    // {
-    //     if (mouseBeingHeld&&equipmentController.IsDistance())
-    //     {
-    //         movement.RotatePlayerTowardsMouse();
-    //         //no tu trzeba jeszcze ze gracza zatrzymuje w miejscu podczas trzymania i zeby strzalki nie skrecaly jak
-    //         gracz sie obraca 
-    //     }
-    // }
+    private void Update()
+    {
+        if (mouseBeingHeld&&equipmentController.IsDistance())
+        {
+            movement.RotatePlayerTowardsMouse();
+            //no tu trzeba jeszcze ze gracza zatrzymuje w miejscu podczas trzymania i zeby strzalki nie skrecaly jak
+            //gracz sie obraca 
+        }
+    }
 
     public void Die()
     {
@@ -228,7 +228,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartBlocking()
     {
-        if (playerState.state == PlayerState.DisableInput||movement.isSprinting) return;
+        if (playerState.state == PlayerState.DisableInput||movement.isSprinting||playerState.state == PlayerState.Dashing) return;
         isBlocking = true;
         //movement.WeaponAnimator.SetBool("isBlocking", true);
         movement.PlayerAnimator.SetBool("isBlocking", true);

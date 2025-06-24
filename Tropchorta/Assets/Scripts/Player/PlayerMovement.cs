@@ -116,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
                 NormalMovement();
                 PlayerAnimator.SetBool("isSprinting", isSprinting);
                 PlayerAnimator.SetBool("isMoving", isMoving);
+                PlayerAnimator.SetBool("isDashing", false);
+
                 
                 // WeaponAnimator.SetBool("isSprinting", isSprinting);
                 // WeaponAnimator.SetBool("isMoving", isMoving);
@@ -131,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case PlayerState.Dashing:
                 // Dashing state, Dash is handled outside of Update and disables normal movement
+                PlayerAnimator.SetBool("isDashing", true);
                 break;
         }
     }
@@ -169,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
         playerState.state = PlayerState.Dashing;
         
         StopFootstepsSound();
+        playerCombat.StopBlocking();
+        PlayerAnimator.SetTrigger("dashTrigger");
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
         if (direction == Vector3.zero)
