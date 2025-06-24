@@ -16,7 +16,7 @@ public class PauseTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasBeenTriggered = true;
-            dialoguePlayer.StartDialogue(dialogueSequence);
+            //dialoguePlayer.StartDialogue(dialogueSequence);
         }
     }
 }
