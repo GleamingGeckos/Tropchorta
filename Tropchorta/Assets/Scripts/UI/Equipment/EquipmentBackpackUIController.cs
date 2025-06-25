@@ -24,6 +24,13 @@ public class EquipmentBackpackUIController : MonoBehaviour
     public TextMeshProUGUI highlightedItemNameText;
     public TextMeshProUGUI highlightedItemDescriptionText;
 
+    private void Awake()
+    {
+        if (equipmentController == null)
+        {
+            equipmentController = GameObject.FindGameObjectWithTag("Equipment").GetComponent<EquipmentController>();
+        }
+    }
     public Canvas getCanvas()
     {
         if(canvas != null)

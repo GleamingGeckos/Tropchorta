@@ -16,6 +16,14 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI descriptionText;
 
+    private void Awake()
+    {
+        if (equipmentController == null)
+        {
+            equipmentController = GameObject.FindGameObjectWithTag("Equipment").GetComponent<EquipmentController>();
+        }
+    }
+
     public void ChangeHeadImage(Item item)
     {
         if (headImage != null && item != null && item.icon != null)

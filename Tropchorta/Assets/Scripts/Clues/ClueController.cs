@@ -17,6 +17,10 @@ public class ClueController : MonoBehaviour
     private void Start()
     {
         //equipmentController = GameObject.FindWithTag("Equipment").GetComponent<EquipmentController>();
+        if (equipmentController == null)
+        {
+            equipmentController = GameObject.FindGameObjectWithTag("Equipment").GetComponent<EquipmentController>();
+        }
     }
     void Update()
     {

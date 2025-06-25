@@ -21,7 +21,10 @@ public class GoToBossFight : MonoBehaviour
         _screenCanvas.SetActive(false);
         _yesButton.onClick.AddListener(OnYesClicked);
         _noButton.onClick.AddListener(OnNoClicked);
-        playerUIController = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUIController>();
+        if (playerUIController == null)
+        {
+            playerUIController = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUIController>();
+        }
     }
 
     void ShowPlayersBackpackPanel()
