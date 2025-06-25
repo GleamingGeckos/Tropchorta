@@ -41,7 +41,7 @@ public class EquipmentController : MonoBehaviour
 
     public void UpdateGoldDisplay(int goldAmount)
     {
-        goldText.text = $"Gold: {goldAmount}";
+        goldText.text = goldAmount.ToString();
     }
 
     public void Initialize(Transform playerTransform)

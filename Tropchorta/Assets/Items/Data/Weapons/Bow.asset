@@ -22,4 +22,3 @@ MonoBehaviour:
   weaponBehaviors:
   - {fileID: 11400000, guid: 84dcc6c4b95ed5049800fe02dbda96fe, type: 2}
   charm: {fileID: 0}
-
