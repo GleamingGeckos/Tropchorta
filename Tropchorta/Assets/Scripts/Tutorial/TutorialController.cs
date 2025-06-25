@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour
 {
@@ -286,7 +287,7 @@ public class TutorialController : MonoBehaviour
 
     private void ExitTutorial()
     {
-
+        SceneManager.LoadScene("New Map");
     }
 
     private void ShowDialogue()
