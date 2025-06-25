@@ -54,7 +54,11 @@ public class SwordBehavior : WeaponBehavior
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && colliders[i].TryGetComponent(out EnemyCombat enemyCombat) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
-                AttackData attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
+                AttackData attack;
+                if (charm)
+                    attack = new AttackData(user.gameObject, damage, charm.GetCharmType());
+                else
+                    attack = new AttackData(user.gameObject, damage, CharmType.None);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
@@ -75,7 +79,11 @@ public class SwordBehavior : WeaponBehavior
             // Currently assuming the collider is on the same object as the HealthComponent
             if (colliders[i].TryGetComponent(out HealthComponent healthComponent) && colliders[i].TryGetComponent(out EnemyCombat enemyCombat) && !colliders[i].CompareTag("Player") && !colliders[i].isTrigger)
             {
-                AttackData attack = new AttackData(user.gameObject, damage*2, charm.GetCharmType());
+                AttackData attack;
+                if (charm)
+                    attack = new AttackData(user.gameObject, damage*2, charm.GetCharmType());
+                else
+                    attack = new AttackData(user.gameObject, damage * 2, CharmType.None);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
@@ -106,7 +114,11 @@ public class SwordBehavior : WeaponBehavior
         {
             if (hitCollider.CompareTag("Enemy") && hitCollider.TryGetComponent(out EnemyCombat enemyCombat) && hitCollider.TryGetComponent(out HealthComponent healthComponent) && !hitCollider.isTrigger)
             {
-                AttackData attack = new AttackData(user.gameObject, damage*3, charm.GetCharmType());
+                AttackData attack;
+                if (charm)
+                    attack = new AttackData(user.gameObject, damage * 3, charm.GetCharmType());
+                else
+                    attack = new AttackData(user.gameObject, damage * 3, CharmType.None);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
