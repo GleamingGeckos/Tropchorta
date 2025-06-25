@@ -17,3 +17,5 @@ MonoBehaviour:
   description: This is a test clue item
   itemPrefab: {fileID: 0}
   itemPrice: 100
+  justDrop: 0
+  shopPanel: {fileID: 21300000, guid: 509671369b0c1c94cb93b8126854cde6, type: 3}

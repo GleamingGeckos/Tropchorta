@@ -442,7 +442,7 @@ public class EquipmentController : MonoBehaviour
                 {
                     DropCharm();
                     interactedItems.Remove(lastInteractedItem);
-                    shoes = itemController.PickUpItem();
+                    weaponCharm = itemController.PickUpItem();
                     equipmentUIController.ChangeCharmImage(charm);
                     equipmentBackpackUIController.ChangeCharmImage(charm);
                     equipmentUIController.HideLastInteractedItemDisplay();

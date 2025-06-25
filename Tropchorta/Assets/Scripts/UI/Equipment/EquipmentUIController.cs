@@ -22,6 +22,10 @@ public class EquipmentUIController : MonoBehaviour
         {
             headImage.sprite = item.icon;
         }
+        else if (item == null)
+        {
+            headImage.sprite = null;
+        }
     }
 
     public void ChangeTorsoImage(Item item)
@@ -29,6 +33,10 @@ public class EquipmentUIController : MonoBehaviour
         if (torsoImage != null && item != null && item.icon != null)
         {
             torsoImage.sprite = item.icon;
+        }
+        else if (item == null)
+        {
+            torsoImage.sprite = null;
         }
     }
 
@@ -38,6 +46,10 @@ public class EquipmentUIController : MonoBehaviour
         {
             pantsImage.sprite = item.icon;
         }
+        else if (item == null)
+        {
+            pantsImage.sprite = null;
+        }
     }
 
     public void ChangeShoesImage(Item item)
@@ -45,6 +57,10 @@ public class EquipmentUIController : MonoBehaviour
         if (shoesImage != null && item != null && item.icon != null)
         {
             shoesImage.sprite = item.icon;
+        }
+        else if (item == null)
+        {
+            shoesImage.sprite = null;
         }
     }
 
@@ -54,6 +70,10 @@ public class EquipmentUIController : MonoBehaviour
         {
             weapon1Image.sprite = item.icon;
         }
+        else if (item == null)
+        {
+            weapon1Image.sprite = null;
+        }
     }
 
     public void ChangeWeapon2Image(Item item)
@@ -62,6 +82,10 @@ public class EquipmentUIController : MonoBehaviour
         {
             weapon2Image.sprite = item.icon;
         }
+        else if (item == null)
+        {
+            weapon2Image.sprite = null;
+        }
     }
 
     public void ChangeCharmImage(Item item)
@@ -69,6 +93,10 @@ public class EquipmentUIController : MonoBehaviour
         if (charmImage != null && item != null && item.icon != null)
         {
             charmImage.sprite = item.icon;
+        }
+        else if (item == null)
+        {
+            charmImage.sprite = null;
         }
     }
 

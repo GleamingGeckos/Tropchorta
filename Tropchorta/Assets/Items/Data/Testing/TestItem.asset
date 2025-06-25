@@ -16,3 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4f133b5199d7be64ba607b0eb10c6d18, type: 3}
   description: Test Item Description
   itemPrefab: {fileID: 380572384130078391, guid: c2b48cb926823a24ea71b6586b203028, type: 3}
+  itemPrice: 100
+  justDrop: 0
+  shopPanel: {fileID: 21300000, guid: 509671369b0c1c94cb93b8126854cde6, type: 3}

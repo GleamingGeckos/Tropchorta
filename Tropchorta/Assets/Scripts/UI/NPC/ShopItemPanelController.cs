@@ -17,7 +17,8 @@ public class ShopItemPanelController : MonoBehaviour
     public void LoadItemData(Item item)
     {
         displayedItem = item;
-        itemImage.sprite = item.icon;
+        itemImage.sprite = item.shopPanel;
+        //itemImage.sprite = item.icon;
         //nameText.text = item.itemName;
         descriptionText.text = item.description;
         priceText.text = item.itemPrice.ToString();

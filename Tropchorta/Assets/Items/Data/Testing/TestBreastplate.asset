@@ -17,5 +17,7 @@ MonoBehaviour:
   description: Item Description for breastplate
   itemPrefab: {fileID: 0}
   itemPrice: 100
+  justDrop: 0
+  shopPanel: {fileID: 21300000, guid: 509671369b0c1c94cb93b8126854cde6, type: 3}
   defensiveBehaviours: []
   charm: {fileID: 11400000, guid: 9f526b1bd43dd1a45b55bdfb380ef7c4, type: 2}

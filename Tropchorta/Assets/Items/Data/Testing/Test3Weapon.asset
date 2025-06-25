@@ -16,5 +16,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4f97c725ce5e5d040aa5736897de8f3e, type: 3}
   description: Test 2 Weapon
   itemPrefab: {fileID: 8086611897145994040, guid: c76cb386cfc35574cbf2cdeb2a768584, type: 3}
+  itemPrice: 100
+  justDrop: 0
+  shopPanel: {fileID: 21300000, guid: 509671369b0c1c94cb93b8126854cde6, type: 3}
   weaponBehaviors:
   - {fileID: 11400000, guid: 720e9483aa3348040bb7fc5bf35f58b9, type: 2}
+  charm: {fileID: 0}

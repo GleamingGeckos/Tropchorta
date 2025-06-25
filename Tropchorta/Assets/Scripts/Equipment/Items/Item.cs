@@ -9,9 +9,5 @@ public class Item : ScriptableObject
     public GameObject itemPrefab;  // The actual prefab to instantiate when dropped
     public int itemPrice = 100 ;
     public bool justDrop = false;
-
-
-
-
-
+    public Sprite shopPanel = null; // temporary solution to remove in later iterations
 }

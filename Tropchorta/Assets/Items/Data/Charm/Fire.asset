@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   itemName: Fire Charm
-  icon: {fileID: 21300000, guid: e77d66e35ed78b54aacf057cb40a0efc, type: 3}
+  icon: {fileID: 21300000, guid: d8c3e115ed168d345ae6aae960ecdc6b, type: 3}
   description: 'Fire! Fire! Fire! '
   itemPrefab: {fileID: 5505681420328838874, guid: fbc277cddda13bf4c81dc6d44cbd8350, type: 3}
   itemPrice: 100
   justDrop: 0
+  shopPanel: {fileID: 21300000, guid: 51f0ee97864a1d047a7c63311a1a760e, type: 3}
   charmType: 1
-  armorReductionProcent: 0.5
-  weaponAmplificationMultiplier: 2
   weaponSwardCharm: {fileID: 2397760560179252254, guid: 09081e486295be8409db0ce3ba9054f4, type: 3}
