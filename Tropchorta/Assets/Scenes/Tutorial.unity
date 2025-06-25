@@ -1099,7 +1099,7 @@ MonoBehaviour:
   playerCombat: {fileID: 1430404090}
   playerInteract: {fileID: 1430404095}
   swordModel: {fileID: 1430404087}
-  uiMustDoPanel: {fileID: 0}
+  uiMustDoPanel: {fileID: 566225416}
   currentStep: 0
 --- !u!114 &1520797824
 MonoBehaviour:
