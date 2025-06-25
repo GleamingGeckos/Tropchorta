@@ -116,7 +116,7 @@ public class TutorialController : MonoBehaviour
                 ShowDialogue(); 
                 break;
 
-            case 5:
+            case 4:
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkCombo = true;
