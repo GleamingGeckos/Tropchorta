@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
   m_Name: Dialogue7.15
   m_EditorClassIdentifier: 
-  fullText: "You may collect items in a backpack, but beware - you won\u2019t be
-    able to use it all during the boss fight. Before entering the lair, you must
+  fullText: "You may collect items in a backpack [I], but beware - you won\u2019t
+    be able to use it all during the boss fight. Before entering the lair, you must
     choose carefully which items to bring along. Choose wisely, for once inside,
     your fate depends on your preparation."

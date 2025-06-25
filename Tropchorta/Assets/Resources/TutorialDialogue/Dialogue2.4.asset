@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Dialogue2.4
   m_EditorClassIdentifier: 
   fullText: "Good. Now listen closely, young hunter.\r\nEvery master of the blade
-    began with a simple strike. You will perform three \u2014 swift, without hesitation.\r\n"
+    began with a simple strike. You will perform three \u2014 swift, without hesitation
+    [LMB].\r\n"

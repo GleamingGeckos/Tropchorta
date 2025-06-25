@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
   m_Name: Dialogue7.16
   m_EditorClassIdentifier: 
-  fullText: "You\u2019ll also take the map. A powerful relic that will\u2026 well,
-    the painter forgot to mark the important spots, so you\u2019ll have to find them
-    yourself. Good luck! "
+  fullText: "You\u2019ll also take the map [M]. A powerful relic that will\u2026
+    well, the painter forgot to mark the important spots, so you\u2019ll have to
+    find them yourself. Good luck! "

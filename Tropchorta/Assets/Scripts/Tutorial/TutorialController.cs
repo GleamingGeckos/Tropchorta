@@ -41,6 +41,11 @@ public class TutorialController : MonoBehaviour
     {
         swordModel.SetActive(false);
         currentStep = 1;
+
+        // Subskrybuj event combo
+        playerCombat.OnCombo3Attacks += CheckCombo;
+        playerCombat.OnPerfectParry += CheckBlock;
+
         ShowDialogue();
     }
 
@@ -66,17 +71,9 @@ public class TutorialController : MonoBehaviour
         }
         else
         {
-            if (checkCombo)
-            {
-                CheckCombo();
-            }
-            else if (checkShift)
+            if (checkShift)
             {
                 CheckShift();
-            }
-            else if (checkBlock)
-            {
-                CheckBlock();
             }
             else if (checkDodge)
             {
@@ -198,6 +195,7 @@ public class TutorialController : MonoBehaviour
     }
     private void CheckCombo()
     {
+
         uiCombo3Attacks.SetActive(false);
         checkCombo = false;
         canMove = true;
@@ -272,4 +270,9 @@ public class TutorialController : MonoBehaviour
         dialoguePlayer.ShowCurrentText(dialogueList[currentStep-1]);
     }
 
+    private void OnDestroy()
+    {
+        playerCombat.OnCombo3Attacks -= CheckCombo;
+        playerCombat.OnPerfectParry -= CheckBlock;
+    }
 }

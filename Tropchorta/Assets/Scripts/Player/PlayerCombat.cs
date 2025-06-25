@@ -46,6 +46,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float stepTime = 0.4f;
     Coroutine stepCoroutine = null;
 
+    public event Action OnCombo3Attacks;
+    public event Action OnPerfectParry;
+
     void Start()
     {
         movement = GetComponent<PlayerMovement>();
@@ -126,6 +129,8 @@ public class PlayerCombat : MonoBehaviour
         }
         else if (comboCounter == specialAttackNr) {
             equipmentController.UseWeaponSpecialAttack(rotatingRootTransform);
+            // Tu wywołujemy event combo 3 ataków
+            OnCombo3Attacks?.Invoke();
         } 
         else {
             equipmentController.UseWeaponStart(rotatingRootTransform);
@@ -301,8 +306,8 @@ public class PlayerCombat : MonoBehaviour
                     enemyMovement.perfectParWasInitiated = true;
                     movement.PlayerAnimator.SetTrigger("parryTrigger");
                     //movement.WeaponAnimator.SetTrigger("parryTrigger");
-                    
-                    
+
+                    OnPerfectParry?.Invoke();  // <<< WYWOŁANIE EVENTU
                 }
             }
         }

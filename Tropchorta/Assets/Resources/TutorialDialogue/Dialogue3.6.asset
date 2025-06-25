@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
   m_Name: Dialogue3.6
   m_EditorClassIdentifier: 
-  fullText: "Good\u2026 you\u2019ve mastered the blade. Now mount your steed - not
-    just any beast, but the wind of the plains, the swiftest in all the land. "
+  fullText: "Good\u2026 you\u2019ve mastered the blade. Now mount your steed [LSHIFT]
+    - not just any beast, but the wind of the plains, the swiftest in all the land. "
