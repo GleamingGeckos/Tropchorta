@@ -236,7 +236,7 @@ MonoBehaviour:
   speed: 50
   slowdownRate: 1
   minSpeed: 45
-  lifetime: 2
+  lifetime: 0.25
   targetTag: Enemy
   motionScale: 1
   motionSpeed: 1

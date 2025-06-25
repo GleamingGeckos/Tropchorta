@@ -15,7 +15,8 @@ public class Projectile : MonoBehaviour
     float currentSpeed;
     [SerializeField] private float motionScale = 1f;
     [SerializeField] private float motionSpeed = 1f;
-    public CharmType charmType = CharmType.None;
+    public CharmType charmType = CharmType.None; 
+    GameObject _parent;
 
     private float motionTime;
 
@@ -31,11 +32,12 @@ public class Projectile : MonoBehaviour
     [Header("For Enemy only")]
     [SerializeField] private GameObject _arrowForPar;
 
-    public void Initialize(Transform target, CharmType charmType, int damage)
+    public void Initialize(Transform target, CharmType charmType, int damage, GameObject parent)
     {
         _target = target;
         _damage = damage;
         this.charmType = charmType;
+        _parent = parent;
     }
 
     public void EnableCharmEffect()
@@ -77,6 +79,7 @@ public class Projectile : MonoBehaviour
 
         currentSpeed = Mathf.Max(currentSpeed - slowdownRate * Time.deltaTime, minSpeed);
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime + lateralOffset * Time.deltaTime);
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -86,29 +89,29 @@ public class Projectile : MonoBehaviour
             if (other.TryGetComponent(out PlayerHealthComponent playerHealthComponent) &&
                 other.TryGetComponent(out PlayerCombat playerCombatComponent) &&
                 other.TryGetComponent(out PlayerMovement playerMovementComponent) &&
-                transform.parent.TryGetComponent(out EnemyMovement enemyMovement) &&
+                _parent.transform.TryGetComponent(out EnemyMovement enemyMovement) &&
                 !other.isTrigger)
             {
-                playerMovementComponent.RotatePlayerTowards(transform.parent.position);
+                playerMovementComponent.RotatePlayerTowards(_parent.transform.position);
                 
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
-                    Quaternion rot = Quaternion.LookRotation(transform.parent.position + transform.up - other.transform.position);
+                    Quaternion rot = Quaternion.LookRotation(_parent.transform.position + transform.up - other.transform.position);
                     var revange = Instantiate(_arrowForPar, other.transform.position, rot, other.transform);
                     revange.GetComponent<Projectile>().charmType = charmType;
                     enemyMovement.perfectParWasInitiated = false;
                 }
                 else if (!playerCombatComponent.isBlocking)
                 {
-                    playerHealthComponent.SimpleDamage(new AttackData(transform.parent.gameObject, _damage, charmType));
+                    playerHealthComponent.SimpleDamage(new AttackData(_parent.transform.gameObject, _damage, charmType));
                 }
             }else if (other.TryGetComponent(out HealthComponent healthComponent) && 
                 other.TryGetComponent(out EnemyCombat enemyCombat) && 
                 other.CompareTag("Enemy"))
             {
                 AttackData attackData;
-                if (transform.parent != null && transform.parent.parent != null)
-                    attackData = new AttackData(transform.parent.parent.gameObject, _damage, charmType);
+                if (_parent.transform != null && _parent.transform.parent != null)
+                    attackData = new AttackData(_parent.transform.parent.gameObject, _damage, charmType);
                 else
                     attackData = new AttackData(gameObject, _damage, charmType);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));

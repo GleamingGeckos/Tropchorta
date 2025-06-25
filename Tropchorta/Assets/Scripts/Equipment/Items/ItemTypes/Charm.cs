@@ -35,6 +35,7 @@ public class Charm : Item
     public void DisableCharmEffect()
     {
         Destroy(_effect);
+        _effect = null;
     }
 
     public AttackData CharmEffectOnWeapon(AttackData attackData)

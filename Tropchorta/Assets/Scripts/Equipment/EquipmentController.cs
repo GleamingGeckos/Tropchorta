@@ -294,16 +294,9 @@ public class EquipmentController : MonoBehaviour
     {
         if (canSwitch && scroll != 0f)
         {
-            if (usedWeapon is Weapon weapon)
-            {
-                weapon.ClearData(transform.parent);
-            }
-            if (inactiveWeapon is Weapon weapon1)
-            {
-                weapon1.Initialize(transform.parent);
-            }
             Item tmpItem = usedWeapon;
             usedWeapon = inactiveWeapon;
+            UpdateCharm();
             inactiveWeapon = tmpItem;
             equipmentUIController.ChangeWeapon1Image(usedWeapon);
             equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
@@ -443,6 +436,8 @@ public class EquipmentController : MonoBehaviour
                     DropCharm();
                     interactedItems.Remove(lastInteractedItem);
                     weaponCharm = itemController.PickUpItem();
+                    UpdateCharm();
+
                     equipmentUIController.ChangeCharmImage(charm);
                     equipmentBackpackUIController.ChangeCharmImage(charm);
                     equipmentUIController.HideLastInteractedItemDisplay();
@@ -600,6 +595,7 @@ public class EquipmentController : MonoBehaviour
         equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
         equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
         equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+        UpdateCharm();
     }
 
     public bool HasClueItem(ClueItem clueItem)
@@ -622,6 +618,7 @@ public class EquipmentController : MonoBehaviour
             case Weapon weapon:
                 tmpItem = usedWeapon;
                 usedWeapon = item;
+                UpdateCharm();
                 Debug.Log($"Switching weapon: {weapon.itemName}");
                 equipmentUIController.ChangeWeapon1Image(usedWeapon);
                 equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
@@ -662,8 +659,10 @@ public class EquipmentController : MonoBehaviour
             case Charm charm:
                 tmpItem = charm;
                 weaponCharm = item;
-                equipmentUIController.ChangeShoesImage(weaponCharm);
-                equipmentBackpackUIController.ChangeShoesImage(weaponCharm);
+                UpdateCharm();
+
+                equipmentUIController.ChangeCharmImage(weaponCharm);
+                equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
                 return tmpItem;
 
             case ClueItem clueItem:
@@ -674,6 +673,16 @@ public class EquipmentController : MonoBehaviour
             default:
                 Debug.Log("Item type is not supported");
                 return null;
+        }
+    }
+
+    void UpdateCharm()
+    {
+        if (usedWeapon is Weapon used)
+        {
+            used.ClearData(transform.parent);
+            used.charm = (Charm)weaponCharm;
+            used.Initialize(transform.parent);
         }
     }
 
@@ -702,8 +711,11 @@ public class EquipmentController : MonoBehaviour
             case 3: breastplate = item; break;
             case 4: pants = item; break;
             case 5: shoes = item; break;
-            case 6: weaponCharm = item; break;
+            case 6: weaponCharm = item;
+                UpdateCharm();
+                break;
         }
+        UpdateCharm();
     }
 
     bool IsItemValidForSlot(int index, Item item)
@@ -778,6 +790,7 @@ public class EquipmentController : MonoBehaviour
 
                 SetEquippedItem(equippedIndex, backpackItem);
                 additionalItems[backpackIndex] = equippedItem;
+                UpdateCharm();
             }
             else
             {
