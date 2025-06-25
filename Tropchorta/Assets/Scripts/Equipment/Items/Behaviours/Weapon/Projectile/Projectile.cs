@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -23,6 +24,11 @@ public class Projectile : MonoBehaviour
     public AnimationCurve motionCurveZ;
 
 
+    [Header("Effects")]
+    private GameObject _effectFire;
+    private GameObject _effectPoison;
+    private GameObject _effectLightning;
+
     [Header("For Enemy only")]
     [SerializeField] private GameObject _arrowForPar;
 
@@ -31,6 +37,16 @@ public class Projectile : MonoBehaviour
         _target = target;
         _damage = damage;
         this.charmType = charmType;
+    }
+
+    public void EnableCharmEffect()
+    {
+        
+        //Transform effectTarget = FindScripts.FindChildWithTag(trans, "Effect");
+        //if (effectTarget != null)
+        //{
+        //    _effect = Instantiate(weaponSwardCharm, effectTarget);
+        //}
     }
 
     void Start()

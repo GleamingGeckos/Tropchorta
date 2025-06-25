@@ -31,6 +31,7 @@ public class Chest : MonoBehaviour
     {
         if (_playerInArea && Input.GetKeyDown(KeyCode.E)) // TODO powinniœmy usystematyzowaæ input
         {
+            Debug.Log("Update");
             Interact();
         }
     }
@@ -44,17 +45,8 @@ public class Chest : MonoBehaviour
             _canvas.SetActive(false);
 
         Renderer rend = GetComponent<Renderer>();
-        //rend.material.SetInt("_TransparentEnabled", 1); TODO Check on that when eny error
-        DOTween.To(() => rend.material.GetFloat("_Tweak_transparency"), x => rend.material.SetFloat("_Tweak_transparency", x), -1f, _fadeDuration)
-            .SetDelay(_fadeDelay)
-            .OnStart(() =>
-            {
-                SpawnWithJump();
-            })
-            .OnComplete(() =>
-            {
-                Destroy(gameObject);
-            });
+        SpawnWithJump();
+        Destroy(gameObject, _fadeDelay);
     }
 
     private void StartParticles()
@@ -77,6 +69,7 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Enter");
             _playerInArea = true;
             if (_canvas != null)
                 _canvas.SetActive(true);
@@ -87,6 +80,7 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Exit");
             _playerInArea = false;
             if (_canvas != null)
                 _canvas.SetActive(false);
