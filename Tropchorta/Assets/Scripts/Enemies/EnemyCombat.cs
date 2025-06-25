@@ -203,8 +203,8 @@ public class EnemyCombat : MonoBehaviour
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, 1f, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
-        GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation, transform);
-        arrow.GetComponent<Projectile>().Initialize(target, _attackCharm, DealDamage());
+        GameObject arrow = Instantiate(arrowPrefab, transform.position + transform.forward + transform.up, transform.rotation);
+        arrow.GetComponent<Projectile>().Initialize(target, _attackCharm, DealDamage(), transform.gameObject);
 
         yield return new WaitForSeconds(0.2f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
 
