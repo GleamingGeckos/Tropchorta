@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   itemName: Bow
-  icon: {fileID: 21300000, guid: 4f97c725ce5e5d040aa5736897de8f3e, type: 3}
   icon: {fileID: 21300000, guid: 65c4d16db907f154999c6ed66588eb7e, type: 3}
   description: Bow that shoots arrows
   itemPrefab: {fileID: 8086611897145994040, guid: c8fa082fcbe35bf42aab938d77cb2296, type: 3}
