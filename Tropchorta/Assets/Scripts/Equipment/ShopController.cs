@@ -8,7 +8,9 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
+    [Header("Other Controllers")]
     [SerializeField] public EquipmentController equipmentController;
+    [SerializeField] private PlayerUIController playerUIController;
 
     [Header("Items Display")]
     [SerializeField] private ShopUIController shopUIController;
@@ -16,13 +18,40 @@ public class ShopController : MonoBehaviour
     [Header("Items")]
     [SerializeField] private List<Item> items;
 
-    private bool isInitialized = false;
+    //private bool isInitialized = false;
 
-
+    public bool isPlayerClose = false;
+    public bool isShopOpened = false;
     private void Start()
     {
+        if(equipmentController == null)
+        {
+            equipmentController = GameObject.FindGameObjectWithTag("Equipment").GetComponent<EquipmentController>();
+        }
+        if (playerUIController == null)
+        {
+            playerUIController = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUIController>();
+        }
         InicializeItemsDisplay();
-        isInitialized = true;
+        //isInitialized = true;
+    }
+
+    void Update()
+    {
+        if (isPlayerClose)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if(isShopOpened)
+                {
+                    StopShop();
+                }
+                else
+                {
+                    StartShop();
+                }
+            }
+        }
     }
 
     void InicializeItemsDisplay()
@@ -63,5 +92,47 @@ public class ShopController : MonoBehaviour
             return false;//if you cant buy this item
         }
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isPlayerClose = true;
+            shopUIController.ShowPressDisplay();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isPlayerClose = false;
+            shopUIController.HidePressDisplay();
+            StopShop(); // just in case he somehow leaves without pressing E?
+        }
+    }
+
+    void StartShop()
+    {
+        if(!isShopOpened)
+        {
+            isShopOpened = true;
+            shopUIController.ShowShopPanel();
+            playerUIController.TurnOffPlayerUI();
+            PauseController.SetPause(true);
+            PauseController.DisableInput(true);
+        }
+    }
+
+    void StopShop()
+    {
+        if (isShopOpened)
+        {
+            isShopOpened = false; 
+            shopUIController.HideShopPanel();
+            playerUIController.TurnOnPlayerUI();
+            PauseController.SetPause(false);
+            PauseController.DisableInput(false);
+        }
     }
 }
