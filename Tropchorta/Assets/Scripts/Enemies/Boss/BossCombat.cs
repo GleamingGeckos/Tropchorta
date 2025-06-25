@@ -1,10 +1,13 @@
 using DG.Tweening;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossCombat : EnemyCombat
 {
+    [Header("Speciul stuff")]
+    [SerializeField] float jumpDamageRadius = 5;
+    [SerializeField] ParticleSystem shockWave;
+
     public override void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
@@ -131,6 +134,56 @@ public class BossCombat : EnemyCombat
 
     protected IEnumerator JumpAttackRoutine(Transform target)
     {
-        yield return new WaitForSeconds(0.2f);
+        isCooldown = true; // Set flag to prevent multiple coroutines
+        float time = _cooldownInterval - timeToAttackInSeconds;
+        yield return new WaitForSeconds(time);
+
+        // start the circle animation
+        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dó³
+        _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
+        _attackStrongImage.enabled = true;
+
+        StrongTween = DOTween.Sequence()
+            .Append(_attackStrongTransform.DOScaleY(_maxStrong.y, timeToAttackInSeconds / 5.2f)
+                .From(_minStrong.y)
+                .SetEase(Ease.InOutBack))
+            .SetLoops(5, LoopType.Yoyo)
+            .OnComplete(() =>
+            {
+                _attackStrongImage.enabled = false;
+                _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
+            });
+        _attackStrongImage.DOFade(1f, timeToAttackInSeconds).From(0.2f);
+
+        animator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
+
+        enemyMovement.AttackStarted(); // stop moving
+
+        yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+
+        // Core attack logic
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, jumpDamageRadius, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
+
+
+        shockWave.Play();
+        for (int i = 0; i < hits; i++)
+        {
+            // Currently assuming the collider is on the same object as the HealthComponent
+            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
+                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
+                && !_colliders[i].isTrigger)
+            {
+                healthComponent.SimpleDamage(new AttackData(gameObject, 30, _attackCharm));
+
+            }
+        }
+        DebugExtension.DebugWireSphere(transform.position, Color.red, jumpDamageRadius, 1f);
+
+        yield return new WaitForSeconds(1.0f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+
+        enemyMovement.AttackFinished(); // start moving again
+        isCooldown = false;
     }
 }

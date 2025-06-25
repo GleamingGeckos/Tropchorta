@@ -16,7 +16,7 @@ public class BaseBoss : BaseEnemy
             BossCombat bossCombat = (BossCombat)_enemyCombat;
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
-
+            /*
             int value = Random.Range(1, 4);
             if (value == 1) // Plucie
             {
@@ -61,6 +61,12 @@ public class BaseBoss : BaseEnemy
                     bossCombat.PunchAttack(other.transform);
                 }
             }
+            else
+            {
+                bossCombat.JumpAttack(other.transform);
+            }
+            */
+                bossCombat.JumpAttack(other.transform);
             _enemyMovement.RotateTowards(player);
         }
     }

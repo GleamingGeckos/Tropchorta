@@ -44,7 +44,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] protected Image _attackStrongImage;
     [SerializeField] protected Vector3 _minStrong;
     [SerializeField] protected Vector3 _maxStrong;
-    Tween StrongTween;
+    protected Tween StrongTween;
 
     [SerializeField] protected Animator animator;
 
