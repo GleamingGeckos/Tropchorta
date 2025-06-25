@@ -7,7 +7,7 @@ public class BossCombat : EnemyCombat
     [Header("Speciul stuff")]
     [SerializeField] float jumpDamageRadius = 5;
     [SerializeField] ParticleSystem shockWave;
-
+    [SerializeField] GameObject damageArea;
     public override void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
@@ -162,26 +162,23 @@ public class BossCombat : EnemyCombat
         enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
+        if(shockWave)
+            shockWave.Play();// To po spadniêciu
 
         // Core attack logic
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, jumpDamageRadius, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
-
-
-        shockWave.Play();
-        for (int i = 0; i < hits; i++)
+        GameObject area = null;
+        if (damageArea != null)
         {
-            // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
-                _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
-                && !_colliders[i].isTrigger)
-            {
-                healthComponent.SimpleDamage(new AttackData(gameObject, 30, _attackCharm));
-
-            }
+            area = Instantiate(damageArea, transform.position, Quaternion.identity);
+            SphereCollider col = area.GetComponent<SphereCollider>();
+            if (col != null)
+                col.radius = jumpDamageRadius;
+            area.GetComponent<DamageArea>().Initialize(DealDamage(), 0.1f, "Player", AttackCharm);
         }
-        DebugExtension.DebugWireSphere(transform.position, Color.red, jumpDamageRadius, 1f);
 
-        yield return new WaitForSeconds(1.0f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+        DebugExtension.DebugWireSphere(transform.position, Color.red, jumpDamageRadius, 1f);
+        yield return new WaitForSeconds(0.33f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
+        Destroy(area);
 
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;

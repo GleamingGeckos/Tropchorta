@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +10,30 @@ public class BaseBoss : BaseEnemy
 {
     private bool _delay = false;
 
+    [SerializeField] int spitCount = 2;
+    [SerializeField] int punchCount = 1;
+    [SerializeField] int jumpCount = 1;
+
+    private List<int> attackSet = new();
+
+    void InitAttackSet()
+    {
+        attackSet.Clear();
+        attackSet.AddRange(Enumerable.Repeat(1, spitCount));
+        attackSet.AddRange(Enumerable.Repeat(2, punchCount));
+        attackSet.AddRange(Enumerable.Repeat(3, jumpCount));
+    }
+
+    int GetRandomAttack()
+    {
+        if (attackSet.Count == 0)
+            InitAttackSet();
+
+        int index = Random.Range(0, attackSet.Count);
+        int attack = attackSet[index];
+        attackSet.RemoveAt(index);
+        return attack;
+    }
     // Update is called once per frame
     override protected void OnTriggerStay(Collider other)
     {
@@ -16,8 +42,8 @@ public class BaseBoss : BaseEnemy
             BossCombat bossCombat = (BossCombat)_enemyCombat;
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
-            /*
-            int value = Random.Range(1, 4);
+
+            int value = GetRandomAttack();
             if (value == 1) // Plucie
             {
                 if (distanceSqr < 15.0f)
@@ -65,8 +91,6 @@ public class BaseBoss : BaseEnemy
             {
                 bossCombat.JumpAttack(other.transform);
             }
-            */
-                bossCombat.JumpAttack(other.transform);
             _enemyMovement.RotateTowards(player);
         }
     }

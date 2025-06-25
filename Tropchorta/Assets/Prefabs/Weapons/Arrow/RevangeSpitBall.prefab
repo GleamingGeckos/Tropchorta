@@ -260,7 +260,6 @@ MonoBehaviour:
   slowdownRate: 1
   minSpeed: 25
   lifetime: 2
-  damage: 5
   targetTag: Enemy
   motionScale: 1
   motionSpeed: 1
@@ -273,59 +272,17 @@ MonoBehaviour:
     m_RotationOrder: 4
   motionCurveY:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0044898987
-      value: 1.1096191
-      inSlope: 0.055386577
-      outSlope: 0.055386577
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4745509
-      value: 1.1356542
-      inSlope: -0.10139078
-      outSlope: -0.10139078
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.25816813
-      outSlope: -0.25816813
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   motionCurveZ:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.5243325
-      outSlope: -0.5243325
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.03889367
-    - serializedVersion: 3
-      time: 1.0007324
-      value: -0.0012016296
-      inSlope: -3.3761544
-      outSlope: -3.3761544
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.021674613
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _effectFire: {fileID: 0}
+  _effectPoison: {fileID: 0}
+  _effectLightning: {fileID: 0}
   _arrowForPar: {fileID: 0}

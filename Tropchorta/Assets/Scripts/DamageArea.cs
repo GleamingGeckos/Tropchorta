@@ -8,6 +8,13 @@ public class DamageArea : MonoBehaviour
     [SerializeField] CharmType charmType;
 
     private float lastHitTime = 0f;
+    public void Initialize(float damage, float cd, string targetTag, CharmType type)
+    {
+        damageValue = damage;
+        cooldown = cd;
+        whoToDamage = targetTag;
+        charmType = type;
+    }
 
     private void OnTriggerStay(Collider other)
     {
