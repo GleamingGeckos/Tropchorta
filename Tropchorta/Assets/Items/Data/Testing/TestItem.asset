@@ -18,4 +18,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 380572384130078391, guid: c2b48cb926823a24ea71b6586b203028, type: 3}
   itemPrice: 100
   justDrop: 0
-  shopPanel: {fileID: 21300000, guid: 509671369b0c1c94cb93b8126854cde6, type: 3}
+  shopPanel: {fileID: 21300000, guid: 8f062ae7544080041a01b53d989348a5, type: 3}
