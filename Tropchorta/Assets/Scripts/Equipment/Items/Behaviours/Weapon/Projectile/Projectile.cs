@@ -23,11 +23,10 @@ public class Projectile : MonoBehaviour
     public AnimationCurve motionCurveY;
     public AnimationCurve motionCurveZ;
 
-
     [Header("Effects")]
-    private GameObject _effectFire;
-    private GameObject _effectPoison;
-    private GameObject _effectLightning;
+    [SerializeField] private GameObject _effectFire;
+    [SerializeField] private GameObject _effectPoison;
+    [SerializeField] private GameObject _effectLightning;
 
     [Header("For Enemy only")]
     [SerializeField] private GameObject _arrowForPar;
@@ -41,16 +40,22 @@ public class Projectile : MonoBehaviour
 
     public void EnableCharmEffect()
     {
-        
-        //Transform effectTarget = FindScripts.FindChildWithTag(trans, "Effect");
-        //if (effectTarget != null)
-        //{
-        //    _effect = Instantiate(weaponSwardCharm, effectTarget);
-        //}
+        GameObject effect = charmType switch
+        {
+            CharmType.Fire => _effectFire,
+            CharmType.Poison => _effectPoison,
+            CharmType.Lightning => _effectLightning,
+            _ => null
+        };
+
+        if (effect != null)
+            effect.SetActive(true);
+
     }
 
     void Start()
     {
+        EnableCharmEffect();
         currentSpeed = speed;
         Destroy(gameObject, lifetime);
     }

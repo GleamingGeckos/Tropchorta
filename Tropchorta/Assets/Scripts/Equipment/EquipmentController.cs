@@ -57,7 +57,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (inactiveWeapon is Weapon weapon)
             {
-                weapon.Initialize(playerTransform);
+                //weapon.Initialize(playerTransform);
             }
         }
     }
