@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 353b3d498605bf342a61ee1b7ce78cf7
+guid: 1b189c294cf00794c8d90b6a3089c57f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: a66f06e75bac5444aabf4b013bab677e, type: 2}
+      name: achtung_boss
+    second: {fileID: 2100000, guid: 24a23878a969f32448cd25823470c0c5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +40,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

@@ -13,15 +13,17 @@ public class TutorialController : MonoBehaviour
 
     [Header("Tutorial Visuals")]
     [SerializeField] private GameObject swordModel;
-    [SerializeField] private GameObject uiCombo3Attacks;
-    [SerializeField] private GameObject uiUseShift;
-    [SerializeField] private GameObject uiPerfectBlock;
-    [SerializeField] private GameObject uiDodge;
-    [SerializeField] private GameObject uiBestiary;
-    [SerializeField] private GameObject uiNotebook;
-    [SerializeField] private GameObject uiTrail;
-    [SerializeField] private GameObject uiEq;
-    [SerializeField] private GameObject uiMap;
+    [SerializeField] private GameObject uiMustDoPanel;
+
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
+    //[SerializeField] private GameObject uiMustDoPanel;
 
     public int currentStep;
 
@@ -115,63 +117,63 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 5:
-                uiCombo3Attacks.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkCombo = true;
                 ShowDialogue();
                 break;
 
             case 6:
-                uiUseShift.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkShift = true;
                 ShowDialogue();
                 break;
 
             case 8:
-                uiPerfectBlock.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBlock = true;
                 ShowDialogue();
                 break;
 
             case 9:
-                uiDodge.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkDodge = true;
                 ShowDialogue();
                 break;
 
             case 11:
-                uiBestiary.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBestiary = true;
                 ShowDialogue();
                 break;
 
             case 12:
-                uiNotebook.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkNotebook = true;
                 ShowDialogue();
                 break;
 
             case 13:
-                uiTrail.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkTrail = true;
                 ShowDialogue();
                 break;
 
             case 15:
-                uiEq.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkEq = true;
                 ShowDialogue();
                 break;
 
             case 16:
-                uiMap.SetActive(true);
+                uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkMap = true;
                 ShowDialogue();
@@ -188,7 +190,7 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            uiUseShift.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkShift = false;
             canMove = true;
         }
@@ -196,13 +198,13 @@ public class TutorialController : MonoBehaviour
     private void CheckCombo()
     {
 
-        uiCombo3Attacks.SetActive(false);
+        uiMustDoPanel.SetActive(false);
         checkCombo = false;
         canMove = true;
     }
     private void CheckBlock()
     {
-        uiPerfectBlock.SetActive(false);
+        uiMustDoPanel.SetActive(false);
         checkBlock = false;
         canMove = true;
     }
@@ -210,7 +212,7 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            uiDodge.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkDodge = false;
             canMove = true;
         }
@@ -220,7 +222,7 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            uiBestiary.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkBestiary = false;
             canMove = true;
         }
@@ -229,14 +231,14 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            uiNotebook.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkNotebook = false;
             canMove = true;
         }
     }
     private void CheckTrail()
     {
-        uiTrail.SetActive(false);
+        uiMustDoPanel.SetActive(false);
         checkTrail = false;
         canMove = true;
 
@@ -245,7 +247,7 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            uiEq.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkEq = false;
             canMove = true;
         }
@@ -254,7 +256,7 @@ public class TutorialController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            uiMap.SetActive(false);
+            uiMustDoPanel.SetActive(false);
             checkMap = false;
             canMove = true;
         }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 353b3d498605bf342a61ee1b7ce78cf7
+guid: 36763d883ef890e4b96b3ab3c2ca69fb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: a66f06e75bac5444aabf4b013bab677e, type: 2}
+      name: Fontanna_Kostka_Lawka
+    second: {fileID: 2100000, guid: fe2074909a09c5e44ba7d14085c2e781, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sklep
+    second: {fileID: 2100000, guid: 6d7114b9c7dff374289cc4b7015d65df, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +45,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
