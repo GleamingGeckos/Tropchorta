@@ -17,5 +17,7 @@ MonoBehaviour:
   description: Bow that shoots arrows
   itemPrefab: {fileID: 8086611897145994040, guid: c8fa082fcbe35bf42aab938d77cb2296, type: 3}
   itemPrice: 30
+  justDrop: 0
   weaponBehaviors:
   - {fileID: 11400000, guid: 84dcc6c4b95ed5049800fe02dbda96fe, type: 2}
+  charm: {fileID: 11400000, guid: 8b76924c3a3175943b8e3990bb91eb4f, type: 2}

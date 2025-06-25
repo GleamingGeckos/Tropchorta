@@ -1,10 +1,11 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu(fileName = "BowBehavior", menuName = "Inventory/WeaponBehaviors/Bow", order = 2)]
 public class BowBehavior : WeaponBehavior
 {
     public GameObject arrowPrefab; 
     private PlayerCombat playerCombat;
-
+    [SerializeField] private int damage = 10;
 
     public override void Initialize(Transform user)
     {
@@ -16,12 +17,14 @@ public class BowBehavior : WeaponBehavior
     public override void UseStart(Transform user, Charm charm)
     {
         GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, user.rotation, user);
+        arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage);
     }
 
     public override void UseStop(Transform user)
     {
 
     }
+
     public override void UseStrongStart(Transform user, Charm charm)
     {
         float spreadAngle = 5f; // k¹t miêdzy strza³ami
