@@ -15,6 +15,8 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private GameObject swordModel;
     [SerializeField] private GameObject uiMustDoPanel;
 
+    [SerializeField] private GameObject enemy;
+
     //[SerializeField] private GameObject uiMustDoPanel;
     //[SerializeField] private GameObject uiMustDoPanel;
     //[SerializeField] private GameObject uiMustDoPanel;
@@ -134,6 +136,7 @@ public class TutorialController : MonoBehaviour
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBlock = true;
+                enemy.SetActive(true);
                 ShowDialogue();
                 break;
 
@@ -141,6 +144,7 @@ public class TutorialController : MonoBehaviour
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkDodge = true;
+
                 ShowDialogue();
                 break;
 
