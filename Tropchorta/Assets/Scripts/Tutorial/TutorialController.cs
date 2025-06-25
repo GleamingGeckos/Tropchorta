@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TutorialController : MonoBehaviour
@@ -14,8 +15,10 @@ public class TutorialController : MonoBehaviour
     [Header("Tutorial Visuals")]
     [SerializeField] private GameObject swordModel;
     [SerializeField] private GameObject uiMustDoPanel;
+    [SerializeField] private TextMeshProUGUI mustTextField;
 
     [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject trace;
 
     //[SerializeField] private GameObject uiMustDoPanel;
     //[SerializeField] private GameObject uiMustDoPanel;
@@ -65,45 +68,48 @@ public class TutorialController : MonoBehaviour
             dialoguePlayer.HidePanel();
             ExitTutorial();
         }
-
-        if (canMove)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Advance();
-            }
-        }
         else
         {
-            if (checkShift)
+            if (canMove)
             {
-                CheckShift();
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    Advance();
+                }
             }
-            else if (checkDodge)
+            else
             {
-                CheckDodge();
-            }
-            else if (checkBestiary)
-            {
-                CheckBestiary();
-            }
-            else if (checkNotebook)
-            {
-                CheckNotebook();
-            }
-            else if (checkTrail)
-            {
-                CheckTrail();
-            }
-            else if (checkEq)
-            {
-                CheckEq();
-            }
-            else if (checkMap)
-            {
-                CheckMap();
+                if (checkShift)
+                {
+                    CheckShift();
+                }
+                else if (checkDodge)
+                {
+                    CheckDodge();
+                }
+                else if (checkBestiary)
+                {
+                    CheckBestiary();
+                }
+                else if (checkNotebook)
+                {
+                    CheckNotebook();
+                }
+                else if (checkTrail)
+                {
+                    CheckTrail();
+                }
+                else if (checkEq)
+                {
+                    CheckEq();
+                }
+                else if (checkMap)
+                {
+                    CheckMap();
+                }
             }
         }
+       
     }
 
     private void Advance()              //Przechodzimy dalej
@@ -119,6 +125,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 4:
+                mustTextField.text = "Attack 3 times [LMB]";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkCombo = true;
@@ -126,6 +133,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 6:
+                mustTextField.text = "Use [SHIFT] to run";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkShift = true;
@@ -133,6 +141,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 8:
+                mustTextField.text = "Use [RMB] to block";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBlock = true;
@@ -141,6 +150,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 9:
+                mustTextField.text = "Use [SPACE] to dash";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkDodge = true;
@@ -149,6 +159,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 11:
+                mustTextField.text = "Use [B] to open Bestiary";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBestiary = true;
@@ -156,6 +167,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 12:
+                mustTextField.text = "Use [N] to open Notes";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkNotebook = true;
@@ -163,13 +175,16 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 13:
+                mustTextField.text = "Use [E] to collect clue";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkTrail = true;
+                trace.SetActive(true);
                 ShowDialogue();
                 break;
 
             case 15:
+                mustTextField.text = "Use [I] to open Equipment";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkEq = true;
@@ -177,6 +192,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 16:
+                mustTextField.text = "Use [M] to open Map";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkMap = true;
@@ -242,10 +258,12 @@ public class TutorialController : MonoBehaviour
     }
     private void CheckTrail()
     {
-        uiMustDoPanel.SetActive(false);
-        checkTrail = false;
-        canMove = true;
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            uiMustDoPanel.SetActive(false);
+            checkTrail = false;
+            canMove = true;
+        }
     }
     private void CheckEq()
     {

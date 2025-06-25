@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4251304635978395309, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 101504962}
     - target: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -187,6 +191,11 @@ PrefabInstance:
 --- !u!1 &101504961 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+  m_PrefabInstance: {fileID: 101504960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &101504962 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2733366508810233481, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
   m_PrefabInstance: {fileID: 101504960}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &192695656
@@ -729,7 +738,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -785,7 +794,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 60.486767, y: 25.038994, z: -288.23355, w: -60.733597}
+  m_margin: {x: 69.74422, y: 38.87011, z: -289.06546, w: -60.733597}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1197,7 +1206,9 @@ MonoBehaviour:
   playerInteract: {fileID: 1430404095}
   swordModel: {fileID: 1430404087}
   uiMustDoPanel: {fileID: 566225416}
+  mustTextField: {fileID: 1212035433}
   enemy: {fileID: 101504961}
+  trace: {fileID: 1555229564}
   currentStep: 0
 --- !u!114 &1520797824
 MonoBehaviour:
@@ -1213,6 +1224,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1278241101}
   textField: {fileID: 1606807450}
+--- !u!1001 &1555229563
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 906950229331176218, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_Name
+      value: TraceClue
+      objectReference: {fileID: 0}
+    - target: {fileID: 906950229331176218, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373463418410549657, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: notesUIController
+      value: 
+      objectReference: {fileID: 1860405494}
+    - target: {fileID: 6373463418410549657, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: equipmentController
+      value: 
+      objectReference: {fileID: 1430404085}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.169
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 21.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.091849975
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99577284
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 190.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490055672544347320, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+--- !u!1 &1555229564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 906950229331176218, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+  m_PrefabInstance: {fileID: 1555229563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1606807449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1590,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf804ce7e5e648408052bcb7d7f3c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1860405494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1517979761570035465, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+  m_PrefabInstance: {fileID: 1860405492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf011f8424e267419021560953fde6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1860405495 stripped
@@ -1876,4 +1972,5 @@ SceneRoots:
   - {fileID: 266353479}
   - {fileID: 971249683}
   - {fileID: 101504960}
+  - {fileID: 1555229563}
   - {fileID: 1921094531}

@@ -10,6 +10,7 @@ public class DialoguePlayer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textField;
 
 
+
     public void ShowCurrentText(DialogueData currentDialogue)
     {
         panel.SetActive(true);
