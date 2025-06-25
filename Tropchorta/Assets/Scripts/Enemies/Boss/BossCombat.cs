@@ -55,8 +55,6 @@ public class BossCombat : EnemyCombat
         enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
-        enemyMovement.StartChasing(target);
-        enemyMovement.agent.updateRotation = true;
 
         // Core attack logic
         Vector3 attackPoint = transform.forward * 1.5f;
@@ -68,6 +66,8 @@ public class BossCombat : EnemyCombat
 
         enemyMovement.AttackFinished(); // start moving again
         isCooldown = false;
+        enemyMovement.StartChasing(target);
+        enemyMovement.agent.updateRotation = true;
     }
 
     protected IEnumerator PunchAttackRoutine(Transform target)

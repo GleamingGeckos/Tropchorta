@@ -11,7 +11,7 @@ public class BaseBoss : BaseEnemy
     // Update is called once per frame
     override protected void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && _enemyMovement != null && !_delay)
+        if (other.gameObject.tag == "Player" && _enemyMovement != null && !_delay && !_enemyCombat.isCooldown)
         {
             BossCombat bossCombat = (BossCombat)_enemyCombat;
             GameObject player = other.gameObject;
@@ -20,44 +20,66 @@ public class BaseBoss : BaseEnemy
             int value = Random.Range(1, 4);
             if (value == 1) // Plucie
             {
-                if (distanceSqr < 10.0f)
+                if (distanceSqr < 15.0f)
                 {
                     Vector3 backDirection = -transform.forward;
-                    Vector3 retreatPosition = transform.position + backDirection * 30.0f; 
+                    Vector3 retreatPosition = transform.position + backDirection * 15.0f; 
                     NavMeshHit hit;
                     if (NavMesh.SamplePosition(retreatPosition, out hit, 3f, NavMesh.AllAreas))
                     {
                         _delay = true;
-                        _enemyMovement.agent.updateRotation = false;
                         _enemyMovement.isChasing = false;
+                        _enemyMovement.agent.updateRotation = false;
                         _enemyMovement.agent.isStopped = false; 
                         _enemyMovement.agent.ResetPath();
                         _enemyMovement.agent.SetDestination(hit.position);
-                        //Debug.Log("SetDestination to: " + hit.position);
-                        //Debug.Log("Agent path status: " + _enemyMovement.agent.pathStatus);
-                        DelayedAttack(other.transform, 0.3f);
+                        StartCoroutine(DelayedDistanceAttack(other.transform, 0.3f));
                     }
                 }
                 else
                 {
+                    //_enemyMovement.agent.isStopped = true;
                     bossCombat.DistanceAttack(other.transform);
                 }
 
             }
-            else if (value == 2 && distanceSqr < 10.0f)
+            else if (value == 2)
             {
-                bossCombat.PunchAttack(other.transform);
+                float distance = Vector3.Distance(transform.position, other.transform.position);
+                if (distance > 10f)
+                {
+                    _delay = true;
+                    _enemyMovement.isChasing = false;
+                    _enemyMovement.agent.updateRotation = false;
+                    _enemyMovement.agent.isStopped = false;
+                    _enemyMovement.agent.ResetPath();
+                    _enemyMovement.agent.SetDestination(other.transform.position);
+                    StartCoroutine(DelayedPunchAttack(other.transform));
+                }
+                else
+                {
+                    bossCombat.PunchAttack(other.transform);
+                }
             }
+            _enemyMovement.RotateTowards(player);
         }
     }
 
-    private IEnumerator DelayedAttack(Transform target, float delay)
+    private IEnumerator DelayedDistanceAttack(Transform target, float delay)
     {
-        Debug.Log("Start");
         BossCombat bossCombat = (BossCombat)_enemyCombat;
         yield return new WaitForSeconds(delay);
         bossCombat.DistanceAttack(target);
-        Debug.Log("Hello");
+        _delay = false;
+    }
+
+    private IEnumerator DelayedPunchAttack(Transform target)
+    {
+        BossCombat bossCombat = (BossCombat)_enemyCombat;
+        yield return new WaitUntil(() =>
+                Vector3.Distance(transform.position, target.position) <= 5f ||
+        !_enemyMovement.agent.hasPath || _enemyMovement.agent.pathStatus != NavMeshPathStatus.PathComplete);
+        bossCombat.PunchAttack(target);
         _delay = false;
     }
 }

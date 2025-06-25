@@ -21,7 +21,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] protected LayerMask _excludedLayer;
     protected Coroutine attackCoroutine;
 
-    [SerializeField] protected bool isCooldown = false;
+    [SerializeField] public bool isCooldown = false;
     [SerializeField, Tooltip("this should be longer than the attack animation itself")] protected float _cooldownInterval = 3.0f;
 
     [Header("Par")]

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Projectile : MonoBehaviour
 {
@@ -71,7 +72,8 @@ public class Projectile : MonoBehaviour
                 
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
-                    var revange = Instantiate(_arrowForPar, other.transform.position, transform.rotation * Quaternion.Euler(0, 180, 0), other.transform);
+                    Quaternion rot = Quaternion.LookRotation(transform.parent.position + transform.up - other.transform.position);
+                    var revange = Instantiate(_arrowForPar, other.transform.position, rot, other.transform);
                     revange.GetComponent<Projectile>().charmType = charmType;
                     enemyMovement.perfectParWasInitiated = false;
                 }
