@@ -14,8 +14,16 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private List<GameObject> itemPanels;
     [SerializeField] int activePanelId = 0;
+    [SerializeField] private GameObject pressDisplayPanel;
 
-
+    public void ShowPressDisplay()
+    {
+        pressDisplayPanel.SetActive(true);
+    }
+    public void HidePressDisplay()
+    {
+        pressDisplayPanel.SetActive(false);
+    }
     public void ShowShopPanel()
     {
         shopPanel.SetActive(true);
@@ -91,21 +99,5 @@ public class ShopUIController : MonoBehaviour
             Debug.Log("Cant buy this item");
         }
         //set active panel id here i guess
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            ShowShopPanel();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            HideShopPanel();
-        }
     }
 }
