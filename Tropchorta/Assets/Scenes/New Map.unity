@@ -6377,6 +6377,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 890934798}
     - target: {fileID: 6131339122415314527, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: 'additionalItems.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131339122415314527, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: equipmentBackpackUIController
       value: 
       objectReference: {fileID: 906029073}
