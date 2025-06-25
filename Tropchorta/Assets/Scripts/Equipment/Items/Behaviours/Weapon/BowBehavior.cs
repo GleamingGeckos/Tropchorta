@@ -17,7 +17,10 @@ public class BowBehavior : WeaponBehavior
     public override void UseStart(Transform user, Charm charm)
     {
         GameObject arrow = Instantiate(arrowPrefab, user.position + user.forward, user.rotation);
-        arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+        if(charm)
+            arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+        else
+            arrow.GetComponent<Projectile>().Initialize(null,CharmType.None, damage, user.gameObject);
     }
 
     public override void UseStop(Transform user)
@@ -37,7 +40,10 @@ public class BowBehavior : WeaponBehavior
             Quaternion rotation = user.rotation * Quaternion.Euler(0, angleOffset, 0);
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
             GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
-            arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+            if (charm)
+                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+            else
+                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage, user.gameObject);
         }
     }
 
@@ -72,7 +78,10 @@ public class BowBehavior : WeaponBehavior
             Quaternion rotation = user.rotation * Quaternion.Euler(0, angleOffset, 0);
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
             GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
-            arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+            if (charm)
+                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+            else
+                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage, user.gameObject);
         }
     }
 
