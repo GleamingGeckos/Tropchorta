@@ -979,6 +979,7 @@ MonoBehaviour:
   - {fileID: 4872426401037227270, guid: 9c9f370de4373e440a4a264135a2a36d, type: 3}
   - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 0
+  strong: 1
   pushDistance: 1
   pushDuration: 0.1
   pushRadius: 1
@@ -1055,7 +1056,6 @@ MonoBehaviour:
   _weakToCharm: 1
   _maxDamage: 2
   _minDamage: 5
-  _howLongAttackDealsDamage: 0
   _intervalsBetweenAttacks: 2
   _excludedLayer:
     serializedVersion: 2
@@ -1091,12 +1091,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a18b7a6d2a9a3245af43e888883dacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   _speed: 7
   _stoppingDistance: 2
   _stunTime: 2
   _stunImage: {fileID: 8028947173684331387}
+  canBeStuned: 1
   isStuned: 0
   perfectParWasInitiated: 0
+  isChasing: 0
 --- !u!136 &1510277763940413129
 CapsuleCollider:
   m_ObjectHideFlags: 0
