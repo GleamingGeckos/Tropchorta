@@ -158,10 +158,10 @@ public class EnemyCombat : MonoBehaviour
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
                 {
                     enemyMovement.Stun();
-                    enemyMovement.perfectParWasInitiated = false;
                 }
                 else if (!playerCombatComponent.isBlocking)
                     healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
+                enemyMovement.perfectParWasInitiated = false;
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, new Color(0.5f, 0.2f, 0.0f), 1f, 1f);
@@ -248,12 +248,12 @@ public class EnemyCombat : MonoBehaviour
         for (int i = 0; i < hits; i++)
         {
             // Currently assuming the collider is on the same object as the HealthComponent
-            if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
+            if (_colliders[i].TryGetComponent(out PlayerHealthComponent healthComponent) &&
                 _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
                 && !_colliders[i].isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
-                healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
+                healthComponent.UnblockableDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
             }
         }
         DebugExtension.DebugWireSphere(transform.position + attackPoint, Color.red, 1f, 1f);
