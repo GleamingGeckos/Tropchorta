@@ -214,6 +214,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkShift = false;
             canMove = true;
+            Advance();
         }
     }
     private void CheckCombo()
@@ -222,12 +223,16 @@ public class TutorialController : MonoBehaviour
         uiMustDoPanel.SetActive(false);
         checkCombo = false;
         canMove = true;
+        Advance();
+        OnDestroyCombo();
     }
     private void CheckBlock()
     {
         uiMustDoPanel.SetActive(false);
         checkBlock = false;
         canMove = true;
+        Advance();
+        OnDestroyBlock();
     }
     private void CheckDodge()
     {
@@ -236,6 +241,8 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkDodge = false;
             canMove = true;
+            Advance();
+
         }
 
     }
@@ -246,6 +253,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkBestiary = false;
             canMove = true;
+            Advance();
         }
     }
     private void CheckNotebook()
@@ -255,6 +263,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkNotebook = false;
             canMove = true;
+            Advance();
         }
     }
     private void CheckTrail()
@@ -264,6 +273,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkTrail = false;
             canMove = true;
+            Advance();
         }
     }
     private void CheckEq()
@@ -273,6 +283,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkEq = false;
             canMove = true;
+            Advance();
         }
     }
     private void CheckMap()
@@ -282,6 +293,7 @@ public class TutorialController : MonoBehaviour
             uiMustDoPanel.SetActive(false);
             checkMap = false;
             canMove = true;
+            Advance();
         }
     }
 
@@ -295,9 +307,13 @@ public class TutorialController : MonoBehaviour
         dialoguePlayer.ShowCurrentText(dialogueList[currentStep-1]);
     }
 
-    private void OnDestroy()
+    private void OnDestroyCombo()
     {
         playerCombat.OnCombo3Attacks -= CheckCombo;
+    }
+
+    private void OnDestroyBlock()
+    {
         playerCombat.OnPerfectParry -= CheckBlock;
     }
 }
