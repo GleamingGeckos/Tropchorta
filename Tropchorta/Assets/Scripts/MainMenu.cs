@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public InputReader input;
     [SerializeField] private string initSceneName;
+    [SerializeField] private string tutSceneName;
     [SerializeField] private bool startWithVisible;
     [SerializeField] private bool allowExit = true;
     private Canvas canvas;
@@ -53,6 +54,11 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene(initSceneName);
+    }
+
+    public void Tutorial()
+    {
+        SceneManager.LoadScene(tutSceneName);
     }
 
     public void QuitGame()
