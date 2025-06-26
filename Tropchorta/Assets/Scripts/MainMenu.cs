@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public InputReader input;
     [SerializeField] private string initSceneName;
     [SerializeField] private bool startWithVisible;
+    [SerializeField] private bool allowExit = true;
     private Canvas canvas;
 
     public bool IsOpend { get; private set; }
