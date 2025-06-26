@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c1befc3038a6c0a4dba3bcd009fb86f8, type: 3}
   description: I'm a redhead so I'll be Ron
   itemPrefab: {fileID: 8086611897145994040, guid: c8fa082fcbe35bf42aab938d77cb2296, type: 3}
-  itemPrice: 30
+  itemPrice: 10
   justDrop: 0
   shopPanel: {fileID: 21300000, guid: 038df56ccfeee134da38b81a05b8a66c, type: 3}
   weaponBehaviors:

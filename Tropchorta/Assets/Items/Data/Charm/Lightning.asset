@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Lightning Charm
   icon: {fileID: 21300000, guid: cea030b7c53c53e49ad9c4852cafa5d6, type: 3}
-  description: 'Lightning! Thunder! Lightning! '
+  description: Gives your weapons lighting enchant
   itemPrefab: {fileID: 5505681420328838874, guid: ac843efa48176f3449505937174429d6, type: 3}
-  itemPrice: 100
+  itemPrice: 5
   justDrop: 0
   shopPanel: {fileID: 21300000, guid: f8b766e6a76cbee4e825ffa3e1ee9042, type: 3}
   charmType: 3

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Poison Charm
   icon: {fileID: 21300000, guid: 4aa1ed6b41765674ca5db0fa8c1e77a8, type: 3}
-  description: 'Poison! Poison! Poison! '
+  description: Gives your weapons poison enchant
   itemPrefab: {fileID: 5505681420328838874, guid: 9221b1df86fdf9a40b2f5a5354cd2328, type: 3}
-  itemPrice: 100
+  itemPrice: 5
   justDrop: 0
   shopPanel: {fileID: 21300000, guid: 0ae49ccca1dab6d45a6184cb79bce319, type: 3}
   charmType: 2
