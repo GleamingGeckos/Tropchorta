@@ -43,7 +43,7 @@ public class PlayerHealthComponent : HealthComponent
     {
         if (healthBar != null)
         {
-            healthBar.SetHealth(currentHealth / MaxHealth);
+            healthBar.SetHealth(currentHealth);
         }
         
     }

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour
 {
-    [SerializeField] float damageValue;
+    [SerializeField] int damageValue;
     [SerializeField] float cooldown;
     [SerializeField] string whoToDamage;
     [SerializeField] CharmType charmType;
 
     private float lastHitTime = 0f;
-    public void Initialize(float damage, float cd, string targetTag, CharmType type)
+    public void Initialize(int damage, float cd, string targetTag, CharmType type)
     {
         damageValue = damage;
         cooldown = cd;

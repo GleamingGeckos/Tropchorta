@@ -72,7 +72,7 @@ public class EnemyCombat : MonoBehaviour
 
     public int DealDamage()
     {
-        int damage = Random.Range(_minDamage, _maxDamage + 1);
+        int damage = _minDamage;
         //Debug.Log($"Attack dealt {damage} damage.");
         return damage;
     }
@@ -152,7 +152,8 @@ public class EnemyCombat : MonoBehaviour
             if (_colliders[i].TryGetComponent(out HealthComponent healthComponent) &&
                 _colliders[i].TryGetComponent(out PlayerCombat playerCombatComponent) &&
                 _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent) &&
-                !_colliders[i].isTrigger)
+                !_colliders[i].isTrigger &&
+    _colliders[i] is CapsuleCollider)
             {
                 playerMovementComponent.RotatePlayerTowards(transform.position);
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
@@ -250,8 +251,10 @@ public class EnemyCombat : MonoBehaviour
             // Currently assuming the collider is on the same object as the HealthComponent
             if (_colliders[i].TryGetComponent(out PlayerHealthComponent healthComponent) &&
                 _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
-                && !_colliders[i].isTrigger)
+                && !_colliders[i].isTrigger &&
+    _colliders[i] is CapsuleCollider)
             {
+                
                 playerMovementComponent.RotatePlayerTowards(transform.position);
                 healthComponent.UnblockableDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
             }

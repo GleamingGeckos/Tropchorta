@@ -1,21 +1,54 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] RectTransform fill;
-    float initialWidth;
-    Vector2 initialPosition;
+    [SerializeField] private GameObject point1;
+    [SerializeField] private GameObject point2;
+    [SerializeField] private GameObject point3;
+    [SerializeField] private GameObject point4;
+    [SerializeField] private GameObject point5;
+    [SerializeField] private GameObject point6;
+    [SerializeField] private GameObject point7;
+    [SerializeField] private GameObject point8;
+    [SerializeField] private GameObject point9;
+    [SerializeField] private GameObject point10;
+    [SerializeField] private GameObject point11;
+    [SerializeField] private GameObject point12;
+    [SerializeField] private GameObject point13;
+    [SerializeField] private GameObject point14;
+    [SerializeField] private GameObject point15;
 
-    void Start()
+    private List<GameObject> points = new List<GameObject>();
+    [SerializeField] private int initialWidth =10;
+
+    private void Awake()
     {
-        initialWidth = fill.sizeDelta.x;
-        initialPosition = fill.anchoredPosition;
+        points.Add(point15);
+        points.Add(point14);
+        points.Add(point13);
+        points.Add(point12);
+        points.Add(point11);
+        points.Add(point10);
+        points.Add(point9);
+        points.Add(point8);
+        points.Add(point7);
+        points.Add(point6);
+        points.Add(point5);
+        points.Add(point4);
+        points.Add(point3);
+        points.Add(point2);
+        points.Add(point1);
     }
-
-    // this expects normalized value (0-1)
-    public void SetHealth(float health)
+    public void SetHealth(int health)
     {
-        fill.sizeDelta = new Vector2(initialWidth * health, fill.sizeDelta.y);
-        fill.anchoredPosition = new Vector2(initialPosition.x - (initialWidth - fill.sizeDelta.x) / 2, initialPosition.y);
+        health = Mathf.Clamp(health, 0, initialWidth);
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            int indexFromEnd = points.Count - 1 - i;
+            points[indexFromEnd].SetActive(i < health);
+        }
     }
 }

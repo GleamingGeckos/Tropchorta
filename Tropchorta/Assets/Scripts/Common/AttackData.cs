@@ -2,11 +2,11 @@ using UnityEngine;
 
 public struct AttackData
 {
-    public float damage;
+    public int damage;
     public CharmType charmType;
     public GameObject attacker;
 
-    public AttackData(GameObject attacker, float damage, CharmType charmType = CharmType.None)
+    public AttackData(GameObject attacker, int damage, CharmType charmType = CharmType.None)
     {
         this.attacker = attacker;
         this.damage = damage;

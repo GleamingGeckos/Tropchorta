@@ -90,6 +90,7 @@ public class Projectile : MonoBehaviour
                 other.TryGetComponent(out PlayerCombat playerCombatComponent) &&
                 other.TryGetComponent(out PlayerMovement playerMovementComponent) &&
                 _parent.transform.TryGetComponent(out EnemyMovement enemyMovement) &&
+                other is CapsuleCollider &&
                 !other.isTrigger)
             {
                 playerMovementComponent.RotatePlayerTowards(_parent.transform.position);

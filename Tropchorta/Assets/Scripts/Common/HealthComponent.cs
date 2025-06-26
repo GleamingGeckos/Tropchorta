@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] protected float maxHealth;
-    [SerializeField] protected float currentHealth;
+    [SerializeField] protected int maxHealth;
+    [SerializeField] protected int currentHealth;
 
     protected bool isDead = false;
     
@@ -55,7 +55,7 @@ public class HealthComponent : MonoBehaviour
         afterAttack.Invoke(ad);
     }
 
-    public void Heal(float heal)
+    public void Heal(int heal)
     {
         if (heal < 0)
         {
@@ -69,7 +69,7 @@ public class HealthComponent : MonoBehaviour
         onHeal.Invoke(heal, currentHealth);
     }
 
-    public void Revive(float newHealth)
+    public void Revive(int newHealth)
     {
         if (!isDead) return;
         if (newHealth < 0)
@@ -82,9 +82,9 @@ public class HealthComponent : MonoBehaviour
         onHeal.Invoke(newHealth, currentHealth);
     }
 
-    public void SetMaxHealth(float newMaxHealth)
+    public void SetMaxHealth(int newMaxHealth)
     {
-        maxHealth = Mathf.Clamp(newMaxHealth, 0, float.MaxValue);
+        maxHealth = Mathf.Clamp(newMaxHealth, 0, int.MaxValue);
         if (maxHealth == 0)
         {
             currentHealth = 0;

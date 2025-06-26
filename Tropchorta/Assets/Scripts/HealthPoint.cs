@@ -4,7 +4,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class HealthPoint : MonoBehaviour
 {
-    [SerializeField] float _healValue = 10.0f;
+    [SerializeField] int _healValue = 1;
     public float delay = 0.1f;
     private Transform _player;
     private bool _isTaken = false;

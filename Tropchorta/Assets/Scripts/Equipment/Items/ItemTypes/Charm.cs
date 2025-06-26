@@ -43,7 +43,7 @@ public class Charm : Item
         AttackData newAttack = new AttackData(attackData);
      
         if (charmType == attackData.charmType && charmType != CharmType.None)
-            newAttack.damage *= weaponAmplificationMultiplier;
+            newAttack.damage = newAttack.damage + 1;
 
         return newAttack;
     }
@@ -52,8 +52,8 @@ public class Charm : Item
     {
         AttackData newAttack = new AttackData(attackData);
 
-        if (charmType == attackData.charmType && charmType != CharmType.None)
-            newAttack.damage *= weaponAmplificationMultiplier;
+        if (charmType == attackData.charmType && attackData.charmType != CharmType.None && charmType != CharmType.None)
+            newAttack.damage = newAttack.damage + 1;
 
         return newAttack;
     }
@@ -63,8 +63,8 @@ public class Charm : Item
         AttackData newAttack = new AttackData(attackData);
         //Debug.Log(charmType + " " + newAttack.charmType);
         //Debug.Log("Old" + newAttack.damage);
-        if (charmType == attackData.charmType && charmType != CharmType.None)
-            newAttack.damage *= (1.0f - armorReductionProcent);
+        if (charmType == attackData.charmType && charmType != CharmType.None && attackData.charmType != CharmType.None)
+            newAttack.damage = newAttack.damage - 1; 
         //Debug.Log("New" + newAttack.damage);
         //Debug.Log("-----------------------------------");
         return newAttack;

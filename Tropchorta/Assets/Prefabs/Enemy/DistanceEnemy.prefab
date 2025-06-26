@@ -978,6 +978,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4872426401037227270, guid: 9c9f370de4373e440a4a264135a2a36d, type: 3}
   - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
+  - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 1
   strong: 0
   pushDistance: 1
@@ -1055,7 +1056,7 @@ MonoBehaviour:
   _attackCharm: 0
   _weakToCharm: 0
   _maxDamage: 2
-  _minDamage: 5
+  _minDamage: 2
   _intervalsBetweenAttacks: 2
   _excludedLayer:
     serializedVersion: 2
