@@ -1,8 +1,9 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using FMODUnity;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
@@ -45,6 +46,10 @@ public class PlayerCombat : MonoBehaviour
     float playerRadius = 1.0f;
     [SerializeField] float stepTime = 0.4f;
     Coroutine stepCoroutine = null;
+
+    [Header("Blocking")]
+    [SerializeField] float blockDuration = 1.5f;
+    private Coroutine blockRoutine;
 
     public event Action OnCombo3Attacks;
     public event Action OnPerfectParry;
@@ -242,33 +247,28 @@ public class PlayerCombat : MonoBehaviour
     {
         if (playerState.state == PlayerState.DisableInput||movement.isSprinting||playerState.state == PlayerState.Dashing) return;
         isBlocking = true;
-        //movement.WeaponAnimator.SetBool("isBlocking", true);
         movement.PlayerAnimator.SetBool("isBlocking", true);
         
-        //movement.WeaponAnimator.SetTrigger("blockTrigger");
         movement.PlayerAnimator.SetTrigger("blockTrigger");
 
         CheckForAttackingEnemies(isBlocking);
-        // if (staffAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block"))
-        // {
-        //     // reset the clip
-        //     staffAnimator.Play("Block", -1, 0);
-        // }
-        // else
-        // {
-        //     // play the clip, if it's not already playing
-        //     staffAnimator.SetBool("Blocking", true);
-        // }
+        blockRoutine = StartCoroutine(StopBlockingAfterTime());
+    }
+
+
+    IEnumerator StopBlockingAfterTime()
+    {
+        yield return new WaitForSeconds(blockDuration);
+        StopBlocking();
     }
 
     public void StopBlocking()
     {
         if (playerState.state == PlayerState.DisableInput) return;
         isBlocking = false;
-        //movement.WeaponAnimator.SetBool("isBlocking", false);
         movement.PlayerAnimator.SetBool("isBlocking", false);
-        //staffAnimator.SetBool("Blocking", false);
     }
+
 
     public void OnAttacked(AttackData ad, bool blockable)
     {
