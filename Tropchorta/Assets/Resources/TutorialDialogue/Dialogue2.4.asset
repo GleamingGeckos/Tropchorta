@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
   m_Name: Dialogue2.4
   m_EditorClassIdentifier: 
-  fullText: "Good. Now listen closely, young hunter.\r\nEvery master of the blade
-    began with a simple strike. You will perform three \u2014 swift, without hesitation
-    [LMB].\r\n"
+  fullText: 'Good. Now listen closely, young hunter.
+
+    Every master of the blade
+    began with a simple strike. You will perform three - swift, without hesitation
+    [LMB].
+
+'
