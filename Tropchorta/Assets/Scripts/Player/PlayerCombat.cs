@@ -76,6 +76,14 @@ public class PlayerCombat : MonoBehaviour
         playerRadius = GetComponent<CapsuleCollider>().radius;
     }
 
+    private void OnDestroy()
+    {
+        var pm = GetComponent<PlayerMovement>();
+        pm.input.OnLeftMouseClickEvent -= OnClickStart;
+        pm.input.OnLeftMouseReleaseEvent -= OnClickEnd;
+        pm.input.OnRightMouseClickEvent -= AltUseStart;
+        pm.input.OnRightMouseReleaseEvent -= AltUseEnd;
+    }
     private void Update()
     {
         if (mouseBeingHeld&&equipmentController.IsDistance())

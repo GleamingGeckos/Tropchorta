@@ -53,11 +53,21 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
+        if (PlayerSingleton.Instance != null)
+        {
+            PlayerSingleton.Instance.ResetSingleton();
+        }
+        PauseController.SetPause(false);
         SceneManager.LoadScene(initSceneName);
     }
 
     public void Tutorial()
     {
+        if (PlayerSingleton.Instance != null)
+        {
+            PlayerSingleton.Instance.ResetSingleton();
+        }
+        PauseController.SetPause(false);
         SceneManager.LoadScene(tutSceneName);
     }
 

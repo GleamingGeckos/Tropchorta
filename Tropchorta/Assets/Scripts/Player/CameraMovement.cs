@@ -45,6 +45,21 @@ public class CameraMovement : MonoBehaviour
         cam = GetComponent<Camera>();
         input.OnLookInputEvent += OnMousePosition;
     }
+    private void Update()
+    {
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
 
     // this is FixedUpdate, the same as movement of the player.
     // if you ever change this to Update, or the player's movement to Update, remember that both need to be the same
@@ -52,7 +67,18 @@ public class CameraMovement : MonoBehaviour
     void LateUpdate()
     {
         if (playerState.state == PlayerState.DisableInput) return;
-
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            else
+            {
+                return;
+            }
+        }
         forwardXZProjected = new Vector2(player.forward.x, player.forward.z).normalized * verticalLookInfluence;
         rightXZProjected = new Vector2(player.right.x, player.right.z).normalized * horizontalLookInfluence;
 

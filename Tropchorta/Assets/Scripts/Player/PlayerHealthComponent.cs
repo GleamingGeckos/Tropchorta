@@ -13,6 +13,7 @@ public class PlayerHealthComponent : HealthComponent
         if (uiObjects.Length > 0)
         {
             healthBar = uiObjects[0].healthBar;
+            UpdateHealthBar();
         }
 
         onHeal.AddListener(UpdateHealth);
