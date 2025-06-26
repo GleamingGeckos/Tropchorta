@@ -157,16 +157,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatMove = new Vector3(lerpedMove.x, 0, lerpedMove.y).normalized;
         Vector3 desiredMove = new Vector3(lerpedMove.x, 0, lerpedMove.y) * speed * (isSprinting ? sprintMod : 1);
         Ray ray = new Ray(transform.position + Vector3.up * maxStepHight - Vector3.up, flatMove);
-        if (!Physics.Raycast(ray, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) || hit.normal.y > 0.7f)
+        if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) || hit.normal.y > 0.7f)
         {
-            cc.Move(desiredMove * Time.deltaTime); // dodaj docisk do ziemi
+            cc.Move(desiredMove * Time.deltaTime);
         }
         else
         {
-
-            Debug.Log("Raycast trafi³ w: " + hit.collider.name);
+            Debug.Log("SphereCast trafi³ w: " + hit.collider.name);
         }
-            Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
+        Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
         //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
 
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
