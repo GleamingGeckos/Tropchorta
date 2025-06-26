@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossFightArenas/BossFightSwamps.unity
     guid: 3a66b6417fa0d8a40832e382f37cbad7
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 36ba085424b73d040a25ecbd3548f826
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6c21e9cb3f1c764da602b29e82c9986, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f2e35d3dae6e23147be006f83b143267, type: 3}
