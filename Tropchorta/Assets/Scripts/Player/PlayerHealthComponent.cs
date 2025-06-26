@@ -21,8 +21,14 @@ public class PlayerHealthComponent : HealthComponent
 
     public override void SimpleDamage(AttackData ad)
     {
-        onAttacked.Invoke(ad);
+        onAttacked.Invoke(ad, true);
     }
+
+    public void UnblockableDamage(AttackData ad)
+    {
+        onAttacked.Invoke(ad, false);
+    }
+
     public void BaseSimpleDamage(AttackData ad)
     {
         base.SimpleDamage(ad);

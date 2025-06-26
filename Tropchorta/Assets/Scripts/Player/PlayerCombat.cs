@@ -270,9 +270,9 @@ public class PlayerCombat : MonoBehaviour
         //staffAnimator.SetBool("Blocking", false);
     }
 
-    public void OnAttacked(AttackData ad)
+    public void OnAttacked(AttackData ad, bool blockable)
     {
-        if (!isBlocking)
+        if ((!isBlocking && blockable) || !blockable)
         {
             AttackData attackData = ad;
             if(equipmentController.GetDefensiveCharm() != null)
@@ -281,8 +281,6 @@ public class PlayerCombat : MonoBehaviour
             }
             health.BaseSimpleDamage(attackData);
         }
-
-        
     }
 
     private void CheckForAttackingEnemies(bool isBlocking)//TODO im tired, needs to be redone, but works for now

@@ -18,7 +18,7 @@ public class HealthComponent : MonoBehaviour
     // Event holds (healValue, currentHealth)
     public UnityEvent<float, float> onHeal;
 
-    public UnityEvent<AttackData> onAttacked;
+    public UnityEvent<AttackData, bool> onAttacked;
 
     public UnityEvent<AttackData> afterAttack;
 

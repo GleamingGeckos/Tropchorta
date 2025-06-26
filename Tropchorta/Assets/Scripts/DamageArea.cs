@@ -22,8 +22,13 @@ public class DamageArea : MonoBehaviour
         {
             if (Time.time >= lastHitTime + cooldown)
             {
+                var healthPlayer = other.GetComponent<PlayerHealthComponent>();
                 var health = other.GetComponent<HealthComponent>();
-                if (health)
+                if (healthPlayer)
+                {
+                    healthPlayer.UnblockableDamage(new AttackData(gameObject, damageValue, charmType));
+                    lastHitTime = Time.time;
+                }else if (health != null)
                 {
                     health.SimpleDamage(new AttackData(gameObject, damageValue, charmType));
                     lastHitTime = Time.time;
