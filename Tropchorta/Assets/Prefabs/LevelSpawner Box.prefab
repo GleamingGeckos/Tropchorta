@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6344134552615311206}
   - component: {fileID: 1915326116662323324}
-  - component: {fileID: 255695649293782822}
   - component: {fileID: 5645461854934717249}
+  - component: {fileID: 7821269785128898299}
   m_Layer: 0
-  m_Name: LevelSpawner
+  m_Name: LevelSpawner Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,28 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df345cc104841c4abb6907a95a8b213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnArea: {fileID: 255695649293782822}
---- !u!135 &255695649293782822
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5643976807772302406}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
+  spawnArea: {fileID: 7821269785128898299}
 --- !u!114 &5645461854934717249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +65,24 @@ MonoBehaviour:
   maxNumber: 7
   respawnDelayMin: 10
   respawnDelayMax: 30
+--- !u!65 &7821269785128898299
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5643976807772302406}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnerForObj : MonoBehaviour
 {
-    [SerializeField] private SphereCollider spawnArea;
+    [SerializeField] private Collider spawnArea;
 
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
@@ -20,7 +20,15 @@ public class SpawnerForObj : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector3 randomPosition = GetRandomPointInSphere(spawnArea);
+            Vector3 randomPosition = transform.position;
+            if (spawnArea is SphereCollider sphere)
+            {
+                randomPosition = GetRandomPointInSphere(sphere);
+            }
+            else if (spawnArea is BoxCollider box)
+            {
+                randomPosition = GetRandomPointInBox(box);
+            }
             randomPosition.y = spawnArea.transform.position.y; // Ustawienie wysokoœci na wysokoœæ spawnera
             GameObject spawnedObj;
             if (parent)
@@ -38,5 +46,16 @@ public class SpawnerForObj : MonoBehaviour
         Vector3 randomPoint = Random.insideUnitSphere * collider.radius;
         randomPoint += collider.transform.position; // Adjust based on collider's position
         return randomPoint;
+    }
+
+    private Vector3 GetRandomPointInBox(BoxCollider collider)
+    {
+        Vector3 localPoint = new Vector3(
+            Random.Range(-0.5f, 0.5f),
+            Random.Range(-0.5f, 0.5f),
+            Random.Range(-0.5f, 0.5f)
+        );
+        Vector3 worldPoint = collider.transform.TransformPoint(Vector3.Scale(localPoint, collider.size));
+        return worldPoint;
     }
 }
