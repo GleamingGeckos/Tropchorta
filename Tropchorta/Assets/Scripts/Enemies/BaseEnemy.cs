@@ -29,6 +29,20 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private float pushRadius = 1.0f;
     [SerializeField] private LayerMask pushCollisionMask = default;
 
+    
+    private void Update()
+    {
+        if (_enemyMovement.agent.hasPath)
+        {
+            _enemyCombat.EnemyAnimator.SetBool("isWalking", true);
+
+        }
+        else
+        {
+            _enemyCombat.EnemyAnimator.SetBool("isWalking", false);
+        }
+    }
+    
     protected void Start()
     {
         material = new Material(GetComponentInChildren<Renderer>().sharedMaterial);
@@ -66,7 +80,7 @@ public class BaseEnemy : MonoBehaviour
             if (!distance && distanceSqr < 6.0f)
             {
                 if (Random.value < 0.7f)
-                    _enemyCombat.Attack(); // czasami bli¿szy
+                    _enemyCombat.Attack(); // czasami bliï¿½szy
                 else if(strong)
                     _enemyCombat.StrongAttack(); // czasami dalszy
             }

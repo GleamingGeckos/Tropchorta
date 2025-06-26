@@ -2,18 +2,25 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
+
+
+
 public class BossCombat : EnemyCombat
 {
     [Header("Speciul stuff")]
     [SerializeField] float jumpDamageRadius = 5;
     [SerializeField] ParticleSystem shockWave;
     [SerializeField] GameObject damageArea;
+    public Animator AlbastAnimator;
+
     public override void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
         Debug.Log("Plucie attack");
         attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
         StartCoroutine(PerfectBlockWindow());
+        AlbastAnimator.SetTrigger("attackTrigger");
+
     }
     
     public void PunchAttack(Transform target)
@@ -21,6 +28,8 @@ public class BossCombat : EnemyCombat
         if (isCooldown) return;
         Debug.Log("Punch attack");
         attackCoroutine = StartCoroutine(PunchAttackRoutine(target));
+        AlbastAnimator.SetTrigger("attackTrigger");
+
     }
     
     public void JumpAttack(Transform target)
@@ -28,6 +37,8 @@ public class BossCombat : EnemyCombat
         if (isCooldown) return;
         Debug.Log("Jump attack");
         attackCoroutine = StartCoroutine(JumpAttackRoutine(target));
+        AlbastAnimator.SetTrigger("aoeTrigger");
+
     }
 
     protected override IEnumerator DistanceAttackRoutine(Transform target)
@@ -139,7 +150,7 @@ public class BossCombat : EnemyCombat
         yield return new WaitForSeconds(time);
 
         // start the circle animation
-        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dó³
+        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dï¿½
         _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
         _attackStrongImage.enabled = true;
 
@@ -163,7 +174,7 @@ public class BossCombat : EnemyCombat
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         if(shockWave)
-            shockWave.Play();// To po spadniêciu
+            shockWave.Play();// To po spadniï¿½ciu
 
         // Core attack logic
         GameObject area = null;

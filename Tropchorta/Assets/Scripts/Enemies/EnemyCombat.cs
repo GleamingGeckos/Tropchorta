@@ -8,6 +8,9 @@ public class EnemyCombat : MonoBehaviour
 {
     [Header("Attack")]
     [SerializeField] protected CharmType _attackCharm;
+    
+    public Animator EnemyAnimator;
+
     public CharmType AttackCharm => _attackCharm; 
     [SerializeField] protected CharmType _weakToCharm;
 
@@ -82,6 +85,8 @@ public class EnemyCombat : MonoBehaviour
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(NormalAttackRoutine());
         StartCoroutine(PerfectBlockWindow());
+        EnemyAnimator.SetTrigger("attackTrigger");
+
     }
 
     public void StrongAttack()
@@ -89,6 +94,8 @@ public class EnemyCombat : MonoBehaviour
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(StrongAttackRoutine());
         StartCoroutine(PerfectBlockWindow());
+        EnemyAnimator.SetTrigger("powerfulTrigger");
+
     }
 
     public virtual void DistanceAttack(Transform target)
@@ -96,6 +103,8 @@ public class EnemyCombat : MonoBehaviour
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
         StartCoroutine(PerfectBlockWindow());
+        EnemyAnimator.SetTrigger("attackTrigger");
+
     }
 
     public void WasBlocked()

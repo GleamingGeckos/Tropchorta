@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
+using Random = UnityEngine.Random;
 
 public class BaseBoss : BaseEnemy
 {
@@ -15,6 +17,20 @@ public class BaseBoss : BaseEnemy
     [SerializeField] int jumpCount = 1;
 
     private List<int> attackSet = new();
+
+    public BossCombat bossCombat;
+    
+    private void Update()
+    {
+        if (_enemyMovement.agent.hasPath)
+        {
+            bossCombat.AlbastAnimator.SetBool("isWalking",true);
+        }
+        else
+        {
+            bossCombat.AlbastAnimator.SetBool("isWalking", false);
+        }
+    }
 
     void InitAttackSet()
     {
