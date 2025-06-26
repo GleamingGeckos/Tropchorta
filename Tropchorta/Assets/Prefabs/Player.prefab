@@ -320,6 +320,7 @@ MonoBehaviour:
   isWindowOpen: 0
   distance: 1
   stepTime: 0.1
+  blockDuration: 1
 --- !u!114 &3305874657431232447
 MonoBehaviour:
   m_ObjectHideFlags: 0
