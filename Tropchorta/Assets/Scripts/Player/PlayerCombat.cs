@@ -32,6 +32,7 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Combo")]
     [SerializeField] int comboCounter = 0;
+    [SerializeField] ParticleSystem shockWave;
     private Coroutine comboCorutine;
     private int specialAttackNr = 3;
     [SerializeField] Vector2Int comboAttackWindow = new Vector2Int(1, 00);
@@ -136,6 +137,8 @@ public class PlayerCombat : MonoBehaviour
             equipmentController.UseWeaponSpecialAttack(rotatingRootTransform);
             // Tu wywołujemy event combo 3 ataków
             OnCombo3Attacks?.Invoke();
+            if (shockWave)
+                shockWave.Play();// To po spadnięciu
         } 
         else {
             equipmentController.UseWeaponStart(rotatingRootTransform);
