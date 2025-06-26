@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,15 +22,11 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject trace;
 
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
-    //[SerializeField] private GameObject uiMustDoPanel;
+    [Header("FMOD Sounds")]
+    [SerializeField] private List<EventReference> soundList;
+    //[SerializeField] private EventReference firstSound;
+
+
 
     public int currentStep;
 
@@ -305,6 +302,7 @@ public class TutorialController : MonoBehaviour
     private void ShowDialogue()
     {
         dialoguePlayer.ShowCurrentText(dialogueList[currentStep-1]);
+        RuntimeManager.PlayOneShot(soundList[currentStep-1], transform.position);
     }
 
     private void OnDestroyCombo()

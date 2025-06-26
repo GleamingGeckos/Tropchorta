@@ -287,11 +287,11 @@ MonoBehaviour:
     Path: 
   dashSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -777167254
+      Data2: 1137731583
+      Data3: -721604731
+      Data4: 372554964
+    Path: event:/Player/Movement/Dash
   PlayerAnimator: {fileID: 7739743104828277848}
   hobbyHorseMesh: {fileID: 8251595532419056364}
 --- !u!114 &5326583177451854505
