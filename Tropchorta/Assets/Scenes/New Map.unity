@@ -693,14 +693,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86020882}
-  m_LocalRotation: {x: 0.06909061, y: -0.87230486, z: -0.4810432, w: 0.053929243}
+  m_LocalRotation: {x: 0.6656663, y: -0.56795967, z: -0.30201527, w: 0.37828162}
   m_LocalPosition: {x: 0, y: 0, z: 0.0121}
   m_LocalScale: {x: 0.009999999, y: 0.009999995, z: 0.009999996}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1464299514}
   m_Father: {fileID: 768080245}
-  m_LocalEulerAnglesHint: {x: 236.282, y: 16.811996, z: -198.09601}
+  m_LocalEulerAnglesHint: {x: 170.761, y: 57.428, z: -273.988}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.00198, y: 0.0023}
@@ -5507,6 +5507,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: TraceClue (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.35355547
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.14644715
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8535527
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3535529
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
       propertyPath: notesUIController
       value: 
@@ -6307,6 +6343,10 @@ PrefabInstance:
     - target: {fileID: 906950229331176218, guid: 997c411b614efae4f9204ef989532368, type: 3}
       propertyPath: m_Name
       value: Amulet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 997c411b614efae4f9204ef989532368, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 997c411b614efae4f9204ef989532368, type: 3}
       propertyPath: notesUIController
@@ -8787,7 +8827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233127465630167434, guid: 74011b00159a8eb40adcf163c5de7626, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.74
+      value: 1.999
       objectReference: {fileID: 0}
     - target: {fileID: 1233127465630167434, guid: 74011b00159a8eb40adcf163c5de7626, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10552,6 +10592,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: TraceClue
       objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.12059204
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04995094
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.91597545
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.37940943
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 165
+      objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
       propertyPath: notesUIController
       value: 
@@ -11195,6 +11271,10 @@ PrefabInstance:
     - target: {fileID: 906950229331176218, guid: 997c411b614efae4f9204ef989532368, type: 3}
       propertyPath: m_Name
       value: Amulet (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 997c411b614efae4f9204ef989532368, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 997c411b614efae4f9204ef989532368, type: 3}
       propertyPath: notesUIController
@@ -13081,6 +13161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Amulet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 997c411b614efae4f9204ef989532368, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 997c411b614efae4f9204ef989532368, type: 3}
       propertyPath: notesUIController
       value: 
@@ -13336,6 +13420,10 @@ PrefabInstance:
     - target: {fileID: 7140873764531346437, guid: 74011b00159a8eb40adcf163c5de7626, type: 3}
       propertyPath: m_Center.z
       value: 0.1264019
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775203802011719737, guid: 74011b00159a8eb40adcf163c5de7626, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8490055672544347320, guid: 74011b00159a8eb40adcf163c5de7626, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14024,6 +14112,38 @@ PrefabInstance:
     - target: {fileID: 906950229331176218, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
       propertyPath: m_Name
       value: TraceClue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785231457966432773, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2391198
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.099047065
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.89239824
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.36964425
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014277472959744584, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6373463418410549657, guid: 6a1f7f3b908912a4e8e600cfba04b9f2, type: 3}
       propertyPath: notesUIController
