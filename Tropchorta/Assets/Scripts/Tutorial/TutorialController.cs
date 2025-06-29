@@ -150,6 +150,7 @@ public class TutorialController : MonoBehaviour
             case 9:
                 mustTextField.text = "Use [SPACE] to dash";
                 uiMustDoPanel.SetActive(true);
+                enemy.SetActive(false);
                 canMove = false;
                 checkDodge = true;
 
@@ -158,6 +159,7 @@ public class TutorialController : MonoBehaviour
 
             case 11:
                 mustTextField.text = "Use [B] to open Bestiary";
+                
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBestiary = true;
@@ -189,13 +191,13 @@ public class TutorialController : MonoBehaviour
                 ShowDialogue();
                 break;
 
-            case 16:
+/*            case 16:
                 mustTextField.text = "Use [M] to open Map";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkMap = true;
                 ShowDialogue();
-                break;
+                break;*/
 
             default:
                 ShowDialogue(); // od razu przejdü dalej, jeúli nie wymaga akcji

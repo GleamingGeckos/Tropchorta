@@ -287,6 +287,10 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 101504962}
+    - target: {fileID: 5642331688653515415, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      propertyPath: maxHealth
+      value: 4000
+      objectReference: {fileID: 0}
     - target: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1301,6 +1305,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7347035687789885493, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8091216811212371203, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.13052887
@@ -1454,7 +1462,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53e1ebbc8686b1147b47680372de056d, type: 2}
   - {fileID: 11400000, guid: d9142c48b50e1ff459cb29b9558d08fe, type: 2}
   - {fileID: 11400000, guid: e4dc006b4db4f5747b2d3624ce391196, type: 2}
-  - {fileID: 11400000, guid: 28fc77cb9e756114f9e5cac910804266, type: 2}
   playerCombat: {fileID: 1430404090}
   playerInteract: {fileID: 1430404095}
   swordModel: {fileID: 1430404087}
@@ -2050,7 +2057,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 1.2666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 530c992bdf7288246beb60842956d92d, type: 2}
   m_BuildHeightMesh: 0

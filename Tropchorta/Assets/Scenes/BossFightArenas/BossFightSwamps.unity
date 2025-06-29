@@ -930,6 +930,14 @@ PrefabInstance:
       propertyPath: _intervalsBetweenAttacks
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 955363162023138436, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: _attackCharm
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 955363162023138436, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: _weakToCharm
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1415594837180344419, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 51.4
@@ -972,7 +980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7492043854543673595, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: m_Name
@@ -2004,7 +2012,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 1.2666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: bbcbcc25650601f4b87cb35a74becb32, type: 2}
   m_BuildHeightMesh: 0

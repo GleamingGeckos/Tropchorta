@@ -56,8 +56,9 @@ public class MainMenu : MonoBehaviour
         if (PlayerSingleton.Instance != null)
         {
             PlayerSingleton.Instance.ResetSingleton();
+            //PlayerUISingleton.Instance.ResetSingleton();
         }
-        PauseController.SetPause(false);
+        //PauseController.SetPause(false);
         SceneManager.LoadScene(initSceneName);
     }
 
@@ -67,7 +68,7 @@ public class MainMenu : MonoBehaviour
         {
             PlayerSingleton.Instance.ResetSingleton();
         }
-        PauseController.SetPause(false);
+        //PauseController.SetPause(false);
         SceneManager.LoadScene(tutSceneName);
     }
 

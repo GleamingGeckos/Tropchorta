@@ -16,4 +16,10 @@ public class PlayerUISingleton : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void ResetSingleton()
+    {
+        Instance = null;
+        Destroy(gameObject);
+    }
 }
