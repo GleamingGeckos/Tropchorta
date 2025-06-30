@@ -47,6 +47,8 @@ public class PlayerCombat : MonoBehaviour
     float playerRadius = 1.0f;
     [SerializeField] float stepTime = 0.4f;
     Coroutine stepCoroutine = null;
+    [SerializeField] private float maxStepHight = 0.001f;
+    [SerializeField] protected LayerMask _excludedLayer;
 
     [Header("Blocking")]
     [SerializeField] float blockDuration = 1.5f;
@@ -216,9 +218,11 @@ public class PlayerCombat : MonoBehaviour
             float t = elapsed / duration;
             Vector3 nextPos = Vector3.Lerp(start, end, t);
 
-            if (Physics.Raycast(target.position, GetRotatingRootForward(), out hit, Vector3.Distance(target.position, nextPos + (GetRotatingRootForward() * playerRadius))))
+            // SphereCast jak w NormalMovement
+            Ray ray = new Ray(nextPos + Vector3.up * 0.4f, GetRotatingRootForward());
+            if (Physics.SphereCast(ray, 0.4f, out hit, playerRadius + 0.1f, ~_excludedLayer, QueryTriggerInteraction.Ignore)
+                && hit.normal.y <= 0.7f)
             {
-                target.position = hit.point + (GetRotatingRootForward() * -playerRadius);
                 yield break;
             }
 

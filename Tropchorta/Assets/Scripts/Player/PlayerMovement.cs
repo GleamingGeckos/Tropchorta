@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [NonSerialized]  public bool isMoving;
     [SerializeField] private float maxStepHight = 0.001f;
     [SerializeField] protected LayerMask _excludedLayer;
+    [SerializeField] protected float _wantedYPos;
 
     // For dash
     [SerializeField] PlayerHealthComponent playerHealthComponent;
@@ -89,8 +90,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 //modelRootTransform.forward = lookDirection;
                 modelRootTransform.DOLookAt(modelRootTransform.position + lookDirection, 0.1f);
-                
-
             }
         }
     }
@@ -148,7 +147,14 @@ public class PlayerMovement : MonoBehaviour
     {
         lerpedMove = lerpedMove.LerpFI(Vector2.zero, Time.fixedDeltaTime, lerpHalfTime);
     }
-
+    protected void CheckYPosition()
+    {
+        if (Mathf.Abs(transform.position.y - _wantedYPos) > 0.01f)
+        {
+            Vector3 correctedPosition = new Vector3(transform.position.x, _wantedYPos, transform.position.z);
+            transform.position = correctedPosition;
+        }
+    }
     public void NormalMovement()
     {
         // normal state
@@ -156,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 flatMove = new Vector3(lerpedMove.x, 0, lerpedMove.y).normalized;
         Vector3 desiredMove = new Vector3(lerpedMove.x, 0, lerpedMove.y) * speed * (isSprinting ? sprintMod : 1);
-        Ray ray = new Ray(transform.position + Vector3.up * maxStepHight - Vector3.up, flatMove);
+        Ray ray = new Ray(transform.position + Vector3.up * 0.4f, flatMove);
         if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) || hit.normal.y > 0.7f)
         {
             cc.Move(desiredMove * Time.deltaTime);
@@ -166,7 +172,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("SphereCast trafi³ w: " + hit.collider.name);
         }
         Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
-        //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+
+        CheckYPosition();
 
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
         { 
