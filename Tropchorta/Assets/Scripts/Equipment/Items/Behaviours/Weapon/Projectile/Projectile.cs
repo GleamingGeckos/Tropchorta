@@ -99,7 +99,7 @@ public class Projectile : MonoBehaviour
                 {
                     Quaternion rot = Quaternion.LookRotation(_parent.transform.position + transform.up - other.transform.position);
                     var revange = Instantiate(_arrowForPar, other.transform.position, rot, other.transform);
-                    revange.GetComponent<Projectile>().Initialize(null, charmType, _damage, other.gameObject);
+                    revange.GetComponent<Projectile>().Initialize(null, charmType, 1, other.gameObject);
                     enemyMovement.perfectParWasInitiated = false;
                 }
                 else if (!playerCombatComponent.isBlocking)

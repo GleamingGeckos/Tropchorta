@@ -1024,9 +1024,9 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BaseEnemie, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 4220987893441494779}
+        m_TargetAssemblyTypeName: BaseBoss, Assembly-CSharp
+        m_MethodName: OnDeath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1058,6 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCharm: 1
+  EnemyAnimator: {fileID: 0}
   _weakToCharm: 2
   _maxDamage: 3
   _minDamage: 4

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3476450718356920656}
   - component: {fileID: 75092182704779387}
   m_Layer: 0
-  m_Name: EnemyArrow
+  m_Name: RevangeEnemyArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   slowdownRate: 1
   minSpeed: 45
   lifetime: 2
-  targetTag: Player
+  targetTag: Enemy
   motionScale: 1
   motionSpeed: 1
   charmType: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _effectFire: {fileID: 0}
-  _effectPoison: {fileID: 0}
-  _effectLightning: {fileID: 0}
-  _arrowForPar: {fileID: 2032088643122078551, guid: 71e07fc362c697f49aa05dca0d2ed118, type: 3}
+  _effectFire: {fileID: 2397760560179252254, guid: 7f52abd82ae59f64f95f97a9defc9c7a, type: 3}
+  _effectPoison: {fileID: 2397760560179252254, guid: aa59069686c4a9f40bc862083aef6288, type: 3}
+  _effectLightning: {fileID: 2397760560179252254, guid: ed284a333c1cc0d42823572fef55e6ea, type: 3}
+  _arrowForPar: {fileID: 0}

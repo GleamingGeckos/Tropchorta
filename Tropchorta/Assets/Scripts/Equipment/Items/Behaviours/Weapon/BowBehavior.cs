@@ -5,7 +5,7 @@ public class BowBehavior : WeaponBehavior
 {
     public GameObject arrowPrefab; 
     private PlayerCombat playerCombat;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 1;
 
     public override void Initialize(Transform user)
     {
@@ -41,9 +41,9 @@ public class BowBehavior : WeaponBehavior
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
             GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
             if (charm)
-                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage * 2, user.gameObject);
             else
-                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage, user.gameObject);
+                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage * 2, user.gameObject);
         }
     }
 
@@ -79,9 +79,9 @@ public class BowBehavior : WeaponBehavior
             Vector3 spawnPos = user.position + rotation * Vector3.forward;
             GameObject arrow = Instantiate(arrowPrefab, spawnPos, rotation);
             if (charm)
-                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage, user.gameObject);
+                arrow.GetComponent<Projectile>().Initialize(null, charm.GetCharmType(), damage * 3, user.gameObject);
             else
-                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage, user.gameObject);
+                arrow.GetComponent<Projectile>().Initialize(null, CharmType.None, damage * 3, user.gameObject);
         }
     }
 

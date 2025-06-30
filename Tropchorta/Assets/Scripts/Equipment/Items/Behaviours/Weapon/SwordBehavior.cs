@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SwordBehavior", menuName = "Inventory/WeaponBehaviors/Sword", order = 1)]
 public class SwordBehavior : WeaponBehavior
 {
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 1;
     [SerializeField] private float attackRadius = 1.0f;
     [SerializeField] private float specialAttackRadius = 1.5f;
     [SerializeField] private float attackDistanceFromPlayer = 2.5f;
