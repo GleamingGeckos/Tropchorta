@@ -980,7 +980,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 104861175}
+    - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaseBoss, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7492043854543673595, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: m_Name
@@ -995,6 +1007,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+--- !u!114 &104861175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4220987893441494779, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+  m_PrefabInstance: {fileID: 104861174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45504987b002fe4fbc66278b955a50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &194439371
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -111,6 +111,11 @@ public class BaseBoss : BaseEnemy
         }
     }
 
+    public void OnDeath()
+    {
+        Destroy(gameObject);
+    }
+
     private IEnumerator DelayedDistanceAttack(Transform target, float delay)
     {
         BossCombat bossCombat = (BossCombat)_enemyCombat;
