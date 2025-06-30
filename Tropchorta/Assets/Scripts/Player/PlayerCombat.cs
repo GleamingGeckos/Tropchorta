@@ -219,7 +219,7 @@ public class PlayerCombat : MonoBehaviour
             Vector3 nextPos = Vector3.Lerp(start, end, t);
 
             // SphereCast jak w NormalMovement
-            Ray ray = new Ray(nextPos + Vector3.up * 0.4f, GetRotatingRootForward());
+            Ray ray = new Ray(nextPos + Vector3.up * maxStepHight, GetRotatingRootForward());
             if (Physics.SphereCast(ray, 0.4f, out hit, playerRadius + 0.1f, ~_excludedLayer, QueryTriggerInteraction.Ignore)
                 && hit.normal.y <= 0.7f)
             {

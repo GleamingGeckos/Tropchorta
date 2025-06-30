@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 flatMove = new Vector3(lerpedMove.x, 0, lerpedMove.y).normalized;
         Vector3 desiredMove = new Vector3(lerpedMove.x, 0, lerpedMove.y) * speed * (isSprinting ? sprintMod : 1);
-        Ray ray = new Ray(transform.position + Vector3.up * 0.4f, flatMove);
+        Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, flatMove);
         if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) || hit.normal.y > 0.7f)
         {
             cc.Move(desiredMove * Time.deltaTime);
@@ -190,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         playerState.state = PlayerState.Dashing;
-        
+
         StopFootstepsSound();
         playerCombat.StopBlocking();
         PlayerAnimator.SetTrigger("dashTrigger");
@@ -204,27 +204,33 @@ public class PlayerMovement : MonoBehaviour
 
         modelRootTransform.DOLookAt(modelRootTransform.position + direction, 0.1f);
 
-        
         while (elapsed < dashDuration)
         {
             float t = elapsed / dashDuration;
             float easedT = 1f - Mathf.Pow(1f - t, 2f); // Quadratic ease-out
             float currentSpeed = Mathf.Lerp(dashSpeed, 7, easedT);
 
-            cc.Move(direction * currentSpeed * Time.deltaTime);
+            // Obstacle check using SphereCast
+            Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, direction);
+            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, currentSpeed * Time.deltaTime + 0.1f, ~_excludedLayer, QueryTriggerInteraction.Ignore)
+                && hit.normal.y <= 0.7f)
+            {
+                StopDash();
+                yield break;
+            }
 
+            cc.Move(direction * currentSpeed * Time.deltaTime);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        
-        
 
         StopDash();
     }
 
+
     void OnDash()
     {
-        if (dashCoroutine == null&&playerState.state != PlayerState.Attacking) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
+        if (dashCoroutine == null && playerState.state != PlayerState.Attacking) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
         {
             isSprinting = false;
             PlayerAnimator.SetBool("isSprinting", isSprinting);
@@ -232,7 +238,6 @@ public class PlayerMovement : MonoBehaviour
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             //playerCombat.StopAttack();
-            trail.enabled = true;
             playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");
         }
@@ -245,10 +250,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopDash()
     {
+        playerState.state = PlayerState.Normal;
         if (dashCoroutine != null)
         {
-            playerState.state = PlayerState.Normal;
-            trail.enabled = false;
             
             playerHealthComponent.isInvulnerable = false;
             cc.includeLayers = 0;
