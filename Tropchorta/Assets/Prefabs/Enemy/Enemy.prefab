@@ -982,7 +982,7 @@ MonoBehaviour:
   - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 0
   strong: 1
-  pushDistance: 1
+  pushDistance: 0.6
   pushDuration: 0.1
   pushRadius: 1
   pushCollisionMask:

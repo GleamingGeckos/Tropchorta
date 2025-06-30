@@ -24,7 +24,7 @@ public class BaseEnemy : MonoBehaviour
     protected HealthComponent _healthComponent;
 
     [Header("Push on attack")]
-    [SerializeField] private float pushDistance = 1.0f;
+    [SerializeField] private float pushDistance = 0.6f;
     [SerializeField] private float pushDuration = 0.1f;
     [SerializeField] private float pushRadius = 1.0f;
     [SerializeField] private LayerMask pushCollisionMask = default;
