@@ -298,7 +298,7 @@ public class TutorialController : MonoBehaviour
 
     private void ExitTutorial()
     {
-        SceneManager.LoadScene("New Map");
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void ShowDialogue()

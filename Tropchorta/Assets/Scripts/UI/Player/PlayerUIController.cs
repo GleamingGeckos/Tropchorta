@@ -20,6 +20,11 @@ public class PlayerUIController : MonoBehaviour
         equipmentBackpackUIController = equipmentBackpackPanel.GetComponent<EquipmentBackpackUIController>();
     }
 
+    private void Start()
+    {
+        PauseController.SetPause(false);
+        PauseController.DisableInput(false);
+    }
     void Update()
     {
         if (canUseUI)

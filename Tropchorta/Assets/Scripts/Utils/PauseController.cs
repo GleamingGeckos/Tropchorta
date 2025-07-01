@@ -20,7 +20,7 @@ public static class PauseController
         }
     }
 
-    public static void DisableInput(bool disable)
+    public static void DisableInput(bool disable)// kto to kurwa pisal bo to jest kontrintuitywne i walczy z IsPause mimo ze nie wylacza czasu tylko input?????
     {
         IsPaused = disable;
         if (IsPaused)

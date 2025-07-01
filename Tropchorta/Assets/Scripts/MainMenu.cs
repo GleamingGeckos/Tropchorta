@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private string tutSceneName;
     [SerializeField] private bool startWithVisible;
     [SerializeField] private bool allowExit = true;
+    [SerializeField] private GameObject mainCamera;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerUI;
+    [SerializeField] private bool destroyPersistentObjects = false;
     private Canvas canvas;
 
     public bool IsOpend { get; private set; }
@@ -17,6 +21,9 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerUI = GameObject.FindGameObjectWithTag("PlayerUI");
     }
 
     void Start()
@@ -53,9 +60,23 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
-        if (PlayerSingleton.Instance != null)
+        if (destroyPersistentObjects)
         {
-            PlayerSingleton.Instance.ResetSingleton();
+            if(mainCamera != null)
+            {
+                Destroy(mainCamera);
+            }
+            if (player != null)
+            {
+                Destroy(player);
+            }
+            if (playerUI != null)
+            {
+                Destroy(playerUI);
+            }
+            //Destroy(GameObject.FindGameObjectWithTag("MainCamera")); 
+            //Destroy(GameObject.FindGameObjectWithTag("Player"));
+            //Destroy(GameObject.FindGameObjectWithTag("PlayerUI"));
             //PlayerUISingleton.Instance.ResetSingleton();
         }
         //PauseController.SetPause(false);
@@ -64,9 +85,24 @@ public class MainMenu : MonoBehaviour
 
     public void Tutorial()
     {
-        if (PlayerSingleton.Instance != null)
+        if (destroyPersistentObjects)
         {
-            PlayerSingleton.Instance.ResetSingleton();
+            if (mainCamera != null)
+            {
+                Destroy(mainCamera);
+            }
+            if (player != null)
+            {
+                Destroy(player);
+            }
+            if (playerUI != null)
+            {
+                Destroy(playerUI);
+            }
+            //Destroy(GameObject.FindGameObjectWithTag("MainCamera"));
+            //Destroy(GameObject.FindGameObjectWithTag("Player"));
+            //Destroy(GameObject.FindGameObjectWithTag("PlayerUI"));
+            //PlayerUISingleton.Instance.ResetSingleton();
         }
         //PauseController.SetPause(false);
         SceneManager.LoadScene(tutSceneName);

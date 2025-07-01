@@ -239,10 +239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
-  initSceneName: New Map
+  initSceneName: NewMap
   tutSceneName: Tutorial
   startWithVisible: 1
   allowExit: 0
+  mainCamera: {fileID: 0}
+  player: {fileID: 0}
+  playerUI: {fileID: 0}
+  destroyPersistentObjects: 1
 --- !u!1 &281398927
 GameObject:
   m_ObjectHideFlags: 0
