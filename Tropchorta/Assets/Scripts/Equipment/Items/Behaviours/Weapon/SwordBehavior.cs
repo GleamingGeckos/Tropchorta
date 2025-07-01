@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 
@@ -9,10 +10,13 @@ public class SwordBehavior : WeaponBehavior
     [SerializeField] private float specialAttackRadius = 1.5f;
     [SerializeField] private float attackDistanceFromPlayer = 2.5f;
     private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
+    [SerializeField] private EventReference attackSound;
+    [SerializeField] private EventReference perfectBlockSound;
+    [SerializeField] private EventReference normalBlockSound;
 
     public override void Initialize(Transform user)
     {
-       // Debug.Log("Setting player in SwordBehavior");
+        // Debug.Log("Setting player in SwordBehavior");
         playerCombat = user.GetComponent<PlayerCombat>();
     }
 
@@ -62,6 +66,7 @@ public class SwordBehavior : WeaponBehavior
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
+        RuntimeManager.PlayOneShot(attackSound, user.position);
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.red, attackRadius, 1f);
     }
 
@@ -81,12 +86,13 @@ public class SwordBehavior : WeaponBehavior
             {
                 AttackData attack;
                 if (charm)
-                    attack = new AttackData(user.gameObject, damage*2, charm.GetCharmType());
+                    attack = new AttackData(user.gameObject, damage * 2, charm.GetCharmType());
                 else
                     attack = new AttackData(user.gameObject, damage * 2, CharmType.None);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
+        RuntimeManager.PlayOneShot(attackSound, user.position);
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.magenta, attackRadius, 1f);
     }
 
@@ -122,12 +128,22 @@ public class SwordBehavior : WeaponBehavior
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
+        RuntimeManager.PlayOneShot(attackSound, user.position);
         DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.blue, radius, 1f);
-
     }
 
     public override bool IsDistance()
     {
         return false;
+    }
+
+    public override void PlayPerfectBlockSound()
+    {
+        RuntimeManager.PlayOneShot(perfectBlockSound);
+    }
+
+    public override void PlayNormalBlockSound()
+    {
+        RuntimeManager.PlayOneShot(normalBlockSound);
     }
 }

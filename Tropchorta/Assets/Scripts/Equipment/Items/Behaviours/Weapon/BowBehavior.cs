@@ -30,7 +30,7 @@ public class BowBehavior : WeaponBehavior
 
     public override void UseStrongStart(Transform user, Charm charm)
     {
-        float spreadAngle = 5f; // k¹t miêdzy strza³ami
+        float spreadAngle = 5f; // kï¿½t miï¿½dzy strzaï¿½ami
         int arrowCount = 3;
         int middle = arrowCount / 2;
 
@@ -68,7 +68,7 @@ public class BowBehavior : WeaponBehavior
 
     public override void UseSpecialAttack(Transform user, Charm charm)
     {
-        float spreadAngle = 15f; // k¹t miêdzy strza³ami
+        float spreadAngle = 15f; // kï¿½t miï¿½dzy strzaï¿½ami
         int arrowCount = 5;
         int middle = arrowCount / 2;
 
@@ -88,5 +88,13 @@ public class BowBehavior : WeaponBehavior
     public override bool IsDistance()
     {
         return true;
+    }
+
+    public override void PlayPerfectBlockSound()
+    {
+    }
+
+    public override void PlayNormalBlockSound()
+    {
     }
 }

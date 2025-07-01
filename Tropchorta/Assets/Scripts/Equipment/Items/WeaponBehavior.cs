@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class WeaponBehavior : ScriptableObject
@@ -24,4 +23,7 @@ public abstract class WeaponBehavior : ScriptableObject
     public abstract void ClearData(Transform user); // for use when player switches weapons so that behaviours are fresh
 
     public abstract bool IsDistance();
+
+    public abstract void PlayPerfectBlockSound();
+    public abstract void PlayNormalBlockSound();
 }

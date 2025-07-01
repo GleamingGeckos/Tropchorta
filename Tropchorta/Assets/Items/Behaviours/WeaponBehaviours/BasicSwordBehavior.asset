@@ -16,3 +16,24 @@ MonoBehaviour:
   attackRadius: 1
   specialAttackRadius: 1.5
   attackDistanceFromPlayer: 2
+  attackSound:
+    Guid:
+      Data1: -949156090
+      Data2: 1255346433
+      Data3: -306064976
+      Data4: 1379436096
+    Path: event:/Player/Combat/StickAttack
+  perfectBlockSound:
+    Guid:
+      Data1: 1762024254
+      Data2: 1112456564
+      Data3: -801610056
+      Data4: 893883447
+    Path: event:/Player/Combat/Blocks/BlockGood
+  normalBlockSound:
+    Guid:
+      Data1: -1774108881
+      Data2: 1264401431
+      Data3: -58131793
+      Data4: -74549602
+    Path: event:/Player/Combat/Blocks/BlockNormal

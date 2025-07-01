@@ -62,4 +62,12 @@ public class AnimationBehavior : WeaponBehavior
     {
         return true;
     }
+
+    public override void PlayPerfectBlockSound()
+    {
+    }
+
+    public override void PlayNormalBlockSound()
+    {
+    }
 }

@@ -1082,6 +1082,13 @@ MonoBehaviour:
   timeFromStartToAttackInUnityTimeline: {x: 0, y: 50}
   offsetFromAnimStartToMovementStop: {x: 0, y: 40}
   arrowPrefab: {fileID: 2032088643122078551, guid: 518e3502757867a4ab47e705f265b831, type: 3}
+  _attackSound:
+    Guid:
+      Data1: -893106763
+      Data2: 1334383441
+      Data3: 1673938592
+      Data4: -1102347157
+    Path: event:/Enemies/EnemyAttack
 --- !u!114 &4251304635978395309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,6 +1913,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78a0c3061412dcb4ca0d4668ff2b94dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1211452267611682757}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78a0c3061412dcb4ca0d4668ff2b94dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7848424486806129467}
   m_SourcePrefab: {fileID: 100100000, guid: 78a0c3061412dcb4ca0d4668ff2b94dd, type: 3}
 --- !u!1 &8450983022585471018 stripped
 GameObject:
@@ -1934,6 +1944,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7848424486806129467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450983022585471018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a904616c200d1ed45b26c6759539e563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEventsList:
+  - name: walk
+    eventReference:
+      Guid:
+        Data1: -1970295345
+        Data2: 1137356615
+        Data3: -1186038346
+        Data4: -2064344749
+      Path: event:/Enemies/EnemyWalk
 --- !u!4 &9082701499299019408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 78a0c3061412dcb4ca0d4668ff2b94dd, type: 3}

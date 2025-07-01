@@ -1,4 +1,5 @@
 using DG.Tweening;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -61,6 +62,8 @@ public class EnemyCombat : MonoBehaviour
 
     public GameObject arrowPrefab;
 
+    [SerializeField] private EventReference _attackSound;
+
     private void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
@@ -84,6 +87,7 @@ public class EnemyCombat : MonoBehaviour
     {
         if (isCooldown) return;
         attackCoroutine = StartCoroutine(NormalAttackRoutine());
+        RuntimeManager.PlayOneShot(_attackSound, transform.position);
         StartCoroutine(PerfectBlockWindow());
         EnemyAnimator.SetTrigger("attackTrigger");
 
@@ -170,7 +174,10 @@ public class EnemyCombat : MonoBehaviour
                     enemyMovement.Stun();
                 }
                 else if (!playerCombatComponent.isBlocking)
+                {
                     healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
+                }
+                    
                 enemyMovement.perfectParWasInitiated = false;
             }
         }
@@ -229,7 +236,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         // start the circle animation
-        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dó³
+        _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma dï¿½
         _attackStrongTransform.localScale = new Vector3(_minStrong.x, _minStrong.y, 1f);
         _attackStrongImage.enabled = true;
 
@@ -317,7 +324,7 @@ public class EnemyCombat : MonoBehaviour
             yield return null;
         }
 
-        // Ustaw koñcow¹ pozycjê tylko jeœli nie by³o kolizji
+        // Ustaw koï¿½cowï¿½ pozycjï¿½ tylko jeï¿½li nie byï¿½o kolizji
         if (!Physics.SphereCast(start, radius, dir, out _, distance, collisionMask))
         {
             pos = start + dir * distance;

@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform modelRootTransform;
     [SerializeField] public InputReader input;
     [SerializeField] public PlayerStateSO playerState;
-    [NonSerialized]  public bool isMoving;
+    [NonSerialized] public bool isMoving;
     [SerializeField] private float maxStepHight = 0.001f;
     [SerializeField] protected LayerMask _excludedLayer;
     [SerializeField] protected float _wantedYPos;
@@ -34,17 +34,14 @@ public class PlayerMovement : MonoBehaviour
     public bool useMouseRotation;
 
     // Sounds
-    [SerializeField] EventReference footstepsSound;
     [SerializeField] EventReference dashSound;
-    float footstepsTime = 0.5f;
-    Coroutine footstepsCoroutine = null;
 
-    
+
     //Animator
     public Animator PlayerAnimator;
     [SerializeField] GameObject hobbyHorseMesh;
 
-    
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -65,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void RotatePlayerTowards(Vector3 lookDirection)
     {
-        if (lookDirection != Vector3.zero&&!isMoving)
+        if (lookDirection != Vector3.zero && !isMoving)
         {
             Vector3 direction = lookDirection - modelRootTransform.position;
             //modelRootTransform.forward = new Vector3(direction.x, 0f, direction.z);
             //Vector3 targetPos = new Vector3(direction.x, 0f, direction.z);
-            
+
             Vector3 flatDirection = new Vector3(direction.x, 0f, direction.z).normalized;
             Vector3 targetPosition = modelRootTransform.position + flatDirection;
 
@@ -99,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (PauseController.IsPaused) return;
         isMoving = movementInput != Vector2.zero;
 
-        
+
         if (isSprinting && isMoving)
         {
             hobbyHorseMesh.transform.localScale = new Vector3(1, 1, 1);
@@ -110,8 +107,8 @@ public class PlayerMovement : MonoBehaviour
             hobbyHorseMesh.transform.localScale = new Vector3(0, 0, 0);
 
         }
-        
-        
+
+
         switch (playerState.state)
         {
             case PlayerState.Normal:
@@ -120,17 +117,15 @@ public class PlayerMovement : MonoBehaviour
                 PlayerAnimator.SetBool("isMoving", isMoving);
                 PlayerAnimator.SetBool("isDashing", false);
 
-                
+
                 // WeaponAnimator.SetBool("isSprinting", isSprinting);
                 // WeaponAnimator.SetBool("isMoving", isMoving);
-                
+
                 break;
             case PlayerState.DisableInput:
-                StopFootstepsSound();
                 // Disable input, do nothing
                 break;
             case PlayerState.Attacking:
-                StopFootstepsSound();
                 AttackingState();
                 break;
             case PlayerState.Dashing:
@@ -139,8 +134,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
-    
-    
+
+
 
     // while attacking, lerp the movement to zero
     void AttackingState()
@@ -169,20 +164,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("SphereCast trafi³ w: " + hit.collider.name);
+            Debug.Log("SphereCast trafiï¿½ w: " + hit.collider.name);
         }
         Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
 
         CheckYPosition();
 
         if (lerpedMove.sqrMagnitude > 0.1f) // sqrt so with normal values (>1) it should always be greater than speed
-        { 
-            PlayFootstepsSound();
-            modelRootTransform.forward = flatMove;
-        }
-        else
         {
-            StopFootstepsSound();
+            modelRootTransform.forward = flatMove;
         }
     }
 
@@ -191,7 +181,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerState.state = PlayerState.Dashing;
 
-        StopFootstepsSound();
         playerCombat.StopBlocking();
         PlayerAnimator.SetTrigger("dashTrigger");
 
@@ -234,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isSprinting = false;
             PlayerAnimator.SetBool("isSprinting", isSprinting);
-            
+
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             //playerCombat.StopAttack();
@@ -253,13 +242,13 @@ public class PlayerMovement : MonoBehaviour
         playerState.state = PlayerState.Normal;
         if (dashCoroutine != null)
         {
-            
+
             playerHealthComponent.isInvulnerable = false;
             cc.includeLayers = 0;
             StopCoroutine(dashCoroutine);
             dashCoroutine = null;
             if (playerCombat.queuedAttack)
-            { 
+            {
                 playerCombat.queuedAttack = false;
                 playerCombat.StartAttackAnim();
             }
@@ -281,31 +270,5 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetRotatingDirection()
     {
         return modelRootTransform.forward;
-    }
-
-    private IEnumerator FootstepsSound()
-    {
-        while (true)
-        {
-            RuntimeManager.PlayOneShot(footstepsSound, transform.position);
-            yield return new WaitForSeconds(footstepsTime);
-        }
-    }
-
-    private void PlayFootstepsSound()
-    {
-        if (footstepsCoroutine == null)
-        {
-            footstepsCoroutine = StartCoroutine(FootstepsSound());
-        }
-    }
-
-    private void StopFootstepsSound()
-    {
-        if (footstepsCoroutine != null)
-        {
-            StopCoroutine(footstepsCoroutine);
-            footstepsCoroutine = null;
-        }
     }
 }
