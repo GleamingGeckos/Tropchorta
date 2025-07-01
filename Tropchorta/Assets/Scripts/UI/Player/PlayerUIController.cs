@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] GameObject bestiaryPanel;
-    [SerializeField] GameObject notesPanel;
+    //[SerializeField] GameObject notesPanel;
     [SerializeField] GameObject mapPanel;
     [SerializeField] BestiaryUIController bestiaryUIController;
     [SerializeField] PlayerMovement playerMovement;
@@ -38,11 +38,11 @@ public class PlayerUIController : MonoBehaviour
                     bestiaryPanel.SetActive(true);
                     PauseController.SetPause(true);
                     playerMovement.playerState.state = PlayerState.DisableInput;
-                    bestiaryUIController.ResetBestiary();
+                    bestiaryUIController.MainPanelDisplay();
                     isBaseState = false;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.N))
+            /*if (Input.GetKeyDown(KeyCode.N))
             {
                 if (notesPanel.activeSelf && !isBaseState)
                 {
@@ -58,7 +58,7 @@ public class PlayerUIController : MonoBehaviour
                     playerMovement.playerState.state = PlayerState.DisableInput;
                     isBaseState = false;
                 }
-            }
+            }*/
             if (Input.GetKeyDown(KeyCode.M))
             {
                 if (mapPanel.activeSelf && !isBaseState)
@@ -120,7 +120,7 @@ public class PlayerUIController : MonoBehaviour
     public void CloseAllPanels()
     {
         bestiaryPanel.SetActive(false);
-        notesPanel.SetActive(false);
+        //notesPanel.SetActive(false);
         mapPanel.SetActive(false);
         equipmentBackpackPanel.SetActive(false);
         PauseController.SetPause(false);
