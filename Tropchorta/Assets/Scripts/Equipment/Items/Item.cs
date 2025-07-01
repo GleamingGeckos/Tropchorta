@@ -8,6 +8,6 @@ public class Item : ScriptableObject
     public string description = "Item Description";
     public GameObject itemPrefab;  // The actual prefab to instantiate when dropped
     public int itemPrice = 100 ;
-    public bool justDrop = false;
+    public bool dropOnBuy = false; // Whether the item should be dropped on the ground when bought or send through equipment pipeline
     public Sprite shopPanel = null; // temporary solution to remove in later iterations
 }

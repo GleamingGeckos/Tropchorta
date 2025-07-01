@@ -34,7 +34,7 @@ public class EquipmentController : MonoBehaviour
     private void Start()
     {
         DisplayItems();
-        ClearGold();
+        ClearGold(); ////////////////////////////////////////////////////////// just in case youre looking for it :)
         input.OnScrollEvent += SwitchWeapons;
         UpdateGoldDisplay(goldAmount);
     }
@@ -296,7 +296,7 @@ public class EquipmentController : MonoBehaviour
         {
             Item tmpItem = usedWeapon;
             usedWeapon = inactiveWeapon;
-            UpdateCharm();
+            UpdateCharmInUsedWeapon();
             inactiveWeapon = tmpItem;
             equipmentUIController.ChangeWeapon1Image(usedWeapon);
             equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
@@ -436,7 +436,7 @@ public class EquipmentController : MonoBehaviour
                     DropCharm();
                     interactedItems.Remove(lastInteractedItem);
                     weaponCharm = itemController.PickUpItem();
-                    UpdateCharm();
+                    UpdateCharmInUsedWeapon();
 
                     equipmentUIController.ChangeCharmImage(charm);
                     equipmentBackpackUIController.ChangeCharmImage(charm);
@@ -595,7 +595,7 @@ public class EquipmentController : MonoBehaviour
         equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
         equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
         equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
-        UpdateCharm();
+        UpdateCharmInUsedWeapon();
     }
 
     public bool HasClueItem(ClueItem clueItem)
@@ -617,12 +617,38 @@ public class EquipmentController : MonoBehaviour
         {
             case Weapon weapon:
                 tmpItem = usedWeapon;
-                usedWeapon = item;
-                UpdateCharm();
-                Debug.Log($"Switching weapon: {weapon.itemName}");
-                equipmentUIController.ChangeWeapon1Image(usedWeapon);
-                equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
-                return tmpItem;
+                if (tmpItem == null)
+                {
+                    usedWeapon = item; 
+                    UpdateCharmInUsedWeapon();
+                    equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                    equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+                    return null;
+                }
+                else
+                {
+                    int backpackEmptySlotId = IsAdditionalItemSpaceAvailable();
+                    if(backpackEmptySlotId != -1)
+                    {
+                        additionalItems[backpackEmptySlotId] = item;
+                        equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
+                    }
+                    else
+                    {
+                        Instantiate(item.itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+                        Debug.Log($"No free space in backpack for weapon : {weapon.itemName} dropping on the ground");
+                    }
+                    UpdateCharmInUsedWeapon();
+                    equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                    equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+                    return null;
+                }
+                //Debug.Log($"Switching weapon: {weapon.itemName}");
+               // UpdateCharmInUsedWeapon();
+                //equipmentUIController.ChangeWeapon1Image(usedWeapon);
+                //equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
+                return null;
+            //return tmpItem;
 
             case Helmet helm:
                 tmpItem = helmet;
@@ -634,11 +660,34 @@ public class EquipmentController : MonoBehaviour
 
             case Breastplate breastp:
                 tmpItem = breastplate;
-                breastplate = item;
-                Debug.Log($"Switching breastplate: {breastp.itemName}");
-                equipmentUIController.ChangeTorsoImage(breastplate);
-                equipmentBackpackUIController.ChangeTorsoImage(breastplate);
-                return tmpItem;
+                if (tmpItem == null)
+                {
+                    breastplate = item;
+                    equipmentUIController.ChangeCharmImage(weaponCharm);
+                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    return null;
+                }
+                else
+                {
+                    int backpackEmptySlotId = IsAdditionalItemSpaceAvailable();
+                    if (backpackEmptySlotId != -1)
+                    {
+                        additionalItems[backpackEmptySlotId] = item;
+                        equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
+                    }
+                    else
+                    {
+                        Instantiate(item.itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+                        Debug.Log($"No free space in backpack for breastplate : {breastplate.itemName} dropping on the ground");
+                    }
+                    equipmentUIController.ChangeCharmImage(weaponCharm);
+                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    return null;
+                }
+                //equipmentUIController.ChangeTorsoImage(breastplate);
+                //equipmentBackpackUIController.ChangeTorsoImage(breastplate);
+                return null;
+            //return tmpItem;
 
             case Pants pant:
                 tmpItem = pants;
@@ -658,12 +707,37 @@ public class EquipmentController : MonoBehaviour
 
             case Charm charm:
                 tmpItem = charm;
-                weaponCharm = item;
-                UpdateCharm();
-
-                equipmentUIController.ChangeCharmImage(weaponCharm);
-                equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
-                return tmpItem;
+                if (tmpItem == null)
+                {
+                    weaponCharm = item;
+                    UpdateCharmInUsedWeapon();
+                    equipmentUIController.ChangeCharmImage(weaponCharm);
+                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    return null;
+                }
+                else
+                {
+                    int backpackEmptySlotId = IsAdditionalItemSpaceAvailable();
+                    if (backpackEmptySlotId != -1)
+                    {
+                        additionalItems[backpackEmptySlotId] = item;
+                        equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
+                    }
+                    else
+                    {
+                        Instantiate(item.itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+                        Debug.Log($"No free space in backpack for charm : {charm.itemName} dropping on the ground");
+                    }
+                    UpdateCharmInUsedWeapon();
+                    equipmentUIController.ChangeCharmImage(weaponCharm);
+                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    return null;
+                }
+                //UpdateCharmInUsedWeapon();
+                //equipmentUIController.ChangeCharmImage(weaponCharm);
+                //equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                return null;
+            //return tmpItem;
 
             case ClueItem clueItem:
                 Debug.Log($"Adding Clue Item: {clueItem.itemName}");
@@ -676,7 +750,7 @@ public class EquipmentController : MonoBehaviour
         }
     }
 
-    void UpdateCharm()
+    void UpdateCharmInUsedWeapon()
     {
         if (usedWeapon is Weapon used)
         {
@@ -712,10 +786,10 @@ public class EquipmentController : MonoBehaviour
             case 4: pants = item; break;
             case 5: shoes = item; break;
             case 6: weaponCharm = item;
-                UpdateCharm();
+                UpdateCharmInUsedWeapon();
                 break;
         }
-        UpdateCharm();
+        UpdateCharmInUsedWeapon();
     }
 
     bool IsItemValidForSlot(int index, Item item)
@@ -790,7 +864,7 @@ public class EquipmentController : MonoBehaviour
 
                 SetEquippedItem(equippedIndex, backpackItem);
                 additionalItems[backpackIndex] = equippedItem;
-                UpdateCharm();
+                UpdateCharmInUsedWeapon();
             }
             else
             {

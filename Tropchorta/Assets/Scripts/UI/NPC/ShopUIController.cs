@@ -15,6 +15,7 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private List<GameObject> itemPanels;
     [SerializeField] int activePanelId = 0;
     [SerializeField] private GameObject pressDisplayPanel;
+    [SerializeField] private GameObject soldoutDisplayPanel;
 
     public void ShowPressDisplay()
     {
@@ -23,6 +24,16 @@ public class ShopUIController : MonoBehaviour
     public void HidePressDisplay()
     {
         pressDisplayPanel.SetActive(false);
+    }
+
+    public void ShowSoldOutDisplay()
+    {
+        soldoutDisplayPanel.SetActive(true);
+    }
+
+    public void HideSoldOutDisplay()
+    {
+        soldoutDisplayPanel.SetActive(false);
     }
     public void ShowShopPanel()
     {
@@ -100,4 +111,5 @@ public class ShopUIController : MonoBehaviour
         }
         //set active panel id here i guess
     }
+
 }

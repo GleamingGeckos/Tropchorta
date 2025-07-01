@@ -20,8 +20,9 @@ public class ShopController : MonoBehaviour
 
     //private bool isInitialized = false;
 
-    public bool isPlayerClose = false;
-    public bool isShopOpened = false;
+    [SerializeField] private bool isShopSoldOut = false;
+    [SerializeField] private bool isPlayerClose = false;
+    [SerializeField] private bool isShopOpened = false;
     private void Start()
     {
         if(equipmentController == null)
@@ -38,7 +39,7 @@ public class ShopController : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerClose)
+        if (isPlayerClose && !isShopSoldOut)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -68,7 +69,7 @@ public class ShopController : MonoBehaviour
         {
 
             equipmentController.RemoveGold(items[itemId].itemPrice);
-            if (items[itemId].justDrop)
+            if (items[itemId].dropOnBuy)
             {
                 Instantiate(items[itemId].itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
                 return true;
@@ -82,6 +83,10 @@ public class ShopController : MonoBehaviour
             else
             {
                 items.Remove(items[itemId]);
+                if(items.Count <= 0)
+                {
+                    SoldOutShop();
+                }
             }
 
             return true;//if you can buy item
@@ -98,7 +103,14 @@ public class ShopController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isPlayerClose = true;
-            shopUIController.ShowPressDisplay();
+            if(!isShopSoldOut)
+            {
+                shopUIController.ShowPressDisplay();
+            }
+            else
+            {
+                shopUIController.ShowSoldOutDisplay();
+            }
         }
     }
 
@@ -108,6 +120,7 @@ public class ShopController : MonoBehaviour
         {
             isPlayerClose = false;
             shopUIController.HidePressDisplay();
+            shopUIController.HideSoldOutDisplay();
             StopShop(); // just in case he somehow leaves without pressing E?
         }
     }
@@ -134,5 +147,14 @@ public class ShopController : MonoBehaviour
             PauseController.SetPause(false);
             PauseController.DisableInput(false);
         }
+    }
+
+    public void SoldOutShop() // called when all shop items are sold out and player cant interact with the shop anymore
+    {
+        Debug.Log("All items in the store are sold out");
+        isShopSoldOut = true;
+        shopUIController.HidePressDisplay();
+        shopUIController.ShowSoldOutDisplay();
+        StopShop();
     }
 }
