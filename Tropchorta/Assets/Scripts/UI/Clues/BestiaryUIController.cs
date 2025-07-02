@@ -9,7 +9,7 @@ public class BestiaryUIController : MonoBehaviour
     [SerializeField] GameObject cluesPanel;
 
     [SerializeField] GameObject goToBestiaryButton;
-    [SerializeField] GameObject goToMenuButton;
+    [SerializeField] public GameObject goToMenuButton;
     [SerializeField] GameObject goToCluesButton;
     [SerializeField] GameObject buttonsRL;
 
