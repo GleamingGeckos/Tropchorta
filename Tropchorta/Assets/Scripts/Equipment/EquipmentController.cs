@@ -706,7 +706,7 @@ public class EquipmentController : MonoBehaviour
                 return tmpItem;
 
             case Charm charm:
-                tmpItem = charm;
+                tmpItem = weaponCharm;
                 if (tmpItem == null)
                 {
                     weaponCharm = item;
