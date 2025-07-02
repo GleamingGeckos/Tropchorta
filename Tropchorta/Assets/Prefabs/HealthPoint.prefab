@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d75c1bca17aea54dbfb71a6abe38d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healValue: 10
+  _healValue: 3
   delay: 0.2
 --- !u!135 &1950361729261557671
 SphereCollider:
