@@ -18,6 +18,8 @@ public class BestiaryUIController : MonoBehaviour
     public void DisplayBeastPanel(int beastId)
     {
         mainPanel.SetActive(false);
+        cluesPanel.SetActive(false);
+        menuPanel.SetActive(false);
         buttonsRL.SetActive(true);
         beastPanels[beastId].SetActive(true);
         goToBestiaryButton.SetActive(true);   
