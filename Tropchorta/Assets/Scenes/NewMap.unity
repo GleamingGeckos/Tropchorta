@@ -809,6 +809,7 @@ GameObject:
   - component: {fileID: 120580604}
   - component: {fileID: 120580603}
   - component: {fileID: 120580602}
+  - component: {fileID: 120580605}
   m_Layer: 5
   m_Name: Cycocha
   m_TagString: Untagged
@@ -855,7 +856,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -930,6 +931,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120580600}
   m_CullTransparentMesh: 1
+--- !u!114 &120580605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120580600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 259461617}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &129357057
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +958,7 @@ GameObject:
   - component: {fileID: 129357061}
   - component: {fileID: 129357060}
   - component: {fileID: 129357059}
+  - component: {fileID: 129357062}
   m_Layer: 5
   m_Name: Bezkost
   m_TagString: Untagged
@@ -988,7 +1005,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -1063,6 +1080,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129357057}
   m_CullTransparentMesh: 1
+--- !u!114 &129357062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129357057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1377336374}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &147644358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2992,9 +3024,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 1766223285}
   sprites:
+  - {fileID: 21300000, guid: 3281fbe0c522c2143a95021e01b5d86c, type: 3}
   - {fileID: 21300000, guid: 4d55fd25b41c3674fb67634e65cba707, type: 3}
   - {fileID: 21300000, guid: 19b192dec63be7e45b75ad3ad16f71b2, type: 3}
-  - {fileID: 21300000, guid: 3281fbe0c522c2143a95021e01b5d86c, type: 3}
+  currentIndex: 0
 --- !u!114 &479200740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,6 +3166,7 @@ GameObject:
   - component: {fileID: 482322194}
   - component: {fileID: 482322193}
   - component: {fileID: 482322192}
+  - component: {fileID: 482322195}
   m_Layer: 5
   m_Name: Dziki
   m_TagString: Untagged
@@ -3179,7 +3213,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -3254,6 +3288,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482322190}
   m_CullTransparentMesh: 1
+--- !u!114 &482322195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482322190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 501785821}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &487232429
 GameObject:
   m_ObjectHideFlags: 0
@@ -5571,6 +5620,7 @@ GameObject:
   - component: {fileID: 870099692}
   - component: {fileID: 870099691}
   - component: {fileID: 870099690}
+  - component: {fileID: 870099693}
   m_Layer: 5
   m_Name: Chabernica
   m_TagString: Untagged
@@ -5617,7 +5667,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -5692,6 +5742,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870099688}
   m_CullTransparentMesh: 1
+--- !u!114 &870099693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870099688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1732912808}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &875646421
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,6 +5769,7 @@ GameObject:
   - component: {fileID: 875646425}
   - component: {fileID: 875646424}
   - component: {fileID: 875646423}
+  - component: {fileID: 875646426}
   m_Layer: 5
   m_Name: Latawiec
   m_TagString: Untagged
@@ -5750,7 +5816,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -5825,6 +5891,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875646421}
   m_CullTransparentMesh: 1
+--- !u!114 &875646426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875646421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 341169947}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &875965331 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8324080729726020118, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
@@ -6402,9 +6483,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 2066653703}
   sprites:
+  - {fileID: 21300000, guid: 58a8feaaf706a0d4c95e02e38d4f9d85, type: 3}
   - {fileID: 21300000, guid: 7683d0e7407f41341a701092d360cd53, type: 3}
   - {fileID: 21300000, guid: 0040afdeea5bc8f479b33a9220b6399c, type: 3}
-  - {fileID: 21300000, guid: 58a8feaaf706a0d4c95e02e38d4f9d85, type: 3}
+  currentIndex: 0
 --- !u!114 &951952209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7383,9 +7465,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 563988706}
   sprites:
+  - {fileID: 21300000, guid: b7118b17651171d46a5c1e36d909320d, type: 3}
   - {fileID: 21300000, guid: c3e425c50fc25e54cafa20257702a068, type: 3}
   - {fileID: 21300000, guid: e3360bad8fe6f2c4f93a563e4eb73ef0, type: 3}
-  - {fileID: 21300000, guid: b7118b17651171d46a5c1e36d909320d, type: 3}
+  currentIndex: 0
 --- !u!114 &1079512405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8374,6 +8457,7 @@ GameObject:
   - component: {fileID: 1197306888}
   - component: {fileID: 1197306887}
   - component: {fileID: 1197306886}
+  - component: {fileID: 1197306889}
   m_Layer: 5
   m_Name: BialiLudzie
   m_TagString: Untagged
@@ -8420,7 +8504,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -8495,6 +8579,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197306884}
   m_CullTransparentMesh: 1
+--- !u!114 &1197306889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197306884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 931650845}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &1219213149
 GameObject:
   m_ObjectHideFlags: 0
@@ -10102,6 +10201,7 @@ GameObject:
   - component: {fileID: 1475485263}
   - component: {fileID: 1475485262}
   - component: {fileID: 1475485261}
+  - component: {fileID: 1475485264}
   m_Layer: 5
   m_Name: Bieda
   m_TagString: Untagged
@@ -10148,7 +10248,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -10223,6 +10323,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475485259}
   m_CullTransparentMesh: 1
+--- !u!114 &1475485264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475485259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 657263824}
+  sprites: []
+  currentIndex: 0
 --- !u!1 &1504574349
 GameObject:
   m_ObjectHideFlags: 0
@@ -10235,6 +10350,7 @@ GameObject:
   - component: {fileID: 1504574353}
   - component: {fileID: 1504574352}
   - component: {fileID: 1504574351}
+  - component: {fileID: 1504574354}
   m_Layer: 5
   m_Name: "A\u0142bast"
   m_TagString: Untagged
@@ -10281,7 +10397,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -10356,6 +10472,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504574349}
   m_CullTransparentMesh: 1
+--- !u!114 &1504574354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504574349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1986725862}
+  sprites: []
+  currentIndex: 0
 --- !u!1001 &1510909335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10513,9 +10644,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 1717340066}
   sprites:
+  - {fileID: 21300000, guid: ad87931ea626fd54fa46eeb989f990db, type: 3}
   - {fileID: 21300000, guid: 0582fd58988f39249bb96b19bb2fe6d2, type: 3}
   - {fileID: 21300000, guid: 24ca6d9e3e2b0a343a2bf15f46ac8e6d, type: 3}
-  - {fileID: 21300000, guid: ad87931ea626fd54fa46eeb989f990db, type: 3}
+  currentIndex: 0
 --- !u!114 &1547444865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12560,6 +12692,7 @@ GameObject:
   - component: {fileID: 1778259904}
   - component: {fileID: 1778259903}
   - component: {fileID: 1778259902}
+  - component: {fileID: 1778259905}
   m_Layer: 5
   m_Name: Bazyliszek
   m_TagString: Untagged
@@ -12606,7 +12739,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -12681,6 +12814,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778259900}
   m_CullTransparentMesh: 1
+--- !u!114 &1778259905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778259900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1326034962}
+  sprites: []
+  currentIndex: 0
 --- !u!1001 &1792374889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12941,6 +13089,7 @@ GameObject:
   - component: {fileID: 1869955564}
   - component: {fileID: 1869955563}
   - component: {fileID: 1869955562}
+  - component: {fileID: 1869955565}
   m_Layer: 5
   m_Name: Bies
   m_TagString: Untagged
@@ -12987,7 +13136,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.3915094, g: 1, b: 0.5656873, a: 1}
@@ -13062,6 +13211,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869955560}
   m_CullTransparentMesh: 1
+--- !u!114 &1869955565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869955560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43539fa312922ed47afa8b1142b45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1320545673}
+  sprites: []
+  currentIndex: 0
 --- !u!1001 &1880057261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14873,9 +15037,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 1112374236}
   sprites:
+  - {fileID: 21300000, guid: a4175fe8a58d06448a4b5c21ea3e1751, type: 3}
   - {fileID: 21300000, guid: 54fa46f9c0f4c7548bc04ba1959c9dac, type: 3}
   - {fileID: 21300000, guid: 612fe8e4aff61084f9e87ff5f5096788, type: 3}
-  - {fileID: 21300000, guid: a4175fe8a58d06448a4b5c21ea3e1751, type: 3}
+  currentIndex: 0
 --- !u!114 &2136481479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15252,7 +15417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2141972359
 RectTransform:
   m_ObjectHideFlags: 0

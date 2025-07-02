@@ -1,22 +1,50 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class ImageCycler : MonoBehaviour
+public class ImageCycler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image targetImage;          // Obrazek, który zmieniamy
-    [SerializeField] private List<Sprite> sprites;       // Lista obrazków do prze³¹czania
-    private int currentIndex = 0;
+    [Header("G³ówna konfiguracja")]
+    [SerializeField] private Image targetImage;            // Obrazek, którego sprite zmieniamy
+    [SerializeField] private List<Sprite> sprites;         // Lista sprite'ów     
 
+
+    public int currentIndex;
+    private Vector3 originalScale;
+
+    private void Awake()
+    {
+        if (targetImage != null)
+            originalScale = targetImage.rectTransform.localScale;
+        currentIndex = 0;
+    }
+
+    // Wywo³ywane z OnClick() przycisku
     public void CycleImage()
     {
         if (sprites == null || sprites.Count == 0 || targetImage == null)
             return;
 
-        // Ustaw sprite z listy
+        currentIndex = (currentIndex + 1) % sprites.Count;
         targetImage.sprite = sprites[currentIndex];
+    }
 
-        // Przesuñ indeks do przodu
-        currentIndex = (currentIndex + 1) % sprites.Count; // zapêtla siê
+    // Najechanie kursorem
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (targetImage != null)
+        {
+            targetImage.rectTransform.localScale = originalScale * 1.1f;
+        }
+    }
+
+    // Zjechanie kursora
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (targetImage != null)
+        {
+            targetImage.rectTransform.localScale = originalScale;
+        }
     }
 }

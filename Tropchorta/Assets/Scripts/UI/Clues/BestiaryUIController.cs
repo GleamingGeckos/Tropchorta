@@ -66,6 +66,7 @@ public class BestiaryUIController : MonoBehaviour
         goToCluesButton.SetActive(true);
         mainPanel.SetActive(true);
         cluesPanel.SetActive(false);
+        menuPanel.SetActive(false);
         activePanelId = -1;
     }
 
