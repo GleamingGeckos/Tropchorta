@@ -663,8 +663,8 @@ public class EquipmentController : MonoBehaviour
                 if (tmpItem == null)
                 {
                     breastplate = item;
-                    equipmentUIController.ChangeCharmImage(weaponCharm);
-                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    equipmentUIController.ChangeTorsoImage(breastplate);
+                    equipmentBackpackUIController.ChangeTorsoImage(breastplate);
                     return null;
                 }
                 else
@@ -680,8 +680,8 @@ public class EquipmentController : MonoBehaviour
                         Instantiate(item.itemPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
                         Debug.Log($"No free space in backpack for breastplate : {breastplate.itemName} dropping on the ground");
                     }
-                    equipmentUIController.ChangeCharmImage(weaponCharm);
-                    equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
+                    equipmentUIController.ChangeTorsoImage(breastplate);
+                    equipmentBackpackUIController.ChangeTorsoImage(breastplate);
                     return null;
                 }
                 //equipmentUIController.ChangeTorsoImage(breastplate);
