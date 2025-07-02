@@ -16,10 +16,6 @@ public class HealthPoint : MonoBehaviour
         {
             _isTaken = true;
             _player = other.transform;
-            if (other.TryGetComponent(out HealthComponent healthComponent))
-            {
-                healthComponent.Heal(_healValue);
-            }
             StartCoroutine(MoveToPlayerAfterDelay());
         }
     }
@@ -36,6 +32,10 @@ public class HealthPoint : MonoBehaviour
             currentSpeed += acceleration * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, _player.position, currentSpeed * Time.deltaTime);
             yield return null;
+        }
+        if (_player.gameObject.TryGetComponent(out HealthComponent healthComponent))
+        {
+            healthComponent.Heal(_healValue);
         }
         Destroy(gameObject);
     }

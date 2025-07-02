@@ -6,13 +6,14 @@ using UnityEngine;
 public class SwordBehavior : WeaponBehavior
 {
     [SerializeField] private int damage = 1;
-    [SerializeField] private float attackRadius = 1.0f;
-    [SerializeField] private float specialAttackRadius = 1.5f;
+    [SerializeField] private float attackRadius = 1.5f;
+    [SerializeField] private float specialAttackRadius = 2.0f;
     [SerializeField] private float attackDistanceFromPlayer = 2.5f;
-    private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
+    [SerializeField] private float specialAttackDistanceFromPlayer = .5f;
     [SerializeField] private EventReference attackSound;
     [SerializeField] private EventReference perfectBlockSound;
     [SerializeField] private EventReference normalBlockSound;
+    private PlayerCombat playerCombat; // will this only be used by player or by enemies as well?
 
     public override void Initialize(Transform user)
     {
@@ -113,7 +114,7 @@ public class SwordBehavior : WeaponBehavior
 
     public override void UseSpecialAttack(Transform user, Charm charm)
     {
-        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * specialAttackRadius * attackDistanceFromPlayer;
+        Vector3 rotatingOffset = playerCombat.GetRotatingRootForward() * specialAttackDistanceFromPlayer;
         float radius = specialAttackRadius;
         Collider[] hitColliders = Physics.OverlapSphere(user.position + rotatingOffset, radius);
         foreach (var hitCollider in hitColliders)
@@ -128,8 +129,8 @@ public class SwordBehavior : WeaponBehavior
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attack, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
         }
-        RuntimeManager.PlayOneShot(attackSound, user.position);
-        DebugExtension.DebugWireSphere(user.position + rotatingOffset, Color.blue, radius, 1f);
+        RuntimeManager.PlayOneShot(attackSound, user.position + rotatingOffset);
+        DebugExtension.DebugWireSphere(user.position, Color.blue, radius, 1f);
     }
 
     public override bool IsDistance()

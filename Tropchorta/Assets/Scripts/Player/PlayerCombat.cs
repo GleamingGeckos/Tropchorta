@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] Animator staffAnimator;
     [SerializeField] public GameObject weaponSlot;
     [SerializeField] Transform rotatingRootTransform;
     [SerializeField] PlayerStateSO playerState;
@@ -127,7 +126,6 @@ public class PlayerCombat : MonoBehaviour
             doNextAttack = true;
         else
             StartAttackAnim();
-
     }
 
     IEnumerator ComboWindow()
@@ -137,22 +135,22 @@ public class PlayerCombat : MonoBehaviour
         isWindowOpen = false;
     }
     
-
     public void Attack()
     {
-        if (isHoldingAttack) {
+        if (isHoldingAttack)
+        {
             equipmentController.UseWeaponStrongStart(rotatingRootTransform);
         }
-        else if (comboCounter == specialAttackNr) {
+        else if (comboCounter == specialAttackNr)
+        {
             equipmentController.UseWeaponSpecialAttack(rotatingRootTransform);
             // Tu wywołujemy event combo 3 ataków
             OnCombo3Attacks?.Invoke();
             if (shockWave)
                 shockWave.Play();// To po spadnięciu
-        } 
-        else {
-            equipmentController.UseWeaponStart(rotatingRootTransform);
         }
+        else
+            equipmentController.UseWeaponStart(rotatingRootTransform);
         if(!equipmentController.IsDistance())
             stepCoroutine = StartCoroutine(MoveForwardSmooth(transform, distance, stepTime));
     }  
@@ -181,8 +179,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void EndAttack()
     {
-
         playerState.state = PlayerState.Normal;
+        StopCoroutine(comboCorutine);
         //movement.WeaponAnimator.SetBool("canExitAttack", true);
         movement.PlayerAnimator.SetBool("canExitAttack", true);
         if (isHoldingAttack)
@@ -234,7 +232,6 @@ public class PlayerCombat : MonoBehaviour
         target.position = end;
     }
 
-
     public void BreakCombo()
     {
         comboCounter = 0;
@@ -269,7 +266,6 @@ public class PlayerCombat : MonoBehaviour
         CheckForAttackingEnemies(isBlocking);
         blockRoutine = StartCoroutine(StopBlockingAfterTime());
     }
-
 
     IEnumerator StopBlockingAfterTime()
     {

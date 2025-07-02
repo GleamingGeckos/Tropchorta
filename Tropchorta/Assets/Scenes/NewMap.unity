@@ -5626,6 +5626,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 906029073}
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: _wantedYPos
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: dummyWeaponSlot
       value: 
       objectReference: {fileID: 0}
