@@ -35,7 +35,7 @@ public class EquipmentController : MonoBehaviour
     {
         DisplayItems();
         ClearGold(); ////////////////////////////////////////////////////////// just in case youre looking for it :)
-        input.OnScrollEvent += SwitchWeapons;
+        //input.OnScrollEvent += SwitchWeapons;
         UpdateGoldDisplay(goldAmount);
     }
 
@@ -64,18 +64,14 @@ public class EquipmentController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+       /* if (Input.GetKeyDown(KeyCode.T))
         {
             //UseWeaponStart(transform);
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log("Picking up items!!!");
             PickUpItem();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-
         }
     }
 
@@ -585,14 +581,14 @@ public class EquipmentController : MonoBehaviour
         //equipmentUIController.ChangeShoesImage(shoes);
         equipmentUIController.ChangeTorsoImage(breastplate);
         equipmentUIController.ChangeWeapon1Image(usedWeapon);
-        equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
+        //equipmentUIController.ChangeWeapon2Image(inactiveWeapon);
         equipmentUIController.ChangeCharmImage(weaponCharm);
         //equipmentBackpackUIController.ChangeHeadImage(helmet);
         //equipmentBackpackUIController.ChangePantsImage(pants);
         //equipmentBackpackUIController.ChangeShoesImage(shoes);
         equipmentBackpackUIController.ChangeTorsoImage(breastplate);
         equipmentBackpackUIController.ChangeWeapon1Image(usedWeapon);
-        equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
+        //equipmentBackpackUIController.ChangeWeapon2Image(inactiveWeapon);
         equipmentBackpackUIController.ChangeBackpackImages(additionalItems);
         equipmentBackpackUIController.ChangeCharmImage(weaponCharm);
         UpdateCharmInUsedWeapon();
