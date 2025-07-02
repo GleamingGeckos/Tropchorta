@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     public Animator PlayerAnimator;
     [SerializeField] GameObject hobbyHorseMesh;
 
-
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -270,5 +269,16 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetRotatingDirection()
     {
         return modelRootTransform.forward;
+    }
+    private void OnDestroy()
+    {
+        if (input != null)
+        {
+            input.OnMoveInputEvent -= OnMoveInput;
+            input.OnLookInputEvent -= OnMousePosition;
+            input.OnSprintEvent -= () => isSprinting = true;
+            input.OnSprintCancelledEvent -= () => isSprinting = false;
+            input.OnSpaceEvent -= OnDash;
+        }
     }
 }
