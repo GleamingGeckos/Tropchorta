@@ -7,8 +7,17 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject authorsPanel;
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] PlayerMovement playerMovement;
 
     [SerializeField] private BestiaryUIController bestiaryUIController;
+    [SerializeField] private GameObject go_bestiaryUIController;
+
+    public void ContinueButton ()
+    {
+/*        go_bestiaryUIController.SetActive(false);
+        PauseController.SetPause(false);
+        playerMovement.playerState.state = PlayerState.Normal;*/
+    }
 
     public void ShowAuthors()
     {

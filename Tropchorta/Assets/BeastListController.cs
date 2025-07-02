@@ -4,8 +4,11 @@ using System.Collections.Generic;
 
 public class BeastListController : MonoBehaviour
 {
-    [Header("Wskazówki – konkretne ImageCyclery")]
-    [SerializeField] private List<ImageCycler> traitsList;
+    [Header("Lista A – reaguje na zle")]
+    [SerializeField] private List<ImageCycler> traitsListIndex2;
+
+    [Header("Lista B – reaguje na dobre")]
+    [SerializeField] private List<ImageCycler> traitsListIndex1;
 
     [Header("Obrazek do zmiany przezroczystoœci")]
     [SerializeField] private Image targetImage;
@@ -16,42 +19,71 @@ public class BeastListController : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var cycler in traitsList)
+        foreach (var cycler in traitsListIndex2)
         {
             if (cycler != null)
-                cycler.OnIndexChanged += OnTraitIndexChanged;
+                cycler.OnIndexChanged += OnAnyTraitIndexChanged;
+        }
+
+        foreach (var cycler in traitsListIndex1)
+        {
+            if (cycler != null)
+                cycler.OnIndexChanged += OnAnyTraitIndexChanged;
         }
     }
 
     private void OnDisable()
     {
-        foreach (var cycler in traitsList)
+        foreach (var cycler in traitsListIndex2)
         {
             if (cycler != null)
-                cycler.OnIndexChanged -= OnTraitIndexChanged;
+                cycler.OnIndexChanged -= OnAnyTraitIndexChanged;
+        }
+
+        foreach (var cycler in traitsListIndex1)
+        {
+            if (cycler != null)
+                cycler.OnIndexChanged -= OnAnyTraitIndexChanged;
         }
     }
 
-    private void OnTraitIndexChanged(ImageCycler changedCycler, int newIndex)
+    private void OnAnyTraitIndexChanged(ImageCycler changedCycler, int newIndex)
     {
-        bool anyHasIndex2 = false;
+        UpdateAlphaState();
+    }
 
-        foreach (var cycler in traitsList)
+    private void UpdateAlphaState()
+    {
+        bool shouldFade = false;
+
+        foreach (var cycler in traitsListIndex2)
         {
             if (cycler != null && cycler.currentIndex == 2)
             {
-                anyHasIndex2 = true;
+                shouldFade = true;
                 break;
+            }
+        }
+
+        if (!shouldFade)
+        {
+            foreach (var cycler in traitsListIndex1)
+            {
+                if (cycler != null && cycler.currentIndex == 1)
+                {
+                    shouldFade = true;
+                    break;
+                }
             }
         }
 
         if (targetImage != null)
         {
             Color c = targetImage.color;
-            c.a = anyHasIndex2 ? fadedAlpha : normalAlpha;
+            c.a = shouldFade ? fadedAlpha : normalAlpha;
             targetImage.color = c;
 
-            Debug.Log("BeastListController: Zmieniono przezroczystoœæ na " + c.a);
+            //Debug.Log($"[BeastListController] Zmieniono przezroczystoœæ na {(shouldFade ? "FADED" : "NORMAL")} (a={c.a})");
         }
     }
 }
