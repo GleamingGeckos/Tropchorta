@@ -1740,6 +1740,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1471961778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &456340752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2763151380894057734, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+  m_PrefabInstance: {fileID: 1460034027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &472976709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2238,6 +2243,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
+--- !u!1 &576619147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7076339757439524321, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+  m_PrefabInstance: {fileID: 1647544446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &595620778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2697,6 +2707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 517564265932684482, guid: 7558bc0fc261b444bb1694af85e52624, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 763740053625561947, guid: 7558bc0fc261b444bb1694af85e52624, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2857,7 +2871,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
   m_PrefabInstance: {fileID: 1647544446}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 576619147}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78aaa4dde83e52b4e81bbc79ca000873, type: 3}
@@ -5760,7 +5774,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
   m_PrefabInstance: {fileID: 1460034027}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 456340752}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47c5c74c1e5a5234290a37530e148649, type: 3}
@@ -6221,10 +6235,34 @@ PrefabInstance:
       propertyPath: go_bestiaryUIController
       value: 
       objectReference: {fileID: 1590545946}
+    - target: {fileID: 2236692164771032116, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 456340752}
+    - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 576619147}
+    - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2006286990}
+    - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: mainMenuScene
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1460034028}
+    - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: destroyPersistentObjects
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4786425247610839163, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: equipmentController
       value: 
@@ -6324,6 +6362,10 @@ PrefabInstance:
     - target: {fileID: 7076339757439524321, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_Name
       value: PlayerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498058105633222300, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

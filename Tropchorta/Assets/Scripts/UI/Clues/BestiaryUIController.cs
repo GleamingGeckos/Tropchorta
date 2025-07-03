@@ -15,6 +15,8 @@ public class BestiaryUIController : MonoBehaviour
 
     [SerializeField] List<GameObject> beastPanels;
     [SerializeField] int activePanelId = -1;
+
+
     public void DisplayBeastPanel(int beastId)
     {
         mainPanel.SetActive(false);

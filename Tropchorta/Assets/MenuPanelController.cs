@@ -9,14 +9,13 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] PlayerMovement playerMovement;
 
+    [SerializeField] PlayerUIController playerUIController;
+
     [SerializeField] private BestiaryUIController bestiaryUIController;
-    [SerializeField] private GameObject go_bestiaryUIController;
 
     public void ContinueButton ()
     {
-/*        go_bestiaryUIController.SetActive(false);
-        PauseController.SetPause(false);
-        playerMovement.playerState.state = PlayerState.Normal;*/
+        playerUIController.CloseBook();
     }
 
     public void ShowAuthors()
