@@ -28,6 +28,7 @@ public class MenuPanelController : MonoBehaviour
     public void ShowOptions()
     {
         menuPanel.SetActive(false);
+        //authorsPanel.SetActive(false);
         optionsPanel.SetActive(true);
         bestiaryUIController.goToMenuButton.SetActive(true);
     }
