@@ -34,11 +34,41 @@ public class LevelSpawner : MonoBehaviour
         if (isWaiting)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0f)
+            if (timer <= 0f && !IsSpawnerVisible())
             {
                 currentEnemyList = spawner.SpawnObjects(enemyType, Random.Range(minNumber, maxNumber + 1));
                 isWaiting = false;
             }
         }
+    }
+    private bool IsSpawnerVisible()
+    {
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            return false;
+        }
+
+        SphereCollider sphere = spawner.GetComponent<SphereCollider>();
+        if (sphere == null)
+        {
+            return false;
+        }
+
+        Vector3 centerWorld = spawner.transform.TransformPoint(sphere.center);
+        float maxScale = Mathf.Max(
+            spawner.transform.lossyScale.x,
+            spawner.transform.lossyScale.y,
+            spawner.transform.lossyScale.z);
+
+        float radius = sphere.radius * maxScale;
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
+
+        Bounds bounds = new Bounds(centerWorld, Vector3.one * radius * 2);
+
+        bool visible = GeometryUtility.TestPlanesAABB(planes, bounds);
+
+        return visible;
     }
 }
