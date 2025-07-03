@@ -10,11 +10,11 @@ public class BestiaryUIController : MonoBehaviour
     [SerializeField] GameObject cluesPanel;
     [SerializeField] GameObject mapPanel;
     [Header("Buttons")]
-    [SerializeField] GameObject goToBestiaryButton;
+    [SerializeField] public GameObject goToBestiaryButton;
     [SerializeField] public GameObject goToMenuButton;
-    [SerializeField] GameObject goToCluesButton;
-    [SerializeField] GameObject goToMapButton;
-    [SerializeField] GameObject buttonsRL;
+    [SerializeField] public GameObject goToCluesButton;
+    [SerializeField] public GameObject goToMapButton;
+    [SerializeField] public GameObject buttonsRL;
 
     [SerializeField] List<GameObject> beastPanels;
     [SerializeField] int activePanelId = -1;
@@ -64,7 +64,7 @@ public class BestiaryUIController : MonoBehaviour
         }
         beastPanels[activePanelId].SetActive(true);
     }
-    public void MainPanelDisplay()// moves back to the all beasts display
+    public void ShowBestiary()// moves back to the all beasts display
     {
         if (activePanelId >= 0)
         {

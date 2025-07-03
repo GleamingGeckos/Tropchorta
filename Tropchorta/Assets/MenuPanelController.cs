@@ -15,7 +15,7 @@ public class MenuPanelController : MonoBehaviour
 
     public void ContinueButton ()
     {
-        playerUIController.CloseBook();
+        playerUIController.CloseBestiary();
     }
 
     public void ShowAuthors()

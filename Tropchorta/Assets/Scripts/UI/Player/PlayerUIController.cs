@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 public class PlayerUIController : MonoBehaviour
 {
     [Header("Panels")]
-    [SerializeField] GameObject bookPanel;
+    [SerializeField] GameObject bestiaryPanel;
     [SerializeField] GameObject mapPanel;
     [SerializeField] GameObject menuPanel;
+    [SerializeField] GameObject cluesPanel;
+    [SerializeField] GameObject optionsPanel;
+    [SerializeField] GameObject authorsPanel;
+    [SerializeField] GameObject mapImagePanel;
+
     [SerializeField] GameObject equipmentBackpackPanel;
 
     [SerializeField] BestiaryUIController bestiaryUIController;
@@ -43,13 +48,15 @@ public class PlayerUIController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
-                if (bookPanel.activeSelf && !isBaseState)
+                if (bestiaryPanel.activeSelf && !isBaseState)
                 {
-                    CloseBook();
+                    CloseBestiary();
+                    mapImagePanel.SetActive(false);
                 }
                 else if (isBaseState)
                 {
-                    OpenBook();
+                    OpenBestiary();
+                    mapImagePanel.SetActive(true);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -61,6 +68,7 @@ public class PlayerUIController : MonoBehaviour
                 else if (isBaseState)
                 {
                     OpenMenu();
+                    mapImagePanel.SetActive(true);
                 }
             }
 
@@ -69,16 +77,13 @@ public class PlayerUIController : MonoBehaviour
                 if (mapPanel.activeSelf && !isBaseState)
                 {
                     mapPanel.SetActive(false);
-                    PauseController.SetPause(false);
-                    playerMovement.playerState.state = PlayerState.Normal;
-                    isBaseState = true;
+                    CloseAllButtons();
+                    Reasume();
                 }
                 else if (isBaseState)
                 {
-                    mapPanel.SetActive(true);
-                    PauseController.SetPause(true);
-                    playerMovement.playerState.state = PlayerState.DisableInput;
-                    isBaseState = false;
+                    OpenMap();
+                    mapImagePanel.SetActive(true);
                 }
             }
             if (Input.GetKeyDown(KeyCode.I))
@@ -86,46 +91,41 @@ public class PlayerUIController : MonoBehaviour
                 if (equipmentBackpackPanel.activeSelf && !isBaseState)
                 {
                     equipmentBackpackPanel.SetActive(false);
-                    PauseController.SetPause(false);
-                    playerMovement.playerState.state = PlayerState.Normal;
-                    isBaseState = true;
+                    Reasume();
                 }
                 else if (isBaseState)
                 {
                     equipmentBackpackPanel.SetActive(true);
-                    PauseController.SetPause(true);
-                    playerMovement.playerState.state = PlayerState.DisableInput;
-                    isBaseState = false;
+                    Pause(); 
                 }
             }
         }
     }
 
+    public void OpenMap()
+    {
+        bestiaryUIController.ShowMapPanel();
+        Pause();
+    }
+
     public void OpenMenu()
     {
-        bookPanel.SetActive(true);
         bestiaryUIController.ShowMenuPanel();
-        PauseController.SetPause(true);
-        isBaseState = false;
-        playerMovement.playerState.state = PlayerState.DisableInput;
+        Pause();
     }
 
 
-    public void OpenBook()
+    public void OpenBestiary()
     {
-        bookPanel.SetActive(true);
-        PauseController.SetPause(true);
-        playerMovement.playerState.state = PlayerState.DisableInput;
-        bestiaryUIController.MainPanelDisplay();
-        isBaseState = false;
+        bestiaryUIController.ShowBestiary();
+        Pause();
     }
 
-    public void CloseBook()
+    public void CloseBestiary()
     {
-        bookPanel.SetActive(false);
-        PauseController.SetPause(false);
-        playerMovement.playerState.state = PlayerState.Normal;
-        isBaseState = true;
+        bestiaryPanel.SetActive(false);
+        CloseAllButtons();
+        Reasume();
     }
 
     public void TurnOnPlayerUI()
@@ -151,29 +151,41 @@ public class PlayerUIController : MonoBehaviour
 
     public void CloseAllPanels()
     {
-        bookPanel.SetActive(false);
+        //Panels
+        bestiaryPanel.SetActive(false);
         menuPanel.SetActive(false);
         mapPanel.SetActive(false);
+        cluesPanel.SetActive(false);
         equipmentBackpackPanel.SetActive(false);
-        PauseController.SetPause(false);
-        playerMovement.playerState.state = PlayerState.Normal;
-        isBaseState = true;
+        optionsPanel.SetActive(false);
+        authorsPanel.SetActive(false);
+        mapImagePanel.SetActive(false);
+
+        CloseAllButtons();
+
+        Reasume(); 
+    }
+
+    public void CloseAllButtons()
+    {
+        //Buttons
+        bestiaryUIController.goToMenuButton.SetActive(false);
+        bestiaryUIController.goToMapButton.SetActive(false);
+        bestiaryUIController.goToCluesButton.SetActive(false);
+        bestiaryUIController.goToBestiaryButton.SetActive(false);
+        bestiaryUIController.buttonsRL.SetActive(false);
     }
 
     public void ShowBackpackPanel()
     {
         equipmentBackpackPanel.SetActive(true);
-        PauseController.SetPause(true);
-        playerMovement.playerState.state = PlayerState.DisableInput;
-        isBaseState = false;
+        Pause();
     }
 
     public void HideBackpackPanel()
     {
         equipmentBackpackPanel.SetActive(false);
-        PauseController.SetPause(false);
-        playerMovement.playerState.state = PlayerState.Normal;
-        isBaseState = true;
+        Reasume();
     }
 
     public void ChangeScene(string sceneName)
@@ -200,5 +212,19 @@ public class PlayerUIController : MonoBehaviour
         }
         //PauseController.SetPause(false);
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void Pause()
+    {
+        PauseController.SetPause(true);
+        isBaseState = false;
+        playerMovement.playerState.state = PlayerState.DisableInput;
+    }
+
+    public void Reasume()
+    {
+        PauseController.SetPause(false);
+        isBaseState = true;
+        playerMovement.playerState.state = PlayerState.Normal;
     }
 }
