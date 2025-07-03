@@ -21,6 +21,7 @@ public class TutorialController : MonoBehaviour
 
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject trace;
+    [SerializeField] private List<ImageCycler> imageCyclers;
 
     [Header("FMOD Sounds")]
     [SerializeField] private List<EventReference> soundList;
@@ -48,6 +49,13 @@ public class TutorialController : MonoBehaviour
         // Subskrybuj event combo
         playerCombat.OnCombo3Attacks += CheckCombo;
         playerCombat.OnPerfectParry += CheckBlock;
+
+        foreach (var cycler in imageCyclers)
+        {
+            cycler.OnIndexChanged += OnCyclerIndexChanged;
+        }
+        BestiaryUIController.OnCluesPanelShown += CheckTrail;
+
 
         ShowDialogue();
     }
@@ -86,14 +94,6 @@ public class TutorialController : MonoBehaviour
                 else if (checkBestiary)
                 {
                     CheckBestiary();
-                }
-                else if (checkNotebook)
-                {
-                    CheckNotebook();
-                }
-                else if (checkTrail)
-                {
-                    CheckTrail();
                 }
                 else if (checkEq)
                 {
@@ -165,7 +165,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 12:
-                mustTextField.text = "Use [N] to open Notes";
+                mustTextField.text = "Click one of the Known traits";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkNotebook = true;
@@ -173,7 +173,7 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 13:
-                mustTextField.text = "Use [E] to collect clue";
+                mustTextField.text = "Open Traits panel in Bestiary";
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkTrail = true;
@@ -253,26 +253,25 @@ public class TutorialController : MonoBehaviour
             Advance();
         }
     }
-    private void CheckNotebook()
+    private void CheckIfKnownTraitsClicked()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
             uiMustDoPanel.SetActive(false);
             checkNotebook = false;
             canMove = true;
             Advance();
-        }
     }
     private void CheckTrail()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            uiMustDoPanel.SetActive(false);
-            checkTrail = false;
-            canMove = true;
-            Advance();
-        }
+        if (!checkTrail) return;
+
+        uiMustDoPanel.SetActive(false);
+        checkTrail = false;
+        canMove = true;
+        Advance();
+
+        OnDestroyTrail(); // odsubskrybuj po użyciu
     }
+
     private void CheckEq()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -324,6 +323,15 @@ public class TutorialController : MonoBehaviour
         playerCombat.OnPerfectParry -= CheckBlock;
     }
 
+    private void OnCyclerIndexChanged(ImageCycler sender, int newIndex)
+    {
+        if (checkNotebook)
+        {
+            CheckIfKnownTraitsClicked();
+        }
+    }
+
+
     private void OnDestroy()
     {
         if (currentTutorialDialogue.isValid())
@@ -332,5 +340,16 @@ public class TutorialController : MonoBehaviour
             currentTutorialDialogue.release();
             currentTutorialDialogue.clearHandle();
         }
+
+        foreach (var cycler in imageCyclers)
+        {
+            cycler.OnIndexChanged -= OnCyclerIndexChanged;
+        }
     }
+
+    private void OnDestroyTrail()
+    {
+        BestiaryUIController.OnCluesPanelShown -= CheckTrail;
+    }
+
 }

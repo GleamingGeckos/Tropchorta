@@ -20,6 +20,8 @@ public class BestiaryUIController : MonoBehaviour
     [SerializeField] int activePanelId = -1;
     [SerializeField] PlayerUIController playerUIController;
 
+    public static event System.Action OnCluesPanelShown;
+
 
     public void DisplayBeastPanel(int beastId)
     {
@@ -126,6 +128,8 @@ public class BestiaryUIController : MonoBehaviour
         goToMapButton.SetActive(true);
 
         cluesPanel.SetActive(true);
+
+        OnCluesPanelShown?.Invoke();
     }
 
     public void ShowMapPanel()

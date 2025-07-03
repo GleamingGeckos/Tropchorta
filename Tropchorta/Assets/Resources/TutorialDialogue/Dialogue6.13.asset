@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03855f5d3609b5d41837395e207cc4f3, type: 3}
   m_Name: Dialogue6.13
   m_EditorClassIdentifier: 
-  fullText: "Hold... Look beneath your feet. A beast\u2019s track. Collect it [E]
-    - every clue brings you closer to the truth. In your bestiary, you will find
-    a complete list of all the clues that can be discovered.\r\n"
+  fullText: "Hold... Look beneath your feet. A beast\u2019s track. Collect it - every
+    clue brings you closer to the truth. In your bestiary, you will find a complete
+    list of all the clues that can be discovered.\r\n"
