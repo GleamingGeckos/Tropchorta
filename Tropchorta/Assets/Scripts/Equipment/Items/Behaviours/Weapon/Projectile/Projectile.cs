@@ -111,10 +111,7 @@ public class Projectile : MonoBehaviour
                 other.CompareTag("Enemy"))
             {
                 AttackData attackData;
-                if (_parent.transform != null && _parent.transform.parent != null)
-                    attackData = new AttackData(_parent.transform.parent.gameObject, _damage, charmType);
-                else
-                    attackData = new AttackData(gameObject, _damage, charmType);
+                attackData = new AttackData(_parent, _damage, charmType);
                 healthComponent.SimpleDamage(Charm.CharmEffectOnWeapon(attackData, enemyCombat.WeakToCharm, Charm.weaponAmplificationMultiplier));
             }
             Destroy(gameObject);

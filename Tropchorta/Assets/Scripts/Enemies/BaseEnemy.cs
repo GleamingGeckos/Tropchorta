@@ -126,6 +126,7 @@ public class BaseEnemy : MonoBehaviour
 
     public void AfterAttack(AttackData ad)
     {
+        Debug.Log("Attacker: " + ad.attacker.name);
         Vector3 direction = transform.position - ad.attacker.transform.position;
         direction.y = 0f;
         direction = direction.normalized; 
