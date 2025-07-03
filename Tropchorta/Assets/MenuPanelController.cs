@@ -15,20 +15,19 @@ public class MenuPanelController : MonoBehaviour
 
     public void ContinueButton ()
     {
-        playerUIController.CloseBestiary();
+        playerUIController.CloseAllUI();
     }
 
     public void ShowAuthors()
     {
-        menuPanel.SetActive(false);
+        playerUIController.CloseAllPanels();
         authorsPanel.SetActive(true);
         bestiaryUIController.goToMenuButton.SetActive(true);
     }
 
     public void ShowOptions()
     {
-        menuPanel.SetActive(false);
-        //authorsPanel.SetActive(false);
+        playerUIController.CloseAllPanels();
         optionsPanel.SetActive(true);
         bestiaryUIController.goToMenuButton.SetActive(true);
     }

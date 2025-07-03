@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +16,8 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] GameObject mapImagePanel;
 
     [SerializeField] GameObject equipmentBackpackPanel;
+
+    [SerializeField] List<GameObject> hoversList;
 
     [SerializeField] BestiaryUIController bestiaryUIController;
     [SerializeField] PlayerMovement playerMovement;
@@ -50,8 +54,7 @@ public class PlayerUIController : MonoBehaviour
             {
                 if (bestiaryPanel.activeSelf && !isBaseState)
                 {
-                    CloseBestiary();
-                    mapImagePanel.SetActive(false);
+                    CloseAllUI();
                 }
                 else if (isBaseState)
                 {
@@ -63,7 +66,7 @@ public class PlayerUIController : MonoBehaviour
             {
                 if (!isBaseState)
                 {
-                    CloseAllPanels();
+                    CloseAllUI();
                 }
                 else if (isBaseState)
                 {
@@ -76,9 +79,7 @@ public class PlayerUIController : MonoBehaviour
             {
                 if (mapPanel.activeSelf && !isBaseState)
                 {
-                    mapPanel.SetActive(false);
-                    CloseAllButtons();
-                    Reasume();
+                    CloseAllUI();
                 }
                 else if (isBaseState)
                 {
@@ -104,12 +105,14 @@ public class PlayerUIController : MonoBehaviour
 
     public void OpenMap()
     {
+        CloseAllPanels();
         bestiaryUIController.ShowMapPanel();
         Pause();
     }
 
     public void OpenMenu()
     {
+        CloseAllPanels();
         bestiaryUIController.ShowMenuPanel();
         Pause();
     }
@@ -117,6 +120,7 @@ public class PlayerUIController : MonoBehaviour
 
     public void OpenBestiary()
     {
+        CloseAllPanels();
         bestiaryUIController.ShowBestiary();
         Pause();
     }
@@ -131,12 +135,14 @@ public class PlayerUIController : MonoBehaviour
     public void TurnOnPlayerUI()
     {
         CloseAllPanels();
+        Reasume();
         canUseUI = true;
     }
 
     public void TurnOffPlayerUI()
     {
         CloseAllPanels();
+        Reasume();
         canUseUI = false;
     }
 
@@ -159,11 +165,7 @@ public class PlayerUIController : MonoBehaviour
         equipmentBackpackPanel.SetActive(false);
         optionsPanel.SetActive(false);
         authorsPanel.SetActive(false);
-        mapImagePanel.SetActive(false);
-
-        CloseAllButtons();
-
-        Reasume(); 
+        //mapImagePanel.SetActive(false);
     }
 
     public void CloseAllButtons()
@@ -174,6 +176,24 @@ public class PlayerUIController : MonoBehaviour
         bestiaryUIController.goToCluesButton.SetActive(false);
         bestiaryUIController.goToBestiaryButton.SetActive(false);
         bestiaryUIController.buttonsRL.SetActive(false);
+    }
+
+    public void CloseAllHovers()
+    {
+        foreach (GameObject obj in hoversList)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+    }
+
+    public void CloseAllUI()
+    {
+        CloseAllPanels();
+        CloseAllButtons();
+        CloseAllHovers();
+        mapImagePanel.SetActive(false);
+        Reasume();
     }
 
     public void ShowBackpackPanel()

@@ -18,14 +18,16 @@ public class BestiaryUIController : MonoBehaviour
 
     [SerializeField] List<GameObject> beastPanels;
     [SerializeField] int activePanelId = -1;
+    [SerializeField] PlayerUIController playerUIController;
 
 
     public void DisplayBeastPanel(int beastId)
     {
-        mainPanel.SetActive(false);
+/*        mainPanel.SetActive(false);
         cluesPanel.SetActive(false);
         menuPanel.SetActive(false);
-        mapPanel.SetActive(false);
+        mapPanel.SetActive(false);*/
+        playerUIController.CloseAllPanels();
 
         buttonsRL.SetActive(true);
         goToBestiaryButton.SetActive(true);   
@@ -51,7 +53,7 @@ public class BestiaryUIController : MonoBehaviour
         beastPanels[activePanelId].SetActive(true);
     }
 
-    public void LastBeastDisplay()// moves on to the last beast display
+    public void PreviousBeastDisplay()// moves on to the last beast display
     {
         beastPanels[activePanelId].SetActive(false);
         if (activePanelId == 0)
@@ -70,9 +72,10 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
-        cluesPanel.SetActive(false);
-        menuPanel.SetActive(false);
-        mapPanel.SetActive(false);
+        /*        cluesPanel.SetActive(false);
+                menuPanel.SetActive(false);
+                mapPanel.SetActive(false);*/
+        playerUIController.CloseAllPanels();
 
         buttonsRL.SetActive(false);
         goToBestiaryButton.SetActive(false);
@@ -91,9 +94,10 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
-        mainPanel.SetActive(false);
-        cluesPanel.SetActive(false);
-        mapPanel.SetActive(false);
+        /*        mainPanel.SetActive(false);
+                cluesPanel.SetActive(false);
+                mapPanel.SetActive(false);*/
+        playerUIController.CloseAllPanels();
 
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(false);
@@ -109,9 +113,10 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
-        mainPanel.SetActive(false);
-        menuPanel.SetActive(false);
-        mapPanel.SetActive(false);
+        /*        mainPanel.SetActive(false);
+                menuPanel.SetActive(false);
+                mapPanel.SetActive(false);*/
+        playerUIController.CloseAllPanels();
 
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(true);
@@ -127,9 +132,10 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
-        mainPanel.SetActive(false);
-        menuPanel.SetActive(false);
-        cluesPanel.SetActive(false);
+        /*        mainPanel.SetActive(false);
+                menuPanel.SetActive(false);
+                cluesPanel.SetActive(false);*/
+        playerUIController.CloseAllPanels();
 
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(true);
