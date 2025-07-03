@@ -133,6 +133,7 @@ public class PlayerCombat : MonoBehaviour
         isWindowOpen = true;
         yield return new WaitForSeconds(comboAttackTime);
         isWindowOpen = false;
+        comboCounter = 0;
     }
     
     public void Attack()
@@ -180,7 +181,6 @@ public class PlayerCombat : MonoBehaviour
     public void EndAttack()
     {
         playerState.state = PlayerState.Normal;
-        StopCoroutine(comboCorutine);
         //movement.WeaponAnimator.SetBool("canExitAttack", true);
         movement.PlayerAnimator.SetBool("canExitAttack", true);
         if (isHoldingAttack)
