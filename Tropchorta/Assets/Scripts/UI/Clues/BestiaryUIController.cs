@@ -4,13 +4,16 @@ using UnityEngine.UI;
 
 public class BestiaryUIController : MonoBehaviour
 {
+    [Header("Panels")]
     [SerializeField] GameObject mainPanel;
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject cluesPanel;
-
+    [SerializeField] GameObject mapPanel;
+    [Header("Buttons")]
     [SerializeField] GameObject goToBestiaryButton;
     [SerializeField] public GameObject goToMenuButton;
     [SerializeField] GameObject goToCluesButton;
+    [SerializeField] GameObject goToMapButton;
     [SerializeField] GameObject buttonsRL;
 
     [SerializeField] List<GameObject> beastPanels;
@@ -22,11 +25,16 @@ public class BestiaryUIController : MonoBehaviour
         mainPanel.SetActive(false);
         cluesPanel.SetActive(false);
         menuPanel.SetActive(false);
+        mapPanel.SetActive(false);
+
         buttonsRL.SetActive(true);
-        beastPanels[beastId].SetActive(true);
         goToBestiaryButton.SetActive(true);   
         goToMenuButton.SetActive(true);
         goToCluesButton.SetActive(true);
+        goToMapButton.SetActive(true);
+
+        beastPanels[beastId].SetActive(true);
+
         activePanelId = beastId;
     }
     public void NextBeastDisplay()// moves on to the next beast display
@@ -62,13 +70,18 @@ public class BestiaryUIController : MonoBehaviour
         {
             beastPanels[activePanelId].SetActive(false);
         }
+        cluesPanel.SetActive(false);
+        menuPanel.SetActive(false);
+        mapPanel.SetActive(false);
+
         buttonsRL.SetActive(false);
         goToBestiaryButton.SetActive(false);
         goToMenuButton.SetActive(true);
         goToCluesButton.SetActive(true);
+        goToMapButton.SetActive(true);
+
         mainPanel.SetActive(true);
-        cluesPanel.SetActive(false);
-        menuPanel.SetActive(false);
+
         activePanelId = -1;
     }
 
@@ -80,9 +93,13 @@ public class BestiaryUIController : MonoBehaviour
         }
         mainPanel.SetActive(false);
         cluesPanel.SetActive(false);
+        mapPanel.SetActive(false);
+
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(false);
         goToCluesButton.SetActive(true);
+        goToMapButton.SetActive(true);
+
         menuPanel.SetActive(true);
     }
 
@@ -94,10 +111,32 @@ public class BestiaryUIController : MonoBehaviour
         }
         mainPanel.SetActive(false);
         menuPanel.SetActive(false);
+        mapPanel.SetActive(false);
+
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(true);
         goToCluesButton.SetActive(false);
+        goToMapButton.SetActive(true);
+
         cluesPanel.SetActive(true);
+    }
+
+    public void ShowMapPanel()
+    {
+        if (activePanelId >= 0)
+        {
+            beastPanels[activePanelId].SetActive(false);
+        }
+        mainPanel.SetActive(false);
+        menuPanel.SetActive(false);
+        cluesPanel.SetActive(false);
+
+        goToBestiaryButton.SetActive(true);
+        goToMenuButton.SetActive(true);
+        goToCluesButton.SetActive(true);
+        goToMapButton.SetActive(false);
+
+        mapPanel.SetActive(true);
     }
 
 }
