@@ -276,7 +276,6 @@ MonoBehaviour:
     m_Bits: 128
   _wantedYPos: 0.98
   playerHealthComponent: {fileID: 3305874657431232447}
-  trail: {fileID: 0}
   useMouseRotation: 0
   dashSound:
     Guid:
