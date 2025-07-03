@@ -1102,8 +1102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  _speed: 7
-  _stoppingDistance: 6
+  _speed: 3
+  _stoppingDistance: 5
   _stunTime: 2
   _stunImage: {fileID: 8028947173684331387}
   canBeStuned: 1
@@ -1179,7 +1179,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &8407367355163870167
 SphereCollider:
@@ -1200,7 +1200,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &355014065761268957
 Animator:
@@ -1234,7 +1234,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360

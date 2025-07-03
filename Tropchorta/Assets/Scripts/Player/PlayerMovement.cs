@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     // For dash
     [SerializeField] PlayerHealthComponent playerHealthComponent;
-    [SerializeField] TrailRenderer trail;
 
     private PlayerCombat playerCombat;
     private CharacterController cc;

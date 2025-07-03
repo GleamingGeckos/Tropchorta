@@ -105,12 +105,20 @@ public class EnemyCombat : MonoBehaviour
     public virtual void DistanceAttack(Transform target)
     {
         if (isCooldown) return;
+
+        //Check if on screen
+        if (!IsModelVisible()) return;
+
         attackCoroutine = StartCoroutine(DistanceAttackRoutine(target));
         StartCoroutine(PerfectBlockWindow());
         EnemyAnimator.SetTrigger("attackTrigger");
 
     }
-
+    bool IsModelVisible()
+    {
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        return renderer != null && renderer.isVisible;
+    }
     public void WasBlocked()
     {
         if (attackCoroutine != null)

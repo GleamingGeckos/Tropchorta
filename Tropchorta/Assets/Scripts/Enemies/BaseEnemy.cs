@@ -30,18 +30,6 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private LayerMask pushCollisionMask = default;
 
     
-    private void Update()
-    {
-        if (_enemyMovement.agent.hasPath)
-        {
-            _enemyCombat.EnemyAnimator.SetBool("isWalking", true);
-
-        }
-        else
-        {
-            _enemyCombat.EnemyAnimator.SetBool("isWalking", false);
-        }
-    }
     
     protected void Start()
     {
@@ -74,6 +62,14 @@ public class BaseEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && _enemyMovement != null && !_enemyMovement.isStuned)
         {
+            if (_enemyMovement.agent.isOnNavMesh && !_enemyMovement.agent.isStopped && _enemyMovement.agent.hasPath && _enemyMovement.agent.remainingDistance > _enemyMovement.agent.stoppingDistance)
+            {
+                _enemyCombat.EnemyAnimator.SetBool("isWalking", true);
+            }
+            else
+            {
+                _enemyCombat.EnemyAnimator.SetBool("isWalking", false);
+            }
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
 
