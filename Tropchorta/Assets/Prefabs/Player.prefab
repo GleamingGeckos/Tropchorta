@@ -273,7 +273,7 @@ MonoBehaviour:
   maxStepHight: -0.5
   _excludedLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   _wantedYPos: 1.05
   playerHealthComponent: {fileID: 3305874657431232447}
   useMouseRotation: 0
