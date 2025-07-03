@@ -24,9 +24,7 @@ public class TutorialController : MonoBehaviour
 
     [Header("FMOD Sounds")]
     [SerializeField] private List<EventReference> soundList;
-    //[SerializeField] private EventReference firstSound;
-
-
+    private FMOD.Studio.EventInstance currentTutorialDialogue;
 
     public int currentStep;
 
@@ -107,19 +105,19 @@ public class TutorialController : MonoBehaviour
                 }
             }
         }
-       
+
     }
 
     private void Advance()              //Przechodzimy dalej
     {
         currentStep++;
-        // Decyzja co dalej zale¿na od etapu
+        // Decyzja co dalej zaleï¿½na od etapu
         switch (currentStep)
         {
             case 3:
                 swordModel.SetActive(true);
                 PauseController.DisableInput(false);
-                ShowDialogue(); 
+                ShowDialogue();
                 break;
 
             case 4:
@@ -159,7 +157,7 @@ public class TutorialController : MonoBehaviour
 
             case 11:
                 mustTextField.text = "Use [B] to open Bestiary";
-                
+
                 uiMustDoPanel.SetActive(true);
                 canMove = false;
                 checkBestiary = true;
@@ -191,22 +189,22 @@ public class TutorialController : MonoBehaviour
                 ShowDialogue();
                 break;
 
-/*            case 16:
-                mustTextField.text = "Use [M] to open Map";
-                uiMustDoPanel.SetActive(true);
-                canMove = false;
-                checkMap = true;
-                ShowDialogue();
-                break;*/
+            /*            case 16:
+                            mustTextField.text = "Use [M] to open Map";
+                            uiMustDoPanel.SetActive(true);
+                            canMove = false;
+                            checkMap = true;
+                            ShowDialogue();
+                            break;*/
 
             default:
-                ShowDialogue(); // od razu przejdŸ dalej, jeœli nie wymaga akcji
+                ShowDialogue(); // od razu przejdï¿½ dalej, jeï¿½li nie wymaga akcji
                 break;
         }
 
     }
 
-    private void CheckShift()         //Sprawdzamy czy gracz naciœnie shifta, jesli tak moze przejsc dalej
+    private void CheckShift()         //Sprawdzamy czy gracz naciï¿½nie shifta, jesli tak moze przejsc dalej
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -303,8 +301,17 @@ public class TutorialController : MonoBehaviour
 
     private void ShowDialogue()
     {
-        dialoguePlayer.ShowCurrentText(dialogueList[currentStep-1]);
-        RuntimeManager.PlayOneShot(soundList[currentStep-1], transform.position);
+        dialoguePlayer.ShowCurrentText(dialogueList[currentStep - 1]);
+        // stop previous dialogue if it is still running (aka is valid)
+        if (currentTutorialDialogue.isValid())
+        {
+            currentTutorialDialogue.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            currentTutorialDialogue.release();
+            currentTutorialDialogue.clearHandle();
+        }
+        // start new dialogue
+        currentTutorialDialogue = RuntimeManager.CreateInstance(soundList[currentStep - 1]);
+        currentTutorialDialogue.start();
     }
 
     private void OnDestroyCombo()
@@ -315,5 +322,15 @@ public class TutorialController : MonoBehaviour
     private void OnDestroyBlock()
     {
         playerCombat.OnPerfectParry -= CheckBlock;
+    }
+
+    private void OnDestroy()
+    {
+        if (currentTutorialDialogue.isValid())
+        {
+            currentTutorialDialogue.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            currentTutorialDialogue.release();
+            currentTutorialDialogue.clearHandle();
+        }
     }
 }

@@ -8,17 +8,17 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private Collider collider;
     private int layerMask;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         input.OnInteractEvent += TalkWith;
+        // this in Start caused nullrefs in other scripts. Probably order issue.
         PauseController.InputReaderRef = input;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void TalkWith()
