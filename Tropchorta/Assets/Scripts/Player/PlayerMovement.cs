@@ -232,7 +232,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        StopDash();
+        if(playerState.state == PlayerState.Dashing)
+            StopDash();
     }
 
     private void StopDash()
