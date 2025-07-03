@@ -99,6 +99,7 @@ public class BestiaryUIController : MonoBehaviour
                 mapPanel.SetActive(false);*/
         playerUIController.CloseAllPanels();
 
+        buttonsRL.SetActive(false);
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(false);
         goToCluesButton.SetActive(true);
@@ -118,6 +119,7 @@ public class BestiaryUIController : MonoBehaviour
                 mapPanel.SetActive(false);*/
         playerUIController.CloseAllPanels();
 
+        buttonsRL.SetActive(false);
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(true);
         goToCluesButton.SetActive(false);
@@ -137,6 +139,7 @@ public class BestiaryUIController : MonoBehaviour
                 cluesPanel.SetActive(false);*/
         playerUIController.CloseAllPanels();
 
+        buttonsRL.SetActive(false);
         goToBestiaryButton.SetActive(true);
         goToMenuButton.SetActive(true);
         goToCluesButton.SetActive(true);
