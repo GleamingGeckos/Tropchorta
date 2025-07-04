@@ -982,6 +982,7 @@ MonoBehaviour:
   - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 1
   strong: 0
+  _intervalsBetweenAttacks: 4
   pushDistance: 0.6
   pushDuration: 0.1
   pushRadius: 1
@@ -1059,7 +1060,6 @@ MonoBehaviour:
   _weakToCharm: 0
   _maxDamage: 2
   _minDamage: 2
-  _intervalsBetweenAttacks: 2
   _excludedLayer:
     serializedVersion: 2
     m_Bits: 128

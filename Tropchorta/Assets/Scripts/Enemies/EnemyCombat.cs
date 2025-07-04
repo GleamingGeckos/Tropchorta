@@ -19,7 +19,6 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] protected int _maxDamage;//inclusive
     [SerializeField] protected int _minDamage;//inclusive
 
-    [SerializeField] protected float _intervalsBetweenAttacks;
 
     protected Collider[] _colliders = new Collider[16];
     [SerializeField] protected LayerMask _excludedLayer;

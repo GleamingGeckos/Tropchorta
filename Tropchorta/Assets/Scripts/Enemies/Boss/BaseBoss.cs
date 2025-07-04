@@ -55,6 +55,19 @@ public class BaseBoss : BaseEnemy
     {
         if (other.gameObject.tag == "Player" && _enemyMovement != null && !_delay && !_enemyCombat.isCooldown)
         {
+            //if (_enemyMovement.agent.isOnNavMesh && !_enemyMovement.agent.isStopped && _enemyMovement.agent.hasPath && _enemyMovement.agent.remainingDistance > _enemyMovement.agent.stoppingDistance)
+            //{
+            //    _enemyCombat.EnemyAnimator.SetBool("isWalking", true);
+            //}
+            //else
+            //{
+            //    _enemyCombat.EnemyAnimator.SetBool("isWalking", false);
+            //}
+
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer < _intervalsBetweenAttacks) return;
+            attackTimer = 0f;
             BossCombat bossCombat = (BossCombat)_enemyCombat;
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;

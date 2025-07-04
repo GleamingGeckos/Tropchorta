@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     public bool perfectParWasInitiated = false;
     public bool isChasing = false;
     bool _attackInterrupted = false;
+    private float _wantedYPos;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
         agent.stoppingDistance = _stoppingDistance;
         agent.speed = _speed;
         _stunImage.enabled = false;
+        _wantedYPos = transform.position.y;
     }
 
     public void RotateTowards(GameObject obj) 
@@ -95,8 +97,17 @@ public class EnemyMovement : MonoBehaviour
         _attackInterrupted = false;
     }
 
+    protected void CheckYPosition()
+    {
+        if (Mathf.Abs(transform.position.y - _wantedYPos) > 0.01f)
+        {
+            Vector3 correctedPosition = new Vector3(transform.position.x, _wantedYPos, transform.position.z);
+            transform.position = correctedPosition;
+        }
+    }
     void Update()
     {
+        CheckYPosition();
         if (!isChasing || _target == null || _attackInterrupted) return;
             agent.SetDestination(_target.position);
     }

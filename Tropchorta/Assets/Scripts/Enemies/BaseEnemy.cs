@@ -17,6 +17,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] GameObject[] spawnPrefabs;
     [SerializeField] bool distance;
     [SerializeField] bool strong;
+    [SerializeField] protected float _intervalsBetweenAttacks;
 
     //Components
     protected EnemyCombat _enemyCombat;
@@ -29,8 +30,8 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private float pushRadius = 1.0f;
     [SerializeField] private LayerMask pushCollisionMask = default;
 
-    
-    
+    protected float attackTimer = 0f;
+
     protected void Start()
     {
         material = new Material(GetComponentInChildren<Renderer>().sharedMaterial);
@@ -70,6 +71,12 @@ public class BaseEnemy : MonoBehaviour
             {
                 _enemyCombat.EnemyAnimator.SetBool("isWalking", false);
             }
+
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer < _intervalsBetweenAttacks) return;
+            attackTimer = 0f;
+
             GameObject player = other.gameObject;
             float distanceSqr = (player.transform.position - transform.position).sqrMagnitude;
 
