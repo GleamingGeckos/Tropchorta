@@ -13,12 +13,67 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lampa_Auto_Plakat_Kosz
-    second: {fileID: 2100000, guid: 9525bca3407616c4799d751afe8d0c58, type: 2}
+    second: {fileID: 2100000, guid: 6d7114b9c7dff374289cc4b7015d65df, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lampa_Siatka
     second: {fileID: 2100000, guid: 9525bca3407616c4799d751afe8d0c58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wata_Stoisko
+    second: {fileID: 2100000, guid: be63fde83c394b84caf1ac8b65130bf2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hulajnoga1
+    second: {fileID: 6393424570087831508, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hulajnoga2
+    second: {fileID: 4367480989291215413, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: paczkomat_czarne
+    second: {fileID: 2100000, guid: 6b5ddb09a88bbe1438f51bc728fcf3fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_czarny
+    second: {fileID: 757764957607909747, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_rama
+    second: {fileID: 3580096250469088049, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_rama2
+    second: {fileID: 1511244438838594388, guid: 8b7e9b1da36023c41bed1d29aeabdfe0, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_rama3
+    second: {fileID: -6256147334582701172, guid: 0c995c80757b93147a4ed6ca4c7f89b0, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_rama4
+    second: {fileID: -7329492948272166267, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rower_rama5
+    second: {fileID: -510913034442550024, guid: 0c995c80757b93147a4ed6ca4c7f89b0, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: srebrne
+    second: {fileID: 386860270413690629, guid: a14a4c4d9155b1043aedfd692113a925, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

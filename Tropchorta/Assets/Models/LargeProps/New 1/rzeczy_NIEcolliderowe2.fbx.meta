@@ -7,23 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Boisko
+    second: {fileID: 2100000, guid: 579eb1179890a8242a7cfa235264363a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DomekNaDrzewie
+    second: {fileID: 2100000, guid: 7e08dacdffff1c54dbaa0a6b8e5eba29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Fontanna_Kostka_Lawka
     second: {fileID: 2100000, guid: fe2074909a09c5e44ba7d14085c2e781, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lampa_Auto_Plakat_Kosz
-    second: {fileID: 2100000, guid: 9525bca3407616c4799d751afe8d0c58, type: 2}
+    second: {fileID: 2100000, guid: 1cd07e33f5f8b14459e9922ae6514045, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lampa_Siatka
-    second: {fileID: 2100000, guid: 9525bca3407616c4799d751afe8d0c58, type: 2}
+    second: {fileID: 2100000, guid: 1cd07e33f5f8b14459e9922ae6514045, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ognisko_Drewno_LawkaDrewniana_Donica_Skrzynka_Kamien
     second: {fileID: 2100000, guid: 53633f26927b79e4e8d465e6f925a6e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plac_Zabaw
+    second: {fileID: 2100000, guid: 1a668dbd1fbd81e408dbdd576eec557c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silownia.001
+    second: {fileID: 2100000, guid: 491d1ecd644c1e34a80d786af21b94d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: koszyk
+    second: {fileID: 2100000, guid: 1cd07e33f5f8b14459e9922ae6514045, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
