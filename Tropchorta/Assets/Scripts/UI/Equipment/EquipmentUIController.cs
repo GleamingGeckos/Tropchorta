@@ -6,9 +6,11 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] EquipmentController equipmentController;
     [SerializeField] Image headImage;
     [SerializeField] Image torsoImage;
+    [SerializeField] Sprite basicTorsoImage;
     [SerializeField] Image pantsImage;
     [SerializeField] Image shoesImage;
     [SerializeField] Image charmImage;
+    [SerializeField] Sprite basicCharmImage;
     [SerializeField] Image weapon1Image;
     [SerializeField] Image weapon2Image;
     [SerializeField] GameObject lastinteractedItemPanel;
@@ -44,7 +46,7 @@ public class EquipmentUIController : MonoBehaviour
         }
         else if (item == null)
         {
-            torsoImage.sprite = null;
+            torsoImage.sprite = basicTorsoImage;
         }
     }
 
@@ -104,7 +106,7 @@ public class EquipmentUIController : MonoBehaviour
         }
         else if (item == null)
         {
-            charmImage.sprite = null;
+            charmImage.sprite = basicCharmImage;
         }
     }
 
