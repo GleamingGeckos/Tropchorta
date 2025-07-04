@@ -7,8 +7,15 @@ public class SetPlayerHere : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            player.transform.position = transform.position;
+            Debug.Log("Setting player position to: " + transform.position);
+            CharacterController cc = player.GetComponent<CharacterController>();
+            if (cc != null)
+            {
+                cc.enabled = false;
+                player.transform.position = transform.position;
+                cc.enabled = true;
+            }
+
         }
     }
-
 }

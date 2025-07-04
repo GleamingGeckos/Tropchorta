@@ -21,7 +21,7 @@ public class PlayerUIController : MonoBehaviour
 
     [SerializeField] BestiaryUIController bestiaryUIController;
     [SerializeField] PlayerMovement playerMovement;
-    
+
     private EquipmentBackpackUIController equipmentBackpackUIController;
     public HealthBar healthBar;
 
@@ -97,7 +97,7 @@ public class PlayerUIController : MonoBehaviour
                 else if (isBaseState)
                 {
                     equipmentBackpackPanel.SetActive(true);
-                    Pause(); 
+                    Pause();
                 }
             }
         }
@@ -231,6 +231,7 @@ public class PlayerUIController : MonoBehaviour
             //PlayerUISingleton.Instance.ResetSingleton();
         }
         //PauseController.SetPause(false);
+        playerMovement.playerState.state = PlayerState.Normal; // reset the player state, otherwise the player will not be able to move in the new scene
         SceneManager.LoadScene(sceneName);
     }
 
