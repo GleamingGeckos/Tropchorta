@@ -2312,8 +2312,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 404.53198, y: 331.63275, z: 227.02463}
-    m_Extent: {x: 1415.9939, y: 551.8552, z: 758.1017}
+    m_Center: {x: 62.3125, y: -591.1771, z: 624.21716}
+    m_Extent: {x: 1384.1588, y: 628.23315, z: 600.9767}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -5738,7 +5738,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669977788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0f76cdc8fa0501429041f7f07cf9d0e, type: 3}
   m_Name: 
@@ -5766,7 +5766,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.023312813, y: 0.01819744, z: 0.008734903}
   m_Center: {x: -0.0013076264, y: -0.0024674688, z: 0.004432694}

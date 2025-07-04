@@ -982,7 +982,7 @@ MonoBehaviour:
   - {fileID: 1393691580721148463, guid: 142c2949e4d6e984381e1c18191feb99, type: 3}
   distance: 0
   strong: 1
-  _intervalsBetweenAttacks: 3
+  _intervalsBetweenAttacks: 1
   pushDistance: 0.6
   pushDuration: 0.1
   pushRadius: 1
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deca46134c6cec042ba7e461e5b8095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 7
   currentHealth: 0
   isInvulnerable: 0
   onDamageTaken:

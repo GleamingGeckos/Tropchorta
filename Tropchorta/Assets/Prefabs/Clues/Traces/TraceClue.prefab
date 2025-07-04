@@ -43,13 +43,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906950229331176218}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0f76cdc8fa0501429041f7f07cf9d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notesUIController: {fileID: 0}
-  clueText: Beast leaves traces
   display: {fileID: 1785231457966432773}
   before: {fileID: 1564801952508029680}
   after: {fileID: 1564801952508029680}
@@ -73,7 +71,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 5.658013, y: 2.1098495, z: 9.812847}
   m_Center: {x: 0.12371634, y: -1.4994769, z: 0.23824263}

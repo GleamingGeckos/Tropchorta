@@ -189,14 +189,16 @@ public class TutorialController : MonoBehaviour
                 ShowDialogue();
                 break;
 
-            /*            case 16:
-                            mustTextField.text = "Use [M] to open Map";
-                            uiMustDoPanel.SetActive(true);
-                            canMove = false;
-                            checkMap = true;
-                            ShowDialogue();
-                            break;*/
-
+            case 16:
+                mustTextField.text = "Use [M] to open Map";
+                uiMustDoPanel.SetActive(true);
+                canMove = false;
+                checkMap = true;
+                ShowDialogue();
+                break;
+            case 17:
+                ShowDialogue();
+                break;
             default:
                 ShowDialogue(); // od razu przejd� dalej, je�li nie wymaga akcji
                 break;
@@ -308,9 +310,13 @@ public class TutorialController : MonoBehaviour
             currentTutorialDialogue.release();
             currentTutorialDialogue.clearHandle();
         }
-        // start new dialogue
-        currentTutorialDialogue = RuntimeManager.CreateInstance(soundList[currentStep - 1]);
-        currentTutorialDialogue.start();
+        if (currentStep < 17)
+        {
+            // start new dialogue
+            currentTutorialDialogue = RuntimeManager.CreateInstance(soundList[currentStep - 1]);
+            currentTutorialDialogue.start();
+        }
+
     }
 
     private void OnDestroyCombo()
