@@ -2568,8 +2568,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 303.71912, y: -633.7213, z: 598.7919}
-    m_Extent: {x: 1348.4194, y: 636.91626, z: 900.2977}
+    m_Center: {x: 1255.0984, y: 535.8982, z: -362.6696}
+    m_Extent: {x: 1241.7878, y: 638.39136, z: 599.8456}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -6214,6 +6214,14 @@ PrefabInstance:
       propertyPath: destroyPersistentObjects
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3995658502777863699, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995658502777863699, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef9d09e68f3f0494da411d7faf4a5a10, type: 3}
     - target: {fileID: 4513513910614911142, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_Name
       value: MapButtonHover
@@ -6306,6 +6314,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5192084112862279302, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192084112862279302, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
+      objectReference: {fileID: 0}
     - target: {fileID: 5217412746678222080, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: playerMovement
       value: 
@@ -6318,6 +6334,14 @@ PrefabInstance:
       propertyPath: equipmentController
       value: 
       objectReference: {fileID: 1460034029}
+    - target: {fileID: 5917925850992181305, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917925850992181305, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7076339757439524321, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: m_Name
       value: PlayerUI
@@ -6333,6 +6357,18 @@ PrefabInstance:
     - target: {fileID: 8700707627444763890, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: targetImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701334945186957293, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -86
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701334945186957293, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840686720537901872, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
