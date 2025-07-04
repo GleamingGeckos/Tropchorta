@@ -9,11 +9,13 @@ public class EquipmentBackpackUIController : MonoBehaviour
     [SerializeField] EquipmentController equipmentController;
     [SerializeField] Image headImage;
     [SerializeField] Image torsoImage;
+    [SerializeField] Sprite basicTorsoImage;
     [SerializeField] Image pantsImage;
     [SerializeField] Image shoesImage;
     [SerializeField] Image weapon1Image;
     [SerializeField] Image weapon2Image;
     [SerializeField] Image charmImage;
+    [SerializeField] Sprite basicCharmImage;
     [SerializeField] List<Image> backpackImages;
 
     [SerializeField] Canvas canvas;
@@ -70,7 +72,7 @@ public class EquipmentBackpackUIController : MonoBehaviour
         }
         else if (item == null)
         {
-            torsoImage.sprite = null;
+            torsoImage.sprite = basicTorsoImage;
         }
     }
 
@@ -130,7 +132,7 @@ public class EquipmentBackpackUIController : MonoBehaviour
         }
         else if (item == null && charmImage != null)
         {
-            charmImage.sprite = null;
+            charmImage.sprite = basicCharmImage;
         }
     }
 

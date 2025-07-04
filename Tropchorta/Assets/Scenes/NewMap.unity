@@ -2312,8 +2312,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: -66.7182, y: -589.2757, z: 679.99384}
-    m_Extent: {x: 1439.5706, y: 629.82526, z: 701.69073}
+    m_Center: {x: 404.53198, y: 331.63275, z: 227.02463}
+    m_Extent: {x: 1415.9939, y: 551.8552, z: 758.1017}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -5361,6 +5361,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1080898622594567905, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d9ebca00d1c762448a52debad283285, type: 3}
     - target: {fileID: 1296876145786473033, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: equipmentController
       value: 
@@ -5409,6 +5413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapButtonHover
       objectReference: {fileID: 0}
+    - target: {fileID: 4644751507541086308, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d172f6d49b45ad941af2eea3ba08f50d, type: 3}
     - target: {fileID: 4786425247610839163, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: equipmentController
       value: 
