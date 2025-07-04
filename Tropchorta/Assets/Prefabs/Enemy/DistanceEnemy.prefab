@@ -1065,12 +1065,12 @@ MonoBehaviour:
     m_Bits: 128
   isCooldown: 0
   _cooldownInterval: 1.5
-  _perfectBlockWindow: {x: 0, y: 30}
+  _perfectBlockWindow: {x: 0, y: 20}
   isPerfectBlockWindow: 0
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
   _attackCircleImage: {fileID: 6573397796364980083}
-  _minCircle: 0.45
+  _minCircle: 0
   _maxCircle: 1.5
   _minColorCircle: {r: 0.60038906, g: 0, b: 0.7254902, a: 1}
   _maxColorCircle: {r: 0.41960785, g: 0.7722576, b: 0.8980392, a: 1}

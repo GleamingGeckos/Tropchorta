@@ -1065,7 +1065,7 @@ MonoBehaviour:
     m_Bits: 128
   isCooldown: 0
   _cooldownInterval: 1.5
-  _perfectBlockWindow: {x: 0, y: 30}
+  _perfectBlockWindow: {x: 0, y: 20}
   isPerfectBlockWindow: 0
   _circles: {fileID: 7474923103453751766}
   _attackCircleTransform: {fileID: 675656907052538019}
