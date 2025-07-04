@@ -2163,6 +2163,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PreviousBeastDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 8387299554821710378, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2506436d10e9a849b0554e746cd6772, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3307646629670418855, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
