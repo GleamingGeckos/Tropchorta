@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PreviousMap.unity
     guid: 82e014efc64f45541af380817609a050
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ZTGKMap.unity
     guid: 4863e3c4fdba4544b8ea1bb38e6fbf91
   - enabled: 1

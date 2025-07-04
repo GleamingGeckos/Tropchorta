@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4514635243386279552
+--- !u!114 &-7065836265751259026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
   - {fileID: 2773825552022297003}
-  - {fileID: -4514635243386279552}
-  m_RendererFeatureMap: ad6b866f10d7b46cabd930a9a49b7e268069806b2acb58c1
+  - {fileID: -7065836265751259026}
+  m_RendererFeatureMap: ad6b866f10d7b46cabd930a9a49b7e266ed8d24a5a1bf19d
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -65,7 +65,7 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
-  m_RenderingMode: 2
+  m_RenderingMode: 0
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
   m_DepthAttachmentFormat: 0
