@@ -160,10 +160,6 @@ public class PlayerMovement : MonoBehaviour
         {
             cc.Move(desiredMove * Time.deltaTime);
         }
-        else
-        {
-            Debug.Log("SphereCast trafi� w: " + hit.collider.name);
-        }
         Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
 
         CheckYPosition();
@@ -221,11 +217,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isSprinting = false;
             PlayerAnimator.SetBool("isSprinting", isSprinting);
-
+            playerHealthComponent.isInvulnerable = true;
             dashCoroutine = StartCoroutine(Dash());
             RuntimeManager.PlayOneShot(dashSound, transform.position);
             //playerCombat.StopAttack();
-            playerHealthComponent.isInvulnerable = true;
             cc.excludeLayers = LayerMask.GetMask("Enemy");
         }
     }
@@ -239,19 +234,24 @@ public class PlayerMovement : MonoBehaviour
     private void StopDash()
     {
         playerState.state = PlayerState.Normal;
+        StartCoroutine(DisableInvulnerabilityDelayed(0.3f));
+        cc.includeLayers = 0;
         if (dashCoroutine != null)
         {
-
-            playerHealthComponent.isInvulnerable = false;
-            cc.includeLayers = 0;
             StopCoroutine(dashCoroutine);
-            dashCoroutine = null;
-            if (playerCombat.queuedAttack)
-            {
-                playerCombat.queuedAttack = false;
-                playerCombat.StartAttackAnim();
-            }
+
+        }            
+        dashCoroutine = null;
+        if (playerCombat.queuedAttack)
+        {
+            playerCombat.queuedAttack = false;
+            playerCombat.StartAttackAnim();
         }
+    }
+    private IEnumerator DisableInvulnerabilityDelayed(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerHealthComponent.isInvulnerable = false;
     }
 
     public void OnMoveInput(Vector2 move)

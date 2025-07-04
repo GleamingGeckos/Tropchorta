@@ -22,11 +22,15 @@ public class PlayerHealthComponent : HealthComponent
 
     public override void SimpleDamage(AttackData ad)
     {
+        if (isInvulnerable)
+            return;
         onAttacked.Invoke(ad, true);
     }
 
     public void UnblockableDamage(AttackData ad)
     {
+        if (isInvulnerable)
+            return;
         onAttacked.Invoke(ad, false);
     }
 

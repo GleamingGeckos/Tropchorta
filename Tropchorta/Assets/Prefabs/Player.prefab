@@ -266,7 +266,7 @@ MonoBehaviour:
   sprintMod: 1.65
   lerpHalfTime: 0.045
   dashDistance: 6
-  dashDuration: 0.35
+  dashDuration: 0.4
   modelRootTransform: {fileID: 8091216811212371203}
   input: {fileID: 11400000, guid: 87bf892f49a13234d9ad69b8762074d5, type: 2}
   playerState: {fileID: 11400000, guid: 8999122271203224bbf3bf11f5ad73d4, type: 2}

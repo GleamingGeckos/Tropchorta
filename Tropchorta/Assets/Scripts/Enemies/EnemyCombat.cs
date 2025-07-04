@@ -157,10 +157,10 @@ public class EnemyCombat : MonoBehaviour
             _attackCircleTransform.localScale = new Vector3(_maxCircle, _maxCircle, 1f);
             _attackCircleImage.color = _maxColorCircle;
         });
-        animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
+        animator.SetTrigger("Attack");
         enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
