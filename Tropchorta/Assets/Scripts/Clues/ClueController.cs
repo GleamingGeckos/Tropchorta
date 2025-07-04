@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ClueController : MonoBehaviour
 {
-    [SerializeField] NotesUIController notesUIController;
-    [SerializeField] string clueText;
+    //[SerializeField] NotesUIController notesUIController;
+    //[SerializeField] string clueText;
     private bool isActivated = false;//true when the clue is activated and player cannot interact with it anymore
     private bool isReady = false;//true when the player is in close proximity and can use the clue
     [SerializeField] GameObject display;
@@ -67,7 +67,7 @@ public class ClueController : MonoBehaviour
                 after.SetActive(true);
                 isActivated = true;
                 isReady = false;
-                notesUIController.AddNote(clueText);
+                //notesUIController.AddNote(clueText);
             }
         }
         else if(!needsClueItem)
@@ -79,7 +79,7 @@ public class ClueController : MonoBehaviour
                 after.SetActive(true);
                 isActivated = true;
                 isReady = false;
-                notesUIController.AddNote(clueText);
+                //notesUIController.AddNote(clueText);
             }
         }
     }
