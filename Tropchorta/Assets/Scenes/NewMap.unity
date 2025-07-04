@@ -2312,8 +2312,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 62.3125, y: -591.1771, z: 624.21716}
-    m_Extent: {x: 1384.1588, y: 628.23315, z: 600.9767}
+    m_Center: {x: -128.50842, y: -537.8107, z: 494.06738}
+    m_Extent: {x: 1488.2805, y: 636.14484, z: 984.77466}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -7100,7 +7100,7 @@ Transform:
   m_GameObject: {fileID: 2006286990}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 3.3, z: -2.2}
+  m_LocalPosition: {x: 39.6, y: 3.3, z: 75.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

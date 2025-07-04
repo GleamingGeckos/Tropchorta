@@ -1339,6 +1339,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6131339122415314527, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: inactiveWeapon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131339122415314527, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: equipmentUIController
       value: 
       objectReference: {fileID: 1382168780}

@@ -2027,6 +2027,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5001157999910165883}
     m_Modifications:
+    - target: {fileID: 328116788023615145, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1273659539424328736, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2127,10 +2131,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4624926026095624325, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624926026095624325, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1152
+      objectReference: {fileID: 0}
     - target: {fileID: 4818680673970524578, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
       propertyPath: playerUIController
       value: 
       objectReference: {fileID: 2550942608159912592}
+    - target: {fileID: 5219131132235502140, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f331cedd821341e49aa8711634c2a198, type: 3}
     - target: {fileID: 6377643294684528147, guid: c2bf6b8d7c13b724baac8be5de6172fd, type: 3}
       propertyPath: m_Name
       value: CluesPanel
