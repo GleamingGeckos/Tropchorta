@@ -46,15 +46,21 @@
             #pragma vertex vert
             #pragma fragment frag
 
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            // #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            // #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma shader_feature _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
             #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
             #pragma multi_compile _ _SHADOWS_SOFT
             #pragma multi_compile_fog
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHTS
+            
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            
+            
 
             struct Attributes
             {
@@ -65,6 +71,8 @@
             {
                 float4 positionCS  : SV_POSITION;
                 half3 color        : COLOR;
+                float3 normalWS    : TEXCOORD0; // Add this line
+                   float3 positionWS  : TEXCOORD1; // <-- ADD THIS LINE
             };
 
             CBUFFER_START(UnityPerMaterial)
@@ -119,9 +127,18 @@
                 directSpecular *= directSpecular;
                 directSpecular *= directSpecular;
 
-                directSpecular *= positionY * 0.12;
+                directSpecular *= positionY * 0.08;
+                //half3 lighting = light.color * (light.shadowAttenuation * light.distanceAttenuation);
+                //EDYTOR^^ 
 
-                half3 lighting = light.color * (light.shadowAttenuation * light.distanceAttenuation);
+
+                
+                half3 lighting = light.color*2.2 * (light.shadowAttenuation );
+                //BUILD^^ 
+
+
+
+                
                 half3 result = (albedo * directDiffuse + directSpecular * (1-mask)) * lighting;
 
                 return result; 
@@ -229,7 +246,7 @@
 
                 //posOS -> posWS
                 float3 positionWS = positionOS + pivot;
-                
+                OUT.positionWS = positionWS; // <-- ADD THIS LINE
                 //posWS -> posCS
                 OUT.positionCS = TransformWorldToHClip(positionWS);
                 
@@ -242,21 +259,35 @@
                 //Lighting Stuff
                 half3 N = normalize(bladeDirection + cameraTransformForwardWS * -0.5 + _RandomNormal * half3(srandom(pivot.x * 314 + pivot.z * 10), 0, srandom(pivot.z * 677 + pivot.x * 10)));
                 //The normal vector is just the blade direction tilted a bit towards the camera with a bit of randomness
+                OUT.normalWS = N;
                 half3 V = normalize(_WorldSpaceCameraPos - positionWS);
 
-                float3 lighting = CalculateLighting(albedo, positionWS, N, V, color.a, quantizedY);
+                 float3 lighting = CalculateLighting(albedo, positionWS, N, V, color.a, quantizedY);
                 //I'm also passing the Alpha Channel of the Color Map cause I dont want the blades that are affected with color to receive specular light 
                 //The main use of the color map for me is burning the grass and the burned grass should not receive specular light
                 
                 float fogFactor = ComputeFogFactor(OUT.positionCS.z);
                 OUT.color.rgb = MixFog(lighting, fogFactor);
 
+                //OUT.color = albedo;
                 return OUT;
             }
 
             half4 frag(Varyings IN) : SV_Target
             {
                 return half4(IN.color.rgb,1);
+                
+
+    // float3 N = normalize(IN.normalWS);
+    // float3 L = normalize(GetMainLight().direction);
+    // float NdotL = max(0.65, dot(N, L));
+    //
+    // Light light = GetMainLight(TransformWorldToShadowCoord(IN.positionWS));
+    // float shadow = light.shadowAttenuation;
+    //
+    // float3 diffuse = NdotL * light.color.rgb * shadow * IN.color;
+    //
+    // return half4(diffuse * 2.0, 1.0); 
             }
             ENDHLSL
         }
