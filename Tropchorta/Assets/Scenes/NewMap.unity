@@ -2568,8 +2568,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: -172.83713, y: -609.37134, z: 722.172}
-    m_Extent: {x: 1051.8749, y: 625.4385, z: 761.7002}
+    m_Center: {x: 303.71912, y: -633.7213, z: 598.7919}
+    m_Extent: {x: 1348.4194, y: 636.91626, z: 900.2977}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0

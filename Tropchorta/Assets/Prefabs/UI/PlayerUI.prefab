@@ -2572,6 +2572,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7561365390942343060}
     - target: {fileID: 6857733315443857693, guid: a417547e0c194a74ba047ccd7eda38ce, type: 3}
+      propertyPath: basicCharmImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d9ebca00d1c762448a52debad283285, type: 3}
+    - target: {fileID: 6857733315443857693, guid: a417547e0c194a74ba047ccd7eda38ce, type: 3}
+      propertyPath: basicTorsoImage
+      value: 
+      objectReference: {fileID: 21300000, guid: d172f6d49b45ad941af2eea3ba08f50d, type: 3}
+    - target: {fileID: 6857733315443857693, guid: a417547e0c194a74ba047ccd7eda38ce, type: 3}
       propertyPath: descriptionText
       value: 
       objectReference: {fileID: 5917925850992181305}
