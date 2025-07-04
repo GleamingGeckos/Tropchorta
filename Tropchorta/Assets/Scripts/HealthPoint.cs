@@ -8,7 +8,13 @@ public class HealthPoint : MonoBehaviour
     public float delay = 0.1f;
     private Transform _player;
     private bool _isTaken = false;
+    [SerializeField] float _rotationSpeed = 90.0f;
 
+
+    private void Update()
+    {
+        transform.Rotate(0f, _rotationSpeed * Time.deltaTime, 0f);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

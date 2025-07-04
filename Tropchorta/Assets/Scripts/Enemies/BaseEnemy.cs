@@ -98,7 +98,7 @@ public class BaseEnemy : MonoBehaviour
     public void OnDeath()
     {
         int index = Random.Range(0, spawnPrefabs.Length);
-        Instantiate(spawnPrefabs[index], transform.position, Quaternion.identity);
+        Instantiate(spawnPrefabs[index], transform.position + Vector3.up, Quaternion.identity);
         Destroy(gameObject);
     }
 

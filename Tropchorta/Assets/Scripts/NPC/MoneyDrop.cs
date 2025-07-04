@@ -9,11 +9,17 @@ public class MoneyDrop : MonoBehaviour
     public float delay = 0.2f;
     private Transform _player;
     private bool _isTaken = false;
+    [SerializeField] float _rotationSpeed = 90.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _value = Random.Range(_minValue, _maxValue);
+    }
+
+    private void Update()
+    {
+        transform.Rotate(0f, _rotationSpeed * Time.deltaTime, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,12 +28,7 @@ public class MoneyDrop : MonoBehaviour
         {
             _isTaken = true;
             _player = other.transform;
-            EquipmentController equipment = _player.GetComponentInChildren<EquipmentController>();
-            if (equipment != null)
-            {
-                //Debug.Log("Add value " + value);
-                equipment.AddGold(_value);
-            }
+
             StartCoroutine(MoveToPlayerAfterDelay());
         }
     }
@@ -44,6 +45,12 @@ public class MoneyDrop : MonoBehaviour
             currentSpeed += acceleration * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, _player.position, currentSpeed * Time.deltaTime);
             yield return null;
+        }
+        EquipmentController equipment = _player.GetComponentInChildren<EquipmentController>();
+        if (equipment != null)
+        {
+            //Debug.Log("Add value " + value);
+            equipment.AddGold(_value);
         }
         Destroy(gameObject);
     }

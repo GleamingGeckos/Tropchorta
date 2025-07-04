@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 4652634178913957889}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.074}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healValue: 3
   delay: 0.2
+  _speed: 90
 --- !u!135 &1950361729261557671
 SphereCollider:
   m_ObjectHideFlags: 0
