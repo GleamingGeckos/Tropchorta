@@ -15,13 +15,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 41bc858114b6a1b4197749efffb41402
   - enabled: 0
-    path: Assets/Scenes/PreviousMap.unity
+    path: Assets/Scenes/Dev_Maps/PreviousMap.unity
     guid: 82e014efc64f45541af380817609a050
   - enabled: 0
-    path: Assets/Scenes/ZTGKMap.unity
+    path: Assets/Scenes/Dev_Maps/ZTGKMap.unity
     guid: 4863e3c4fdba4544b8ea1bb38e6fbf91
   - enabled: 1
-    path: Assets/Scenes/BossFightArenas/BossFightSwamps.unity
+    path: Assets/Scenes/BossFightSwamps.unity
     guid: 3a66b6417fa0d8a40832e382f37cbad7
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity

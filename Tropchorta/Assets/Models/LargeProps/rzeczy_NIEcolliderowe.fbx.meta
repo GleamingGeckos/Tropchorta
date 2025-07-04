@@ -3,7 +3,122 @@ guid: 76577a5206f22d347a7cd824ae410998
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fontanna_Kostka_Lawka
+    second: {fileID: 2100000, guid: 8f9fc87dc4a89c34f8d73d65575248be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lampa_Auto_Plakat_Kosz
+    second: {fileID: 2100000, guid: 70a2f311e4b632d4393eac5f21dec4c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lampa_Siatka
+    second: {fileID: 2100000, guid: 28be7c4930a8d6b4895fb5c8c7f3b22c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ognisko_Drewno_LawkaDrewniana_Donica_Skrzynka_Kamien
+    second: {fileID: 2100000, guid: 77e45ef17e455314bb97e8cf482d1b8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: adalbert_tenisowki
+    second: {fileID: 2100000, guid: e6aded2f6435cea4088fb315e8cc45ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue
+    second: {fileID: 2100000, guid: 490d5a5ccb7a6ac48b16622486eb1e9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown
+    second: {fileID: 2100000, guid: 322d0374738bcb141a0db3cbb9faf5d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drewno
+    second: {fileID: 2100000, guid: f5631c46db1e2bc47bd8efb5d13ace05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fioletka
+    second: {fileID: 2100000, guid: 8ca30dc8e0caaf541bd9b6a07618c5c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: koszyk
+    second: {fileID: 2100000, guid: 7d1f1e4e43127e44ea589f3c87a0766d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: linka
+    second: {fileID: 2100000, guid: 8835432783d1e354aab62e5be2ca8a2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: namiot2
+    second: {fileID: 2100000, guid: 6ccf330ba9534524ab5e8e2a3f0c4ad6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: namiot2_v2
+    second: {fileID: 2100000, guid: 1944ceb2185f3e847b2f51edd7694ae2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: namkiot
+    second: {fileID: 2100000, guid: d6a7e8418667e41418c86deb930b33bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orange
+    second: {fileID: 2100000, guid: f1b2afee820111345bcf6ddcc6bf98a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_brazowy
+    second: {fileID: 2100000, guid: a6b9acb3535273049935dd90debf1c7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_brazowyciemny
+    second: {fileID: 2100000, guid: 707b9bde6e52e764181e2bcd9fceb862, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_czerwony
+    second: {fileID: 2100000, guid: 017cf62e448d2fe4881c80df82517345, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_niebieski
+    second: {fileID: 2100000, guid: d51c7b4ac3c285a4286583f922653176, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_opona
+    second: {fileID: 2100000, guid: b5e2a4fb318ed1b49a0aeff7afdeb3df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_pomaranczowy
+    second: {fileID: 2100000, guid: e1c3dc1b4d7616e4482aa6401b7180bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_zielony
+    second: {fileID: 2100000, guid: 306842be220ff3346852390f945e2a64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zielka
+    second: {fileID: 2100000, guid: 1932f84fea81f504a87658ffa1f12afb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

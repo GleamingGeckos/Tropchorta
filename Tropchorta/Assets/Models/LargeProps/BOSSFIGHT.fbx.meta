@@ -3,7 +3,22 @@ guid: f3c6db9ec0d08de48a0d725976fd20a8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: adalbert_spodnie
+    second: {fileID: 2100000, guid: 7c97d9f8233cbaa488497933da30cf56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drewno
+    second: {fileID: 2100000, guid: 26c43ebd7cc841441bfed76b4d82265a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stone
+    second: {fileID: 2100000, guid: b797e5b8ba985aa4b9330f7dac54a361, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

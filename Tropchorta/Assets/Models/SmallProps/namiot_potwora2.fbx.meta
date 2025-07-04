@@ -3,7 +3,32 @@ guid: 44e6730973607ea4497a1fc13ffac946
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drewno
+    second: {fileID: 2100000, guid: 4dec3972b5f523c49a31829d068eef1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: linka
+    second: {fileID: 2100000, guid: 55bf67204dac6e74ba2c00ced62ed11f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: namiot_leze
+    second: {fileID: 2100000, guid: 0d81582bdfed0d743873abc657de9d25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_czerwony
+    second: {fileID: 2100000, guid: e5ac66ea9928aa144a54340b0fe2616d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: placzabaw_pomaranczowy
+    second: {fileID: 2100000, guid: 3e5d4f8558318934b920675e774de209, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

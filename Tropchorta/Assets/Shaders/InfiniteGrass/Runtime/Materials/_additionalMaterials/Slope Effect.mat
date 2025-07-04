@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mask Effect
-  m_Shader: {fileID: 4800000, guid: b1fe9016eba670549a50db1cc9069bec, type: 3}
+  m_Name: Slope Effect
+  m_Shader: {fileID: 4800000, guid: 59956aed13cdf3d4ca814829633da4d7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
