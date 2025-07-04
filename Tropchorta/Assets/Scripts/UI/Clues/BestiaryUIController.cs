@@ -16,7 +16,7 @@ public class BestiaryUIController : MonoBehaviour
     [SerializeField] public GameObject goToMapButton;
     [SerializeField] public GameObject buttonsRL;
 
-    [SerializeField] List<GameObject> beastPanels;
+    [SerializeField] public List<GameObject> beastPanels;
     [SerializeField] int activePanelId = -1;
     [SerializeField] PlayerUIController playerUIController;
 

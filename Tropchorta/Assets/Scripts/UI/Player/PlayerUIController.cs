@@ -165,7 +165,7 @@ public class PlayerUIController : MonoBehaviour
         equipmentBackpackPanel.SetActive(false);
         optionsPanel.SetActive(false);
         authorsPanel.SetActive(false);
-        //mapImagePanel.SetActive(false);
+        CloseAllBeastsPanels();
     }
 
     public void CloseAllButtons()
@@ -181,6 +181,15 @@ public class PlayerUIController : MonoBehaviour
     public void CloseAllHovers()
     {
         foreach (GameObject obj in hoversList)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+    }
+
+    public void CloseAllBeastsPanels()
+    {
+        foreach (GameObject obj in bestiaryUIController.beastPanels)
         {
             if (obj != null)
                 obj.SetActive(false);
