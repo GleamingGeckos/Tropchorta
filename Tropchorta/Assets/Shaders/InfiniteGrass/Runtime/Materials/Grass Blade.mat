@@ -61,7 +61,7 @@ Material:
     - _MaxSubdivision: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RandomNormal: 0.666
+    - _RandomNormal: 0.5
     - _SubdivisionBumpWidth: 0
     - _SubdivisionDistance: 100
     - _SubdivisionHeightBoost: 0
