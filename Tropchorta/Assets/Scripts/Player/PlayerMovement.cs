@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         if(gameObject.GetComponent<CapsuleCollider>() != null ) 
             playerRadius = gameObject.GetComponent<CapsuleCollider>().radius;
         //WeaponAnimator = playerCombat.weaponSlot.GetComponentInChildren<Animator>();
+        playerState.state = PlayerState.Normal;
     }
 
     public void RotatePlayerTowards(Vector3 lookDirection)
