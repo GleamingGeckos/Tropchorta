@@ -582,6 +582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rzeczy_colliderowe
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 693d63072a58deb4a9f8ef0413c1511c, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1592,7 +1596,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5718689977482458945, guid: 656950ae0b0f8c64094b935df2de35a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.9
+      value: 33.99
       objectReference: {fileID: 0}
     - target: {fileID: 5718689977482458945, guid: 656950ae0b0f8c64094b935df2de35a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1600,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5718689977482458945, guid: 656950ae0b0f8c64094b935df2de35a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75
+      value: 82.09
       objectReference: {fileID: 0}
     - target: {fileID: 5718689977482458945, guid: 656950ae0b0f8c64094b935df2de35a5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2176,6 +2180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ogrodzenie
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: e122545fa3230ab479242bdc92d99699, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2511,8 +2519,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 190.96191, y: -423.9287, z: 256.51318}
-    m_Extent: {x: 176.94678, y: 492.11035, z: 244.27393}
+    m_Center: {x: 39.600002, y: -262.95007, z: 536.3585}
+    m_Extent: {x: 9.388889, y: 288.5802, z: 494.4694}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -5357,6 +5365,10 @@ PrefabInstance:
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: _wantedYPos
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
+      propertyPath: maxStepHight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
       propertyPath: dummyWeaponSlot
