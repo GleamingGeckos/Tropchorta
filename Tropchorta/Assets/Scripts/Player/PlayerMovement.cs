@@ -3,6 +3,7 @@ using FMODUnity;
 using System;
 using System.Collections;
 using Unity.Burst;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,11 +20,13 @@ public class PlayerMovement : MonoBehaviour
     [NonSerialized] public bool isMoving;
     [SerializeField] private float maxStepHight = 0.001f;
     [SerializeField] protected LayerMask _excludedLayer;
+    [SerializeField] protected LayerMask _excludedDashLayer;
     [SerializeField] protected float _wantedYPos;
 
     // For dash
     [SerializeField] PlayerHealthComponent playerHealthComponent;
 
+    private float playerRadius = 0.32f;
     private PlayerCombat playerCombat;
     private CharacterController cc;
     private Vector2 lerpedMove;
@@ -55,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
         input.OnSprintEvent += () => isSprinting = true;
         input.OnSprintCancelledEvent += () => isSprinting = false;
         input.OnSpaceEvent += OnDash;
+        if(gameObject.GetComponent<CapsuleCollider>() != null ) 
+            playerRadius = gameObject.GetComponent<CapsuleCollider>().radius;
         //WeaponAnimator = playerCombat.weaponSlot.GetComponentInChildren<Animator>();
     }
 
@@ -170,7 +175,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     IEnumerator Dash()
     {
         playerState.state = PlayerState.Dashing;
@@ -186,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
         float elapsed = 0f;
 
         modelRootTransform.DOLookAt(modelRootTransform.position + direction, 0.1f);
-
+        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Enemy"), true);
         while (elapsed < dashDuration)
         {
             float t = elapsed / dashDuration;
@@ -195,8 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Obstacle check using SphereCast
             Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, direction);
-            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, currentSpeed * Time.deltaTime + 0.1f, ~_excludedLayer, QueryTriggerInteraction.Ignore)
-                && hit.normal.y <= 0.7f)
+            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, currentSpeed * Time.deltaTime + 0.1f, ~_excludedDashLayer, QueryTriggerInteraction.Ignore))//&& hit.normal.y <= 0.7f
             {
                 StopDash();
                 yield break;
@@ -225,14 +228,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(playerState.state == PlayerState.Dashing)
-            StopDash();
-    }
-
     private void StopDash()
     {
+        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Enemy"), false);
         playerState.state = PlayerState.Normal;
         StartCoroutine(DisableInvulnerabilityDelayed(0.3f));
         cc.includeLayers = 0;

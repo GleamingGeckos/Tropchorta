@@ -50,6 +50,7 @@ public class SpawnerForObj : MonoBehaviour
                 i--; 
                 continue;
             }
+            spawnedObjects.Add(spawnedObj);
         }
 
         return spawnedObjects;
