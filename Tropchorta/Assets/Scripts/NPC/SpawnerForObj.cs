@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnerForObj : MonoBehaviour
 {
@@ -29,13 +30,15 @@ public class SpawnerForObj : MonoBehaviour
             {
                 randomPosition = GetRandomPointInBox(box);
             }
-            randomPosition.y = spawnArea.transform.position.y; // Ustawienie wysokoœci na wysokoœæ spawnera
-            GameObject spawnedObj;
-            if (parent)
-                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity, parent);
-            else
-                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity);
-            spawnedObjects.Add(spawnedObj);
+
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                Vector3 navMeshPosition = hit.position;
+                GameObject spawnedObj = parent ?
+                    Instantiate(objToSpawn, navMeshPosition, Quaternion.identity, parent) :
+                    Instantiate(objToSpawn, navMeshPosition, Quaternion.identity);
+                spawnedObjects.Add(spawnedObj);
+            }
         }
 
         return spawnedObjects;
