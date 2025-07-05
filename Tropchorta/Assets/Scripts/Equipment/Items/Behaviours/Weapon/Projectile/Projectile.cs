@@ -101,6 +101,10 @@ public class Projectile : MonoBehaviour
                     var revange = Instantiate(_arrowForPar, other.transform.position, rot, other.transform);
                     revange.GetComponent<Projectile>().Initialize(null, charmType, 1, other.gameObject);
                     enemyMovement.perfectParWasInitiated = false;
+                    playerCombatComponent.PerfectBlocked();
+                }else if (playerCombatComponent.isBlocking)
+                {
+                    playerCombatComponent.NormalBlocked();
                 }
                 else if (!playerCombatComponent.isBlocking)
                 {

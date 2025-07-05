@@ -294,6 +294,21 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void PerfectBlocked()
+    {
+        movement.PlayerAnimator.SetTrigger("parryTrigger");
+        //movement.WeaponAnimator.SetTrigger("parryTrigger");
+        equipmentController.PerfectBlocked();
+    }
+    
+
+    public void NormalBlocked()
+    {
+        movement.PlayerAnimator.SetTrigger("parryTrigger");
+        //movement.WeaponAnimator.SetTrigger("parryTrigger");
+        equipmentController.NormalBlocked();
+    }
+
     private void CheckForAttackingEnemies(bool isBlocking)//TODO im tired, needs to be redone, but works for now
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, 3);
@@ -313,8 +328,6 @@ public class PlayerCombat : MonoBehaviour
                 if (enemyCombat != null && enemyMovement != null && enemyCombat.isPerfectBlockWindow)
                 {
                     enemyMovement.perfectParWasInitiated = true;
-                    movement.PlayerAnimator.SetTrigger("parryTrigger");
-                    //movement.WeaponAnimator.SetTrigger("parryTrigger");
 
                     OnPerfectParry?.Invoke();  // <<< WYWOŁANIE EVENTU
                 }

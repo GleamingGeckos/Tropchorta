@@ -71,6 +71,22 @@ public class Weapon : Item
         }
     }
 
+    public void PerfectBlocked()
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.PlayPerfectBlockSound();
+        }
+    }
+
+    public void NormalBlocked()
+    {
+        foreach (var behavior in weaponBehaviors)
+        {
+            behavior?.PlayNormalBlockSound();
+        }
+    }
+
     public void ClearData(Transform user)
     {
         if (charm != null)

@@ -189,6 +189,46 @@ public class EquipmentController : MonoBehaviour
             Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
         }
     }
+    
+
+    public void PerfectBlocked()
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            weapon.PerfectBlocked();
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
+    
+
+    public void NormalBlocked()
+    {
+        if (usedWeapon == null)
+        {
+            Debug.LogWarning("No weapon equipped.");
+            return;
+        }
+
+        // Check if the equipped item is a Weapon
+        if (usedWeapon is Weapon weapon)
+        {
+            weapon.NormalBlocked();
+        }
+        else
+        {
+            Debug.LogWarning($"{usedWeapon.itemName} is not a weapon.");
+        }
+    }
 
     public bool IsDistance()
     {

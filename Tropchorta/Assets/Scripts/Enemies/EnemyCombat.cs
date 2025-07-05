@@ -178,8 +178,12 @@ public class EnemyCombat : MonoBehaviour
                 playerMovementComponent.RotatePlayerTowards(transform.position);
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking)
                 {
+                    playerCombatComponent.PerfectBlocked();
                     enemyMovement.Stun();
-                }
+                } else if (playerCombatComponent.isBlocking)
+                {
+                    playerCombatComponent.NormalBlocked();
+                } 
                 else if (!playerCombatComponent.isBlocking)
                 {
                     healthComponent.SimpleDamage(new AttackData(gameObject, DealDamage(), _attackCharm));
