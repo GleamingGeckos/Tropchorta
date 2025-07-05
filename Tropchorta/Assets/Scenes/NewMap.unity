@@ -1296,7 +1296,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 5
@@ -2208,7 +2208,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 4
@@ -2511,8 +2511,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 39.600002, y: -262.95007, z: 536.3585}
-    m_Extent: {x: 9.388889, y: 288.5802, z: 494.4694}
+    m_Center: {x: 190.96191, y: -423.9287, z: 256.51318}
+    m_Extent: {x: 176.94678, y: 492.11035, z: 244.27393}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -3154,7 +3154,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 5
@@ -4328,7 +4328,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 4
@@ -4426,7 +4426,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 5
@@ -4457,7 +4457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.71
+      value: -12.43
       objectReference: {fileID: 0}
     - target: {fileID: 6344134552615311206, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4524,7 +4524,7 @@ PrefabInstance:
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: enemyType
       value: 
-      objectReference: {fileID: 7492043854543673595, guid: 628316b34c5f4204db61c158b0165b8b, type: 3}
+      objectReference: {fileID: 7492043854543673595, guid: fe8adea5f8ac27241816ca135a63dcd3, type: 3}
     - target: {fileID: 5645461854934717249, guid: 9532e5d23a4e8274a9512c4357121e8c, type: 3}
       propertyPath: maxNumber
       value: 3
@@ -4813,8 +4813,8 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 1.2666667
-  m_MinRegionArea: 2
+  m_VoxelSize: 0.06666667
+  m_MinRegionArea: 0.59
   m_NavMeshData: {fileID: 23800000, guid: c7c69794695f7de4aab7b5e2aa715a64, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1235979174

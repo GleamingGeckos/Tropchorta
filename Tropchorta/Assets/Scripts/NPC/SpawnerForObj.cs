@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,8 +19,14 @@ public class SpawnerForObj : MonoBehaviour
     {
         spawnedObjects.Clear();
 
+        int maxAttempts = spawnCount * 10;
+        int attempts = 0;
+
         for (int i = 0; i < spawnCount; i++)
         {
+            attempts++;
+            if (attempts > maxAttempts) break;
+
             Vector3 randomPosition = transform.position;
             if (spawnArea is SphereCollider sphere)
             {
@@ -31,13 +37,18 @@ public class SpawnerForObj : MonoBehaviour
                 randomPosition = GetRandomPointInBox(box);
             }
 
-            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            randomPosition.y = spawnArea.transform.position.y; // Ustawienie wysoko�ci na wysoko�� spawnera
+            GameObject spawnedObj;
+            if (parent)
+                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity, parent);
+            else
+                spawnedObj = Instantiate(objToSpawn, randomPosition, Quaternion.identity);
+            
+            if(spawnedObj.GetComponent<NavMeshAgent>() && !spawnedObj.GetComponent<NavMeshAgent>().isOnNavMesh)
             {
-                Vector3 navMeshPosition = hit.position;
-                GameObject spawnedObj = parent ?
-                    Instantiate(objToSpawn, navMeshPosition, Quaternion.identity, parent) :
-                    Instantiate(objToSpawn, navMeshPosition, Quaternion.identity);
-                spawnedObjects.Add(spawnedObj);
+                Destroy(spawnedObj);  
+                i--; 
+                continue;
             }
         }
 
