@@ -2519,8 +2519,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 54.729797, y: -601.5687, z: 303.45825}
-    m_Extent: {x: 1281.7986, y: 613.0127, z: 707.07336}
+    m_Center: {x: 115.564026, y: -519.2428, z: 301.8805}
+    m_Extent: {x: 1258.6824, y: 612.7683, z: 655.42456}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -4792,7 +4792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1235979173
 MonoBehaviour:
   m_ObjectHideFlags: 0

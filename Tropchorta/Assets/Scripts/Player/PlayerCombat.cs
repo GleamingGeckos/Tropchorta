@@ -258,6 +258,9 @@ public class PlayerCombat : MonoBehaviour
     public void StartBlocking()
     {
         if (playerState.state == PlayerState.DisableInput||movement.isSprinting||playerState.state == PlayerState.Dashing) return;
+        queuedAttack = false;
+        doNextAttack = false;
+
         isBlocking = true;
         movement.PlayerAnimator.SetBool("isBlocking", true);
         
