@@ -161,11 +161,17 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatMove = new Vector3(lerpedMove.x, 0, lerpedMove.y).normalized;
         Vector3 desiredMove = new Vector3(lerpedMove.x, 0, lerpedMove.y) * speed * (isSprinting ? sprintMod : 1);
         Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, flatMove);
-        if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) || hit.normal.y > 0.7f)
+        if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore))//|| hit.normal.y > 0.7f
         {
             cc.Move(desiredMove * Time.deltaTime);
         }
-        Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 0.1f);
+        else if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit2, 0.5f, _excludedDashLayer, QueryTriggerInteraction.Ignore))// Use this if dont slide (just stop) on enemy if (!Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, _excludedDashLayer, QueryTriggerInteraction.Ignore))
+        {
+            // Slide along collision surface
+            Vector3 slideDir = Vector3.ProjectOnPlane(desiredMove, hit2.normal);
+            cc.Move(slideDir * Time.deltaTime);
+        }
+
 
         CheckYPosition();
 

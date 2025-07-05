@@ -275,7 +275,7 @@ public class EnemyCombat : MonoBehaviour
             if (_colliders[i].TryGetComponent(out PlayerHealthComponent healthComponent) &&
                 _colliders[i].TryGetComponent(out PlayerMovement playerMovementComponent)
                 && !_colliders[i].isTrigger &&
-    _colliders[i] is CapsuleCollider)
+                _colliders[i] is CapsuleCollider)
             {
                 
                 playerMovementComponent.RotatePlayerTowards(transform.position);

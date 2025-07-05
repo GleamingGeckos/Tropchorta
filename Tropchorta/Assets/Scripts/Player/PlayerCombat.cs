@@ -206,30 +206,30 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator MoveForwardSmooth(Transform target, float distance, float duration)
     {
-        Vector3 start = target.position;
-        Vector3 end = start + GetRotatingRootForward() * distance;
+        CharacterController cc = GetComponent<CharacterController>();
+        if (cc == null) yield break;
+        Vector3 start = transform.position;
+        Vector3 direction = GetRotatingRootForward();
+        Vector3 totalMove = direction * distance;
         float elapsed = 0f;
-        RaycastHit hit;
 
         while (elapsed < duration)
         {
-            float t = elapsed / duration;
-            Vector3 nextPos = Vector3.Lerp(start, end, t);
+            float t = Time.fixedDeltaTime / duration;
+            Vector3 step = totalMove * t;
 
-            // SphereCast jak w NormalMovement
-            Ray ray = new Ray(nextPos + Vector3.up * maxStepHight, GetRotatingRootForward());
-            if (Physics.SphereCast(ray, 0.4f, out hit, playerRadius + 0.1f, ~_excludedLayer, QueryTriggerInteraction.Ignore)
-                && hit.normal.y <= 0.7f)
+            Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, direction);
+            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) && hit.normal.y <= 0.7f)
             {
                 yield break;
             }
 
-            target.position = nextPos;
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+            cc.Move(step);
+            Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.green, 0.1f);
 
-        target.position = end;
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     public void BreakCombo()
