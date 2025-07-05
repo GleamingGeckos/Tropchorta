@@ -91,10 +91,12 @@ public class EnemyMovement : MonoBehaviour
     public void AttackStarted()
     {
         _attackInterrupted = true;
+        agent.isStopped = true;
     }
     public void AttackFinished()
     {
         _attackInterrupted = false;
+        agent.isStopped = false;
     }
 
     protected void CheckYPosition()

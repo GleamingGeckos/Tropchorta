@@ -142,6 +142,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(time);
         _circles.SetActive(true);
 
+        enemyMovement.AttackStarted(); // stop moving
         // start the circle animation
         circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
         .SetEase(Ease.Linear)
@@ -160,7 +161,6 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
         animator.SetTrigger("Attack");
-        enemyMovement.AttackStarted(); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
@@ -202,6 +202,7 @@ public class EnemyCombat : MonoBehaviour
         float time = _cooldownInterval - timeToAttackInSeconds;
         yield return new WaitForSeconds(time);
         _circles.SetActive(true);
+        enemyMovement.AttackStarted();
 
         // start the circle animation
         circleTween = _attackCircleTransform.DOScale(_minCircle, timeToAttackInSeconds)
@@ -217,11 +218,10 @@ public class EnemyCombat : MonoBehaviour
             _attackCircleTransform.localScale = new Vector3(_maxCircle, _maxCircle, 1f);
             _attackCircleImage.color = _maxColorCircle;
         });
-        animator.SetTrigger("Attack");
-
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
-        enemyMovement.AttackStarted(); // stop moving
+        animator.SetTrigger("Attack");
+ // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
@@ -241,6 +241,7 @@ public class EnemyCombat : MonoBehaviour
         isCooldown = true; // Set flag to prevent multiple coroutines
         float time = _cooldownInterval - timeToAttackInSeconds;
         yield return new WaitForSeconds(time);
+        enemyMovement.AttackStarted();
 
         // start the circle animation
         _attackStrongTransform.pivot = new Vector2(_attackStrongTransform.pivot.x, 0f); // trzyma d�
@@ -259,11 +260,10 @@ public class EnemyCombat : MonoBehaviour
             });
         _attackStrongImage.DOFade(1f, timeToAttackInSeconds).From(0.2f);
 
-        animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(moveStopOffset); // wait a bit from the attack telegraph animation and stop moving
 
-        enemyMovement.AttackStarted(); // stop moving
+        animator.SetTrigger("Attack"); // stop moving
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
