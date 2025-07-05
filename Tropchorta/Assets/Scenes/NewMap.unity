@@ -2519,8 +2519,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 39.600002, y: -262.95007, z: 536.3585}
-    m_Extent: {x: 9.388889, y: 288.5802, z: 494.4694}
+    m_Center: {x: 54.729797, y: -601.5687, z: 303.45825}
+    m_Extent: {x: 1281.7986, y: 613.0127, z: 707.07336}
 --- !u!4 &620366489
 Transform:
   m_ObjectHideFlags: 0
@@ -4627,8 +4627,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185325793}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.6480575, z: -0, w: 0.7615914}
-  m_LocalPosition: {x: -141.56, y: 42.463085, z: -112.9}
+  m_LocalRotation: {x: -0, y: -0.981029, z: -0, w: 0.19386141}
+  m_LocalPosition: {x: -139.18, y: 42.463085, z: -112.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4639,7 +4639,7 @@ Transform:
   - {fileID: 40966173}
   - {fileID: 100348090}
   m_Father: {fileID: 51877332}
-  m_LocalEulerAnglesHint: {x: 0, y: -80.791, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -157.644, z: 0}
 --- !u!1 &1228466141
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,7 +4792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1235979173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5862,7 +5862,7 @@ TerrainCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 4c8ce9f0460dea7498130d175cdf9399, type: 2}
   m_EnableTreeColliders: 1
@@ -6600,7 +6600,7 @@ TerrainCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: f9072701a7de8994780d2cb86e0c54e7, type: 2}
   m_EnableTreeColliders: 1
