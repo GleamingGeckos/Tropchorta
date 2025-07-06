@@ -21,6 +21,7 @@ public class TutorialController : MonoBehaviour
 
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject trace;
+    [SerializeField] private GameObject traceMask;
     [SerializeField] private List<ImageCycler> imageCyclers;
 
     [Header("FMOD Sounds")]
@@ -178,6 +179,7 @@ public class TutorialController : MonoBehaviour
                 canMove = false;
                 checkTrail = true;
                 trace.SetActive(true);
+                traceMask.SetActive(true);
                 ShowDialogue();
                 break;
 
