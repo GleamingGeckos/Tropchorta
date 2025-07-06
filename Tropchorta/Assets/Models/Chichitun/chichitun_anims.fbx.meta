@@ -7,6 +7,31 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Chichitun1
+    second: {fileID: 2100000, guid: 994e5552d0dff7242957278a0cf0a43a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chichitun2
+    second: {fileID: 2100000, guid: 61bc07dd2fc1db24984febe793aa36a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chichitun3
+    second: {fileID: 2100000, guid: 43f980b67c4abdd429feed24c753ac38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chichitun4
+    second: {fileID: 2100000, guid: 4ec4cdfc236499140bdb805724a7fdf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chichitun5
+    second: {fileID: 2100000, guid: 5892bd40dd27bd245a1cee7dc71b49f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ChichitunBody.001
     second: {fileID: 2100000, guid: 5892bd40dd27bd245a1cee7dc71b49f8, type: 2}
   - first:
@@ -29,6 +54,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Chichitun_Pants.001
     second: {fileID: 2100000, guid: 4ec4cdfc236499140bdb805724a7fdf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cialko1
+    second: {fileID: 2100000, guid: a157301e64019924bb844caa5c3f189c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tenisowki_bialy
+    second: {fileID: 2100000, guid: 2bf2ce9b1eea56c4abdb0a4073a9e847, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -166,65 +201,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: root|taking_damage
-      takeName: root|taking_damage
-      internalID: 2197344885058737455
-      firstFrame: 0
-      lastFrame: 21
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: root|walk
-      takeName: root|walk
-      internalID: -2282383924012439423
-      firstFrame: 0
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: PlaySound
+        data: walk
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4580577
+        functionName: PlaySound
+        data: walk
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
