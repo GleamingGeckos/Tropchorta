@@ -312,6 +312,11 @@ public class PlayerCombat : MonoBehaviour
         equipmentController.NormalBlocked();
     }
 
+    public CharmType GetCurrentCharm()
+    {
+        return equipmentController.GetCharm();
+    }
+
     private void CheckForAttackingEnemies(bool isBlocking)//TODO im tired, needs to be redone, but works for now
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, 3);
