@@ -257,7 +257,9 @@ public class PlayerCombat : MonoBehaviour
 
     public void StartBlocking()
     {
-        if (playerState.state == PlayerState.DisableInput||movement.isSprinting||playerState.state == PlayerState.Dashing) return;
+        if (playerState.state == PlayerState.Dashing)
+            movement.queuedDash = true;
+        if (playerState.state == PlayerState.DisableInput || movement.isSprinting) return;
         queuedAttack = false;
         doNextAttack = false;
 

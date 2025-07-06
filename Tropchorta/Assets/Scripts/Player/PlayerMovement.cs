@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [NonSerialized] public bool isSprinting;
     Coroutine dashCoroutine = null;
     public bool useMouseRotation;
+    public bool queuedDash;
 
     // Sounds
     [SerializeField] EventReference dashSound;
@@ -78,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
             modelRootTransform
                 .DOLookAt(targetPosition, 0.1f)
                 .SetEase(Ease.OutSine);
-
         }
     }
 
@@ -120,11 +120,6 @@ public class PlayerMovement : MonoBehaviour
                 PlayerAnimator.SetBool("isSprinting", isSprinting);
                 PlayerAnimator.SetBool("isMoving", isMoving);
                 PlayerAnimator.SetBool("isDashing", false);
-
-
-                // WeaponAnimator.SetBool("isSprinting", isSprinting);
-                // WeaponAnimator.SetBool("isMoving", isMoving);
-
                 break;
             case PlayerState.DisableInput:
                 // Disable input, do nothing
@@ -139,13 +134,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
     // while attacking, lerp the movement to zero
     void AttackingState()
     {
         lerpedMove = lerpedMove.LerpFI(Vector2.zero, Time.fixedDeltaTime, lerpHalfTime);
     }
+
     protected void CheckYPosition()
     {
         if (Mathf.Abs(transform.position.y - _wantedYPos) > 0.01f)
@@ -154,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position = correctedPosition;
         }
     }
+
     public void NormalMovement()
     {
         // normal state
@@ -184,10 +179,19 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        while(playerState.state == PlayerState.Attacking || playerCombat.isBlocking)
+        {
+            yield return null;
+        }
+        queuedDash = false;
+        isSprinting = false;
+        playerHealthComponent.isInvulnerable = true;
         playerState.state = PlayerState.Dashing;
-
+        RuntimeManager.PlayOneShot(dashSound, transform.position);
+        cc.excludeLayers = LayerMask.GetMask("Enemy");
         playerCombat.StopBlocking();
         PlayerAnimator.SetTrigger("dashTrigger");
+        PlayerAnimator.SetBool("isSprinting", isSprinting);
 
         Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y).normalized;
         if (direction == Vector3.zero)
@@ -220,18 +224,14 @@ public class PlayerMovement : MonoBehaviour
         StopDash();
     }
 
-
     void OnDash()
     {
-        if (dashCoroutine == null && playerState.state != PlayerState.Attacking) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
+        playerCombat.queuedAttack = false;
+        playerCombat.doNextAttack = false;
+        queuedDash = true;
+        if (dashCoroutine == null) //TODO:: ZAKOLEJKOWANIE DASZA JESLI KLIKNIETY PODCZAS ATAKU
         {
-            isSprinting = false;
-            PlayerAnimator.SetBool("isSprinting", isSprinting);
-            playerHealthComponent.isInvulnerable = true;
             dashCoroutine = StartCoroutine(Dash());
-            RuntimeManager.PlayOneShot(dashSound, transform.position);
-            //playerCombat.StopAttack();
-            cc.excludeLayers = LayerMask.GetMask("Enemy");
         }
     }
 
@@ -244,7 +244,6 @@ public class PlayerMovement : MonoBehaviour
         if (dashCoroutine != null)
         {
             StopCoroutine(dashCoroutine);
-
         }            
         dashCoroutine = null;
         if (playerCombat.queuedAttack)
@@ -253,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
             playerCombat.StartAttackAnim();
         }
     }
+
     private IEnumerator DisableInvulnerabilityDelayed(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -275,6 +275,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return modelRootTransform.forward;
     }
+
     private void OnDestroy()
     {
         if (input != null)
