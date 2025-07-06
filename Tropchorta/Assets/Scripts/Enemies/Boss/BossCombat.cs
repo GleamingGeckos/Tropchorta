@@ -8,9 +8,11 @@ using UnityEngine;
 public class BossCombat : EnemyCombat
 {
     [Header("Speciul stuff")]
-    [SerializeField] float jumpDamageRadius = 5;
+    [SerializeField] float jumpDamageRadius = 5.0f;
     [SerializeField] ParticleSystem shockWave;
     [SerializeField] GameObject damageArea;
+    [SerializeField] float attakDistanceFromBoss;
+    [SerializeField] float attakRadius;
     public Animator AlbastAnimator;
 
     public override void DistanceAttack(Transform target)
@@ -113,8 +115,8 @@ public class BossCombat : EnemyCombat
 
         yield return new WaitForSeconds(timeToAttackInSeconds - moveStopOffset);
         // Core attack logic
-        Vector3 attackPoint = transform.forward * 1.5f;
-        float attackRadius = 2.0f;
+        Vector3 attackPoint = transform.forward * attakDistanceFromBoss;
+        float attackRadius = attakRadius;
         int hits = Physics.OverlapSphereNonAlloc(transform.position + attackPoint, attackRadius, _colliders, ~_excludedLayer); // TODO : layermask for damageable objects or enemies?
         for (int i = 0; i < hits; i++)
         {
@@ -187,7 +189,7 @@ public class BossCombat : EnemyCombat
             area.GetComponent<DamageArea>().Initialize(DealDamage(), 0.1f, "Player", AttackCharm);
         }
 
-        DebugExtension.DebugWireSphere(transform.position, Color.red, jumpDamageRadius, 1f);
+        DebugExtension.DebugWireSphere(transform.position, Color.red, jumpDamageRadius, 3f);
         yield return new WaitForSeconds(0.33f); // some extra space padding before we allow movement again so the animation doesnt feel weird 
         Destroy(area);
 

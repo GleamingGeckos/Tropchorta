@@ -324,9 +324,9 @@ public class EnemyCombat : MonoBehaviour
             float t = elapsed / duration;
             Vector3 nextPos = Vector3.Lerp(start, start + dir * distance, t);
 
-            Debug.DrawRay(start, dir * Vector3.Distance(start, nextPos), Color.red, 10f);
+            Debug.DrawRay(start, dir * Vector3.Distance(start, start + dir * distance), Color.red, 10f);
             // Obstacle check using SphereCast
-            if (Physics.SphereCast(start, radius, dir, out RaycastHit hit, Vector3.Distance(start, nextPos), collisionMask))
+            if (Physics.SphereCast(start, radius, dir, out RaycastHit hit, Vector3.Distance(start, start + dir * (distance + radius)), collisionMask))
             {
                 yield break;
             }

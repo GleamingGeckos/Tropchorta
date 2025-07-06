@@ -427,6 +427,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 15705557}
     - target: {fileID: 4220987893441494779, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: pushRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220987893441494779, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: _intervalsBetweenAttacks
       value: 4
       objectReference: {fileID: 0}
@@ -1811,8 +1815,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 507.8593, y: 94.727295, z: -50.62799}
-    m_Extent: {x: 1204.864, y: 608.36, z: 819.93524}
+    m_Center: {x: -288.75464, y: -362.3755, z: -149.74536}
+    m_Extent: {x: 353.62183, y: 373.45654, z: 224.52783}
 --- !u!4 &1869916700
 Transform:
   m_ObjectHideFlags: 0

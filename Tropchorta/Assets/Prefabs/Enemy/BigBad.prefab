@@ -991,6 +991,7 @@ MonoBehaviour:
   spitCount: 4
   punchCount: 3
   jumpCount: 2
+  endUI: {fileID: 0}
   bossCombat: {fileID: 955363162023138436}
 --- !u!114 &5642331688653515415
 MonoBehaviour:
@@ -1092,9 +1093,11 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  jumpDamageRadius: 4
+  jumpDamageRadius: 6
   shockWave: {fileID: 115933157427203688}
   damageArea: {fileID: 1404510279940751746, guid: 31b18125a56f1c24ab56de60e3bad6c3, type: 3}
+  attakDistanceFromBoss: 0
+  attakRadius: 0
   AlbastAnimator: {fileID: 2625706138295730203}
 --- !u!114 &4251304635978395309
 MonoBehaviour:
