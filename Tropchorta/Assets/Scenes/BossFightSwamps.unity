@@ -342,6 +342,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 955363162023138436, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: _maxDamage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 955363162023138436, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: _minDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 955363162023138436, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: _attackCharm
       value: 2
       objectReference: {fileID: 0}
@@ -395,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: maxHealth
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1885,8 +1893,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 0, y: -262.95007, z: 458.9585}
-    m_Extent: {x: 11.166667, y: 289.44623, z: 494.96936}
+    m_Center: {x: 75.53345, y: -594.2397, z: 336.403}
+    m_Extent: {x: 1257.0292, y: 628.961, z: 614.43085}
 --- !u!4 &1869916700
 Transform:
   m_ObjectHideFlags: 0
