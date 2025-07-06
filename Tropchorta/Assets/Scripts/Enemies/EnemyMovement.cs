@@ -63,11 +63,9 @@ public class EnemyMovement : MonoBehaviour
         {
             perfectParWasInitiated = false;
             isStuned = true;
-            Debug.Log("Stun");
             _stunImage.enabled = true;
             StopChasing();
             StartCoroutine(StunWindow());
-            
         }
     }
 

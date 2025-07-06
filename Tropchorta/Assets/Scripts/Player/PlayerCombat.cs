@@ -219,7 +219,7 @@ public class PlayerCombat : MonoBehaviour
             Vector3 step = totalMove * t;
 
             Ray ray = new Ray(transform.position + Vector3.up * maxStepHight, direction);
-            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 0.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) && hit.normal.y <= 0.7f)
+            if (Physics.SphereCast(ray, 0.4f, out RaycastHit hit, 1.5f, ~_excludedLayer, QueryTriggerInteraction.Ignore) && hit.normal.y <= 0.7f)
             {
                 yield break;
             }

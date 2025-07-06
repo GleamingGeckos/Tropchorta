@@ -332,8 +332,8 @@ public class EnemyCombat : MonoBehaviour
             }
 
             pos = nextPos;
-            elapsed += Time.deltaTime;
-            yield return null;
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
 
         // Ustaw ko�cow� pozycj� tylko je�li nie by�o kolizji
