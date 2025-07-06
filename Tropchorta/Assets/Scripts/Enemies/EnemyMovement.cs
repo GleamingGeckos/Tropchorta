@@ -110,6 +110,8 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         CheckYPosition();
+        if (isChasing && _target != null)
+            RotateTowards(_target.gameObject);
         if (!isChasing || _target == null || _attackInterrupted) return;
             agent.SetDestination(_target.position);
     }
