@@ -127,7 +127,9 @@
                 directSpecular *= directSpecular;
                 directSpecular *= directSpecular;
 
-                directSpecular *= positionY * 0.08;
+                directSpecular *= positionY * 0.05;
+                //^^te highlighty na trawce tez sie troche rozna w buildzie od edytora
+                
                 //half3 lighting = light.color * (light.shadowAttenuation * light.distanceAttenuation);
                 //EDYTOR^^ 
 
