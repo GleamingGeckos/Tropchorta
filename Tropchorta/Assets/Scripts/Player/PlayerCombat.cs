@@ -265,7 +265,6 @@ public class PlayerCombat : MonoBehaviour
 
         isBlocking = true;
         movement.PlayerAnimator.SetBool("isBlocking", true);
-        
         movement.PlayerAnimator.SetTrigger("blockTrigger");
 
         CheckForAttackingEnemies(isBlocking);
@@ -281,8 +280,13 @@ public class PlayerCombat : MonoBehaviour
     public void StopBlocking()
     {
         if (playerState.state == PlayerState.DisableInput) return;
-        isBlocking = false;
         movement.PlayerAnimator.SetBool("isBlocking", false);
+        if(blockRoutine != null)
+        {
+            StopCoroutine(blockRoutine);
+            blockRoutine = null;
+        }
+        isBlocking = false;
     }
 
 
