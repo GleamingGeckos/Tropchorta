@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.521449, y: 1.01, z: -2.7923393}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.8}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032088643122078551}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3043265418447793763
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 85ed68694035dff43b1567b2ed948d2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +108,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 4, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &3476450718356920656
 TrailRenderer:
@@ -155,7 +155,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.54
+  m_Time: 0.6
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -164,22 +164,22 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.02336502
-        value: 0.14742127
-        inSlope: 0
-        outSlope: 0
+        time: 0
+        value: 1
+        inSlope: -1.1137204
+        outSlope: -1.1137204
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.14242423
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.39389893
+        outSlope: -0.39389893
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.15757585
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -203,8 +203,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 4241
-      atime2: 4325
+      atime1: 1157
+      atime2: 1928
       atime3: 65535
       atime4: 65535
       atime5: 0
@@ -239,8 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  slowdownRate: 1
-  minSpeed: 45
+  slowdownRate: 45
+  minSpeed: 1
   lifetime: 2
   targetTag: Player
   motionScale: 1
@@ -267,4 +267,4 @@ MonoBehaviour:
   _effectFire: {fileID: 0}
   _effectPoison: {fileID: 0}
   _effectLightning: {fileID: 0}
-  _arrowForPar: {fileID: 2032088643122078551, guid: 71e07fc362c697f49aa05dca0d2ed118, type: 3}
+  _arrowForPar: {fileID: 2032088643122078551, guid: 10a25646164bd714ea619ee10557e937, type: 3}

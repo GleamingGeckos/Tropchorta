@@ -38,6 +38,7 @@ public class Projectile : MonoBehaviour
         _damage = damage;
         this.charmType = charmType;
         _parent = parent;
+        EnableCharmEffect();
     }
 
     public void EnableCharmEffect()
@@ -57,7 +58,6 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        EnableCharmEffect();
         currentSpeed = speed;
         Destroy(gameObject, lifetime);
     }
@@ -98,8 +98,9 @@ public class Projectile : MonoBehaviour
                 if (enemyMovement.perfectParWasInitiated && playerCombatComponent.isBlocking && _arrowForPar != null)
                 {
                     Quaternion rot = Quaternion.LookRotation(_parent.transform.position + transform.up - other.transform.position);
-                    var revange = Instantiate(_arrowForPar, other.transform.position, rot, other.transform);
-                    revange.GetComponent<Projectile>().Initialize(null, charmType, 1, other.gameObject);
+                    var revange = Instantiate(_arrowForPar, other.transform.position, rot);
+                    Debug.Log(playerCombatComponent.GetCurrentCharm().ToString());
+                    revange.GetComponent<Projectile>().Initialize(null, playerCombatComponent.GetCurrentCharm(), 1, other.gameObject);
                     enemyMovement.perfectParWasInitiated = false;
                     playerCombatComponent.PerfectBlocked();
                 }else if (playerCombatComponent.isBlocking)

@@ -505,6 +505,19 @@ public class EquipmentController : MonoBehaviour
         }
         return null;    
     }
+    
+
+    public CharmType GetCharm()
+    {
+        if (weaponCharm != null)
+        {
+            if (weaponCharm is Charm charm)
+            {
+                return charm.GetCharmType();
+            }
+        }
+        return CharmType.None;    
+    }
 
     public void UseDefensiveItems(Transform playerTransform)
     {
