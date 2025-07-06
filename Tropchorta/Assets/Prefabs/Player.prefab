@@ -280,6 +280,7 @@ MonoBehaviour:
   _wantedYPos: 1.05
   playerHealthComponent: {fileID: 3305874657431232447}
   useMouseRotation: 0
+  queuedDash: 0
   dashSound:
     Guid:
       Data1: -777167254
@@ -314,7 +315,7 @@ MonoBehaviour:
   doNextAttack: 0
   isNextStrongAttack: 0
   isWindowOpen: 0
-  distance: 1
+  distance: 0.5
   stepTime: 0.1
   maxStepHight: -0.5
   _excludedLayer:
