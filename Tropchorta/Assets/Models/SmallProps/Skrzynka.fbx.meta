@@ -3,7 +3,12 @@ guid: 7f53358140c93a14cb98adf98d439a14
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ognisko_Drewno_LawkaDrewniana_Donica_Skrzynka_Kamien
+    second: {fileID: 2100000, guid: 53633f26927b79e4e8d465e6f925a6e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
