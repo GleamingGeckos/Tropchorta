@@ -15,6 +15,7 @@ public class BaseBoss : BaseEnemy
     [SerializeField] int spitCount = 2;
     [SerializeField] int punchCount = 1;
     [SerializeField] int jumpCount = 1;
+    public GameObject endUI;
 
     private List<int> attackSet = new();
 
@@ -127,6 +128,8 @@ public class BaseBoss : BaseEnemy
     public void OnDeath()
     {
         Destroy(gameObject);
+        endUI.SetActive(true);
+        
     }
 
     private IEnumerator DelayedDistanceAttack(Transform target, float delay)

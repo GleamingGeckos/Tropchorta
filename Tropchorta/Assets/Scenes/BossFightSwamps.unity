@@ -127,6 +127,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2433570889906116183, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433570889906116183, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 670662711}
+    - target: {fileID: 2433570889906116183, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433570889906116183, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433570889906116183, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: NewMap
+      objectReference: {fileID: 0}
     - target: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
       propertyPath: playerMovement
       value: 
@@ -220,6 +240,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+--- !u!1 &15705557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1928446315886217930, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+  m_PrefabInstance: {fileID: 15705556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &25568773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 776361435356769090, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
@@ -398,12 +423,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4220987893441494779, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
+      propertyPath: endUI
+      value: 
+      objectReference: {fileID: 15705557}
+    - target: {fileID: 4220987893441494779, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: _intervalsBetweenAttacks
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5642331688653515415, guid: 0d81a7e90f027a4469cb4cadacfc3197, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -646,6 +675,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 656950ae0b0f8c64094b935df2de35a5, type: 3}
+--- !u!114 &670662711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2550942608159912592, guid: c721b93ee048d0e43871a0975751c19c, type: 3}
+  m_PrefabInstance: {fileID: 15705556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78aaa4dde83e52b4e81bbc79ca000873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &843164438 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6285505479242332040, guid: 4220efb5f10672f48903481b1ac1a57c, type: 3}
@@ -1771,8 +1811,8 @@ MonoBehaviour:
   maxBufferCount: 1
   previewVisibleGrassCount: 0
   cameraBounds:
-    m_Center: {x: 75.53345, y: -594.2397, z: 336.403}
-    m_Extent: {x: 1257.0292, y: 628.961, z: 614.43085}
+    m_Center: {x: 507.8593, y: 94.727295, z: -50.62799}
+    m_Extent: {x: 1204.864, y: 608.36, z: 819.93524}
 --- !u!4 &1869916700
 Transform:
   m_ObjectHideFlags: 0
